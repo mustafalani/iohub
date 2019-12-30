@@ -733,7 +733,7 @@
 									    data-colors="#22AA99"
 									    role="application">
 									</div>
-									<div className="netdata-container-easypiechart" style="marginRight:10px;width:11%;willchange:transform;" data-netdata="system.ram" data-host="http://northwaves.net:19999"
+									<div className="netdata-container-easypiechart" style="marginRight:10px;width:11%;willchange:transform;" data-netdata="system.ram" data-host="http://iohub.tv:19999"
 									    data-dimensions="used|buffers|active|wired"
 									    data-append-options="percentage"
 									    data-chart-library="easypiechart"

@@ -897,7 +897,7 @@
 		$rundown['engine_type'] = $endingids[0];
 		$rundown['status'] = 0;
 		$rundown['created_at'] = time();
-		$rundown['updated_at'] = time();
+		$rundown['updated_at'] = time();		
 		$id = $this->common_model->insertRundown($rundown);
 		if($id > 0)
 		{
