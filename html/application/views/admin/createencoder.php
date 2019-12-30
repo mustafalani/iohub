@@ -149,8 +149,8 @@ echo '<script type="text/Javascript">encoderModelOutFormat='.json_encode($output
 		border-radius: 3px;
 	}
 </style>
-<link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/ion.rangeSlider.css"/>
-<link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/ion.rangeSlider.skinHTML5.css"/>
+<link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/ion.rangeSlider.css"/>
+<link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/ion.rangeSlider.skinHTML5.css"/>
   <main class="main">
   	   <!-- Breadcrumb-->
       <ol class="breadcrumb">
@@ -222,7 +222,7 @@ echo '<script type="text/Javascript">encoderModelOutFormat='.json_encode($output
                                                                     <input type="text" class="form-control" id="encoder_ip" name="encoder_ip" required="true"/>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <label>SSH Port <span class="mndtry">*</span></label>
+                                                                    <label> Port <span class="mndtry">*</span></label>
                                                                     <input type="text" class="form-control" id="encoder_port" name="encoder_port" required="true"/>
                                                                 </div>
                                                             </div>

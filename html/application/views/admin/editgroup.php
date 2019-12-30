@@ -169,13 +169,13 @@
 												if(sizeof($img) <= 0)
 												{
 												?>
-												<img class="groupimg img-circle" id="imgdiv" src="<?php echo site_url();?>assets/site/main/images/dummy3.png">
+												<img class="groupimg img-circle" id="imgdiv" src="<?php echo site_url();?>public/site/main/images/dummy3.png">
 												<?php
 												}
 												else
 												{
 												?>
-												<img class="groupimg img-circle"  id="imgdiv" src="<?php echo site_url();?>assets/site/main/group_pics/<?php echo $img[0]['name'];?>">
+												<img class="groupimg img-circle"  id="imgdiv" src="<?php echo site_url();?>public/site/main/group_pics/<?php echo $img[0]['name'];?>">
 												<?php
 												}
 											?>

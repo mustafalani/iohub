@@ -101,7 +101,7 @@
 																			<section id="encoders">
 																				<h4>How Can I Add And Configure a New Encoder?</h4>
 																				<p>Navigate to the <a href="/configuration">Configuration</a> page then Click on the Encoders tab.</p>
-																				<img class="img-responsive pad" src="../assets/site/main/images/tutorial/ss/screenshot-encoders-1.png" alt="Photo" style="border: solid 1px #4597c4;">
+																				<img class="img-responsive pad" src="../public/site/main/images/tutorial/ss/screenshot-encoders-1.png" alt="Photo" style="border: solid 1px #4597c4;">
 																				<br>
 																				<p>To add a New Encoder, click on <a href="/addEncoderes" style="float:unset!important;margin-left:0;"class="add-btn"><span><i class="fa fa-plus"></i> Encoder</span></a></p>
 																				<p>A window requesting basic information for the new encoder (Name, IP Address, SSH Port, Encoder User Name and Password ) will pop up.</p>
@@ -109,7 +109,7 @@
 																					<h4 style="color: #0097bc;">Tip!</h4>
 																					<p>All of this information can be edited later. Once it is filled in, click Save.</p>
 																				</div>
-																				<img class="img-responsive pad" src="../assets/site/main/images/tutorial/ss/screenshot-encoders-3.png" alt="Photo" style="border: solid 1px #4597c4;">
+																				<img class="img-responsive pad" src="../public/site/main/images/tutorial/ss/screenshot-encoders-3.png" alt="Photo" style="border: solid 1px #4597c4;">
 																				<br>
 																				<div class="callout callout-info" style="background: #fff!important;color: #373737!important;">
 																					<h4 style="color: #0097bc;">Tip!</h4>
@@ -118,7 +118,7 @@
 																				</div>
 																				<p>In the Hardware tab you can add upto three Decklink I/O cards. To add a new I/O card, select Blackmagic Design from the Hardware list
 																						then select the installed Model from the Model list</p>
-																				<img class="img-responsive pad" src="../assets/site/main/images/tutorial/ss/screenshot-encoders-4.png" alt="Photo" style="border: solid 1px #4597c4;">
+																				<img class="img-responsive pad" src="../public/site/main/images/tutorial/ss/screenshot-encoders-4.png" alt="Photo" style="border: solid 1px #4597c4;">
 																				<br>
 																				<p>Click on the Inputs tab, then click <a style="float:unset!important;margin-left:0;"class="add-btn"><span><i class="fa fa-plus"></i> Input</span></a> to add an input from the previusly added Decklink I/O cards with whichever connection type you are using.</p>
 																				<div class="callout callout-danger" style="background: #fff!important;color: #373737!important;">
@@ -127,7 +127,7 @@
 																					<p>Refere To <a href="#supported-io-devices" style="color: #3c8dbc!important;">The List Of Supported</a> I/O Devices To See If Your Device is Supported.</p>
 																				</div>
 																				<p>Select the video and audio sources of the new added input.</p>
-																				<img class="img-responsive pad" src="../assets/site/main/images/tutorial/ss/screenshot-encoders-5.png" alt="Photo" style="border: solid 1px #4597c4;">
+																				<img class="img-responsive pad" src="../public/site/main/images/tutorial/ss/screenshot-encoders-5.png" alt="Photo" style="border: solid 1px #4597c4;">
 																				<br>
 																				<p>Click on the Outputs tab, then click <a style="float:unset!important;margin-left:0;"class="add-btn"><span><i class="fa fa-plus"></i> Output</span></a> to add an output from the previusly added Decklink I/O cards.</p>
 																				<div class="callout callout-danger" style="background: #fff!important;color: #373737!important;">
@@ -136,29 +136,29 @@
 																					<p>Refere To <a href="#supported-io-devices" style="color: #3c8dbc!important;">The List Of Supported</a> I/O Devices To See If Your Device is Supported.</p>
 																				</div>
 																				<p>Select the video destination of the new added output and the desired output format.</p>
-																				<img class="img-responsive pad" src="../assets/site/main/images/tutorial/ss/screenshot-encoders-6.png" alt="Photo" style="border: solid 1px #4597c4;">
+																				<img class="img-responsive pad" src="../public/site/main/images/tutorial/ss/screenshot-encoders-6.png" alt="Photo" style="border: solid 1px #4597c4;">
 																				<br>
 																				<div class="callout callout-danger" style="background: #fff!important;color: #373737!important;">
 																					<h4 style="color: #c23321;">Note!</h4>
 																					<p>After Adding A New Encoder, It Will Be Lsited In The Encoders List. Each New Encoder Must Be Paired With iohub Automation Controller Before It Can Be Used.</p>
 																				</div>
 																				<p>To pair an encoder, click on the encoder name, this will open the encoder editing page.</p>
-																				<img class="img-responsive pad" src="../assets/site/main/images/tutorial/ss/screenshot-encoders-7.png" alt="Photo" style="border: solid 1px #4597c4;">
+																				<img class="img-responsive pad" src="../public/site/main/images/tutorial/ss/screenshot-encoders-7.png" alt="Photo" style="border: solid 1px #4597c4;">
 																				<br>
 																				<p>Make sure that the encoder is running, then click on the <a style="color: #3c8dbc!important;">Pair </a>button.</p>
-																				<img class="img-responsive pad" src="../assets/site/main/images/tutorial/ss/screenshot-encoders-8.png" alt="Photo" style="border: solid 1px #4597c4;">
+																				<img class="img-responsive pad" src="../public/site/main/images/tutorial/ss/screenshot-encoders-8.png" alt="Photo" style="border: solid 1px #4597c4;">
 																				<br>
 																				<p>If pairing the encoder is successful it will return a Pair Token.</p>
-																				<img class="img-responsive pad" src="../assets/site/main/images/tutorial/ss/screenshot-encoders-9.png" alt="Photo" style="border: solid 1px #4597c4;">
+																				<img class="img-responsive pad" src="../public/site/main/images/tutorial/ss/screenshot-encoders-9.png" alt="Photo" style="border: solid 1px #4597c4;">
 																				<br>
 																				<p>The encoder is now ready to use.</p>
-																				<img class="img-responsive pad" src="../assets/site/main/images/tutorial/ss/screenshot-encoders-10.png" alt="Photo" style="border: solid 1px #4597c4;">
+																				<img class="img-responsive pad" src="../public/site/main/images/tutorial/ss/screenshot-encoders-10.png" alt="Photo" style="border: solid 1px #4597c4;">
 																				<br>
 																			</section>
 																			<section id="publishers">
 																			  <h4>How Can I Add and Configure a New Publisher?</h4>
 																			  <p>Navigate to the <a href="/configuration">Configuration</a> page then Click on the Publishers tab.</p>
-																			  <img class="img-responsive pad" src="../assets/site/main/images/tutorial/ss/screenshot-publisher-1.png" alt="Photo" style="border: solid 1px #4597c4;">
+																			  <img class="img-responsive pad" src="../public/site/main/images/tutorial/ss/screenshot-publisher-1.png" alt="Photo" style="border: solid 1px #4597c4;">
 																			  <br>
 																			  <p>To add a New Publisher, click on <a href="/createwowza" style="float:unset!important;margin-left:0;"class="add-btn"><span><i class="fa fa-plus"></i> Publisher</span></a></p>
 																			  <p>A window requesting information for the new publisher (Name, IP Address, Default Stream Name, RTMP Port, License, ..etc) will pop up.</p>
@@ -166,7 +166,7 @@
 																					<h4 style="color: #0097bc;">Tip!</h4>
 																					<p>All of this information can be edited later. Once it is filled in, click Save.</p>
 																				</div>
-																			  <img class="img-responsive pad" src="../assets/site/main/images/tutorial/ss/screenshot-publisher-3.png" alt="Photo" style="border: solid 1px #4597c4;">
+																			  <img class="img-responsive pad" src="../public/site/main/images/tutorial/ss/screenshot-publisher-3.png" alt="Photo" style="border: solid 1px #4597c4;">
 																			  <br>
 																			  <div class="callout callout-info" style="background: #fff!important;color: #373737!important;">
 																			    <h4 style="color: #0097bc;">Tip!</h4>
@@ -177,13 +177,13 @@
 																			    <p>After Adding A New Publisher, It Will Be Lsited In The Publishers List.</p>
 																			  </div>
 																			  <p>The publisher is now ready to use.</p>
-																			  <img class="img-responsive pad" src="../assets/site/main/images/tutorial/ss/screenshot-publisher-4.png" alt="Photo" style="border: solid 1px #4597c4;">
+																			  <img class="img-responsive pad" src="../public/site/main/images/tutorial/ss/screenshot-publisher-4.png" alt="Photo" style="border: solid 1px #4597c4;">
 																			  <br>
 																			</section>
 																			<section id="gateway">
 																			  <h4>How Can I Add and Configure a NDI Gateway?</h4>
 																			  <p>Navigate to the <a href="/configuration">Configuration</a> page then Click on the NDI Gateway tab.</p>
-																			  <img class="img-responsive pad" src="../assets/site/main/images/tutorial/ss/screenshot-ndi-gw-1.png" alt="Photo" style="border: solid 1px #4597c4;">
+																			  <img class="img-responsive pad" src="../public/site/main/images/tutorial/ss/screenshot-ndi-gw-1.png" alt="Photo" style="border: solid 1px #4597c4;">
 																			  <br>
 																			  <p>To add a New Gateway, click on <a href="/addgateways" style="float:unset!important;margin-left:0;"class="add-btn"><span><i class="fa fa-plus"></i> Gateway</span></a></p>
 																			  <p>A window requesting information for the new publisher (Name, IP Address, SSH Port, User Name & Password) will pop up.</p>
@@ -191,7 +191,7 @@
 																					<h4 style="color: #0097bc;">Tip!</h4>
 																					<p>All of this information can be edited later. Once it is filled in, click Save.</p>
 																				</div>
-																			  <img class="img-responsive pad" src="../assets/site/main/images/tutorial/ss/screenshot-ndi-gw-3.png" alt="Photo" style="border: solid 1px #4597c4;">
+																			  <img class="img-responsive pad" src="../public/site/main/images/tutorial/ss/screenshot-ndi-gw-3.png" alt="Photo" style="border: solid 1px #4597c4;">
 																			  <br>
 																			  <div class="callout callout-info" style="background: #fff!important;color: #373737!important;">
 																			    <h4 style="color: #0097bc;">Tip!</h4>
@@ -202,22 +202,22 @@
 																			    <p>After Adding A New NDI Gateway, It Will Be Lsited In The NDI Gateways List. Each New Gateway Must Be Paired With iohub Automation Controller Before It Can Be Used.</p>
 																			  </div>
 																			  <p>To pair an NDI Gateway, click on it's name in the list, this will open the NDI Gateway editing page.</p>
-																			  <img class="img-responsive pad" src="../assets/site/main/images/tutorial/ss/screenshot-ndi-gw-5.png" alt="Photo" style="border: solid 1px #4597c4;">
+																			  <img class="img-responsive pad" src="../public/site/main/images/tutorial/ss/screenshot-ndi-gw-5.png" alt="Photo" style="border: solid 1px #4597c4;">
 																			  <br>
 																			  <p>Make sure that the NDI Gateway is running, then click on the <a style="color: #3c8dbc!important;">Pair </a>button.</p>
-																			  <img class="img-responsive pad" src="../assets/site/main/images/tutorial/ss/screenshot-encoders-8.png" alt="Photo" style="border: solid 1px #4597c4;">
+																			  <img class="img-responsive pad" src="../public/site/main/images/tutorial/ss/screenshot-encoders-8.png" alt="Photo" style="border: solid 1px #4597c4;">
 																			  <br>
 																			  <p>If pairing the NDI Gateway is successful it will return a Pair Token.</p>
-																			  <img class="img-responsive pad" src="../assets/site/main/images/tutorial/ss/screenshot-encoders-9.png" alt="Photo" style="border: solid 1px #4597c4;">
+																			  <img class="img-responsive pad" src="../public/site/main/images/tutorial/ss/screenshot-encoders-9.png" alt="Photo" style="border: solid 1px #4597c4;">
 																			  <br>
 																			  <p>The Gateway is now ready to use.</p>
-																			  <img class="img-responsive pad" src="../assets/site/main/images/tutorial/ss/screenshot-ndi-gw-4.png" alt="Photo" style="border: solid 1px #4597c4;">
+																			  <img class="img-responsive pad" src="../public/site/main/images/tutorial/ss/screenshot-ndi-gw-4.png" alt="Photo" style="border: solid 1px #4597c4;">
 																			  <br>
 																			</section>
 																			<section id="presets">
 																			  <h4>How Can I Add a New Encoding Preset?</h4>
 																			  <p>Navigate to the <a href="/configuration">Configuration</a> page then Click on the Encoding Presets tab.</p>
-																			  <img class="img-responsive pad" src="../assets/site/main/images/tutorial/ss/screenshot-preset-1.png" alt="Photo" style="border: solid 1px #4597c4;">
+																			  <img class="img-responsive pad" src="../public/site/main/images/tutorial/ss/screenshot-preset-1.png" alt="Photo" style="border: solid 1px #4597c4;">
 																			  <br>
 																			  <p>To add a New Preset, click on <a href="/createtemplate" style="float:unset!important;margin-left:0;"class="add-btn"><span><i class="fa fa-plus"></i> Preset</span></a></p>
 																			  <p>A window requesting information for the new preset (Name, Video, Audio ..etc) will pop up.</p>
@@ -225,7 +225,7 @@
 																					<h4 style="color: #0097bc;">Tip!</h4>
 																					<p>All of this information can be edited later. Once it is filled in, click Save.</p>
 																				</div>
-																			  <img class="img-responsive pad" src="../assets/site/main/images/tutorial/ss/screenshot-preset-3.png" alt="Photo" style="border: solid 1px #4597c4;">
+																			  <img class="img-responsive pad" src="../public/site/main/images/tutorial/ss/screenshot-preset-3.png" alt="Photo" style="border: solid 1px #4597c4;">
 																			  <br>
 																			  <div class="callout callout-info" style="background: #fff!important;color: #373737!important;">
 																			    <h4 style="color: #0097bc;">Tip!</h4>
@@ -267,7 +267,7 @@
 																			    <p>After Adding A New Preset, It Will Be Listed In The Presets List.</p>
 																			  </div>
 																			  <p>The Preset is now ready to use.</p>
-																			  <img class="img-responsive pad" src="../assets/site/main/images/tutorial/ss/screenshot-preset-4.png" alt="Photo" style="border: solid 1px #4597c4;">
+																			  <img class="img-responsive pad" src="../public/site/main/images/tutorial/ss/screenshot-preset-4.png" alt="Photo" style="border: solid 1px #4597c4;">
 																			  <br>
 																			</section>
 																			<section id="channels">

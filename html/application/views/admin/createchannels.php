@@ -72,7 +72,7 @@ z-index: 9999;
     *margin-right: .3em;
     line-height: 14px;
     vertical-align: text-top;
-    background-image: url("assets/site/main/img/glyphicons-halflings.png");
+    background-image: url("public/site/main/img/glyphicons-halflings.png");
     background-position: 14px 14px;
     background-repeat: no-repeat;
 

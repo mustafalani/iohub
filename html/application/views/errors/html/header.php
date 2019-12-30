@@ -2,19 +2,19 @@
 <html>
 <head>
 <meta charset="utf-8">
-<link rel="shortcut icon" href="<?php echo base_url();?>assets/site/main/images/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="shortcut icon" href="<?php echo base_url();?>public/site/main/images/favicon.ico" type="image/vnd.microsoft.icon" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Indian Council for Cultural Relations</title>
-<link rel="stylesheet" href="<?php echo base_url();?>assets/site/main/css/bootstrap-dialog.min.css" />
-<link rel="stylesheet" href="<?php echo base_url();?>assets/site/main/css/bootstrap.min.css" />
-<link rel="stylesheet" href="<?php echo base_url();?>assets/site/main/css/datatables.min.css" />
-<link rel="stylesheet" href="<?php echo base_url();?>assets/site/main/css/font-awesome.min.css" />
-<link rel="stylesheet" href="<?php echo base_url();?>assets/site/main/css/AdminLTE.min.css" />
-<link rel="stylesheet" href="<?php echo base_url();?>assets/site/main/css/mea-portal.css" />
-<link rel="stylesheet" href="<?php echo base_url();?>assets/site/main/css/dropzone.css" />
-<link rel="stylesheet" href="<?php echo base_url();?>assets/site/main/css/jquery-ui.css" />
+<link rel="stylesheet" href="<?php echo base_url();?>public/site/main/css/bootstrap-dialog.min.css" />
+<link rel="stylesheet" href="<?php echo base_url();?>public/site/main/css/bootstrap.min.css" />
+<link rel="stylesheet" href="<?php echo base_url();?>public/site/main/css/datatables.min.css" />
+<link rel="stylesheet" href="<?php echo base_url();?>public/site/main/css/font-awesome.min.css" />
+<link rel="stylesheet" href="<?php echo base_url();?>public/site/main/css/AdminLTE.min.css" />
+<link rel="stylesheet" href="<?php echo base_url();?>public/site/main/css/mea-portal.css" />
+<link rel="stylesheet" href="<?php echo base_url();?>public/site/main/css/dropzone.css" />
+<link rel="stylesheet" href="<?php echo base_url();?>public/site/main/css/jquery-ui.css" />
 <?php
 echo '<script type="text/javascript">var baseURL="'.base_url().'";</script>';
 echo '<script type="text/javascript">var Controller="'.$this->router->fetch_class().'";</script>';
@@ -55,14 +55,14 @@ if(!$this->session->userdata('user_data'))
 	}
 }
 ?>
-<script src="<?php echo base_url();?>assets/site/main/js/jquery-1.11.3.min.js"></script>
-<script src="<?php echo base_url();?>assets/site/main/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url();?>assets/site/main/js/bootstrap-dialog.min.js"></script>
-<script src="<?php echo base_url();?>assets/site/main/js/datatables.min.js"></script>
-<script src="<?php echo base_url();?>assets/site/main/js/dropzone.js"></script>
-<script src="<?php echo base_url();?>assets/site/main/js/jquery-ui.js"></script>
-<script src="<?php echo base_url();?>assets/site/main/js/flip.js"></script>
-<script src="<?php echo base_url();?>assets/site/main/js/custom.js"></script>
+<script src="<?php echo base_url();?>public/site/main/js/jquery-1.11.3.min.js"></script>
+<script src="<?php echo base_url();?>public/site/main/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url();?>public/site/main/js/bootstrap-dialog.min.js"></script>
+<script src="<?php echo base_url();?>public/site/main/js/datatables.min.js"></script>
+<script src="<?php echo base_url();?>public/site/main/js/dropzone.js"></script>
+<script src="<?php echo base_url();?>public/site/main/js/jquery-ui.js"></script>
+<script src="<?php echo base_url();?>public/site/main/js/flip.js"></script>
+<script src="<?php echo base_url();?>public/site/main/js/custom.js"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		var isMessage = getParameterByName("text");		
@@ -147,7 +147,7 @@ if(!$this->session->userdata('user_data'))
 				<div class="container" >
 					<div class="logo">
 						<div class="col-xs-12 col-sm-4 col-md-4 tcenter nopadding logo-sec">
-							<a href=""><img src="<?php echo base_url();?>assets/site/main/images/mea-logo.png" alt="MEA Logo" /></a>
+							<a href=""><img src="<?php echo base_url();?>public/site/main/images/mea-logo.png" alt="MEA Logo" /></a>
 						</div>
 						<div class="col-xs-12 col-sm-7 col-md-7 tcenter text-right searcharea">
 							<form class="navbar-form" role="search">
@@ -160,7 +160,7 @@ if(!$this->session->userdata('user_data'))
 							</form>
 						</div>
 						<div class="col-xs-12 col-sm-1 col-md-1 tcenter">
-							<img src="<?php echo base_url();?>assets/site/main/images/logos/national-emblem-india.png" style="width:62px;" alt="Indian Embelam"/>
+							<img src="<?php echo base_url();?>public/site/main/images/logos/national-emblem-india.png" style="width:62px;" alt="Indian Embelam"/>
 						</div>
 					</div>
 				</div>
@@ -215,10 +215,10 @@ if(!$this->session->userdata('user_data'))
 										<li>
 							  		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Forms &nbsp; <b class="caret"></b></a>
 							  		<ul class="dropdown-menu">
-								          <li ><a href="<?php echo site_url();?>assets/site/docs/Undertaking_from_students.pdf">Undertaking Form</a></li>														         
-								          <li><a href="<?php echo site_url();?>assets/site/docs/Financial_Terms.pdf" download>Financial Terms of ICCR</a></li>
-								          <li><a href="<?php echo site_url();?>assets/site/docs/Fitness.pdf" download>Physical Fitness Format</a></li>
-								            <li><a href="<?php echo site_url();?>assets/site/docs/CityBrief.pdf" download>Cities Brief</a></li>
+								          <li ><a href="<?php echo site_url();?>public/site/docs/Undertaking_from_students.pdf">Undertaking Form</a></li>														         
+								          <li><a href="<?php echo site_url();?>public/site/docs/Financial_Terms.pdf" download>Financial Terms of ICCR</a></li>
+								          <li><a href="<?php echo site_url();?>public/site/docs/Fitness.pdf" download>Physical Fitness Format</a></li>
+								            <li><a href="<?php echo site_url();?>public/site/docs/CityBrief.pdf" download>Cities Brief</a></li>
 								           
 								          <!--<li><a href="<?php echo site_url();?>mission/format">English Language Test Format</a></li>-->
 								          </ul>

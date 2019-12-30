@@ -12,7 +12,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen" />
  
     <!-- Custom CSS -->
-    <link href="assets/site/main/react/css/custom.css" rel="stylesheet" media="screen" />
+    <link href="public/site/main/react/css/custom.css" rel="stylesheet" media="screen" />
  
 </head>
 <body>

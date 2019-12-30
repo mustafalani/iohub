@@ -85,7 +85,7 @@ z-index: 9999;
     *margin-right: .3em;
     line-height: 14px;
     vertical-align: text-top;
-    background-image: url("assets/site/main/img/glyphicons-halflings.png");
+    background-image: url("public/site/main/img/glyphicons-halflings.png");
     background-position: 14px 14px;
     background-repeat: no-repeat;
 
@@ -347,13 +347,13 @@ echo '<script type="text/javascript">channelss='.$channelJson.'</script>';
 																	?>
 																<!--	<li id="<?php echo $channel['id'];?>" class="label label-live channelStartStopGateway"><a class='settings' id="<?php echo $channel['channel_type'];?>_<?php echo $bank['id'];?>" href='javascript:void(0);'><i class="fa fa-gear" style="color: #3737376b;position:  absolute;left: 0;padding: 2px;top:  0;font-size:  16px;"></i></a><a id="stop_<?php echo $bank['id'];?>" class='stopgatewaych' href='javascript:void(0);'><i class="fa fa-times" style="color: #3737376b;position:  absolute;right:  0;padding: 2px;top:  0;font-size:  16px;"></i></a><span class="events-attachment-button"><?php echo $channel['channel_type'];?></span>
                                 <p class="counter" style="color: #f2f906;font-size: 13px;font-family: monospace;text-align:  center;" title="Fri Aug 31 23:45:00 2018"></p>
-                                <img src="<?php echo site_url();?>assets/site/main/img/channel-loading.gif" class="ajxload"/>
+                                <img src="<?php echo site_url();?>public/site/main/img/channel-loading.gif" class="ajxload"/>
                                 </li>-->
                                 <li id="<?php echo $channel['id'];?>" class="label label-gray channelStartStopGateway"><a class='settings' id="<?php echo $channel['channel_type'];?>_<?php echo $bank['id'];?>" href='javascript:void(0);'><i class="fa fa-gear" style="color: #3737376b;position:  absolute;left: 0;padding: 2px;top:  0;font-size:  16px;"></i></a><a id="stop_<?php echo $bank['id'];?>" class='stopgatewaych' href='javascript:void(0);'><i class="fa fa-times" style="color: #3737376b;position:  absolute;right:  0;padding: 2px;top:  0;font-size:  16px;"></i></a><span class="events-attachment-button inactive"><?php echo $channel['channel_type'];?></span>
 
 
                                 <p class="counter inactive counter" style="color: #f2f906;font-size: 13px;font-family: monospace;text-align:  center;" title="">00:00:00:00</p>
-                                <img src="<?php echo site_url();?>assets/site/main/img/channel-loading.gif" class="ajxload"/></li>
+                                <img src="<?php echo site_url();?>public/site/main/img/channel-loading.gif" class="ajxload"/></li>
 																	<?php
 																}
 																elseif($channel['status'] == 0)
@@ -363,7 +363,7 @@ echo '<script type="text/javascript">channelss='.$channelJson.'</script>';
 
 
                                 <p class="counter inactive counter" style="color: #f2f906;font-size: 13px;font-family: monospace;text-align:  center;" title="">00:00:00:00</p>
-                                <img src="<?php echo site_url();?>assets/site/main/img/channel-loading.gif" class="ajxload"/></li>
+                                <img src="<?php echo site_url();?>public/site/main/img/channel-loading.gif" class="ajxload"/></li>
 																	<?php
 																}
 															}

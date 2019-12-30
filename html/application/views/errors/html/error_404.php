@@ -49,7 +49,7 @@ font-size: 57px;
 
 			<div class="row">
 				<div class="col-md-12 animate-box" data-animate-effect="fadeIn">
-					<div class="fh5co-404-wrap" id="video" data-vide-bg="<?php echo site_url();?>assets/site/main/video/noise" data-vide-options="position: 0 50%">
+					<div class="fh5co-404-wrap" id="video" data-vide-bg="<?php echo site_url();?>public/site/main/video/noise" data-vide-options="position: 0 50%">
 						<div class="overlay"></div>
 					</div>
 				</div>

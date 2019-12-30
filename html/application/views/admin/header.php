@@ -24,7 +24,7 @@
 	{
 		switch($segment)
 		{
-      case "dashboard":
+			case "dashboard":
 				echo "iohub | Dashboard";
 			break;
 			case "configuration":
@@ -170,7 +170,7 @@
 		}
 	}
    ?>
-   <link rel="shortcut icon" href="<?php echo site_url();?>assets/site/main/img/iohub_logo.png" type="image/png" />
+   <link rel="shortcut icon" href="<?php echo site_url();?>public/site/main/img/iohub_logo.png" type="image/png" />
     <!-- Icons-->
     <link href="<?php echo site_url();?>node_modules/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
     <link href="<?php echo site_url();?>node_modules/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
@@ -186,23 +186,23 @@
 
    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.0.0/flatly/bootstrap.min.css">-->
     <!-- Main styles for this application-->
-    <link href="<?php echo site_url();?>assets/site/main/css/style.css" rel="stylesheet">
+    <link href="<?php echo site_url();?>public/site/main/css/style.css" rel="stylesheet">
     <link href="<?php echo site_url();?>vendors/pace-progress/css/pace.min.css" rel="stylesheet">
     <!-- Custom styles for this application-->
-    <link href="<?php echo site_url();?>assets/site/main/css/custom.css" rel="stylesheet">
-    <link href="<?php echo site_url();?>assets/site/main/css/beyond_design.css" rel="stylesheet">
+    <link href="<?php echo site_url();?>public/site/main/css/custom.css" rel="stylesheet">
+    <link href="<?php echo site_url();?>public/site/main/css/beyond_design.css" rel="stylesheet">
 
 
 <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.0.0/flatly/bootstrap.min.css">-->
-<link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/Date-Time-Picker/build/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="<?php echo site_url();?>public/site/main/Date-Time-Picker/build/css/bootstrap-datetimepicker.min.css">
    <link rel="stylesheet" href="<?php echo site_url();?>node_modules/bootstrap-select-v4/dist/css/bootstrap-select.min.css"/>
-   <!-- <link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/bootstrap-multiselect.css"/>-->
-   <!-- <link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/bootstrap-datetimepicker.min.css"/>-->
-<!--	<link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/bootstrap-datepicker.min.css"/>-->
+   <!-- <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/bootstrap-multiselect.css"/>-->
+   <!-- <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/bootstrap-datetimepicker.min.css"/>-->
+<!--	<link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/bootstrap-datepicker.min.css"/>-->
 
     <!-- sweetalert-->
-    <link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/sweetalert.css">
-    <link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/toastr.min.css"/>
+    <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/sweetalert.css">
+    <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/toastr.min.css"/>
     <?php echo '<script type="text/javascript">var baseURL = "'.base_url().'";</script>'; ?>
 	<?php echo '<script type="text/javascript">var csrf_test_name = "'.$this->security->get_csrf_hash().'";</script>'; ?>
 	<?php
@@ -215,9 +215,10 @@
 	$permissions = $this->common_model->getUserPermission($userdata['user_type']);
 	echo '<script type="text/javascript">var userPermissions=\''.json_encode($permissions[0]).'\';</script>';
 	?>
-	 <link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/fullcalendar.min.css">
-  <link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/fullcalendar.print.min.css" media="print">
-  <link rel="stylesheet" href="https://iohub.tv/assets/site/main/css/jquery.flowchart.css"/>
+	 <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/fullcalendar.min.css">
+  <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/fullcalendar.print.min.css" media="print">
+  <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/jquery.flowchart.css"/>
+   <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/dropzone.css"/>
 
 
 	 <style type="text/css">

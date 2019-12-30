@@ -39,9 +39,9 @@ class Encoders extends REST_Controller {
 			);
 			$isUpdated = $this->common_model->updateEncoderByItsEncoderId($data,$cleanData['encoderId']);
 			if($isUpdated){
-				echo "Encoder Time (".$cleanData['uptime'].") Updated for ".$cleanData['encoderId']." Successfully!";
+				echo "Encoder Time Updated Successfully!";
 			}else{
-				echo "Encoder Time (".$cleanData['uptime'].") Not Updated for ".$cleanData['encoderId'];
+				echo "Encoder Time Not Updated!";
 			}
 		}else{
 			echo "Encoder Id is Null";
@@ -65,79 +65,18 @@ class Encoders extends REST_Controller {
 			echo "Encoder Id is Null";
 		}
 	}
-	public function gatewaypairing_post()
-	{
-		$response = array('status'=>FALSE,'response'=>'');
-		/* All Parametes From Request */
-		$cleanData = $this->security->xss_clean($this->input->post(NULL, TRUE));
-		$channelId = $cleanData['id'];
-		$action = $cleanData['action'];
-		$idArray = explode('_',$channelId);
-		$encoder = $this->common_model->getGatewayEncoderByEncoderID($idArray[0]);
-		$ip =  $encoder[0]["encoder_ip"];
-		$username = $encoder[0]["encoder_uname"];
-		$password = $encoder[0]["encoder_pass"];
-		$port = $encoder[0]["encoder_port"];
-		/* Checking Connection of Encoder */
-		$ssh = new Net_SSH2($ip);
-		if (!$ssh->login($username, $password,$port))
-		{
-			$response['status']= FALSE;
-			$response['response']= $ssh->getLog();
-			echo json_encode($response);
-		}
-		else
-		{			
-			switch($action){
-				case "pair":
-					$pairedId = $ssh->exec('$HOME/iohub/scripts/encoder-pair.sh '.site_url().' '.$encoder[0]["encoder_name"].' '.$encoder[0]["encoder_id"]);
-					if($pairedId != "")
-					{
-						$pairedId = trim(preg_replace('/\s\s+/', ' ', $pairedId));
-						$data = array(
-							'paired'=>1,
-							'pairID'=>$pairedId
-						);
-						$this->common_model->updateGateway($data,$encoder[0]['id']);
-						$response['status']= TRUE;
-						$response['response']= $idArray[0].'_unpair';
-						$response['responseserver']= $pairedId;
-					}
-					else
-					{
-						$response['status']= FALSE;
-						$response['response']= $idArray[0].'_pair';
-						$response['responseserver']= "";
-					}
-				break;
-				case "unpair":
-					$resp = $ssh->exec('xmlstarlet ed -L -d \'//KeyValuePair[Value/text()="'.$encoder[0]["encoder_id"].'"]\' $HOME/iohub/config/config.xml');
-					$data = array(
-						'paired'=>0,
-						'pairID'=>""
-					);
-					$this->common_model->updateGateway($data,$encoder[0]['id']);
-					$response['status']= TRUE;
-					$response['response']= $idArray[0].'_pair';
-					$response['responseserver']= $resp;
-				break;
-			}			
-			echo json_encode($response);
-		}
-	}
 	public function pairing_post()
 	{
 		$response = array('status'=>FALSE,'response'=>'');
 		/* All Parametes From Request */
 		$cleanData = $this->security->xss_clean($this->input->post(NULL, TRUE));
 		$channelId = $cleanData['id'];
-		$action = $cleanData['action'];
 		$idArray = explode('_',$channelId);
-		$encoder = $this->common_model->getEncoderByEncoderID($idArray[0]);
+		$encoder = $this->common_model->getAllEncoders($idArray[0],0);
 		$ip =  $encoder[0]["encoder_ip"];
 		$username = $encoder[0]["encoder_uname"];
 		$password = $encoder[0]["encoder_pass"];
-		$port = $encoder[0]["encoder_port"];
+		$port = $encoder[0]["encoder_port"];;
 		/* Checking Connection of Encoder */
 		$ssh = new Net_SSH2($ip);
 		if (!$ssh->login($username, $password,$port))
@@ -147,41 +86,11 @@ class Encoders extends REST_Controller {
 			echo json_encode($response);
 		}
 		else
-		{			
-			switch($action){
-				case "pair":
-					$pairedId = $ssh->exec('$HOME/iohub/scripts/encoder-pair.sh '.site_url().' '.$encoder[0]["encoder_name"].' '.$encoder[0]["encoder_id"]);
-					if($pairedId != "")
-					{
-						$pairedId = trim(preg_replace('/\s\s+/', ' ', $pairedId));
-						$data = array(
-							'paired'=>1,
-							'pairID'=>$pairedId
-						);
-						$this->common_model->updateEncoder($data,$encoder[0]['id']);
-						$response['status']= TRUE;
-						$response['response']= $idArray[0].'_unpair';
-						$response['responseserver']= $pairedId;
-					}
-					else
-					{
-						$response['status']= FALSE;
-						$response['response']= $idArray[0].'_pair';
-						$response['responseserver']= "";
-					}
-				break;
-				case "unpair":
-					$resp = $ssh->exec('xmlstarlet ed -L -d \'//KeyValuePair[Value/text()="'.$encoder[0]["encoder_id"].'"]\' $HOME/iohub/config/config.xml');
-					$data = array(
-						'paired'=>0,
-						'pairID'=>""
-					);
-					$this->common_model->updateEncoder($data,$encoder[0]['id']);
-					$response['status']= TRUE;
-					$response['response']= $idArray[0].'_pair';
-					$response['responseserver']= $resp;
-				break;
-			}			
+		{
+			$res = $ssh->exec('$HOME/iohub/scripts/encoder-pair.sh '.site_url().' '.$encoder[0]["encoder_name"].' '.$encoder[0]["encoder_id"]);
+			$response['status']= TRUE;
+			$response['response']= $idArray[1];
+			$response['responseserver']= $res;
 			echo json_encode($response);
 		}
 	}

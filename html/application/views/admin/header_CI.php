@@ -76,7 +76,7 @@
     <meta http-equiv="Cache-Control" content=" private, no-cache, no-store, must-revalidate, pre-check=0, post-check=0, max-age=0">
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
-	<link rel="shortcut icon" href="<?php echo site_url();?>assets/site/main/img/iohub_logo.png" type="image/png" />
+	<link rel="shortcut icon" href="<?php echo site_url();?>public/site/main/img/iohub_logo.png" type="image/png" />
 	
 	<?php echo '<script type="text/javascript">var baseURL = "'.base_url().'";</script>'; ?>
 <?php echo '<script type="text/javascript">var csrf_test_name = "'.$this->security->get_csrf_hash().'";</script>'; ?>
@@ -92,54 +92,54 @@ echo '<script type="text/javascript">var userPermissions=\''.json_encode($permis
 ?>
 	<style type="text/css">
 	.login-full{
-		background-image: url('<?php echo site_url();?>assets/site/main/images/bg.jpg');
+		background-image: url('<?php echo site_url();?>public/site/main/images/bg.jpg');
 	}
 
 	.login-dv{
-		background-image: url('<?php echo site_url();?>assets/site/main/images/login-bg.png');
+		background-image: url('<?php echo site_url();?>public/site/main/images/login-bg.png');
 	}
 </style>
  <!-- ========= CSS Included ========= -->
     <!-- === Bootstrap 3.3.7 === -->
-    <link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/bootstrap.min.css">
     <!-- === Font Awesome === -->
-     <link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/jquery-ui.css"/>
-    <link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/font-awesome.min.css"/>
+     <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/jquery-ui.css"/>
+    <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/font-awesome.min.css"/>
     <!-- === Core Style === -->
-    <link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/admin.min.css"/>
-    <link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/all-skins.min.css"/>
+    <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/admin.min.css"/>
+    <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/all-skins.min.css"/>
     <!-- === Date Picker === -->
  
-<link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/bst.css"/>
-     <link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/bootstrap-datetimepicker.min.css"/>
-<link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/bootstrap-datepicker.min.css"/>
+<link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/bst.css"/>
+     <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/bootstrap-datetimepicker.min.css"/>
+<link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/bootstrap-datepicker.min.css"/>
     
-     <!--<link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/js/plugins/bootstrap-daterangepicker/daterangepicker.css"/>-->
-    <link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/bootstrap-select.min.css"/>
-    <link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/bootstrap-multiselect.css"/>
-    <link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/datatables.min.css"/>
+     <!--<link rel="stylesheet" href="<?php echo site_url();?>public/site/main/js/plugins/bootstrap-daterangepicker/daterangepicker.css"/>-->
+    <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/bootstrap-select.min.css"/>
+    <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/bootstrap-multiselect.css"/>
+    <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/datatables.min.css"/>
     
-    <link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/fullcalendar.min.css">
-  <link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/fullcalendar.print.min.css" media="print">
+    <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/fullcalendar.min.css">
+  <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/fullcalendar.print.min.css" media="print">
   
-    <link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/sweetalert.css">
+    <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/sweetalert.css">
    
-    <link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/jquery.countdownTimer.css">
+    <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/jquery.countdownTimer.css">
     <!-- === Custom Css === -->
     
-    <link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/custom.css">
-    <link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/beyond_design.css">
-    <link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/custom.css">
+    <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/beyond_design.css">
+    <link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/dashboard.css">
      
-	<link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/animate.css">
-		<link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/toastr.min.css"/>
-		<link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/jquery.flowchart.css"/>
+	<link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/animate.css">
+		<link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/toastr.min.css"/>
+		<link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/jquery.flowchart.css"/>
 
-	<!--<link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/style.css">-->
+	<!--<link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/style.css">-->
 
 
 	<!-- Modernizr JS -->
-	<!--<script src="<?php echo site_url();?>assets/site/main/js/modernizr-2.6.2.min.js"></script>-->
+	<!--<script src="<?php echo site_url();?>public/site/main/js/modernizr-2.6.2.min.js"></script>-->
   
 	
     <!--[if lt IE 9]>

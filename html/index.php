@@ -61,7 +61,7 @@ if( ! ini_get('date.timezone') )
 {
     date_default_timezone_set('Europe/Copenhagen');
 }
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
+	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
 /*
  *---------------------------------------------------------------
@@ -75,13 +75,14 @@ switch (ENVIRONMENT)
 {
 	case 'development':
 		error_reporting(-1);
-		ini_set('display_errors', 1);
+		ini_set('display_errors', 0);
 
 	break;
 
 	case 'testing':
 	case 'production':
 		ini_set('display_errors', 0);
+		echo PHP_VERSION;
 		if (version_compare(PHP_VERSION, '5.3', '>='))
 		{
 			error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED);

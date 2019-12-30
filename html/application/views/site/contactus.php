@@ -88,15 +88,15 @@ marquee{
 			<div class="carousel-inner" role="listbox">
 			
 			<div class="item active">
-			  <img class="first-slide" src="<?php echo base_url();?>assets/site/main/images/bg/bg1.png" alt="ICCR Banner" />
+			  <img class="first-slide" src="<?php echo base_url();?>public/site/main/images/bg/bg1.png" alt="ICCR Banner" />
 			</div>
 			
 				
 			<!--<div class="item ">
-			  <img class="second-slide" src="<?php echo base_url();?>assets/site/main/images/bg/bg2.png" alt="ICCR  Banner" />
+			  <img class="second-slide" src="<?php echo base_url();?>public/site/main/images/bg/bg2.png" alt="ICCR  Banner" />
 			</div>-->
 			<div class="item">
-			  <img class="second-slide" src="<?php echo base_url();?>assets/site/main/images/bg/bg.png" alt="ICCR  Banner" />
+			  <img class="second-slide" src="<?php echo base_url();?>public/site/main/images/bg/bg.png" alt="ICCR  Banner" />
 			</div>
 			</div>
 			<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -116,36 +116,36 @@ marquee{
 		
 		<div  style="margin:1% auto 0;width:75%;">
 					<div class="col-xs-12 col-sm-6 col-md-6 pdleft goals card">
-						<a target="_blank" href="http://www.iccr.gov.in/"><img style="height:70px;" src="<?php echo base_url();?>assets/site/main/images/logos/iccr-logo.png" class="img-circle front"/></a>
-						<a target="_blank" href="http://www.iccr.gov.in/"><img style="height:70px;" src="<?php echo base_url();?>assets/site/main/images/logos/iccr-logo.png" class="img-circle back"/></a>
+						<a target="_blank" href="http://www.iccr.gov.in/"><img style="height:70px;" src="<?php echo base_url();?>public/site/main/images/logos/iccr-logo.png" class="img-circle front"/></a>
+						<a target="_blank" href="http://www.iccr.gov.in/"><img style="height:70px;" src="<?php echo base_url();?>public/site/main/images/logos/iccr-logo.png" class="img-circle back"/></a>
 					</div>
 					<div class="col-xs-12 col-sm-6 col-md-6 pdleft goals card">
-						<a target="_blank" href="http://mea.gov.in/"><img src="<?php echo base_url();?>assets/site/main/images/logos/Internship-Ministry-of-External-Affairs.jpg" class="img-circle front"/></a>
-						<a target="_blank" href="http://mea.gov.in/"><img src="<?php echo base_url();?>assets/site/main/images/logos/Internship-Ministry-of-External-Affairs.jpg" class="img-circle back"/></a>
+						<a target="_blank" href="http://mea.gov.in/"><img src="<?php echo base_url();?>public/site/main/images/logos/Internship-Ministry-of-External-Affairs.jpg" class="img-circle front"/></a>
+						<a target="_blank" href="http://mea.gov.in/"><img src="<?php echo base_url();?>public/site/main/images/logos/Internship-Ministry-of-External-Affairs.jpg" class="img-circle back"/></a>
 					</div>
 					<div class="col-xs-12 col-sm-6 col-md-6 pdleft goals card">
-						<a target="_blank" href="http://knowindia.gov.in/"><img src="<?php echo base_url();?>assets/site/main/images/logos/india_galance.png" alt="Incredible India" class="img-circle front" /></a>
-						<a target="_blank" href="http://knowindia.gov.in/"><img src="<?php echo base_url();?>assets/site/main/images/logos/india_galance.png" alt="Incredible India" class="img-circle back" /></a>
+						<a target="_blank" href="http://knowindia.gov.in/"><img src="<?php echo base_url();?>public/site/main/images/logos/india_galance.png" alt="Incredible India" class="img-circle front" /></a>
+						<a target="_blank" href="http://knowindia.gov.in/"><img src="<?php echo base_url();?>public/site/main/images/logos/india_galance.png" alt="Incredible India" class="img-circle back" /></a>
 					</div>
 					<div class="col-xs-12 col-sm-6 col-md-6 pdleft goals card">
-						<a target="_blank" href="https://india.gov.in/"><img src="<?php echo base_url();?>assets/site/main/images/logos/india-gov.png" alt="eFilling India" class="img-circle front" /></a>
-						<a target="_blank" href="https://india.gov.in/"><img src="<?php echo base_url();?>assets/site/main/images/logos/india-gov.png" alt="eFilling India" class="img-circle back" /></a>
+						<a target="_blank" href="https://india.gov.in/"><img src="<?php echo base_url();?>public/site/main/images/logos/india-gov.png" alt="eFilling India" class="img-circle front" /></a>
+						<a target="_blank" href="https://india.gov.in/"><img src="<?php echo base_url();?>public/site/main/images/logos/india-gov.png" alt="eFilling India" class="img-circle back" /></a>
 					</div>
 					<div class="col-xs-12 col-sm-6 col-md-6 pdleft goals card">
-						<a target="_blank" href="http://idayofyoga.org/"><img src="<?php echo base_url();?>assets/site/main/images/logos/logo.png" class="img-circle front" /></a>							
-						<a target="_blank" href="http://idayofyoga.org/"><img src="<?php echo base_url();?>assets/site/main/images/logos/logo.png"  class="img-circle back" /></a>
+						<a target="_blank" href="http://idayofyoga.org/"><img src="<?php echo base_url();?>public/site/main/images/logos/logo.png" class="img-circle front" /></a>							
+						<a target="_blank" href="http://idayofyoga.org/"><img src="<?php echo base_url();?>public/site/main/images/logos/logo.png"  class="img-circle back" /></a>
 					</div>
 					
 					
 					<div class="col-xs-12 col-sm-6 col-md-6 pdleft goals card">
-						<a target="_blank" href="http://www.makeinindia.com/home"><img src="<?php echo base_url();?>assets/site/main/images/logos/i-bWNH6DK.png" alt="Ministry of Tourism" class="img-circle front" /></a>
-						<a target="_blank" href="http://www.makeinindia.com/home"><img src="<?php echo base_url();?>assets/site/main/images/logos/i-bWNH6DK.png" alt="Ministry of Tourism" class="img-circle back" /></a>
+						<a target="_blank" href="http://www.makeinindia.com/home"><img src="<?php echo base_url();?>public/site/main/images/logos/i-bWNH6DK.png" alt="Ministry of Tourism" class="img-circle front" /></a>
+						<a target="_blank" href="http://www.makeinindia.com/home"><img src="<?php echo base_url();?>public/site/main/images/logos/i-bWNH6DK.png" alt="Ministry of Tourism" class="img-circle back" /></a>
 					</div>
 					
 									
 					<div class="col-xs-12 col-sm-6 col-md-6 pdleft goals card">
-						<a target="_blank" href="https://incredibleindia.org/"><img src="<?php echo base_url();?>assets/site/main/images/logos/_logo.jpg" class="img-circle front"/></a>
-						<a target="_blank" href="https://incredibleindia.org/"><img src="<?php echo base_url();?>assets/site/main/images/logos/_logo.jpg" class="img-circle back"/></a>
+						<a target="_blank" href="https://incredibleindia.org/"><img src="<?php echo base_url();?>public/site/main/images/logos/_logo.jpg" class="img-circle front"/></a>
+						<a target="_blank" href="https://incredibleindia.org/"><img src="<?php echo base_url();?>public/site/main/images/logos/_logo.jpg" class="img-circle back"/></a>
 					</div>
 				</div>
 		

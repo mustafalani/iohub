@@ -11,6 +11,18 @@ class Common_model extends CI_Model {
         $this->status = $this->config->item('status');
         $this->roles = $this->config->item('roles');
     }
+    function getWrokflowbyId($wid)
+    {
+	   $this->db->select('ks_workflow.*');
+       $this->db->from('ks_workflow');  
+       $this->db->where('workflow_id',$wid);  
+       $code = $this->db->error(); 
+       if($code['code'] > 0)
+	   {	      	
+		  show_error('Message');
+	   }
+       return $this->db->get()->result_array();
+	}
     function getOutputFormats()
     {
 	   $this->db->select('ks_output_format.*');
@@ -311,16 +323,27 @@ class Common_model extends CI_Model {
 	   }
        return $this->db->get()->result_array();
 	}
-    function getChannelbyId($Id)
+    function getIoTStreambyId($Id)
     {
-		$this->db->select('ks_channels.*');
-       $this->db->from('ks_channels');
+		$this->db->select('ks_iotstreams.*');
+		$this->db->from('ks_iotstreams');
        $this->db->where('id',$Id);  
        $code = $this->db->error(); if($code['code'] > 0)
 	   {	      	
 		  show_error('Message');
 	   }
        return $this->db->get()->result_array();
+	}
+	function getChannelbyId($Id)
+	{
+		$this->db->select('ks_channels.*');
+		$this->db->from('ks_channels');
+		$this->db->where('id',$Id);
+		$code = $this->db->error();
+		if ($code['code'] > 0) {
+			show_error('Message');
+		}
+		return $this->db->get()->result_array();
 	}
 	function getChannelbyProcessName($processname)
     {
@@ -451,6 +474,21 @@ class Common_model extends CI_Model {
 	   }
        return $this->db->get()->result_array();
 	}
+	function getAllIoTStreams($id)
+	{
+		$this->db->select('ks_iotstreams.*');
+		$this->db->from('ks_iotstreams');
+		$this->db->where('status',1);
+		if ($id > 0) {
+			$this->db->where('id',$id);
+		}
+		$this->db->order_by('id','desc');
+		$code = $this->db->error();
+		if ($code['code'] > 0) {
+			show_error('Message');
+		}
+		return $this->db->get()->result_array();
+	}
     function getInputName($id)
     {
 	   $this->db->select('ks_encoder_input.*');
@@ -482,6 +520,36 @@ class Common_model extends CI_Model {
 	   {	      	
 		  show_error('Message');
 	   }
+       return $this->db->get()->result_array();
+	}
+	function getNebula($gid=0)
+    {
+		$this->db->select('ks_nebula.*');
+       $this->db->from('ks_nebula');
+       if($gid > 0)
+       {
+	   	$this->db->where('encoder_group',$gid);  	
+	   }
+       $code = $this->db->error(); if($code['code'] > 0)
+	   {	      	
+		  show_error('Message');
+	   }
+	   $this->db->order_by('id','DESC');
+       return $this->db->get()->result_array();
+	}
+	function getNebulabyId($id=0)
+    {
+		$this->db->select('ks_nebula.*');
+       $this->db->from('ks_nebula');
+       if($id > 0)
+       {
+	   	$this->db->where('id',$id);  	
+	   }
+       $code = $this->db->error(); if($code['code'] > 0)
+	   {	      	
+		  show_error('Message');
+	   }
+	   $this->db->order_by('id','DESC');
        return $this->db->get()->result_array();
 	}
     function getEncoderTemplate($uid=0)
@@ -683,6 +751,16 @@ class Common_model extends CI_Model {
 		  show_error('Message');
 	   }
         return $this->db->affected_rows(); 
+	}
+	public function updateIoTStreamByStreamId($data, $id)
+	{
+		$this->db->where('process_name', $id);
+		$this->db->update('ks_iotstreams', $data);
+		$code = $this->db->error();
+		if ($code['code'] > 0) {
+			show_error('Message');
+		}
+		return $this->db->affected_rows();
 	}
 	public function updateChannelByChannelId($data,$id)
     {
@@ -5432,71 +5510,7 @@ where iccr_status_mapping.status IN(13,14,-14) and tt.university_is_accept=1 and
 			  show_error('Message');
 		   }
       return $this->db->get()->result_array();
-	}
-	function getApplicationByNo($appno)
-	{
-		$this->db->select('iccr_student_application_details.*,iccr_countries.country_name');
-      $this->db->from('iccr_student_application_details');  
-      $this->db->join('iccr_countries','iccr_countries.id=iccr_student_application_details.country');
-      $this->db->where('application_no',$appno);  
-      $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-      $result = $this->db->get()->result_array();
-      if(sizeof($result) > 0)
-      	return $result;
-	  else 
-	  	return array();
-	}
-	function getSchemes()
-	{
-	  $this->db->select('*');
-      $this->db->from('iccr_profile_image');
-      $this->db->where('uid',$userid);  
-      $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-      return $this->db->get()->result_array();
-	}
-	function getOldSchemeById($id)
-	{
-	  $this->db->select('scheme_name,code');
-      $this->db->from('iccr_schemes');
-      $this->db->where('id',$id);  
-      $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-      return $this->db->get()->result_array();
-	}
-	function getSchemeById($id)
-	{
-	  $this->db->select('id,scheme_name,code');
-      $this->db->from('iccr_scheme');
-      $this->db->where('id',$id);  
-      $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-      return $this->db->get()->result_array();
-	}
-	function applicationExists($userid)
-	{
-	  $this->db->select('*');
-      $this->db->from('iccr_student_application_details');
-      $this->db->where('uid',$userid);  
-      $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-      $result = $this->db->get()->result_array();
-      if(sizeof($result) > 0)
-      	return TRUE;
-	  else 
-	  	return FALSE;
-	}
+	}	
 	function getGgoupImage($id)
 	{
 	  $this->db->select('*');
@@ -5517,325 +5531,6 @@ where iccr_status_mapping.status IN(13,14,-14) and tt.university_is_accept=1 and
 	function insertGroupImage($data)
 	{
 		$q = $this->db->insert_string('ks_group_pics',$data);             
-        $this->db->query($q);
-        $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-        return $this->db->insert_id();	
-	}
-	function insertDocuments($data)
-	{
-		$q = $this->db->insert_string('iccr_documents',$data);             
-        $this->db->query($q);
-        $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-        return $this->db->insert_id();	
-	}
-	function insertApplicationMapStatus($data)
-	{
-		$q = $this->db->insert_string('iccr_status_mapping',$data);             
-        $this->db->query($q);
-        $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-        return $this->db->insert_id();
-	}
-	public function scholarArivalStatusUpdate($appno,$data,$id)
-	{
-		$sql ="update iccr_travelplan set iccr_travelplan.status=".$data['status'].", iccr_travelplan.arrival_date_ro='".$data['arrival_date_ro']."' where iccr_travelplan.id=".$id;
-		
-		$code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-		 return $this->db->query($sql);
-	}
-	public function updateApplicationMapStatus($appno,$data)
-	{
-		$this->db->where('application_no', $appno);
-        $this->db->update('iccr_status_mapping', $data); 
-        $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-        $success = $this->db->affected_rows(); 
-        if($success >= 0)
-        	return TRUE;
-        else
-         	return FALSE;
-	}
-	function insertBonafideDocument($appno,$data)
-	{
-		$this->db->where('application_no', $appno);
-        $this->db->update('iccr_status_mapping', $data); 
-        $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-        $success = $this->db->affected_rows(); 
-        if($success >= 0)
-        	return TRUE;
-        else
-         	return FALSE;
-	}
-	function insertJoiningDocument($appno,$data)
-	{
-		$this->db->where('application_no', $appno);
-        $this->db->update('iccr_status_mapping', $data); 
-        $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-        $success = $this->db->affected_rows(); 
-        if($success >= 0)
-        	return TRUE;
-        else
-         	return FALSE;
-	}
-	function insertPoliceDocument($appno,$data)
-	{
-		$this->db->where('application_no', $appno);
-        $this->db->update('iccr_status_mapping', $data); 
-        $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-        $success = $this->db->affected_rows(); 
-        if($success >= 0)
-        	return TRUE;
-        else
-         	return FALSE;
-	}
-	function updateApplicationStatus($appno,$userid)
-	{		
-		$data = array(
-			'status'=>'Submit'
-		);
-		$this->db->where('uid', $userid);
-		$this->db->where('application_no', $appno);
-        $this->db->update('iccr_student_application_details', $data); 
-        $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-        $success = $this->db->affected_rows(); 
-        if($success >= 0)
-        	return TRUE;
-        else
-         	return FALSE;
-	}
-	function getResons($appid)
-	{
-		$this->db->select('checklist_ids');
-	    $this->db->from('iccr_status_mapping');
-	    $this->db->where('application_no',$appid);  
-	    $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-	    return $this->db->get()->result_array();
-	      
-	}
-	function updateApplicationStatusPending($appno,$userid)
-	{
-		$data = array(
-		'status'=>'Pending'
-		);
-		$this->db->where('uid', $userid);
-		$this->db->where('application_no', $appno);
-        $this->db->update('iccr_student_application_details', $data); 
-        $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-        $success = $this->db->affected_rows(); 
-        if($success >= 0)
-        	return TRUE;
-        else
-         	return FALSE;
-	}
-	function educationExists($userid)
-	{
-		$this->db->select('*');
-	      $this->db->from('iccr_student_education_details');
-	      $this->db->where('uid',$userid);  
-	      $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-	      $result = $this->db->get()->result_array();
-	      if(sizeof($result) > 0)
-	      	return TRUE;
-		  else 
-		  	return FALSE;
-	}
-	function otherDetailExists($userid)
-	{
-		$this->db->select('*');
-	      $this->db->from('iccr_student_other_details');
-	      $this->db->where('uid',$userid);  
-	      $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-	      $result = $this->db->get()->result_array();
-	      if(sizeof($result) > 0)
-	      	return TRUE;
-		  else 
-		  	return FALSE;
-	}
-	function updateUniversityForwardedLetter($data,$appni)
-	{
-		$this->db->where('application_no', $appni);
-        $this->db->update('iccr_status_mapping', $data); 
-        $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-        $success = $this->db->affected_rows(); 
-        if($success >= 0)
-        	return TRUE;
-        else
-         	return FALSE;
-	}
-	function updateOtherDetails($data,$userid)
-	{
-		$this->db->where('uid', $userid);
-        $this->db->update('iccr_student_other_details', $data); 
-        $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-        $success = $this->db->affected_rows(); 
-        if($success >= 0)
-        	return TRUE;
-        else
-         	return FALSE;
-	}
-	function insertOtherDetails($data)
-	{	 
-        $q = $this->db->insert_string('iccr_student_other_details',$data);             
-        $this->db->query($q);
-        $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-        return $this->db->insert_id();	
-	}
-	function updateEducation($data,$userid)
-	{
-		$this->db->where('uid', $userid);
-        $this->db->update('iccr_student_education_details', $data); 
-        $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-        $success = $this->db->affected_rows(); 
-        if($success >= 0)
-        	return TRUE;
-        else
-         	return FALSE;
-	}
-	function getApplicationNoByUserId($userid)
-	{
-		$this->db->select('application_no');
-      $this->db->from('iccr_student_application_details');
-      $this->db->where('uid',$userid);  
-      $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-      return $this->db->get()->result_array();
-	}
-	function getApplicationDocuments($userid)
-	{
-		$this->db->select('*');
-      $this->db->from('iccr_documents');
-      $this->db->where('uid',$userid);  
-      $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-      return $this->db->get()->result_array();
-	}
-	function getUserIdbyApplicationNo($appno)
-	{
-		$this->db->select('uid');
-      $this->db->from('iccr_student_education_details');
-      $this->db->where('application_no',$appno);  
-      $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-      return $this->db->get()->result_array();
-	}
-	function getApplicationDocumentsbyAppNo($appno)
-	{
-		$this->db->select('*');
-      $this->db->from('iccr_documents');
-      $this->db->where('application_no',$appno);  
-      $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-      return $this->db->get()->result_array();
-	}
-	function insertEducation($data)
-	{	 
-        $q = $this->db->insert_string('iccr_student_education_details',$data);             
-        $this->db->query($q);
-        $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-        return $this->db->insert_id();	
-	}
-	function updateApplicationStepOne($data,$userid)
-	{
-		$this->db->where('uid', $userid);
-		
-		$date_issue = $data['passport_issue_date'].'-'.$data['passport_issue_month'].'-'.$data['passport_issue_year'];
-		$date_expiry = $data['passport_expiry_date'].'-'.$data['passport_expiry_month'].'-'.$data['passport_expiry_year'];
-		
-		unset($data['passport_issue_date']);
-		unset($data['passport_issue_month']);
-		unset($data['passport_issue_year']);
-		unset($data['passport_expiry_date']);
-		unset($data['passport_expiry_month']);
-		unset($data['passport_expiry_year']);
-		
-		$data['passport_issue_date'] = $date_issue;
-		$data['passport_expiry_date'] = $date_expiry;
-        $this->db->update('iccr_student_application_details', $data); 
-        $code = $this->db->error(); if($code['code'] > 0)
-		   {	      	
-			  show_error('Message');
-		   }
-        $success = $this->db->affected_rows();         
-        if($success >= 0)
-        	return TRUE;
-        else
-         	return FALSE;
-	}
-	function insertApplicationStepOne($data)
-	{	 
-		$date_issue = $data['passport_issue_date'].'-'.$data['passport_issue_month'].'-'.$data['passport_issue_year'];
-		$date_expiry = $data['passport_expiry_date'].'-'.$data['passport_expiry_month'].'-'.$data['passport_expiry_year'];
-		
-		unset($data['passport_issue_date']);
-		unset($data['passport_issue_month']);
-		unset($data['passport_issue_year']);
-		unset($data['passport_expiry_date']);
-		unset($data['passport_expiry_month']);
-		unset($data['passport_expiry_year']);
-		
-		$data['passport_issue_date'] = $date_issue;
-		$data['passport_expiry_date'] = $date_expiry;
-        $q = $this->db->insert_string('iccr_student_application_details',$data);             
         $this->db->query($q);
         $code = $this->db->error(); if($code['code'] > 0)
 		   {	      	
@@ -6054,6 +5749,52 @@ where iccr_status_mapping.status IN(13,14,-14) and tt.university_is_accept=1 and
 		return false;
 		}
     }
+    public function getAllWorkflowchannels($id)
+    {
+		$this->db->select('ks_workflow.*');
+       $this->db->from('ks_workflow');
+       $this->db->where('channel_status',1); 
+       if($id > 0)
+       {
+	   		$this->db->where('uid',$id);  	
+	   }
+       $this->db->order_by('id','desc');
+       $code = $this->db->error(); if($code['code'] > 0)
+	   {	      	
+		  show_error('Message');
+	   }
+       return $this->db->get()->result_array();
+	}
+    public function insertWorkflowChannels($channel)
+    {  
+		try
+		{
+           $q = $this->db->insert_string('ks_workflow',$channel);             
+           $this->db->query($q);
+           $code = $this->db->error(); if($code['code'] > 0)
+		   {	      	
+			  show_error('Message');
+		   }
+           return $this->db->insert_id();
+		}
+		catch(Exception $e)
+		{
+			return false;
+		}
+    }
+	public function insertIoTStreams($streams){
+		try {
+			$q = $this->db->insert_string('ks_iotstreams',$streams);
+			$this->db->query($q);
+			$code = $this->db->error();
+			if ($code['code'] > 0) {
+				show_error('Message');
+			}
+			return $this->db->insert_id();
+		} catch (Exception $e) {
+			return false;
+		}
+	}
     public function insertChannels($channel)
     {  
 		try
@@ -6120,6 +5861,23 @@ where iccr_status_mapping.status IN(13,14,-14) and tt.university_is_accept=1 and
 		try
 		{
            $q = $this->db->insert_string('ks_encoder',$encoder);             
+           $this->db->query($q);
+           $code = $this->db->error(); if($code['code'] > 0)
+		   {	      	
+			  show_error('Message');
+		   }
+           return $this->db->insert_id();
+		}
+		catch(Exception $e)
+		{
+			return false;
+		}
+    }
+    public function insertNebula($encoder)
+    {  
+		try
+		{
+           $q = $this->db->insert_string('ks_nebula',$encoder);             
            $this->db->query($q);
            $code = $this->db->error(); if($code['code'] > 0)
 		   {	      	
@@ -6367,6 +6125,16 @@ where iccr_status_mapping.status IN(13,14,-14) and tt.university_is_accept=1 and
     {
 		$this->db->where(array('encid'=>$id,'out_name'=>$data['out_name']));
         $this->db->update('ks_encoder_destinations', $data); 
+        $code = $this->db->error(); if($code['code'] > 0)
+	   {	      	
+		  show_error('Message');
+	   }
+        return $this->db->affected_rows(); 
+	}
+	 public function updateNebula($data,$id)
+    {
+		$this->db->where('id', $id);
+        $this->db->update('ks_nebula', $data); 
         $code = $this->db->error(); if($code['code'] > 0)
 	   {	      	
 		  show_error('Message');
@@ -6674,6 +6442,16 @@ where iccr_status_mapping.status IN(13,14,-14) and tt.university_is_accept=1 and
 		$this->db->order_by('id','DESC');
 		return $this->db->get()->result_array();
 	}
+	function getAllRundownClips($rundownid)
+    {
+		$this->db->select("*");
+		$this->db->from("ks_rundown_clips");
+		if($rundownid>0)
+		{
+			$this->db->where('rundown_id',$rundownid);	
+		}		
+		return $this->db->get()->result_array();
+	}
 	function getAllEncodersbyStatusAndEnc($id=0,$uid=0,$encid)
     {
 		$this->db->select("*");
@@ -6691,6 +6469,7 @@ where iccr_status_mapping.status IN(13,14,-14) and tt.university_is_accept=1 and
 		{
 			$this->db->or_where('id',$encid);	
 		}
+		
 		$this->db->order_by('id','DESC');
 		return $this->db->get()->result_array();
 	}
@@ -6728,6 +6507,21 @@ where iccr_status_mapping.status IN(13,14,-14) and tt.university_is_accept=1 and
 		{
 			$this->db->where('encoder_id',$id);	
 		}		
+		return $this->db->get()->result_array();
+	}
+	function getAllNebula($id=0,$uid=0)
+    {
+		$this->db->select("*");
+		$this->db->from("ks_nebula");
+		if($id>0)
+		{
+			$this->db->where('id',$id);	
+		}
+		if($uid > 0)
+		{
+			$this->db->where('uid',$uid);	
+		}
+		$this->db->order_by('id','DESC');
 		return $this->db->get()->result_array();
 	}
 	function getAllGateways($id=0,$uid=0)
@@ -7101,6 +6895,65 @@ where iccr_status_mapping.status IN(13,14,-14) and tt.university_is_accept=1 and
        $this->db->from('ks_channel_output');
        $this->db->where('id',$cid);
        return $result = $this->db->get()->result_array();
+	}
+	function insertRundown($rundown)
+	{
+		$q = $this->db->insert_string('ks_rundowns',$rundown);             
+        $this->db->query($q);
+        return $this->db->insert_id();
+	}
+	function insertRundownClips($clip)
+	{
+		$q = $this->db->insert_string('ks_rundown_clips',$clip);             
+        $this->db->query($q);
+        return $this->db->insert_id();
+	}
+	
+	function getAllRundowns($id)
+	{
+	   $this->db->select('*');
+       $this->db->from('ks_rundowns');   
+       $this->db->order_by('id','desc');  
+	   $code = $this->db->error(); 
+	   if($id>0)
+		{
+			$this->db->where('id',$id);	
+		}
+	   if($code['code'] > 0)
+	   {	      	
+		  show_error('Message');
+	   }
+       return $this->db->get()->result_array();
+	}
+	function deleteRundown($rundownid)
+	{	          
+       $this->db->where('id', $rundownid);	
+       $this->db->delete('ks_rundowns');
+       $code = $this->db->error(); if($code['code'] > 0)
+	   {	      	
+		  show_error('Message');
+	   }
+       return $this->db->affected_rows();
+	}
+	public function updateRundown($data,$id)
+    {
+		$this->db->where('id', $id);
+        $this->db->update('ks_rundowns', $data); 
+        $code = $this->db->error(); if($code['code'] > 0)
+	   {	      	
+		  show_error('Message');
+	   }
+        return $this->db->affected_rows(); 
+	}
+	function deleteRundownClips($rundownid)
+	{	          
+       $this->db->where('rundown_id', $rundownid);	
+       $this->db->delete('ks_rundown_clips');
+       $code = $this->db->error(); if($code['code'] > 0)
+	   {	      	
+		  show_error('Message');
+	   }
+       return $this->db->affected_rows();
 	}
 } 
 ?>

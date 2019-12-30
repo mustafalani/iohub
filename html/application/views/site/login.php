@@ -171,7 +171,7 @@ line-height: 1;
     </div>
     </body>
     <footer class="app-footer" style="position:absolute;width:100%;padding:15px;bottom:0;font-size:12px;">
-      <img class="loginlogo" style="width:10%;"src="<?php echo site_url();?>assets/site/main/img/logo.png"/>
+      <img class="loginlogo" style="width:10%;"src="<?php echo site_url();?>public/site/main/img/logo.png"/>
         <div style="padding-left:15px;">
           <a href="http://iohub.live">iohub v2.0</span></a>
           <span>&copy; - Copyright <a href="https://kurrent.tv">Kurrent TV </a>All rights reserved.</span>

@@ -372,7 +372,7 @@ class Channels extends REST_Controller {
 					if(strpos($output[1],'PC Out') !== false)
 					{
 						$outputType = "";
-						$outputName = " -f alsa default -pix_fmt bgra -s hd1080 -f fbdev /dev/fb0";
+						$outputName = " alsa default -pix_fmt bgra -f fbdev /dev/fb0";
             $inputOptions = "-fflags nobuffer";
 					}
 					else
@@ -464,7 +464,7 @@ class Channels extends REST_Controller {
 					if(strpos($output[1],'PC Out') !== false)
 					{
 						$outputType = "";
-						$outputName = " -f alsa default -pix_fmt bgra -s hd1080 -f fbdev /dev/fb0";
+						$outputName = " alsa default -pix_fmt bgra -f fbdev /dev/fb0";
             $inputOptions = "-fflags nobuffer";
 					}
 					else
@@ -537,7 +537,7 @@ class Channels extends REST_Controller {
 					if(strpos($output[1],'PC Out') !== false)
 					{
 						$outputType = "";
-						$outputName = " -f alsa default -pix_fmt bgra -s hd1080 -f fbdev /dev/fb0";
+						$outputName = " alsa default -pix_fmt bgra -f fbdev /dev/fb0";
             $inputOptions = "-fflags nobuffer";
 					}
 					else
@@ -594,7 +594,7 @@ class Channels extends REST_Controller {
 					if(strpos($output[1],'PC Out') !== false)
 					{
 						$outputType = "";
-						$outputName = " -f alsa default -pix_fmt bgra -s hd1080 -f fbdev /dev/fb0";
+						$outputName = " alsa default -pix_fmt bgra -f fbdev /dev/fb0";
             $inputOptions = "-fflags nobuffer";
 					}
 					else
@@ -650,7 +650,7 @@ class Channels extends REST_Controller {
 					if(strpos($output[1],'PC Out') !== false)
 					{
 						$outputType = "";
-						$outputName = " -f alsa default -pix_fmt bgra -s hd1080 -f fbdev /dev/fb0";
+						$outputName = " alsa default -pix_fmt bgra -s hd1080 -f fbdev /dev/fb0";
             $inputOptions = "-fflags nobuffer";
 					}
 					else
@@ -707,7 +707,7 @@ class Channels extends REST_Controller {
 					if(strpos($output[1],'PC Out') !== false)
 					{
 						$outputType = "";
-						$outputName = " -f alsa default -pix_fmt bgra -s hd1080 -f fbdev /dev/fb0";
+						$outputName = " alsa default -pix_fmt bgra -f fbdev /dev/fb0";
             $inputOptions = "-fflags nobuffer";
 					}
 					else
@@ -879,7 +879,7 @@ class Channels extends REST_Controller {
 
 		$idArray = explode('_',$channelId);
 		$channel = $this->common_model->getChannelbyId($idArray[1]);
-		if($channel[0]['encoder_id'] == "" || $channel[0]['encoder_id'] <= 0)
+		if($channel[0]['encoder_id'] == "")
 		{
 			$encoderId = $channel[0]['encoderid'];
 		}
@@ -887,14 +887,15 @@ class Channels extends REST_Controller {
 		{
 			$encoderId = $channel[0]['encoder_id'];
 		}
+
 		$encoder = $this->common_model->getAllEncoders($encoderId,0);
 		$ip =  $encoder[0]["encoder_ip"];
 		$username = $encoder[0]["encoder_uname"];
 		$password = $encoder[0]["encoder_pass"];
 		$port = "22";
 		$ssh = new Net_SSH2($ip);
-
 		if (!$ssh->login($username, $password,$port)) {
+
 			$response['status']= FALSE;
 			$response['response']= $ssh->getLog();
 			echo json_encode($response);
@@ -914,7 +915,7 @@ class Channels extends REST_Controller {
 
 				$LOOPIDINRESPONSE = (int) filter_var($loopid, FILTER_SANITIZE_NUMBER_INT);
 				//$CID = $ssh->exec('$(pgrep -P "'.$LOOPIDINRESPONSE.'");');
-       			$CID = "'.$LOOPIDINRESPONSE.'";
+        $CID = "'.$LOOPIDINRESPONSE.'";
 				$actualCID = (int) filter_var($CID, FILTER_SANITIZE_NUMBER_INT);
 				//$ssh->exec('kill -9 '.trim($actualCID));
 				//echo 'pkill -9 -P '.trim($actualCID).' && kill -9 '.trim($actualCID).' && dd if=/dev/zero of=/dev/fb0';

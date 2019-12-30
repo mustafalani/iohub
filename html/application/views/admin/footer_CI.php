@@ -22,54 +22,54 @@
 
     <!-- ========= jQuery Included ========= -->
     
-    <script src="<?php echo site_url();?>assets/site/main/js/jquery.min.js"></script>
+    <script src="<?php echo site_url();?>public/site/main/js/jquery.min.js"></script>
    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
     <!-- === Bootstrap 3.3.7 === -->
-    <script src="<?php echo site_url();?>assets/site/main/js/jquery-ui.js"></script>
-    <!--<script src="<?php echo site_url();?>assets/site/main/js/jquery-ui.min.js"></script>-->
+    <script src="<?php echo site_url();?>public/site/main/js/jquery-ui.js"></script>
+    <!--<script src="<?php echo site_url();?>public/site/main/js/jquery-ui.min.js"></script>-->
     
-    <script src="<?php echo site_url();?>assets/site/main/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?php echo site_url();?>public/site/main/bootstrap/js/bootstrap.min.js"></script>
     <!-- === Date Picker === -->   
-    <script src="<?php echo site_url();?>assets/site/main/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="<?php echo site_url();?>public/site/main/js/bootstrap-datetimepicker.min.js"></script>
   
-<!--<script src="<?php echo site_url();?>assets/site/main/js/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>-->
-        <script src="<?php echo site_url();?>assets/site/main/js/bootstrap-select.min.js"></script>
-      <script src="<?php echo site_url();?>assets/site/main/js/bootstrap-multiselect.js"></script>
+<!--<script src="<?php echo site_url();?>public/site/main/js/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>-->
+        <script src="<?php echo site_url();?>public/site/main/js/bootstrap-select.min.js"></script>
+      <script src="<?php echo site_url();?>public/site/main/js/bootstrap-multiselect.js"></script>
     
-    <script src="<?php echo site_url();?>assets/site/main/js/datatables.min.js"></script>
-    <script src="<?php echo site_url();?>assets/site/main/js/admin.min.js"></script>
-    <script src="<?php echo site_url();?>assets/site/main/js/sweetalert.js"></script>
-       <script src="<?php echo site_url();?>assets/site/main/js/toastr.min.js"></script>
+    <script src="<?php echo site_url();?>public/site/main/js/datatables.min.js"></script>
+    <script src="<?php echo site_url();?>public/site/main/js/admin.min.js"></script>
+    <script src="<?php echo site_url();?>public/site/main/js/sweetalert.js"></script>
+       <script src="<?php echo site_url();?>public/site/main/js/toastr.min.js"></script>
        <!-- fullCalendar -->
-	<script src="<?php echo site_url();?>assets/site/main/js/moment.js"></script>
-	<script src="<?php echo site_url();?>assets/site/main/js/fullcalendar.min.js"></script>
-	   <script src="<?php echo site_url();?>assets/site/main/js/jquery.flowchart.js"></script>
-	 <script type="text/javascript" src="<?php echo site_url();?>assets/site/main/js/highcharts.js"></script>
-	<script type="text/javascript" src="<?php echo site_url();?>assets/site/main/js/exporting.js"></script> 
-    <script src="<?php echo site_url();?>assets/site/main/js/custom.js"></script>
-     <script src="<?php echo site_url();?>assets/site/main/js/workflow.js"></script>
-   <script src="<?php echo site_url();?>assets/site/main/js/swfobject.min.js"></script>
-   <script src="<?php echo site_url();?>assets/site/main/js/net_js_main.js"></script>  
-   <script src="<?php echo site_url();?>assets/site/main/js/piecircle.js"></script> 
+	<script src="<?php echo site_url();?>public/site/main/js/moment.js"></script>
+	<script src="<?php echo site_url();?>public/site/main/js/fullcalendar.min.js"></script>
+	   <script src="<?php echo site_url();?>public/site/main/js/jquery.flowchart.js"></script>
+	 <script type="text/javascript" src="<?php echo site_url();?>public/site/main/js/highcharts.js"></script>
+	<script type="text/javascript" src="<?php echo site_url();?>public/site/main/js/exporting.js"></script> 
+    <script src="<?php echo site_url();?>public/site/main/js/custom.js"></script>
+     <script src="<?php echo site_url();?>public/site/main/js/workflow.js"></script>
+   <script src="<?php echo site_url();?>public/site/main/js/swfobject.min.js"></script>
+   <script src="<?php echo site_url();?>public/site/main/js/net_js_main.js"></script>  
+   <script src="<?php echo site_url();?>public/site/main/js/piecircle.js"></script> 
    <!--  404 Start-->
-   	<script src="<?php echo site_url();?>assets/site/main/js/jquery.vide.min.js"></script>
+   	<script src="<?php echo site_url();?>public/site/main/js/jquery.vide.min.js"></script>
 	<!-- Waypoints -->
-	<script src="<?php echo site_url();?>assets/site/main/js/jquery.waypoints.min.js"></script>
+	<script src="<?php echo site_url();?>public/site/main/js/jquery.waypoints.min.js"></script>
 	<!-- Main JS -->
-	<script src="<?php echo site_url();?>assets/site/main/js/main.js"></script> 
+	<script src="<?php echo site_url();?>public/site/main/js/main.js"></script> 
 	
 	<!--  404 Start-->
-     <script src="<?php echo site_url();?>assets/site/main/js/jquery.countdownTimer.min.js"></script>
-	 <script src="<?php echo site_url();?>assets/site/main/js/jstz.min.js"></script>
-	 <script src="<?php echo site_url();?>assets/site/main/js/jClocksGMT.js"></script>
-     <script src="<?php echo site_url();?>assets/site/main/js/jquery.rotate.js"></script>
-     <script src="<?php echo site_url();?>assets/site/main/js/ion.rangeSlider.min.js"></script>
+     <script src="<?php echo site_url();?>public/site/main/js/jquery.countdownTimer.min.js"></script>
+	 <script src="<?php echo site_url();?>public/site/main/js/jstz.min.js"></script>
+	 <script src="<?php echo site_url();?>public/site/main/js/jClocksGMT.js"></script>
+     <script src="<?php echo site_url();?>public/site/main/js/jquery.rotate.js"></script>
+     <script src="<?php echo site_url();?>public/site/main/js/ion.rangeSlider.min.js"></script>
       <script type="text/javascript">
      
       	if(Action == "dashboard" || Action == "editEncoder" || Action == "editGateway" || Action == "updatewowzaengin" || Action == "configuration")
       	{     		
 			var my_awesome_script = document.createElement('script');
-			my_awesome_script.setAttribute('src',baseURL+'assets/site/main/js/dashboard.js?v20170724-7');
+			my_awesome_script.setAttribute('src',baseURL+'public/site/main/js/dashboard.js?v20170724-7');
 			document.head.appendChild(my_awesome_script);
 		}
 		if(Action == "channels")
@@ -79,7 +79,7 @@
 		
       </script>   
       
-    <script src="<?php echo site_url();?>assets/site/main/js/custom-kurrent.js"></script>
+    <script src="<?php echo site_url();?>public/site/main/js/custom-kurrent.js"></script>
  
     
     <script type="text/javascript"> 
@@ -490,7 +490,7 @@ $(document).ready(function(){
 	?>
 
 <div class="loaddiv">
-	<img src="<?php echo site_url();?>assets/site/main/img/loading.gif"/>
+	<img src="<?php echo site_url();?>public/site/main/img/loading.gif"/>
 </div>
 
 
