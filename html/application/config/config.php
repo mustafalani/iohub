@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'https://northwaves.net/iohub/';
+$config['base_url'] = 'https://iohub.tv/';
 
 /*
 |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ $config['index_page'] = '';
 |
 | WARNING: If you set this to 'PATH_INFO', URIs will always be URL-decoded!
 */
-$config['uri_protocol']	= "REQUEST_URI";
+$config['uri_protocol']	= "PATH_INFO";
 
 /*
 |--------------------------------------------------------------------------
@@ -367,11 +367,12 @@ $config['encryption_key'] = 'EDCV^FR5tgb7u8%';
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
-$config['sess_driver'] = 'database';
+//$config['sess_driver'] = 'database';
+$config['sess_driver'] = 'files';
 
 $config['sess_cookie_name'] = 'ks_sessions';
 $config['sess_expiration'] = 72000;
-//$config['sess_save_path'] = FCPATH.'application/ci_sessions/';
+$config['sess_save_path'] = FCPATH.'application/ci_sessions/';
 $config['sess_match_ip'] = FALSE;
 $config['sess_use_database'] = TRUE;
 $config['sess_table_name'] = 'ks_sessions';
@@ -515,8 +516,8 @@ $config['rewrite_short_tags'] = FALSE;
 | Comma-separated:	'10.0.1.200,192.168.5.0/24'
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
-$config['startChannelPath'] = 'https://northwaves.net/iohub/api/startchannels';
-$config['stopChannelPath'] = 'https://northwaves.net/iohub/api/stopchannels';
+$config['startChannelPath'] = 'https://iohub.tv/api/startchannels';
+$config['stopChannelPath'] = 'https://iohub.tv/api/stopchannels';
 $config['proxy_ips'] = '';
 $config['financial_year_last'] = '5';
 
@@ -525,9 +526,9 @@ $config['roles'] = array('admin'=>1,'groupadmin'=>2,'user'=>3);
 $config['rol'] = array('Admin'=>1,'GroupAdmin'=>2,'User'=>3);
 $config['status'] = array('0', '1');
 $config['isProduction'] = FALSE;
-$config['ServerIP'] = '152.115.45.135';
+$config['ServerIP'] = '152.115.45.143';
 $config['ServerUser'] = 'ksm';
-$config['ServerPassword'] = 'BDoNvDOKoH52nesvAZ';
+$config['ServerPassword'] = 'purse968*bites';
 
 
 $config['SDITONDI']['input_type'] = "-f decklink";
@@ -537,171 +538,171 @@ $config['SDITONDI']['output_type'] = "-f libndi_newtek";
 
 $config['SDITORTMP']['input_type'] = "-f decklink";
 $config['SDITORTMP']['output_options'] = "";
-$config['SDITORTMP']['format_code'] = "-format_code 'autodetection'";
+$config['SDITORTMP']['format_code'] = "";
 $config['SDITORTMP']['output_type'] = "-f flv";
 
 $config['SDITOMPEGRTP']['input_type'] = "-f decklink";
 $config['SDITOMPEGRTP']['output_options'] = "";
-$config['SDITOMPEGRTP']['format_code'] = "-format_code 'autodetection'";
+$config['SDITOMPEGRTP']['format_code'] = "";
 $config['SDITOMPEGRTP']['output_type'] = "-f mpegts";
 
 $config['SDITOMPEGUDP']['input_type'] = "-f decklink";
 $config['SDITOMPEGUDP']['output_options'] = "";
-$config['SDITOMPEGUDP']['format_code'] = "-format_code 'autodetection'";
+$config['SDITOMPEGUDP']['format_code'] = "";
 $config['SDITOMPEGUDP']['output_type'] = "-f mpegts";
 
 $config['SDITOMPEGSRT']['input_type'] = "-f decklink";
 $config['SDITOMPEGSRT']['output_options'] = "";
-$config['SDITOMPEGSRT']['format_code'] = "-format_code 'autodetection'";
+$config['SDITOMPEGSRT']['format_code'] = "";
 $config['SDITOMPEGSRT']['output_type'] = "-f mpegts";
 
 $config['NDITOSDI']['input_type'] = "-f libndi_newtek";
 $config['NDITOSDI']['output_options'] = "";
-$config['NDITOSDI']['format_code'] = "-format_code 'autodetection'";
+$config['NDITOSDI']['format_code'] = "";
 $config['NDITOSDI']['output_type'] = "-f decklink";
 
 $config['NDITONDI']['input_type'] = "-f libndi_newtek";
 $config['NDITONDI']['output_options'] = "";
-$config['NDITONDI']['format_code'] = "-format_code 'autodetection'";
+$config['NDITONDI']['format_code'] = "";
 $config['NDITONDI']['output_type'] = "-f libndi_newtek";
 
 $config['NDITORTMP']['input_type'] = "-f libndi_newtek";
 $config['NDITORTMP']['output_options'] = "";
-$config['NDITORTMP']['format_code'] = "-format_code 'autodetection'";
+$config['NDITORTMP']['format_code'] = "";
 $config['NDITORTMP']['output_type'] = "-f flv";
 
 $config['NDITOMPEGRTP']['input_type'] = "-f libndi_newtek";
 $config['NDITOMPEGRTP']['output_options'] = "";
-$config['NDITOMPEGRTP']['format_code'] = "-format_code 'autodetection'";
+$config['NDITOMPEGRTP']['format_code'] = "";
 $config['NDITOMPEGRTP']['output_type'] = "-f mpegts";
 
 $config['NDITOMPEGUDP']['input_type'] = "-f libndi_newtek";
 $config['NDITOMPEGUDP']['output_options'] = "";
-$config['NDITOMPEGUDP']['format_code'] = "-format_code 'autodetection'";
+$config['NDITOMPEGUDP']['format_code'] = "";
 $config['NDITOMPEGUDP']['output_type'] = "-f mpegts";
 
 $config['NDITOMPEGSRT']['input_type'] = "-f libndi_newtek";
 $config['NDITOMPEGSRT']['output_options'] = "";
-$config['NDITOMPEGSRT']['format_code'] = "-format_code 'autodetection'";
+$config['NDITOMPEGSRT']['format_code'] = "";
 $config['NDITOMPEGSRT']['output_type'] = "-f mpegts";
 
 $config['RTMPTOSDI']['input_type'] = "-f flv";
 $config['RTMPTOSDI']['output_options'] = "";
-$config['RTMPTOSDI']['format_code'] = "-format_code 'autodetection'";
+$config['RTMPTOSDI']['format_code'] = "";
 $config['RTMPTOSDI']['output_type'] = "-f decklink";
 
 $config['RTMPTONDI']['input_type'] = "-f flv";
 $config['RTMPTONDI']['output_options'] = "";
-$config['RTMPTONDI']['format_code'] = "-format_code 'autodetection'";
+$config['RTMPTONDI']['format_code'] = "";
 $config['RTMPTONDI']['output_type'] = "-f libndi_newtek";
 
 $config['RTMPTORTMP']['input_type'] = "-f flv";
 $config['RTMPTORTMP']['output_options'] = "";
-$config['RTMPTORTMP']['format_code'] = "-format_code 'autodetection'";
+$config['RTMPTORTMP']['format_code'] = "";
 $config['RTMPTORTMP']['output_type'] = "-f flv";
 
 $config['RTMPTOMPEGRTP']['input_type'] = "-f flv";
 $config['RTMPTOMPEGRTP']['output_options'] = "";
-$config['RTMPTOMPEGRTP']['format_code'] = "-format_code 'autodetection'";
+$config['RTMPTOMPEGRTP']['format_code'] = "";
 $config['RTMPTOMPEGRTP']['output_type'] = "-f mpegts";
 
 $config['RTMPTOMPEGUDP']['input_type'] = "-f flv";
 $config['RTMPTOMPEGUDP']['output_options'] = "";
-$config['RTMPTOMPEGUDP']['format_code'] = "-format_code 'autodetection'";
+$config['RTMPTOMPEGUDP']['format_code'] = "";
 $config['RTMPTOMPEGUDP']['output_type'] = "-f mpegts";
 
 $config['RTMPTOMPEGSRT']['input_type'] = "-f flv";
 $config['RTMPTOMPEGSRT']['output_options'] = "";
-$config['RTMPTOMPEGSRT']['format_code'] = "-format_code 'autodetection'";
+$config['RTMPTOMPEGSRT']['format_code'] = "";
 $config['RTMPTOMPEGSRT']['output_type'] = "-f mpegts";
 
 $config['MPEGRTPTOSDI']['input_type'] = "-f mpegts";
 $config['MPEGRTPTOSDI']['output_options'] = "";
-$config['MPEGRTPTOSDI']['format_code'] = "-format_code 'autodetection'";
+$config['MPEGRTPTOSDI']['format_code'] = "";
 $config['MPEGRTPTOSDI']['output_type'] = "-f decklink";
 
 $config['MPEGRTPTONDI']['input_type'] = "-f mpegts";
 $config['MPEGRTPTONDI']['output_options'] = "";
-$config['MPEGRTPTONDI']['format_code'] = "-format_code 'autodetection'";
+$config['MPEGRTPTONDI']['format_code'] = "";
 $config['MPEGRTPTONDI']['output_type'] = "-f libndi_newtek";
 
 $config['MPEGRTPTORTMP']['input_type'] = "-f mpegts";
 $config['MPEGRTPTORTMP']['output_options'] = "";
-$config['MPEGRTPTORTMP']['format_code'] = "-format_code 'autodetection'";
+$config['MPEGRTPTORTMP']['format_code'] = "";
 $config['MPEGRTPTORTMP']['output_type'] = "-f flv";
 
 $config['MPEGRTPTOMPEGRTP']['input_type'] = "-f mpegts";
 $config['MPEGRTPTOMPEGRTP']['output_options'] = "";
-$config['MPEGRTPTOMPEGRTP']['format_code'] = "-format_code 'autodetection'";
+$config['MPEGRTPTOMPEGRTP']['format_code'] = "";
 $config['MPEGRTPTOMPEGRTP']['output_type'] = "-f mpegts";
 
 $config['MPEGUDPTOSDI']['input_type'] = "-f mpegts";
 $config['MPEGUDPTOSDI']['output_options'] = "";
-$config['MPEGUDPTOSDI']['format_code'] = "-format_code 'autodetection'";
+$config['MPEGUDPTOSDI']['format_code'] = "";
 $config['MPEGUDPTOSDI']['output_type'] = "-f decklink";
 
 $config['MPEGUDPTONDI']['input_type'] = "-f mpegts";
 $config['MPEGUDPTONDI']['output_options'] = "";
-$config['MPEGUDPTONDI']['format_code'] = "-format_code 'autodetection'";
+$config['MPEGUDPTONDI']['format_code'] = "";
 $config['MPEGUDPTONDI']['output_type'] = "-f libndi_newtek";
 
 $config['MPEGUDPTORTMP']['input_type'] = "-f mpegts";
 $config['MPEGUDPTORTMP']['output_options'] = "";
-$config['MPEGUDPTORTMP']['format_code'] = "-format_code 'autodetection'";
+$config['MPEGUDPTORTMP']['format_code'] = "";
 $config['MPEGUDPTORTMP']['output_type'] = "-f flv";
 
 $config['MPEGUDPTOMPEGUDP']['input_type'] = "-f mpegts";
 $config['MPEGUDPTOMPEGUDP']['output_options'] = "";
-$config['MPEGUDPTOMPEGUDP']['format_code'] = "-format_code 'autodetection'";
+$config['MPEGUDPTOMPEGUDP']['format_code'] = "";
 $config['MPEGUDPTOMPEGUDP']['output_type'] = "-f mpegts";
 
 $config['MPEGSRTTOSDI']['input_type'] = "-f mpegts";
 $config['MPEGSRTTOSDI']['output_options'] = "";
-$config['MPEGSRTTOSDI']['format_code'] = "-format_code 'autodetection'";
+$config['MPEGSRTTOSDI']['format_code'] = "";
 $config['MPEGSRTTOSDI']['output_type'] = "-f decklink";
 
 $config['MPEGSRTTONDI']['input_type'] = "-f mpegts";
 $config['MPEGSRTTONDI']['output_options'] = "";
-$config['MPEGSRTTONDI']['format_code'] = "-format_code 'autodetection'";
+$config['MPEGSRTTONDI']['format_code'] = "";
 $config['MPEGSRTTONDI']['output_type'] = "-f libndi_newtek";
 
 $config['MPEGSRTTORTMP']['input_type'] = "-f mpegts";
 $config['MPEGSRTTORTMP']['output_options'] = "";
-$config['MPEGSRTTORTMP']['format_code'] = "-format_code 'autodetection'";
+$config['MPEGSRTTORTMP']['format_code'] = "";
 $config['MPEGSRTTORTMP']['output_type'] = "-f flv";
 
 $config['MPEGSRTTOMPEGSRT']['input_type'] = "-f mpegts";
 $config['MPEGSRTTOMPEGSRT']['output_options'] = "";
-$config['MPEGSRTTOMPEGSRT']['format_code'] = "-format_code 'autodetection'";
+$config['MPEGSRTTOMPEGSRT']['format_code'] = "";
 $config['MPEGSRTTOMPEGSRT']['output_type'] = "-f mpegts";
 
 
 $config['HTTPLIVETOSDI']['input_type'] = "";
 $config['HTTPLIVETOSDI']['output_options'] = "";
-$config['HTTPLIVETOSDI']['format_code'] = "-format_code 'autodetection'";
+$config['HTTPLIVETOSDI']['format_code'] = "";
 $config['HTTPLIVETOSDI']['output_type'] = "-f decklink";
 
 $config['HTTPLIVETONDI']['input_type'] = "";
 $config['HTTPLIVETONDI']['output_options'] = "";
-$config['HTTPLIVETONDI']['format_code'] = "-format_code 'autodetection'";
+$config['HTTPLIVETONDI']['format_code'] = "";
 $config['HTTPLIVETONDI']['output_type'] = "-f libndi_newtek";
 
 $config['HTTPLIVETORTMP']['input_type'] = "";
 $config['HTTPLIVETORTMP']['output_options'] = "";
-$config['HTTPLIVETORTMP']['format_code'] = "-format_code 'autodetection'";
+$config['HTTPLIVETORTMP']['format_code'] = "";
 $config['HTTPLIVETORTMP']['output_type'] = "-f flv";
 
 $config['HTTPLIVETOMPEGRTP']['input_type'] = "";
 $config['HTTPLIVETOMPEGRTP']['output_options'] = "";
-$config['HTTPLIVETOMPEGRTP']['format_code'] = "-format_code 'autodetection'";
+$config['HTTPLIVETOMPEGRTP']['format_code'] = "";
 $config['HTTPLIVETOMPEGRTP']['output_type'] = "-f mpegts";
 
 $config['HTTPLIVETOMPEGUDP']['input_type'] = "";
 $config['HTTPLIVETOMPEGUDP']['output_options'] = "";
-$config['HTTPLIVETOMPEGUDP']['format_code'] = "-format_code 'autodetection'";
+$config['HTTPLIVETOMPEGUDP']['format_code'] = "";
 $config['HTTPLIVETOMPEGUDP']['output_type'] = "-f mpegts";
 
 $config['HTTPLIVETOMPEGSRT']['input_type'] = "";
 $config['HTTPLIVETOMPEGSRT']['output_options'] = "";
-$config['HTTPLIVETOMPEGSRT']['format_code'] = "-format_code 'autodetection'";
+$config['HTTPLIVETOMPEGSRT']['format_code'] = "";
 $config['HTTPLIVETOMPEGSRT']['output_type'] = "-f mpegts";

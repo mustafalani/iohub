@@ -819,7 +819,7 @@ $(document).on('click','.btnSaveRundownList',function(){
 	var stime = stimes.substring(0, stimes.length - 1);
 	$.ajax({
         url: baseURL + "nebula/saveRundownList",
-        data:{'rundownid':pathArray[3],'clipids':cids,'loops':lps,'paths':pthss,'stime':stime},
+        data:{'rundownid':pathArray[2],'clipids':cids,'loops':lps,'paths':pthss,'stime':stime},
         type:'post',
         dataType:'json',
         success:function(jsonResponse){
