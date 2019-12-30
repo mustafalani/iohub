@@ -1,10 +1,10 @@
-<?php
+<?php 
 error_reporting(E_ALL);
 ini_set('display_errors',1);
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require_once("application/third_party/ssp.class.php");
 class Logs extends CI_Controller {
-
+	
 	protected $response = array();
 	public function __construct()
 	{
@@ -17,7 +17,7 @@ class Logs extends CI_Controller {
 		$this->load->library('breadcrumbs');
 		$this->load->library('encrypt');
 		$this->load->helper('date');
-		$this->load->model('common_model');
+		$this->load->model('common_model');  
 		$this->load->model('LogsModel');
 	}
 	public function index()

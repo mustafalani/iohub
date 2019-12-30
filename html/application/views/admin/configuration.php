@@ -68,7 +68,7 @@
 					<li class="nav-item" role="presentation">
 					<a class="nav-link" id="encodingtemplate" href="#Encoding-Templates" aria-controls="Encoding Templates" role="tab" data-toggle="tab">Encoding Presets</a></li>
 					<li class="nav-item" role="presentation">
-					<a class="nav-link"  href="#assets" aria-controls="Assets" role="tab" data-toggle="tab">Assets</a></li>
+					<a class="nav-link"  href="#nebula" aria-controls="Nebula" role="tab" data-toggle="tab">Nebula</a></li>
 
                 </ul>
                 <div class="tab-content">
@@ -1143,9 +1143,224 @@
                                     </div>
 							 	</div>
                             </div>
-							<div role="tabpanel" class="tab-pane" id="assets">
+							<div role="tabpanel" class="tab-pane" id="nebula">
 
-								Assets
+								<div class="card-body">
+								    <div class="row">
+								        <div class="col-12" style="padding: 0;">
+								            <div class="box-header">
+								 <!-- Single button -->
+								<div class="btn-group">
+
+								<select class="form-control actionsel " id="actionNebula">
+								<option value="">Action</option>
+								<option value="Refresh">Refresh</option>
+								<option value="TakeOffline">Take Offline</option>
+								<option value="BringOnline">Bring Online</option>
+								<option value="Reboot">Reboot</option>
+								<option value="Delete">Delete</option>
+								</select>
+
+
+								</div>
+								<!-- Standard button -->
+								<button type="button" class="btn btn-primary submit" onclick="submitAllnebula()";>Submit</button>
+
+								<a  href="<?php echo site_url();?>createnebula" class="btn btn-primary add-btn float-right">
+								    <span><i class="fa fa-plus"></i> Nebula</span>
+								</a>
+								</div>
+								<br/>
+								<div class="table-responsive no-padding" >
+								    <table class="table table-hover check-input cstmtable nebulaTable">
+								        <tr>
+								            <th>
+								                <div class="boxes">
+								                    <input type="checkbox" id="selectallnebula">
+								                    <label for="selectallnebula"></label>
+								                </div>
+								            </th>
+								            <th>ID</th>
+								            <th>Name</th>
+								            <th>Group Name</th>
+								            <th>IP Address</th>
+
+								            <th>Uptime</th>
+								            <th>Status</th>
+								            <th> &nbsp; </th>
+								            <th> &nbsp; </th>
+								            <th> &nbsp; </th>
+								            <th> &nbsp; </th>
+								        </tr>
+
+								          <?php
+								          if(sizeof($nebula)>0)
+								          {
+								            $nebula_count=1;
+								foreach($nebula as $nebula)
+								{
+								  ?>
+								  <tr id="row_<?php echo $nebula['id'];?>">
+								    <td>
+								                      <div class="boxes">
+								                          <input type="checkbox" name="appids[]" class="nebulaGrp" id="del_<?php echo $nebula['id'];?>" value="<?php echo $nebula['id'];?>">
+								                          <label for="del_<?php echo $nebula['id'];?>"></label>
+								                      </div>
+								                  </td>
+								                  <td><?php echo $nebula_count;?></td>
+								                  <td><a id="<?php echo $nebula['id'];?>" class="enciid" href="<?php echo site_url();?>editnebula/<?php echo $nebula['id'];?>"><?php echo $nebula['encoder_name'];?></a> </td>
+								                  <td>
+								      <?php
+								      if($nebula['encoder_group'] > 0)
+								      {
+								        $groupName = $this->common_model->getGroupInfobyId($nebula['encoder_group']);
+								        echo $groupName[0]['group_name'];
+								      }
+								      else
+								      {
+								        echo "NA";
+								      }
+								      ?>
+								    </td>
+								                  <td><?php echo $nebula['encoder_ip'];?></td>
+
+								                  <td class="uptime">
+								                  <?php
+								                    if($nebula['status'] == 1)
+								      {
+								        if($nebula['uptime'] != "")
+								        {
+								          echo $nebula['uptime'];
+								        }
+								        else
+								        {
+								          echo 'NA';
+								        }
+								      }
+								      else
+								      {
+								        echo 'NA';
+								      }
+								     ?></td>
+								                  <td>
+								                  <?php
+								                    if($nebula['status'] == 1)
+								      {
+								        $ip= $nebula['encoder_ip'];
+								        //if (!$socket = @fsockopen("$ip", 22, $errno, $errstr, 2))
+								        //{
+								        //  echo ("<span id='status' class='label label-danger'>Dead</span>");
+								        //}
+								      //	else
+								        //{
+								          echo("<span id='status' class='label label-success'>Online</span>");
+								        //  fclose($socket);
+								        //}
+								      }
+								      else
+								      {
+								        echo ("<span id='status' class='label label-danger'>Offline</span>");
+								      }
+
+								      ?>
+
+								      </td>
+								       <td style="position:relative;"><a class="nebula_heart" id="encheart_<?php echo $nebula['id'];?>" href="javascript:void(0);"><i class="fa fa-heartbeat" aria-hidden="true"></i></a>
+								                  <?php
+								                    if($nebula['status'] == 1)
+								                    {
+								                      $host = "http://".$nebula['encoder_ip'].":19999";
+								    $url = $host."/api/v1/charts";
+								    $ch = curl_init();
+								      $headers = array(
+								      'Content-Type: application/json'
+								      );
+								      curl_setopt($ch, CURLOPT_URL, $url);
+								      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+								      curl_setopt($ch, CURLOPT_HEADER, 0);
+								      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+								      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+								      curl_setopt($ch, CURLOPT_TIMEOUT, 2);
+								      $result = curl_exec($ch);
+								      $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+
+								    if($httpcode == 200)
+								    {
+
+								  ?>
+
+								       <div class="box-body" style="display:none;position: absolute;top: -117px;min-width: 500px;/*! left: 0; */border: 1px solid;background: #3C8DBC;padding: 0;min-height: 131px;right: -274%;">
+								          <div style="width: 100%; max-height: calc(100% - 15px); text-align: center; display: inline-block;">
+								        <div style="width: 100%; height:100%; align: center; display: inline-block;">
+								            <br/>
+								            <div class="netdata-container-gauge" style="margin-right: 10px; width: 32%; will-change: transform;" data-netdata="system.cpu"  data-host="<?php echo $host;?>" data-chart-library="gauge" data-title="CPU" data-units="%" data-gauge-max-value="100" data-width="32%" data-after="-420" data-points="420" data-colors="#22AA99" role="application"></div>
+								            <div class="netdata-container-easypiechart" style="margin-right: 10px; width: 17%; will-change: transform;" data-netdata="system.net" data-host="<?php echo $host;?>" data-dimensions="received" data-chart-library="easypiechart" data-title="Net Inbound" data-width="17%" data-before="0" data-after="-420" data-points="420" data-common-units="system.net.mainhead" role="application"></div>
+								            <div class="netdata-container-easypiechart" style="margin-right: 10px; width: 15%; will-change: transform;" data-netdata="system.net" data-host="<?php echo $host;?>" data-dimensions="sent" data-chart-library="easypiechart" data-title="Net Outbound" data-width="15%" data-before="0" data-after="-420" data-points="420" data-common-units="system.net.mainhead" role="application"></div>
+								            <div class="netdata-container-easypiechart" style="margin-right: 10px; width: 12%; will-change: transform;" data-netdata="system.ram" data-host="<?php echo $host;?>" data-dimensions="used|buffers|active|wired" data-append-options="percentage" data-chart-library="easypiechart" data-title="Used RAM" data-units="%" data-easypiechart-max-value="100" data-width="12%" data-after="-420" data-points="420" data-colors="#EE9911" role="application">
+
+								            </div>
+								         </div>
+								      </div>
+								           </div>
+								  <?php
+								    }
+								    else
+								    {
+								      ?>
+
+								               <div class="box-body" style="display:none;position: absolute; top:-34px; min-width: 211px; border: 1px solid; background: rgb(60, 141, 188) none repeat scroll 0% 0%; padding: 0px; min-height: 50px; right: -169%;">
+								                  <div class="row">
+								                     <div class="col-xs-6 col-md-12 text-center">
+								                        <h1 style="margin:0;font-size:25px;margin-top:10px;">No Data Found</h1>
+								                     </div>
+								                  </div>
+								               </div>
+								    <?php
+								    }
+								                    }
+								                    else
+								                    {
+								                      ?>
+
+								               <div class="box-body" style="display:none;position: absolute; top:-34px; min-width: 211px; border: 1px solid; background: rgb(60, 141, 188) none repeat scroll 0% 0%; padding: 0px; min-height: 50px; right: -169%;">
+								                  <div class="row">
+								                     <div class="col-xs-6 col-md-12 text-center">
+								                        <h1 style="margin:0;font-size:25px;margin-top:10px;">No Data Found</h1>
+								                     </div>
+								                  </div>
+								               </div>
+								    <?php
+								                    }
+								                    ?>
+
+
+								                  </td>
+								                  <td><a href="#" class="nebula_refresh" id="encref_<?php echo $nebula['id'];?>" data-toggle="tooltip" title="Refresh" data-placement="bottom"><i class="fa fa-refresh" aria-hidden="true"></i></a></td>
+								                  <td><a href="#" class="nebula_reboot" id="encreboot_<?php echo $nebula['id'];?>" data-toggle="tooltip" title="Reboot" data-placement="bottom"><i class="fa fa-repeat" aria-hidden="true"></i></a></td>
+
+								    <td><a data-toggle="tooltip" title="Delete" class="nebuladelete" id="del_<?php echo $nebula['id']?>" href="javascript:void(0);"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+
+								              </tr>
+								  <?php
+								  $nebula_count++;
+								}
+								}
+								else
+								{
+								?>
+								<tr>
+								<td colspan="10">No Nebula Added Yet!</td>
+								</tr>
+								<?php
+								}
+								          ?>
+								    </table>
+								</div>
+
+								        </div>
+								    </div>
+								</div>
 
 							</div>
 						</div>

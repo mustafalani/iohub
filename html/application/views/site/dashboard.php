@@ -48,7 +48,7 @@ hr{
 		 <div class="col-xs-8">
 		 <h3>Welcome to the Indian Council for Cultural Relations</h3>
 		 	<div class="col-md-5 pdleft">
-					  <img style="height: 178px;width: 100%;margin-top: 8px;" class="first-slide" src="<?php echo base_url();?>assets/site/main/images/banner/banner1.jpg" alt="ICCR" />
+					  <img style="height: 178px;width: 100%;margin-top: 8px;" class="first-slide" src="<?php echo base_url();?>public/site/main/images/banner/banner1.jpg" alt="ICCR" />
 					</div>
 					<div class="col-md-7">
 					  

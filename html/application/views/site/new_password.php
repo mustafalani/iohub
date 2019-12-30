@@ -74,7 +74,7 @@ input,select,label{font-size:14px !important;}
 </style>
 <section class="meacontent">
 	<div class="col-xs-10 form_head">		
-		<img src="<?php echo site_url();?>assets/site/main/images/indian-embelam.png" alt="Indian Embelam">
+		<img src="<?php echo site_url();?>public/site/main/images/indian-embelam.png" alt="Indian Embelam">
 		<h3 class="text-center caps">Reset Your Password</h3>	
 	</div>
 		<div class="headsec container">Welcome to ICCR Scholarship Portal </div>
@@ -148,7 +148,7 @@ input,select,label{font-size:14px !important;}
 		</div>
 	</div>	
 </section>
-<script src="<?php echo base_url();?>assets/site/main/js/sha.js"></script>
+<script src="<?php echo base_url();?>public/site/main/js/sha.js"></script>
 <script>	
 	
 	function ValidatePass2() {

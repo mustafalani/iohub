@@ -269,8 +269,8 @@
    border-radius: 3px;
    }
 </style>
-<link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/ion.rangeSlider.css"/>
-<link rel="stylesheet" href="<?php echo site_url();?>assets/site/main/css/ion.rangeSlider.skinHTML5.css"/>
+<link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/ion.rangeSlider.css"/>
+<link rel="stylesheet" href="<?php echo site_url();?>public/site/main/css/ion.rangeSlider.skinHTML5.css"/>
 <main class="main">
    <!-- Breadcrumb-->
    <ol class="breadcrumb">

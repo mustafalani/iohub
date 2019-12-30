@@ -228,7 +228,7 @@
                      <div class="box-body">
                         <div class="row">
                            <div class="col-xs-6 col-md-12 text-center">
-                              <img src="<?php echo site_url();?>assets/site/main/img/Screenshot at May 16 00-33-20.png">
+                              <img src="<?php echo site_url();?>public/site/main/img/Screenshot at May 16 00-33-20.png">
                            </div>
                      </div>
                   </div>
@@ -254,7 +254,7 @@
                      <div class="box-body">
                         <div class="row">
                            <div class="col-xs-6 col-md-12 text-center">
-                              <img src="<?php echo site_url();?>assets/site/main/img/Screenshot at May 15 16-53-30.png">
+                              <img src="<?php echo site_url();?>public/site/main/img/Screenshot at May 15 16-53-30.png">
                            </div>
                         </div>
                      </div>
@@ -278,7 +278,7 @@
                      <div class="box-body">
                         <div class="row">
                            <div class="col-xs-6 col-md-12 text-center">
-                              <img src="<?php echo site_url();?>assets/site/main/img/Screenshot at May 15 16-53-30.png">
+                              <img src="<?php echo site_url();?>public/site/main/img/Screenshot at May 15 16-53-30.png">
                            </div>
                         </div>
                      </div>
@@ -304,7 +304,7 @@
                      <div class="box-body">
                         <div class="row">
                            <div class="col-xs-6 col-md-12 text-center">
-                              <img src="<?php echo site_url();?>assets/site/main/img/Screenshot at May 15 16-53-30.png">
+                              <img src="<?php echo site_url();?>public/site/main/img/Screenshot at May 15 16-53-30.png">
                            </div>
                         </div>
                      </div>
@@ -326,7 +326,7 @@
                      <div class="box-body">
                         <div class="row">
                            <div class="col-xs-6 col-md-12 text-center">
-                              <img src="<?php echo site_url();?>assets/site/main/img/Screenshot at May 15 16-53-30.png">
+                              <img src="<?php echo site_url();?>public/site/main/img/Screenshot at May 15 16-53-30.png">
                            </div>
                         </div>
                      </div>
@@ -348,7 +348,7 @@
                      <div class="box-body">
                         <div class="row">
                            <div class="col-xs-6 col-md-12 text-center">
-                              <img src="<?php echo site_url();?>assets/site/main/img/Screenshot at May 15 16-53-30.png">
+                              <img src="<?php echo site_url();?>public/site/main/img/Screenshot at May 15 16-53-30.png">
                            </div>
                         </div>
                      </div>
@@ -370,7 +370,7 @@
                      <div class="box-body">
                         <div class="row">
                            <div class="col-xs-6 col-md-12 text-center">
-                              <img src="<?php echo site_url();?>assets/site/main/img/Screenshot at May 15 16-53-30.png">
+                              <img src="<?php echo site_url();?>public/site/main/img/Screenshot at May 15 16-53-30.png">
                            </div>
                         </div>
                      </div>

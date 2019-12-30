@@ -128,7 +128,7 @@
 								</div>
 							</div>
 							<div class="col-lg-4">
-								<img id="imgdiv" class="groupimg" src="<?php echo site_url();?>assets/site/main/images/dummy3.png">
+								<img id="imgdiv" class="groupimg" src="<?php echo site_url();?>public/site/main/images/dummy3.png">
 								<input style="width:0px;height:0px;" type="file" name="groupfile" id="groupfile" class="groupfile" />
 								<a href="javascript:void(0);" id="uploadprofilepic">Upload Image</a>
 

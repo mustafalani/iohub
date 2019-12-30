@@ -1,7 +1,7 @@
    </div>
   <footer class="app-footer">
       <div>
-        <a href="http://iohub.live">iohub v2.0 <span class="badge badge-success">LIVE</span></a>
+        <a href="http://iohub.live">iohub v2.0 <span class="badge badge-warning">BETA</span></a>
         <span>&copy; - Copyright <a href="https://kurrent.tv">Kurrent TV </a>All rights reserved.</span>
       </div>
       <div class="ml-auto">
@@ -32,71 +32,73 @@
     <script src="<?php echo site_url();?>node_modules/@coreui/coreui-plugin-chartjs-custom-tooltips/dist/js/custom-tooltips.min.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
-   <script src="<?php echo site_url();?>assets/site/main/Date-Time-Picker/build/js/bootstrap-datetimepicker.min.js"></script>
+   <script src="<?php echo site_url();?>public/site/main/Date-Time-Picker/build/js/bootstrap-datetimepicker.min.js"></script>
 
-       <!--<script src="<?php echo site_url();?>assets/site/main/js/jquery-ui.js"></script>-->
-   <!-- <script src="<?php echo site_url();?>assets/site/main/bootstrap/js/bootstrap.min.js"></script>-->
+       <!--<script src="<?php echo site_url();?>public/site/main/js/jquery-ui.js"></script>-->
+   <!-- <script src="<?php echo site_url();?>public/site/main/bootstrap/js/bootstrap.min.js"></script>-->
    <script src="<?php echo site_url();?>/node_modules/bootstrap/js/dist/util.js"></script>
    <script src="<?php echo site_url();?>/node_modules/bootstrap/js/dist/modal.js"></script>
 
  <!-- <script src="<?php echo site_url();?>/node_modules/bootstrap-datetime-picker/js/bootstrap-datetimepicker.min.js"></script>-->
     <!-- === Date Picker === -->
- <!--   <script src="<?php echo site_url();?>assets/site/main/js/bootstrap-datetimepicker.min.js"></script>
+ <!--   <script src="<?php echo site_url();?>public/site/main/js/bootstrap-datetimepicker.min.js"></script>
     <script src="<?php echo site_url();?>/node_modules/bootstrap-daterangepicker/daterangepicker.js"></script>-->
 
-<!--<script src="<?php echo site_url();?>assets/site/main/js/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>-->
+<!--<script src="<?php echo site_url();?>public/site/main/js/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>-->
       <script src="<?php echo site_url();?>node_modules/bootstrap-select-v4/dist/js/bootstrap-select.min.js"></script>
-      <script src="<?php echo site_url();?>assets/site/main/js/bootstrap-multiselect.js"></script>
+      <script src="<?php echo site_url();?>public/site/main/js/bootstrap-multiselect.js"></script>
 
-    <script src="<?php echo site_url();?>assets/site/main/js/datatables.min.js"></script>
-    <script src="<?php echo site_url();?>assets/site/main/js/admin.min.js"></script>
-    <script src="<?php echo site_url();?>assets/site/main/js/sweetalert.js"></script>
-       <script src="<?php echo site_url();?>assets/site/main/js/toastr.min.js"></script>
+    <script src="<?php echo site_url();?>public/site/main/js/datatables.min.js"></script>
+    <script src="<?php echo site_url();?>public/site/main/js/admin.min.js"></script>
+    <script src="<?php echo site_url();?>public/site/main/js/sweetalert.js"></script>
+       <script src="<?php echo site_url();?>public/site/main/js/toastr.min.js"></script>
        <!-- fullCalendar -->
-	<script src="<?php echo site_url();?>assets/site/main/js/moment.js"></script>
-	<script src="<?php echo site_url();?>assets/site/main/js/fullcalendar.min.js"></script>
-	   <script src="<?php echo site_url();?>assets/site/main/js/jquery.flowchart.js"></script>
-	 <script type="text/javascript" src="<?php echo site_url();?>assets/site/main/js/highcharts.js"></script>
-	<script type="text/javascript" src="<?php echo site_url();?>assets/site/main/js/exporting.js"></script>
+	<script src="<?php echo site_url();?>public/site/main/js/moment.js"></script>
+	<script src="<?php echo site_url();?>public/site/main/js/fullcalendar.min.js"></script>
+	   <script src="<?php echo site_url();?>public/site/main/js/jquery.flowchart.js"></script>
+	 <script type="text/javascript" src="<?php echo site_url();?>public/site/main/js/highcharts.js"></script>
+	<script type="text/javascript" src="<?php echo site_url();?>public/site/main/js/exporting.js"></script>
+	<script type="text/javascript" src="<?php echo site_url();?>public/site/main/js/resumable.js"></script>
+    <script src="<?php echo site_url();?>public/site/main/js/custom.js"></script>
+    <script src="<?php echo site_url();?>public/site/main/js/custom_nebula.js"></script>
+     <script src="<?php echo site_url();?>public/site/main/js/workflow.js"></script>
 
-    <script src="<?php echo site_url();?>assets/site/main/js/custom.js"></script>
-     <script src="<?php echo site_url();?>assets/site/main/js/workflow.js"></script>
-
-   <script src="<?php echo site_url();?>assets/site/main/js/swfobject.min.js"></script>
-   <script src="<?php echo site_url();?>assets/site/main/js/net_js_main.js"></script>
-   <script src="<?php echo site_url();?>assets/site/main/js/piecircle.js"></script>
+   <script src="<?php echo site_url();?>public/site/main/js/swfobject.min.js"></script>
+   <script src="<?php echo site_url();?>public/site/main/js/net_js_main.js"></script>
+   <script src="<?php echo site_url();?>public/site/main/js/piecircle.js"></script>
    <!--  404 Start-->
-   	<script src="<?php echo site_url();?>assets/site/main/js/jquery.vide.min.js"></script>
+   	<script src="<?php echo site_url();?>public/site/main/js/jquery.vide.min.js"></script>
 	<!-- Waypoints -->
-	<script src="<?php echo site_url();?>assets/site/main/js/jquery.waypoints.min.js"></script>
+	<script src="<?php echo site_url();?>public/site/main/js/jquery.waypoints.min.js"></script>
 	<!-- Main JS -->
-	<script src="<?php echo site_url();?>assets/site/main/js/main.js"></script>
-
+	<script src="<?php echo site_url();?>public/site/main/js/main.js"></script>
+	<script src="<?php echo site_url();?>public/site/main/js/dropzone.js"></script>
 	<!--  404 Start-->
-     <script src="<?php echo site_url();?>assets/site/main/js/jquery.countdownTimer.min.js"></script>
-	 <script src="<?php echo site_url();?>assets/site/main/js/jstz.min.js"></script>
-	 <script src="<?php echo site_url();?>assets/site/main/js/jClocksGMT.js"></script>
-     <script src="<?php echo site_url();?>assets/site/main/js/jquery.rotate.js"></script>
-     <script src="<?php echo site_url();?>assets/site/main/js/ion.rangeSlider.min.js"></script>
+     <script src="<?php echo site_url();?>public/site/main/js/jquery.countdownTimer.min.js"></script>
+	 <script src="<?php echo site_url();?>public/site/main/js/jstz.min.js"></script>
+	 <script src="<?php echo site_url();?>public/site/main/js/jClocksGMT.js"></script>
+     <script src="<?php echo site_url();?>public/site/main/js/jquery.rotate.js"></script>
+     <script src="<?php echo site_url();?>public/site/main/js/ion.rangeSlider.min.js"></script>
+     <script src="http://SortableJS.github.io/Sortable/Sortable.js"></script>
      <script>
     	if(Action == "dashboard")
       	{
       		var my_awesome_script2 = document.createElement('script');
-			my_awesome_script2.setAttribute('src',baseURL+'assets/site/main/main.js');
+			my_awesome_script2.setAttribute('src',baseURL+'public/site/main/main.js');
 			document.head.appendChild(my_awesome_script2);
       	}
     </script>
-   <!-- <script src="<?php echo site_url();?>assets/site/main/main.js"></script>-->
+   <!-- <script src="<?php echo site_url();?>public/site/main/main.js"></script>-->
           <script type="text/javascript">
     	var netdataTheme = 'slate'; // this is dark
 
     </script>
    <script type="text/javascript">
 
-      	if(Action == "dashboard" || Action == "editEncoder" || Action == "editGateway" || Action == "updatewowzaengin" || Action == "configuration")
+      	if(Action == "dashboard" || Action == "editEncoder" || Action == "editGateway" || Action == "updatewowzaengin" || Action == "configuration" || Action == 'editnebula')
       	{
 			var my_awesome_script = document.createElement('script');
-			my_awesome_script.setAttribute('src',baseURL+'assets/site/main/js/dashboard.js?v20170724-7');
+			my_awesome_script.setAttribute('src',baseURL+'public/site/main/js/dashboard.js?v20170724-7');
 			document.head.appendChild(my_awesome_script);
 		}
 		if(Action == "channels")
@@ -106,7 +108,7 @@
 
       </script>
 
-    <script src="<?php echo site_url();?>assets/site/main/js/custom-kurrent.js"></script>
+    <script src="<?php echo site_url();?>public/site/main/js/custom-kurrent.js"></script>
 
 
     <script type="text/javascript">
@@ -144,7 +146,16 @@
     //console.log(new Date().toLocaleString('en-US', { timeZone: timezone.name() }));
     </script>
 <script type="text/javascript">
-
+ Dropzone.autoDiscover = false;
+$(document).ready(function () {
+    //$("#frm_assetsmain").dropzone({
+     //   maxFiles: 2000,
+      //  url: "/ajax_file_upload_handler/",
+     //   success: function (file, response) {
+     //       console.log(response);
+      //  }
+   // });
+});
 $(document).ready(function(){
 
 	$('.opentopmenu').click(function(){
@@ -234,6 +245,13 @@ $(document).ready(function(){
         digital:true,
         analog:false
     });
+
+	$('#rundown_starttime').datetimepicker({
+		format:'DD/MM/YYYY H:mm:s'
+	});
+	$('#rundown_endtime').datetimepicker({
+		format:'DD/MM/YYYY H:mm:s'
+	});
 
     $('#channel_starttime').datetimepicker({
 		format:'DD/MM/YYYY H:mm:s'
@@ -375,6 +393,22 @@ function playAppSRC(src)
 		swal("Warning","Select App First!", 'warning');
 	}
 }
+function playRundownPlaylist()
+{
+	var src = $('#player_rundownlive').attr('title');
+	if(src != "")
+	{
+		//src = src.replace("http","rtmp");
+		var id="player_rundownlive";
+		if (src) {
+			playRTMP(src,id);
+		}
+	}
+	else
+	{
+		swal("Warning","Select App First!", 'warning');
+	}
+}
 function playApp()
 {
 	var src = $('#block').val();
@@ -424,6 +458,12 @@ $(document).ready(function() {
 $(document).on('click','.playStreams',function(){
 	var id = $(this).attr('id');
 	playStreams(id);
+});
+$(document).on('click','#playappp',function(){
+	playApp();
+});
+$(document).on('click','#playrunlist',function(){
+	playRundownPlaylist();
 });
 $(document).on('click','#playappp',function(){
 	playApp();
@@ -627,8 +667,150 @@ $(document).ready(function(){
 	?>
 
 <div class="loaddiv">
-	<img src="<?php echo site_url();?>assets/site/main/img/loading.gif"/>
+	<img src="<?php echo site_url();?>public/site/main/img/loading.gif"/>
 </div>
+ <script>
+ var messageReceive = false;
+    	if(Action == "editrundown")
+      	{
+      		var per =0;
+      		let websocket_conn = null;
+				function  initConnection(){
+
+					socketURL = RUNDOWN_URL.replace('https://','');
+					console.log("Connection Init " + socketURL);
+					 websocket_conn = new WebSocket('wss://'+ socketURL +':8865/opt/ffplayout/playlists/logs/'+PLAYLISTNAME +'/ffplayout.log?tail=1');
+					// websocket_conn = new WebSocket('ws://152.115.45.138:8865/home/iohub/ffplayout/playlists/logs/test-rundown-01_4j3b.log?tail=1')
+
+				}
+				function pong(){
+					console.log("Send: Pong");
+					websocket_conn.send('pong');
+				}
+				initConnection();
+				websocket_conn.onopen = function () {
+				}
+				websocket_conn.onmessage = function (evt) {
+				    var msg = evt.data;
+				    console.log("Message Received: " + msg);
+				    if (msg == 'ping') {
+				        pong();
+				        return;
+				    }
+				    else
+				    {
+				    	var array_message = msg.split('\n');
+
+						if(isPlaylistOnline == 1){
+							if(array_message.length <=10)
+					    	{
+								for(var i=0; i<array_message.length; i++)
+						    	{
+						    		if(array_message[i].includes("Index") == true)
+						    		{
+						    			/*var interval_id = window.setInterval("", 9999); // Get a reference to the last
+
+										for (var i = 1; i < interval_id; i++){
+											window.clearInterval(i);
+										}
+										   */
+
+										var array_message_string = array_message[i].toString().replace('\"',"").split("  ");
+										var string_source = array_message_string[1].toString().replace("Node: \"{",",");
+										string_source = string_source.replace("}","");
+										string_source = string_source.replace(/ +/g, "");
+										string_source = string_source.replace(/'/g, '');
+										var arrray_source = string_source.split(',');
+										var _playlist_index = arrray_source[0].split(':');
+										var _playlist_index_no = _playlist_index[1].toString().replace('\"',"");
+										console.log(_playlist_index_no);
+										$('#tableassetsss tr').each(function(){
+											$(this).removeAttr('style');
+											$(this).find('#status').removeClass('label-success').addClass('label-gray').html('Ready');
+											$(this).find('#status').removeClass('label-warning').addClass('label-gray').html('Ready');
+										});
+										var time = $('#tableassetsss tr:eq('+ parseInt(_playlist_index_no) +')').find('td.duration').attr('accesskey');						var seconds = time * 1000;
+										$('.starttime_bar').text('00:00:00');
+										$('.endtime_bar').text($('#tableassetsss tr:eq('+ parseInt(_playlist_index_no) +')').find('td.duration').html());
+										per = per + time;
+										currentIndexGreenBar = parseInt(currentIndexGreenBar)  + per;
+										$('.progress-bar-one').css({background: "linear-gradient(to right, #4dbd74 "+currentIndexGreenBar+"%,transparent "+currentIndexGreenBar+"%,transparent 100%)"});
+										start(seconds);
+										var now = $('#tableassetsss tr:eq('+ parseInt(_playlist_index_no) +')').find('td:eq(2)').html();
+										$('.nowclip').text(now);
+										$('#tableassetsss tr:eq('+ parseInt(_playlist_index_no) +')').attr('style','background-color: #01a65a17;');
+										$('#tableassetsss tr:eq('+ parseInt(_playlist_index_no) +')').find('#status').removeAttr('class').addClass('label label-success').text('ONAIR');
+
+										var next = $('#tableassetsss tr:eq('+ (parseInt(_playlist_index_no) + 1) +')').find('td:eq(2)').html();
+										$('.nextclip').text(next);
+
+										$('#tableassetsss tr:eq('+ (parseInt(_playlist_index_no) + 1) +')').attr('style','background-color: #ffc10736;');
+										$('#tableassetsss tr:eq('+ (parseInt(_playlist_index_no) + 1) +')').find('#status').removeAttr('class').addClass('label label-warning').text('CUED');
+										if(parseInt(_playlist_index_no) > 0){
+											$('#tableassetsss tr:eq('+ (parseInt(_playlist_index_no) -1) +')').removeAttr('style');
+											$('#tableassetsss tr:eq('+ (parseInt(_playlist_index_no) -1) +')').find('#status').removeAttr('class').addClass('label label-gray').text('READY');
+										}
+
+									}
+								}
+							}
+						}
+					}
+				}
+				websocket_conn.onclose = function() {
+					console.log("Connection Close: Init Again");
+				    initConnection();
+				}
+      	}
+      	function start(d){
+		     var duration = d; // it should finish in 5 seconds !
+		     var percent = duration / 100; // 1 percent of duration
+		     var i = 0 ;
+		     var interval = setInterval(function(){
+		        i++;
+		         $('.progress-bar-tow').css({background: "linear-gradient(to right, #3C8DBC "+i+"%,transparent "+i+"%,transparent 100%)"});
+		         //var th = percent/1000;
+		        // var t = secondsToHms(th);
+		        //$('.starttime_bar').text(t);
+		        if(i>=100){
+		            clearInterval(interval);
+		        }
+		    }, percent);
+		}
+		function startCurrentIndex(d,startindex){
+		     var duration = d; // it should finish in 5 seconds !
+		     var ind = (startindex * 1000);
+
+		     var percent = duration / 100; // 1 percent of duration
+		     var currentpercent = (percent/parseInt(ind))*1000;
+		     var i = parseInt(currentpercent);
+		      $('.progress-bar-tow').css({background: "linear-gradient(to right, #3C8DBC "+i+"%,transparent "+i+"%,transparent 100%)"});
+		     var interval = setInterval(function(){
+		        i++;
+		         $('.progress-bar-tow').css({background: "linear-gradient(to right, #3C8DBC "+i+"%,transparent "+i+"%,transparent 100%)"});
+		        if(i>=100){
+		            clearInterval(interval);
+		        }
+		    }, percent);
+		}
+		$(document).ready(function(){
+			/*if(isPlaylistOnline == 1 && currentIndex >= 0){
+				var time = $('#tableassetsss tr:eq('+ parseInt(currentIndex) +')').find('td.duration').attr('accesskey');				var seconds = time * 1000;
+				startCurrentIndex(seconds,currentIndexPostion);
+			}*/
+			var startcounter = currentIndexPostion;
+			var totalDuration = currentIndexDuration;
+			if(startcounter > 0 && totalDuration > 0)
+			{
+				setInterval(function(){
+				 startcounter++;
+				if(startcounter <= totalDuration){
+				   $('.countup').html(startcounter);
+				 }}, 1000);
+				}
+
+		});
+    </script>
   </body>
 </html>
 
@@ -638,37 +820,37 @@ $(document).ready(function(){
 
     <!-- ========= jQuery Included ========= -->
 
-<!--    <script src="<?php echo site_url();?>assets/site/main/js/jquery.min.js"></script>
-    <script src="<?php echo site_url();?>assets/site/main/js/jquery-ui.js"></script>
-    <script src="<?php echo site_url();?>assets/site/main/bootstrap/js/bootstrap.min.js"></script>
-    <script src="<?php echo site_url();?>assets/site/main/js/bootstrap-datetimepicker.min.js"></script>
-        <script src="<?php echo site_url();?>assets/site/main/js/bootstrap-select.min.js"></script>
-      <script src="<?php echo site_url();?>assets/site/main/js/bootstrap-multiselect.js"></script>
-    <script src="<?php echo site_url();?>assets/site/main/js/datatables.min.js"></script>
-    <script src="<?php echo site_url();?>assets/site/main/js/admin.min.js"></script>
-    <script src="<?php echo site_url();?>assets/site/main/js/sweetalert.js"></script>
-       <script src="<?php echo site_url();?>assets/site/main/js/toastr.min.js"></script>
+<!--    <script src="<?php echo site_url();?>public/site/main/js/jquery.min.js"></script>
+    <script src="<?php echo site_url();?>public/site/main/js/jquery-ui.js"></script>
+    <script src="<?php echo site_url();?>public/site/main/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?php echo site_url();?>public/site/main/js/bootstrap-datetimepicker.min.js"></script>
+        <script src="<?php echo site_url();?>public/site/main/js/bootstrap-select.min.js"></script>
+      <script src="<?php echo site_url();?>public/site/main/js/bootstrap-multiselect.js"></script>
+    <script src="<?php echo site_url();?>public/site/main/js/datatables.min.js"></script>
+    <script src="<?php echo site_url();?>public/site/main/js/admin.min.js"></script>
+    <script src="<?php echo site_url();?>public/site/main/js/sweetalert.js"></script>
+       <script src="<?php echo site_url();?>public/site/main/js/toastr.min.js"></script>
        <!-- fullCalendar
-	<script src="<?php echo site_url();?>assets/site/main/js/moment.js"></script>
-	<script src="<?php echo site_url();?>assets/site/main/js/fullcalendar.min.js"></script>
-	   <script src="<?php echo site_url();?>assets/site/main/js/jquery.flowchart.js"></script>
-	 <script type="text/javascript" src="<?php echo site_url();?>assets/site/main/js/highcharts.js"></script>
-	<script type="text/javascript" src="<?php echo site_url();?>assets/site/main/js/exporting.js"></script>
-    <script src="<?php echo site_url();?>assets/site/main/js/custom.js"></script>
-     <script src="<?php echo site_url();?>assets/site/main/js/workflow.js"></script>
-   <script src="<?php echo site_url();?>assets/site/main/js/swfobject.min.js"></script>
-   <script src="<?php echo site_url();?>assets/site/main/js/net_js_main.js"></script>
-   <script src="<?php echo site_url();?>assets/site/main/js/piecircle.js"></script>
+	<script src="<?php echo site_url();?>public/site/main/js/moment.js"></script>
+	<script src="<?php echo site_url();?>public/site/main/js/fullcalendar.min.js"></script>
+	   <script src="<?php echo site_url();?>public/site/main/js/jquery.flowchart.js"></script>
+	 <script type="text/javascript" src="<?php echo site_url();?>public/site/main/js/highcharts.js"></script>
+	<script type="text/javascript" src="<?php echo site_url();?>public/site/main/js/exporting.js"></script>
+    <script src="<?php echo site_url();?>public/site/main/js/custom.js"></script>
+     <script src="<?php echo site_url();?>public/site/main/js/workflow.js"></script>
+   <script src="<?php echo site_url();?>public/site/main/js/swfobject.min.js"></script>
+   <script src="<?php echo site_url();?>public/site/main/js/net_js_main.js"></script>
+   <script src="<?php echo site_url();?>public/site/main/js/piecircle.js"></script>
    <!--  404 Start
-   	<script src="<?php echo site_url();?>assets/site/main/js/jquery.vide.min.js"></script>
+   	<script src="<?php echo site_url();?>public/site/main/js/jquery.vide.min.js"></script>
 	<!-- Waypoints
-	<script src="<?php echo site_url();?>assets/site/main/js/jquery.waypoints.min.js"></script>
+	<script src="<?php echo site_url();?>public/site/main/js/jquery.waypoints.min.js"></script>
 	<!-- Main JS
-	<script src="<?php echo site_url();?>assets/site/main/js/main.js"></script>
+	<script src="<?php echo site_url();?>public/site/main/js/main.js"></script>
 
 	<!--  404 Start
-     <script src="<?php echo site_url();?>assets/site/main/js/jquery.countdownTimer.min.js"></script>
-	 <script src="<?php echo site_url();?>assets/site/main/js/jstz.min.js"></script>
-	 <script src="<?php echo site_url();?>assets/site/main/js/jClocksGMT.js"></script>
-     <script src="<?php echo site_url();?>assets/site/main/js/jquery.rotate.js"></script>
-     <script src="<?php echo site_url();?>assets/site/main/js/ion.rangeSlider.min.js"></script>-->
+     <script src="<?php echo site_url();?>public/site/main/js/jquery.countdownTimer.min.js"></script>
+	 <script src="<?php echo site_url();?>public/site/main/js/jstz.min.js"></script>
+	 <script src="<?php echo site_url();?>public/site/main/js/jClocksGMT.js"></script>
+     <script src="<?php echo site_url();?>public/site/main/js/jquery.rotate.js"></script>
+     <script src="<?php echo site_url();?>public/site/main/js/ion.rangeSlider.min.js"></script>-->

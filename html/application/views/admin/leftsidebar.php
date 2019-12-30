@@ -7,6 +7,8 @@
           <ul class="nav">
             <?php
                 	$permissions = $this->session->userdata('user_permissions');
+                	$userdata = $this->session->userdata('user_data');
+                	//print_r($userdata);
 					if($permissions['view_dashboard'] > 0)
 					{
 					?>
@@ -97,10 +99,38 @@
 					<?php
 					}
                     ?>
- 					 <li class="nav-item"><a class="nav-link" href="<?php echo site_url();?>asset"><i class="nav-icon fa fa-database" aria-hidden="true"></i> <span class="mtext">Assets</span>
+ 					 <li class="nav-item nav-dropdown"><a class="nav-link nav-dropdown-toggle" href="#">
+ 					 <i class="nav-icon fa fa-database" aria-hidden="true"></i> <span class="mtext">Assets</span>
                         </a>
+                        <ul class="nav-dropdown-items">
+                        	<?php
+                        	if($userdata['user_type'] == 1){
+								$nebulas = $this->common_model->getNebula(0);
+								if(sizeof($nebulas)>0)
+								{
+									foreach($nebulas as $nebul){
+										?>
+										<li class="nav-item">
+										<a class="nav-link" href="<?php echo site_url();?>assets/<?php echo $nebul['id']; ?>"><i class="nav-icon fa fa-film" aria-hidden="true"></i> <span class="mtext"><?php echo $nebul['encoder_name']; ?></span></a></li>
+										<?php
+									}
+								}
+							}else if($userdata['user_type'] > 1){
+								$nebulas = $this->common_model->getNebula($userdata['group_id']);
+								if(sizeof($nebulas)>0)
+								{
+									foreach($nebulas as $nebul){
+										?>
+										<li class="nav-item">
+										<a class="nav-link" href="<?php echo site_url();?>assets/<?php echo $nebul['id']; ?>"><i class="nav-icon fa fa-film" aria-hidden="true"></i> <span class="mtext"><?php echo $nebul['encoder_name']; ?></span></a></li>
+										<?php
+									}
+								}
+							}
+                        	?>
+                        </ul>
                     </li>
-                     <li class="nav-item"><a class="nav-link" href="<?php echo site_url();?>rundown"><i class="nav-icon icon-list" aria-hidden="true"></i> <span class="mtext">Rundown</span>
+                     <li class="nav-item"><a class="nav-link" href="<?php echo site_url();?>rundowns"><i class="nav-icon icon-list" aria-hidden="true"></i> <span class="mtext">Rundowns</span>
                         </a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo site_url();?>jobs"><i class="nav-icon fa fa-tasks" aria-hidden="true"></i> <span class="mtext">Jobs</span>

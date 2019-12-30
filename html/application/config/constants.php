@@ -122,3 +122,4 @@ define('MPEG_TS_RTP','5');
 define('MPEG_TS_UDP','6');
 define('MPEG_TS_SRT','7');
 define('HTTP_LIVE_STREAMING','8');
+define('KURRENTTV_BASE_URL','https://kurrenttv.nbla.cloud');

@@ -9,16 +9,16 @@
             <a href="<?php echo site_url();?>" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <!--<span class="logo-mini">S<span class="text-one">M</span></span>-->
-         <!--       <object class="logo-mini" type="image/svg+xml" data="<?php echo site_url();?>assets/site/main/img/iohub_logo.png">
+         <!--       <object class="logo-mini" type="image/svg+xml" data="<?php echo site_url();?>public/site/main/img/iohub_logo.png">
   Your browser does not support SVG
 </object>-->
-<img class="logo-mini" src="<?php echo site_url();?>assets/site/main/img/iohub-logo.png"/>
+<img class="logo-mini" src="<?php echo site_url();?>public/site/main/img/iohub-logo.png"/>
                 <!-- logo for regular state and mobile devices -->
                 <!--<span class="logo-lg">Stream <span class="text-one">Manager</span> <span class="text-two">v1.0</span></span>-->
-            <!--   <object style="width:50px;" type="image/svg+xml" data="<?php echo site_url();?>assets/site/main/img/iohub_logo.png">
+            <!--   <object style="width:50px;" type="image/svg+xml" data="<?php echo site_url();?>public/site/main/img/iohub_logo.png">
   Your browser does not support SVG
 </object>-->
-<img class="logo-lg" src="<?php echo site_url();?>assets/site/main/img/sygnet.png"/>
+<img class="logo-lg" src="<?php echo site_url();?>public/site/main/img/sygnet.png"/>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
@@ -162,13 +162,13 @@
                                 		if($userdata['userImage'] == "")
                                 		{
 											?>
-											<img src="<?php echo site_url();?>assets/site/main/images/avatar2.png" class="img-circle" alt="User Image">
+											<img src="<?php echo site_url();?>public/site/main/images/avatar2.png" class="img-circle" alt="User Image">
 											<?php
 										}
 										else
 										{
 											?>
-											<img src="<?php echo site_url();?>assets/site/main/group_pics/<?php echo $userdata['userImage'];?>" class="img-circle" alt="User Image">
+											<img src="<?php echo site_url();?>public/site/main/group_pics/<?php echo $userdata['userImage'];?>" class="img-circle" alt="User Image">
 
 											<?php
 										}

@@ -1,6 +1,6 @@
 <div style="max-width:600px; margin:0 auto; border:#ccc solid 1px;">
 <div style="border-bottom:#003F74 solid 2px; text-align:center; margin-bottom:5px;">
-<img src="<?php echo base_url();?>/assets/site/main/images/mea-logo.png" /></div>
+<img src="<?php echo base_url();?>/public/site/main/images/mea-logo.png" /></div>
 <div style="padding:10px 15px 0 15px;">
 
 <?php echo $content; ?>

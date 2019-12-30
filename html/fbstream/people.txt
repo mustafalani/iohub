@@ -1,2 +1,0 @@
-{"Name":"Ammar Yousaf","Profile URL":"https:\/\/www.facebook.com\/app_scoped_user_id\/1270428646308079\/","Image":"https:\/\/graph.facebook.com\/1270428646308079\/picture?width=150&height=150","Email":"ammaryousaf_58@yahoo.com"}
-{"Name":"Ammar Yousaf","Profile URL":"https:\/\/www.facebook.com\/app_scoped_user_id\/1270428646308079\/","Image":"https:\/\/graph.facebook.com\/1270428646308079\/picture?width=150&height=150","Email":"ammaryousaf_58@yahoo.com"}

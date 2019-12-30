@@ -5,7 +5,22 @@
 <script type="text/javascript">
 	var channelLocks = [];
 </script>
-
+<?php
+if(sizeof($channelsLock)>0)
+{
+	foreach($channelsLock as $key=>$chanl)
+	{
+		if($chanl == NULL)
+		{
+			echo '<script type="text/javascript">channelLocks['.$key.']=0;</script>';
+		}
+		else
+		{
+			echo '<script type="text/javascript">channelLocks['.$key.']='.$chanl.';</script>';
+		}
+	}
+}
+?>
 <style type="text/css">
 	.clr{
 		color:#747474;
