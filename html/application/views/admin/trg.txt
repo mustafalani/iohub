@@ -1,0 +1,106 @@
+if($target[0]['target'] == "google" && $target[0]['broadcast_id'] != "")
+			{
+				$url = "https://www.googleapis.com/youtube/v3/liveBroadcasts/transition";					
+ 	
+ 			$array = array('broadcastStatus'=>'live','id'=>$target[0]['broadcast_id'],'part'=>'id,snippet,cdn,contentDetails,status,title','key'=>'AIzaSyCbfMOJ4Gub_XhBNKYeQb1CqWTiGuZsIPM');
+			//echo json_encode($array);
+			
+				/**
+				* 
+				* token
+				* 
+				*/
+				$OAUTH2_CLIENT_ID = '96664961069-u28cbpg3rn590g43l9jbl8fu3ma1uk41.apps.googleusercontent.com';
+			
+			$OAUTH2_CLIENT_SECRET = 'sjjaq7BxcjKLrQ1Pv4ISpPuj';
+			$client = new Google_Client();
+			$client->setClientId($OAUTH2_CLIENT_ID);
+			$client->setClientSecret($OAUTH2_CLIENT_SECRET);
+			$client->setScopes('https://www.googleapis.com/auth/youtube');
+			$redirect = filter_var('https://' . $_SERVER['HTTP_HOST'] . '/admin/googleaccount',FILTER_SANITIZE_URL);
+
+			$client->setRedirectUri($redirect);
+			$youtube = new Google_Service_YouTube($client);
+			
+
+			$googleState = $this->session->userdata('state');
+			if (isset($_GET['code'])) {
+			  if (!empty($googleState) && strval($googleState) !== strval($_GET['state'])) {
+			   	$this->session->set_flashdata('message_type', 'error');
+				$this->session->set_flashdata('error', 'The Google Account session state did not match.');
+				//redirect(site_url() . 'admin/createtarget');
+			  }
+
+			  $client->authenticate($_GET['code']);
+			  //$this->session->set_userdata($tokenSessionKey, $client->getAccessToken());	
+			}	
+			if($client->getAccessToken())
+			{
+				$token = $client->getAccessToken();
+				if($token != "")
+				{
+					$ch = curl_init();
+					curl_setopt($ch,CURLOPT_URL, $url);
+					curl_setopt($ch,CURLOPT_POST, 1);
+					curl_setopt($ch,CURLOPT_POSTFIELDS, json_encode($array));
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+					curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Length: '.sizeof($array),'Accept: application/json','Authorization: Bearer ['.$token['access_token'].']'));
+					$result = curl_exec($ch);
+					$httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+					echo $httpcode;
+					curl_close($ch);
+					print_r($result);
+				}
+			}
+			else
+			{
+				
+			}
+			}
+
+
+
+
+
+
+
+
+//print_r($target[0]);
+			if($target[0]['target'] == "google" && $target[0]['broadcast_id'] != "")
+			{
+				$token = $this->session->userdata($target[0]['broadcast_id']);
+				$code = $this->session->userdata('ycode');
+				if(!empty($token))
+				{
+					$OAUTH2_CLIENT_ID = '96664961069-u28cbpg3rn590g43l9jbl8fu3ma1uk41.apps.googleusercontent.com';
+					$OAUTH2_CLIENT_SECRET = 'sjjaq7BxcjKLrQ1Pv4ISpPuj';
+					
+
+					$data = array(
+					    'code' => $code,
+					    'client_id' => $OAUTH2_CLIENT_ID,
+					    'client_secret' =>$OAUTH2_CLIENT_SECRET,
+					    'redirect_uri' =>'',
+					    'ccess_type'=>'offline',
+					    'grant_type' => 'authorization_code');
+					print_r($data);
+					$ch = curl_init();
+					curl_setopt($ch, CURLOPT_URL, 'https://accounts.google.com/o/oauth2/token');
+					curl_setopt($ch, CURLOPT_POST, true);
+					curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+					
+
+					$json_response = curl_exec($ch);
+					echo $json_response;
+					curl_close($ch);	
+				}
+			}	
+
+
+
+
+
+408. That’s an error.
+
+Your client has taken too long to issue its request. 

@@ -1,0 +1,15 @@
+$url = "https://www.googleapis.com/youtube/v3/liveBroadcasts/transition";					
+ 	
+ 			$array = array('broadcastStatus'=>'live','id'=>$broadcastsResponse['id'],'part'=>'id,snippet,cdn,contentDetails,status,title');
+			
+			$token = $client->getAccessToken();
+			$ch = curl_init();
+			curl_setopt($ch,CURLOPT_URL, $url);
+			curl_setopt($ch,CURLOPT_POST, 1);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Length: '.sizeof($array),'Accept: application/json','Authorization: Bearer['.$token["access_token"].']'));
+		//	$result = curl_exec($ch);
+		//	$httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		//	echo $httpcode;
+			curl_close($ch);
+        	print_r($result);
