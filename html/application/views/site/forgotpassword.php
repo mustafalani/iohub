@@ -30,7 +30,7 @@
              <form class="login-form" method="post" action="<?php echo site_url();?>home/forgot_password" enctype="multipart/form-data">
       <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>"/>
                 <!--<h4> Stream <span class="text-one">Manager</span></h4>-->
-                <img class="login-logo" src="<?php echo site_url();?>assets/site/main/img/iohub_logo.png"/>
+                <img class="login-logo" src="<?php echo site_url();?>public/site/main/img/iohub_logo.png"/>
                 <h5>Forgot Password</h5>
                 <div class="form-group">
                     <div class="input-group">

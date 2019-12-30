@@ -132,7 +132,7 @@ z-index: 9999;
     *margin-right: .3em;
     line-height: 14px;
     vertical-align: text-top;
-    background-image: url("assets/site/main/img/glyphicons-halflings.png");
+    background-image: url("public/site/main/img/glyphicons-halflings.png");
     background-position: 14px 14px;
     background-repeat: no-repeat;
 
@@ -273,7 +273,7 @@ z-index: 9999;
 					<?php
 						}
 						?>
-
+             
              <div class="card-header">Add New Target</div>
 				<div class="card-body">
 				<?php if($this->session->flashdata('success')){ ?>
@@ -302,7 +302,7 @@ z-index: 9999;
 			<div class="col-lg-12 col-12-12">
 	            <div class="content-box config-contentonly">
 	            <div class="config-container">
-
+	           
 
       <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
 
@@ -1297,7 +1297,7 @@ z-index: 9999;
 								?>
 									<input type="hidden" value="" id="broadcast_id" name="broadcast_id"/>
 							<input type="hidden" value="" id="livstreamid" name="livstreamid"/>
-							<div class="form-group col-lg-12">
+							<div class="form-group col-lg-12 pdright">
 								<div class="btns-dv">
 									<div class="row">
 										<a class="btn btn-google btn-sm fbbutton" href="<?php echo site_url();?>admin/cancelProvider">

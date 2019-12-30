@@ -172,13 +172,13 @@
 												if($img[0]['name'] == "")
 												{
 												?>
-												<img id="imgdiv" src="<?php echo site_url();?>assets/site/main/images/dummy3.png">
+												<img id="imgdiv" src="<?php echo site_url();?>public/site/main/images/dummy3.png">
 												<?php
 												}
 												else
 												{
 												?>
-												<img width="78" height="69" id="imgdiv" src="<?php echo site_url();?>assets/site/main/group_pics/<?php if(!empty($img[0])){echo $img[0]['name'];}?>" class="">
+												<img width="78" height="69" id="imgdiv" src="<?php echo site_url();?>public/site/main/group_pics/<?php if(!empty($img[0])){echo $img[0]['name'];}?>" class="">
 												<?php
 												}
 											?>

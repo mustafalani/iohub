@@ -108,7 +108,7 @@ input,select,label{font-size:14px !important;}
     text-shadow:none;   
 	}
 	.invalid {
-    background:url("../assets/site/main/img/invalid.png") no-repeat 0 50%;
+    background:url("../public/site/main/img/invalid.png") no-repeat 0 50%;
     padding-left:22px;
     line-height:24px;
     color:#ec3f41;
@@ -117,7 +117,7 @@ input,select,label{font-size:14px !important;}
 	}
 	.valid {
 	content: "\2713";
-	background: rgba(0, 0, 0, 0) url("../assets/site/main/img/valid.png") no-repeat scroll 0 50%;
+	background: rgba(0, 0, 0, 0) url("../public/site/main/img/valid.png") no-repeat scroll 0 50%;
     color: #3a7d34;
     float: left;
     line-height: 24px;
@@ -130,7 +130,7 @@ input,select,label{font-size:14px !important;}
 </style>
 <section class="meacontent">	
 	<div class="col-xs-10 form_head">		
-		<img src="<?php echo site_url();?>assets/site/main/images/indian-embelam.png" alt="Indian Embelam">
+		<img src="<?php echo site_url();?>public/site/main/images/indian-embelam.png" alt="Indian Embelam">
 		<h3 class="text-center caps">Reset Your Password</h3>	
 	</div>
 	<div class="headsec container">Welcome <?php
@@ -212,7 +212,7 @@ input,select,label{font-size:14px !important;}
 	<br/><br/>	<br/>  
 	
 </section>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/site/main/js/sha.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>public/site/main/js/sha.js"></script>
 <script type="text/javascript">
 	function getPass()
 	{

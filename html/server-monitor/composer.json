@@ -1,9 +1,0 @@
-{
-    "require": {
-        "cboden/ratchet": "^0.4.1",
-        "hassankhan/config": "^2.0"
-    },
-    "autoload":{
-        "psr-4": {"Distvan\\": "lib/"}
-    }
-}

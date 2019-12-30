@@ -91,14 +91,28 @@ $route['seo/sitemap\.xml'] = "seo/sitemap";
 $route['createtarget/:num'] = "admin/createtarget/:num";
 $route['periscope'] = "admin/periscope";
 $route['twitchcasting'] = "admin/twitchcasting";
-$route['gateway'] = "admin/gateway";
+//$route['gateway'] = "admin/gateway";
 $route['twitch'] = "admin/twitch";
 $route['addgateways'] = "admin/addgateways";
 $route['schedule'] = "admin/schedule";
 $route['workflows'] = "admin/workflows";
 $route['workflowlist'] = "admin/workflowlist";
 $route['workflows/(.*)'] = "admin/workflows";
+
 $route['editGateway/:num'] = "admin/editGateway/:num";
-$route['jobs'] = "admin/jobs";
-$route['asset'] = "admin/asset";
-$route['rundown'] = "admin/rundown";
+$route['editnebula/:num'] = "admin/editnebula/:num";
+
+$route['addasset/:num'] = "admin/createassets";
+$route['jobs'] = "nebula/jobs";
+$route['assets'] = "admin/asset";
+$route['assets/:num'] = "admin/asset";
+$route['editasset/:num/:num'] = "nebula/editasset/:num/:num";
+
+$route['rundowns'] = "admin/rundowns";
+$route['createnebula'] = 'admin/createnebula';
+$route['createrundown'] = 'nebula/createrundown';
+$route['editrundown'] = 'nebula/editrundown';
+$route['editrundown/:num'] = 'nebula/editrundown/:num';
+$route['temp'] = 'nebula/temp';
+$route['iotstream'] = 'extras/iotstream';
+$route['createIoTStream'] = 'extras/createIoTStream';

@@ -29,6 +29,7 @@ class User extends CI_Controller {
         $this->load->helper('date');      
         $this->load->model('user_model');
         $this->load->model('common_model');
+        $this->load->model('LogsModel');
     } 
 	public function login()
 	{
@@ -91,7 +92,8 @@ class User extends CI_Controller {
 							 'group_notification'=>$groupInfo[0]['group_notification'],
 							 'group_sitename'=>$groupInfo[0]['group_sitename']
 							);
-							$this->common_model->insertLogs($datas['fname'],'user',"User Logged In Successfully!",$datas['userid'],"Success");
+							$this->LogsModel->insert(["created"=>time(),"name"=>$datas['fname'],"log_type"=>'user',"message"=>"User Logged In Successfully!","uid"=>$datas['userid'],"status"=>"Success"],FALSE);
+							
 							$this->session->set_userdata('user_data',$datas);   
 							$this->session->set_userdata('lock_data',array());        
 							redirect(site_url() . 'dashboard');
@@ -231,7 +233,8 @@ class User extends CI_Controller {
 		            }
 		            else
 		            {
-		            	$this->common_model->insertLogs($clean['username'],'user',"Wrong Username/Password!",0,"Error");
+		            	$this->LogsModel->insert(["created"=>time(),"name"=>$clean['username'],"log_type"=>'user',"message"=>"Wrong Username/Password!","uid"=>0,"status"=>"Error"],FALSE);
+		            	
 		            	$this->session->set_flashdata('message_type', 'error');
 						$this->session->set_flashdata('error', 'Wrong Username/Password!');
 						redirect($actual_link);	
@@ -240,7 +243,7 @@ class User extends CI_Controller {
 		}
 		catch(Exception $e)
 		{
-			$this->common_model->insertLogs($clean['username'],'user',"Wrong Username/Password!",0,"Error");
+			$this->LogsModel->insert(["created"=>time(),"name"=>$clean['username'],"log_type"=>'user',"message"=>"Wrong Username/Password!","uid"=>0,"status"=>"Error"],FALSE);
 			$this->session->set_flashdata('message_type', 'error');
 			$this->session->set_flashdata('error', 'Wrong Username/Password');
 			redirect($actual_link);				
@@ -249,7 +252,8 @@ class User extends CI_Controller {
 	public function logout()
     {        
         $userInfo = $this->session->userdata('user_data');
-        $this->common_model->insertLogs($userInfo['username'],'user',"User Logged Out Successfully!",$userInfo['userid'],"Success");
+        $this->LogsModel->insert(["created"=>time(),"name"=>$userInfo['fname'],"log_type"=>'user',"message"=>"User Logged Out Successfully!","uid"=>$userInfo['userid'],"status"=>"Success"],FALSE);
+        
 		$roles = $this->config->item('roles_id');
 		$role = $roles[$userInfo['user_type']];
 		$this->session->unset_userdata('user_data');
@@ -261,93 +265,7 @@ class User extends CI_Controller {
 		$sessionData = $this->session->userdata('captcha_code');
 		$sessionText = $sessionData['code'];
 		return ($captchText == $sessionText) ? TRUE : FALSE;
-	}
-	public function register()
-	{
-		try{
-			$this->form_validation->set_rules('country', 'Country', 'required');
-	        $this->form_validation->set_rules('student_name', 'Name', 'required');
-	        $this->form_validation->set_rules('gender', 'Gender', 'required');
-	        $this->form_validation->set_rules('applicant_date', 'Date of Birth', 'required');
-	        $this->form_validation->set_rules('applicant_month', 'Date of Birth', 'required');
-	        $this->form_validation->set_rules('applicant_year', 'Date of Birth', 'required');
-	        $this->form_validation->set_rules('mobile_no', 'Mobile Number', 'required');
-	        $this->form_validation->set_rules('emailId', 'Email', 'required|valid_email');
-	        $this->form_validation->set_rules('password', 'Password', 'required');	       
-	        $this->form_validation->set_rules('isindian', 'Is Indian', 'required');
-	        $post     = $this->input->post();
-	        $actual_link =  $_SERVER['HTTP_REFERER'];
-	        $clean    = $this->security->xss_clean($post);
-	        if ($this->form_validation->run() == FALSE) {
-        	    $this->session->set_flashdata('message_type', 'error');
-				$this->session->set_flashdata('error', 'Invalid Data!');
-				redirect($actual_link);		           
-	        } 
-	        else 
-	        {
-	        	if($this->isValidCaptch($clean['userCaptcha']))
-	            {
-    		     if ($this->user_model->isDuplicate($this->input->post('emailId'))) {
-    		     	$this->session->set_flashdata('message_type', 'error');
-					$this->session->set_flashdata('error', 'Email Id Already Exist!');
-					redirect($actual_link);	    	
-	            } else {
-		                $clean   = $this->security->xss_clean($this->input->post(NULL, TRUE));	               
-		                $clean['username'] = $this->input->post('student_name');
-		                $id      = $this->user_model->insertUser($clean);
-		                $clean['uid'] = $id;
-		                $id_detail = $this->user_model->insertStudentDetails($clean);
-		                $token   = $this->user_model->insertToken($id);
-		                $qstring = $this->base64url_encode($token);
-		                $url     = site_url() . 'home/complete/token/' . $qstring;
-		                $link    = '<a href="' . $url . '">Confirm my email and create my account! »</a>';
-		                $message = '';                
-		                $message .= '<strong>Please confirm your email address.</strong><br><br>';
-		                $message .= 'You are almost there! Please click the link below to create your ICCR account. <br>';
-		                                
-		                $message .= $link;
-	                	$data = array(
-						    'content' => $message					   
-						);
-	                	$config = Array(
-					        'mailtype' => 'html'				        
-					     );
-					     $content = $this->load->view('mail_signup',$data, true); 
-					     $from_email = "diritc.iccr@gov.in"; 
-						 $to_email = $this->input->post('emailId'); 			   
-						 /* Load email library */
-						 $this->load->library('email',$config);			   
-						 $this->email->from($from_email, 'Indian Council for Cultural Relations (ICCR)'); 
-						 $this->email->to($to_email);
-						 $this->email->subject('Indian Council for Cultural Relations (ICCR)'); 
-						 $this->email->message($content); 			   
-						 // if($this->email->send()) 
-						 // {
-						 	// echo '<script>window.location.href="'.site_url().'home?text=Please check your email inbox/spam to activate the account.&type=Thank You!&at=success&redirect='.site_url().'home";</script>';
-						 // }					
-						 // else 
-						 // echo '<script>window.location.href="'.site_url().'home?text=Email not sent.&type=Error Message&at=danger&redirect='.site_url().'home/register";</script>';
-						 $this->session->set_flashdata('message_type', 'success');
-						$this->session->set_flashdata('success', 'Registration Sucessfully!');
-						redirect($actual_link);		
-	            	}    	
-	            }
-	            else
-	            {
-	            	 $this->session->set_flashdata('message_type', 'error');
-					$this->session->set_flashdata('error', 'Wrong Text Enterd!');
-					redirect($actual_link);	
-					
-				}
-        	}
-		}
-		catch(Exception $e)
-		{
-	 		$this->session->set_flashdata('message_type', 'error');
-			$this->session->set_flashdata('error', 'Internal Server Error. Please Try After Some Time');
-			redirect($actual_link);				 
-		}
-	}
+	}	
 	public function base64url_encode($data)
     {
         return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');

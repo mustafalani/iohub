@@ -40,9 +40,9 @@
       <div class="container-fluid">
       	<div class="animated fadeIn">
            <div class="card">
-           
+
            	<form id="wowza-form" class="action-table" method="post" action="<?php echo site_url();?>admin/updateGateway/<?php echo $gateway[0]['id'];?>" enctype="multipart/form-data">
-           
+
 						 <div class="card-header">Edit NDI Gateway</div>
 				<div class="card-body">
 				<?php if($this->session->flashdata('success')){ ?>
@@ -69,7 +69,7 @@
 			<div class="row">
 				<div class="col-lg-12 col-12-12">
 					<div class="content-box config-contentonly">
-					
+
       <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
       <input type="hidden" name="encoderId" id="encoderId" value="<?php echo $gateway[0]['id'];?>">
 
@@ -249,20 +249,87 @@
 									if($httpcode == 200)
 									{
 										?>
-										<div class="netdata-container-easypiechart" style="margin-right: 10px; width: 9%; will-change: transform;" data-netdata="system.swap" data-host="<?php echo $host;?>" data-dimensions="used" data-append-options="percentage" data-chart-library="easypiechart" data-title="Used Swap" data-units="%" data-easypiechart-max-value="100" data-width="9%" data-before="0" data-after="-420" data-points="420" data-colors="#DD4400" role="application"></div>
-                <div class="netdata-container-easypiechart" style="margin-right: 10px; width: 11%; will-change: transform;" data-netdata="system.io" data-host="<?php echo $host;?>" data-dimensions="in" data-chart-library="easypiechart" data-title="Disk Read" data-width="11%" data-before="0" data-after="-420" data-points="420" data-common-units="system.io.mainhead" role="application"></div>
-
-                <div class="netdata-container-easypiechart" style="margin-right: 10px; width: 11%; will-change: transform;" data-netdata="system.io" data-host="<?php echo $host;?>" data-dimensions="out" data-chart-library="easypiechart" data-title="Disk Write" data-width="11%" data-before="0" data-after="-420" data-points="420" data-common-units="system.io.mainhead" role="application"></div>
-
-                <div class="netdata-container-gauge" style="margin-right: 10px; width: 20%; will-change: transform;" data-netdata="system.cpu"  data-host="<?php echo $host;?>" data-chart-library="gauge" data-title="CPU" data-units="%" data-gauge-max-value="100" data-width="20%" data-after="-420" data-points="420" data-colors="#22AA99" role="application"></div>
-
-                <div class="netdata-container-easypiechart" style="margin-right: 10px; width: 11%; will-change: transform;" data-netdata="system.net" data-host="<?php echo $host;?>" data-dimensions="received" data-chart-library="easypiechart" data-title="Net Inbound" data-width="11%" data-before="0" data-after="-420" data-points="420" data-common-units="system.net.mainhead" role="application"></div>
-
-                <div class="netdata-container-easypiechart" style="margin-right: 10px; width: 11%; will-change: transform;" data-netdata="system.net" data-host="<?php echo $host;?>" data-dimensions="sent" data-chart-library="easypiechart" data-title="Net Outbound" data-width="11%" data-before="0" data-after="-420" data-points="420" data-common-units="system.net.mainhead" role="application"></div>
-
-                <div class="netdata-container-easypiechart" style="margin-right: 10px; width: 9%; will-change: transform;" data-netdata="system.ram" data-host="<?php echo $host;?>" data-dimensions="used|buffers|active|wired" data-append-options="percentage" data-chart-library="easypiechart" data-title="Used RAM" data-units="%" data-easypiechart-max-value="100" data-width="9%" data-after="-420" data-points="420" data-colors="#EE9911" role="application">
-
-                </div>
+										<div class="netdata-container-easypiechart"style="margin-right: 10px; width: 11%; will-change: transform;" data-netdata="system.io" data-host="<?php echo $host;?>"
+											 data-dimensions="in"
+											 data-chart-library="easypiechart"
+											 data-title="Disk Read"
+											 data-width="10%"
+											 data-before="0"
+											 data-after="-420"
+											 data-points="420"
+											 data-common-units="system.io.mainhead"
+											 role="application">
+										</div>
+										<div class="netdata-container-easypiechart" style="margin-right: 10px; width: 11%; will-change: transform;" data-netdata="system.io" data-host="<?php echo $host;?>"
+											 data-dimensions="out"
+											 data-chart-library="easypiechart"
+											 data-title="Disk Write"
+											 data-width="10%"
+											 data-before="0"
+											 data-after="-420"
+											 data-points="420"
+											 data-common-units="system.io.mainhead"
+											 role="application">
+										</div>
+										<div data-netdata="disk_space._"
+											 data-host="<?php echo $host;?>"
+											 data-decimal-digits="0"
+											 data-title="Available Disk"
+											 data-dimensions="avail"
+											 data-chart-library="easypiechart"
+											 data-easypiechart-max-value="100"
+											 data-width="11%"
+											 data-height="100%"
+											 data-after="-420"
+											 data-points="420"
+											 role="application">
+										</div>
+										<div class="netdata-container-gauge" style="margin-right: 10px; width: 20%; will-change: transform;" data-netdata="system.cpu"  data-host="<?php echo $host;?>"
+											 data-chart-library="gauge"
+											 data-title="CPU"
+											 data-units="%"
+											 data-gauge-max-value="100"
+											 data-width="20%"
+											 data-after="-420"
+											 data-points="420"
+											 data-colors="#22AA99"
+											 role="application">
+										</div>
+										<div class="netdata-container-easypiechart" style="margin-right: 10px; width: 9%; will-change: transform;" data-netdata="system.ram" data-host="<?php echo $host;?>"
+											 data-dimensions="used|buffers|active|wired"
+											 data-append-options="percentage"
+											 data-chart-library="easypiechart"
+											 data-title="Used RAM"
+											 data-units="%"
+											 data-easypiechart-max-value="100"
+											 data-width="11%"
+											 data-after="-420"
+											 data-points="420"
+											 data-colors="#EE9911"
+											 role="application">
+										</div>
+										<div class="netdata-container-easypiechart" style="margin-right: 10px; width: 11%; will-change: transform;" data-netdata="system.net" data-host="<?php echo $host;?>"
+											 data-dimensions="received"
+											 data-chart-library="easypiechart"
+											 data-title="Net Inbound"
+											 data-width="10%"
+											 data-before="0"
+											 data-after="-420"
+											 data-points="420"
+											 data-common-units="system.net.mainhead"
+											 role="application">
+										</div>
+										<div class="netdata-container-easypiechart" style="margin-right: 10px; width: 11%; will-change: transform;" data-netdata="system.net" data-host="<?php echo $host;?>"
+											 data-dimensions="sent"
+											 data-chart-library="easypiechart"
+											 data-title="Net
+											 Outbound" data-width="10%"
+											 data-before="0"
+											 data-after="-420"
+											 data-points="420"
+											 data-common-units="system.net.mainhead"
+											 role="application">
+										</div>
 										<?php
 									}
                 else
@@ -281,7 +348,7 @@
             </div>
             </div>
                         </div>
-						
+
 
 
 
@@ -295,9 +362,9 @@
 					<button class="btn btn-sm btn-primary" type="submit">Update</button>
 						<button class="btn btn-sm btn-danger" type="reset">Reset</button>
 						</div>
-						
-						
-						</form>	
+
+
+						</form>
 			</div>
 		</div>
 	</div>

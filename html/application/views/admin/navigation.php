@@ -13,8 +13,8 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" href="#">
-        <img class="navbar-brand-full" src="<?php echo site_url();?>assets/site/main/img/logo.png" width="auto" height="40" alt="iohub Logo">
-        <img class="navbar-brand-minimized" src="<?php echo site_url();?>assets/site/main/img/sygnet.png" width="auto" height="40" alt="iohub Logo">
+        <img class="navbar-brand-full" src="<?php echo site_url();?>public/site/main/img/logo.png" width="auto" height="40" alt="iohub Logo">
+        <img class="navbar-brand-minimized" src="<?php echo site_url();?>public/site/main/img/sygnet.png" width="auto" height="40" alt="iohub Logo">
       </a>
       <button class="navbar-toggler sidebar-toggler d-md-down-none opentopmenu" type="button" data-toggle="sidebar-lg-show">
         <span class="navbar-toggler-icon"></span>
@@ -108,7 +108,7 @@
 					}
                     ?>
  				<li class="nav-item px-3"><a class="nav-link" href="<?php echo site_url();?>asset">Assets</a></li>
-  				<li class="nav-item px-3"><a class="nav-link" href="<?php echo site_url();?>rundown">Rundown</a></li>
+  				<li class="nav-item px-3"><a class="nav-link" href="<?php echo site_url();?>rundowns">Rundowns</a></li>
   				<li class="nav-item px-3"><a class="nav-link" href="<?php echo site_url();?>jobs">Jobs</a></li>
                       <?php
                     if($permissions['view_archive'] > 0)
@@ -201,13 +201,13 @@
 						          if(sizeof($img) <= 0)
 						          {
 						          ?>
-						          <img class="img-avatar" id="imgdiv" src="<?php echo site_url();?>assets/site/main/images/admin-dummy.png"/>
+						          <img class="img-avatar" id="imgdiv" src="<?php echo site_url();?>public/site/main/images/admin-dummy.png"/>
 						          <?php
 						          }
 						          else
 						          {
 						          ?>
-						          <img class="img-avatar" id="imgdiv" src="<?php echo site_url();?>assets/site/main/group_pics/<?php echo $img[0]['name'];?>"/>
+						          <img class="img-avatar" id="imgdiv" src="<?php echo site_url();?>public/site/main/group_pics/<?php echo $img[0]['name'];?>"/>
 						          <?php
 						          }
 						        ?>

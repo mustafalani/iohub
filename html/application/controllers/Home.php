@@ -37,6 +37,97 @@
 			$this->load->view('errors/html/error_500');
 			$this->load->view('site/footer');
 		}
+		public function createasset()
+		{
+			$URL = "https://kurrenttv.nbla.cloud/login";			
+			$ch1 = curl_init();	
+			curl_setopt($ch1,CURLOPT_URL, $URL);	
+			curl_setopt($ch1, CURLOPT_POST, 1);	
+			curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);	
+			curl_setopt($ch1,CURLOPT_POSTFIELDS, "login=demo&password=demo&api=1");
+			curl_setopt($ch1, CURLOPT_HTTPHEADER, array('Content-Type'=>'application/json'));			
+			
+			$result = curl_exec($ch1);				
+			$jsonData = rtrim($result, "\0");		
+			$resultarray = json_decode($jsonData,TRUE);				
+			curl_close($ch1);
+		
+			$curl = curl_init();
+			$fields = json_encode(array("object_type" =>'asset','objects'=>array(0),'data'=>array('title'=>'test','subtitle'=>'testing','description'=>'testing desc','id_folder'=>1),'session_id'=>$resultarray['session_id']));
+			curl_setopt_array($curl, array(
+			  CURLOPT_URL => "https://kurrenttv.nbla.cloud/api/set",
+			  CURLOPT_RETURNTRANSFER => true,
+			  CURLOPT_ENCODING => "",
+			  CURLOPT_MAXREDIRS => 10,			 
+			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			  CURLOPT_CUSTOMREQUEST => "POST",
+			  CURLOPT_POSTFIELDS =>$fields,
+			  CURLOPT_HTTPHEADER => array(
+			  	'Accept: application/json',
+			    'Content-Type: application/json',
+			    'Content-Length:'. strlen($fields),
+			    'Authorization: Bearer '.base64_encode($resultarray['data']['login'].':demo'),
+			    'Cookie: '.$_SERVER['HTTP_COOKIE']
+			  ),
+			));
+
+			$response = curl_exec($curl);
+			$err = curl_error($curl);
+			echo $response;
+			print_r($response);
+			curl_close($curl);
+			
+			if ($err) {
+			  echo "cURL Error #:" . $err;
+			} else {
+			  echo $response;
+			}
+		}
+		public function testcurl()
+		{
+			$URL = "https://kurrenttv.nbla.cloud/login";			
+			$ch1 = curl_init();	
+			curl_setopt($ch1,CURLOPT_URL, $URL);	
+			curl_setopt($ch1, CURLOPT_POST, 1);	
+			curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);	
+			curl_setopt($ch1,CURLOPT_POSTFIELDS, "login=demo&password=demo&api=1");
+			curl_setopt($ch1, CURLOPT_HTTPHEADER, array('Content-Type'=>'application/json'));			
+			
+			$result = curl_exec($ch1);				
+			$jsonData = rtrim($result, "\0");		
+			$resultarray = json_decode($jsonData,TRUE);				
+			curl_close($ch1);
+		
+			$curl = curl_init();
+			$fields = json_encode(array("object_type" =>'asset','id_view'=>1,'session_id'=>$resultarray['session_id']));
+			curl_setopt_array($curl, array(
+			  CURLOPT_URL => "https://kurrenttv.nbla.cloud/api/get",
+			  CURLOPT_RETURNTRANSFER => true,
+			  CURLOPT_ENCODING => "",
+			  CURLOPT_MAXREDIRS => 10,			 
+			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			  CURLOPT_CUSTOMREQUEST => "POST",
+			  CURLOPT_POSTFIELDS =>$fields,
+			  CURLOPT_HTTPHEADER => array(
+			  	'Accept: application/json',
+			    'Content-Type: application/json',
+			    'Content-Length:'. strlen($fields),
+			    'Authorization: Bearer '.base64_encode($resultarray['data']['login'].':demo'),
+			    'Cookie: '.$_SERVER['HTTP_COOKIE']
+			  ),
+			));
+
+			$response = curl_exec($curl);
+			$err = curl_error($curl);
+
+			curl_close($curl);
+			
+			if ($err) {
+			  echo "cURL Error #:" . $err;
+			} else {
+			  echo $response;
+			}
+		}
 		public function index()
 		{
 			$userdata = $this->session->userdata('user_data');
@@ -87,8 +178,8 @@
 		 public function refresh(){
 		 	$actual_link =  $_SERVER['HTTP_REFERER'];	
 	        $config = array(
-	            'img_path'      => FCPATH.'assets/site/main/captcha/',
-	            'img_url'       => base_url().'assets/site/main/captcha/',
+	            'img_path'      => FCPATH.'public/site/main/captcha/',
+	            'img_url'       => base_url().'public/site/main/captcha/',
 	            'font_path'     => 'system/fonts/texb.ttf',
 	            'img_width'     => '160',
 	            'img_height'    => 50,
@@ -103,9 +194,9 @@
 		public function forgotPassword()
 		{			
 			$config = array(
-			    'img_path'      => FCPATH.'assets/site/main/captcha/',
-			    'img_url'       => base_url().'assets/site/main/captcha/',
-			    'font_path'     => FCPATH.'assets/site/main/fonts/captcha_fonts/times_new_yorker.ttf',
+			    'img_path'      => FCPATH.'public/site/main/captcha/',
+			    'img_url'       => base_url().'public/site/main/captcha/',
+			    'font_path'     => FCPATH.'public/site/main/fonts/captcha_fonts/times_new_yorker.ttf',
 			    'img_width'     => '150',
 			    'img_height'    => 50,
 			    'word_length'   => 8,
@@ -314,8 +405,8 @@
 			$data['captcha'] = $this->createCaptcha( array(
 			'min_length' => 5,
 			'max_length' => 5,
-			'backgrounds' => array(FCPATH.'assets/site/main/images/captcha_bg/white-carbon.png'),
-			'fonts' => array(FCPATH.'assets/site/main/fonts/captcha_fonts/times_new_yorker.ttf'),
+			'backgrounds' => array(FCPATH.'public/site/main/images/captcha_bg/white-carbon.png'),
+			'fonts' => array(FCPATH.'public/site/main/fonts/captcha_fonts/times_new_yorker.ttf'),
 			'characters' => 'ABCDEFGHJKLMNPRSTUVWXYZabcdefghjkmnprstuvwxyz23456789',
 			'min_font_size' => 28,
 			'max_font_size' => 28,
@@ -500,8 +591,8 @@
 				throw new Exception('Required GD library is missing');
 			}
 			
-			$bg_path = dirname(__FILE__) . 'assets/site/main/images/captcha_bg/backgrounds/';
-			$font_path = dirname(__FILE__) . 'assets/site/main/fonts/captcha_fonts/';
+			$bg_path = dirname(__FILE__) . 'public/site/main/images/captcha_bg/backgrounds/';
+			$font_path = dirname(__FILE__) . 'public/site/main/fonts/captcha_fonts/';
 			
 			// Default values
 			$captcha_config = array(

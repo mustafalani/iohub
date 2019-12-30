@@ -23,10 +23,21 @@
                     		<div class="col-lg-12 col-12-12">
 								<div class="content-box config-contentonly">
 									<div class="config-container">
-										<a class="extr" href="<?php echo site_url();?>streamviewer" style="width: 100px;font-size:105px;color:#fff;height:123px;display:block;"><i class="fa fa-th-large"></i></a>
-										<a href="<?php echo site_url();?>streamviewer"><span>Stream Viewer</span></a>
-                             </div>
-                           </div>
+										<div class="row">
+										<div class="col-1">
+											<a class="extr" href="<?php echo site_url(); ?>streamviewer" style="width: 100px;font-size:105px;color:#fff;height:123px;display:block;">
+												<i class="fa fa-th-large"></i></a>
+											<a href="<?php echo site_url(); ?>streamviewer">
+												<span>Stream Viewer</span></a>
+										</div>
+										<div style="text-align:center;width:103px !important;">
+											<a class="extr" href="<?php echo site_url(); ?>iotstream" style="width: 101px;font-size:105px;color:#fff;height:138px;display:block;">
+												<i class="icon-screen-tablet"></i></a>
+											<a href="<?php echo site_url(); ?>iotstream" style="text-align:center;">
+												<span>IoT Stream</span></a></div>
+										</div>							
+                             		</div>
+                           		</div>
                          </div>
                     </div>
                 </div>

@@ -15,18 +15,18 @@ class Model extends \CI_Model implements \ArrayAccess
 {
     /**
      * Database Configuration for read-write master
-     *
+     * 
      * @var object|string|array CI DB ($this->db as default), CI specific group name or CI database config array
      */
     protected $database = "";
 
     /**
      * Database Configuration for read-only slave
-     *
+     * 
      * @var object|string|array CI DB ($this->db as default), CI specific group name or CI database config array
      */
     protected $databaseRead = "";
-
+    
     /**
      * Table name
      *
@@ -124,7 +124,7 @@ class Model extends \CI_Model implements \ArrayAccess
      * @var object database caches by database key for write
      */
     protected static $_dbCaches = [];
-
+    
     /**
      * @var object database caches by database key for read (Salve)
      */
@@ -184,7 +184,7 @@ class Model extends \CI_Model implements \ArrayAccess
             if (is_object($this->database)) {
                 // CI DB Connection
                 $this->_db = $this->database;
-            }
+            } 
             elseif (is_string($this->database)) {
                 // Cache Mechanism
                 if (isset(self::$_dbCaches[$this->database])) {
@@ -208,7 +208,7 @@ class Model extends \CI_Model implements \ArrayAccess
             if (is_object($this->databaseRead)) {
                 // CI DB Connection
                 $this->_dbr = $this->databaseRead;
-            }
+            } 
             elseif (is_string($this->databaseRead)) {
                 // Cache Mechanism
                 if (isset(self::$_dbrCaches[$this->databaseRead])) {
@@ -227,7 +227,7 @@ class Model extends \CI_Model implements \ArrayAccess
             // CI Default DB Connection
             $this->_dbr = $this->_getDefaultDB();
         }
-
+        
         /* Table Name Guessing */
         if (!$this->table) {
             $this->table = str_replace('_model', '', strtolower(get_called_class()));
@@ -236,7 +236,7 @@ class Model extends \CI_Model implements \ArrayAccess
 
     /**
      * Get Master Database Connection
-     *
+     * 
      * @return object CI &DB
      */
     public function getDatabase()
@@ -246,7 +246,7 @@ class Model extends \CI_Model implements \ArrayAccess
 
     /**
      * Get Slave Database Connection
-     *
+     * 
      * @return object CI &DB
      */
     public function getDatabaseRead()
@@ -308,7 +308,7 @@ class Model extends \CI_Model implements \ArrayAccess
 
     /**
      * Returns the validation rules for attributes.
-     *
+     * 
      * @see https://www.codeigniter.com/userguide3/libraries/form_validation.html#rule-reference
      * @return array validation rules. (CodeIgniter Rule Reference)
      */
@@ -319,9 +319,9 @@ class Model extends \CI_Model implements \ArrayAccess
 
     /**
      * Performs the data validation with filters
-     *
+     * 
      * ORM only performs validation for assigned properties.
-     *
+     * 
      * @param array Data of attributes
      * @param boolean Return filtered data
      * @return boolean Result
@@ -365,7 +365,7 @@ class Model extends \CI_Model implements \ArrayAccess
         $validator->set_rules($rules);
         // Run Validate
         $result = $validator->run();
-
+        
         // Result handle
         if ($result===false) {
 
@@ -381,7 +381,7 @@ class Model extends \CI_Model implements \ArrayAccess
     /**
      * Validation - Get error data referenced by last failed Validation
      *
-     * @return array
+     * @return array 
      */
     public function getErrors()
     {
@@ -413,9 +413,9 @@ class Model extends \CI_Model implements \ArrayAccess
 
         // Filter process with setting check
         if (!empty($filters) && is_array($filters)) {
-
-            foreach ($filters as $key => $filter) {
-
+            
+            foreach ($filters as $key => $filter) { 
+                
                 if (!isset($filter[0]))
                     throw new Exception("No attributes defined in \$filters from " . get_called_class() . " (" . __CLASS__ . ")", 500);
 
@@ -431,12 +431,12 @@ class Model extends \CI_Model implements \ArrayAccess
 
                     if (!isset($data[$attribute]))
                         continue;
-
+                    
                     $data[$attribute] = call_user_func($function, $data[$attribute]);
                 }
             }
         }
-
+        
         return $data;
     }
 
@@ -450,9 +450,9 @@ class Model extends \CI_Model implements \ArrayAccess
     {
         $this->alias = $alias;
 
-        // Turn off cleaner to prevent continuous setting
+        // Turn off cleaner to prevent continuous setting 
         $this->_cleanNextFind = false;
-
+        
         return $this;
     }
 
@@ -461,14 +461,14 @@ class Model extends \CI_Model implements \ArrayAccess
      *
      * @param boolean $withAll withAll() switch helper
      * @return object CI_DB_query_builder
-     * @example
+     * @example 
      *  $posts = $this->PostModel->find()
      *      ->where('is_public', '1')
      *      ->limit(0,25)
      *      ->order_by('id')
      *      ->get()
      *      ->result_array();
-     * @example
+     * @example 
      *  // Without all featured conditions for next find()
      *  $posts = $this->PostModel->find(true)
      *      ->where('is_deleted', '1')
@@ -481,7 +481,7 @@ class Model extends \CI_Model implements \ArrayAccess
     public function find($withAll=false)
     {
         $instance = new static;
-
+        
         // One time setting reset mechanism
         if ($instance->_cleanNextFind === true) {
             // Reset alias
@@ -490,10 +490,10 @@ class Model extends \CI_Model implements \ArrayAccess
             // Turn on clean for next find
             $instance->_cleanNextFind = true;
         }
-
+        
         // Alias option for FROM
         $sqlFrom = ($instance->alias) ? "{$instance->table} AS {$instance->alias}" : $instance->table;
-
+        
         $instance->_dbr->from($sqlFrom);
 
         // WithAll helper
@@ -535,11 +535,11 @@ class Model extends \CI_Model implements \ArrayAccess
     public static function findOne($condition=[])
     {
         $instance = new static;
-
+        
         $record = $instance->_findByCondition($condition)
             ->limit(1)
             ->get()->row_array();
-
+        
         // Record check
         if (!$record) {
             return $record;
@@ -551,7 +551,7 @@ class Model extends \CI_Model implements \ArrayAccess
     /**
      * Returns a list of active record models that match the specified primary key value(s) or a set of column values.
      *
-     * @param mixed $condition Refer to _findByCondition() for the explanation
+     * @param mixed $condition Refer to _findByCondition() for the explanation 
      * @param integer|array $limit Limit or [offset, limit]
      * @return array Set of ActiveRecord(Model)s
      * @example
@@ -571,17 +571,17 @@ class Model extends \CI_Model implements \ArrayAccess
         if ($limit) {
 
             $offset = null;
-
+            
             if (is_array($limit) && isset($limit[1])) {
                 // Prevent list() variable effect
                 $set = $limit;
                 list($offset, $limit) = $set;
             }
-
+            
             $query = ($limit) ? $query->limit($limit) : $query;
             $query = ($offset) ? $query->offset($offset) : $query;
         }
-
+        
         $records = $query->get()->result_array();
 
         // Record check
@@ -594,7 +594,7 @@ class Model extends \CI_Model implements \ArrayAccess
         foreach ((array)$records as $key => $record) {
             // Check primary key setting
             if (!isset($record[$instance->primaryKey])) {
-                throw new Exception("Model's primary key not set", 500);
+                throw new Exception("Model's primary key not set", 500); 
             }
             // Create an ActiveRecord into collect
             $set[] = $instance->createActiveRecord($record, $record[$instance->primaryKey]);
@@ -607,7 +607,7 @@ class Model extends \CI_Model implements \ArrayAccess
      * reset an CI Query Builder instance with Model.
      *
      * @return object Self
-     * @example
+     * @example 
      *  $this->Model->reset()->find();
      */
     public function reset()
@@ -615,15 +615,15 @@ class Model extends \CI_Model implements \ArrayAccess
         // Reset query
         $this->_db->reset_query();
         $this->_dbr->reset_query();
-
+        
         return $this;
     }
 
     /**
      * Insert a row with Timestamps feature into the associated database table using the attribute values of this record.
-     *
+     * 
      * @param array $attributes
-     * @param boolean $runValidation Whether to perform validation (calling validate()) before manipulate the record.
+     * @param boolean $runValidation Whether to perform validation (calling validate()) before manipulate the record. 
      * @return boolean Result
      * @example
      *  $result = $this->Model->insert([
@@ -635,8 +635,8 @@ class Model extends \CI_Model implements \ArrayAccess
     {
         // Validation
         if ($runValidation && false===$attributes=$this->validate($attributes, true))
-            return false;
-
+            return false; 
+        
         $this->_attrEventBeforeInsert($attributes);
 
         return $this->_db->insert($this->table, $attributes);
@@ -644,9 +644,9 @@ class Model extends \CI_Model implements \ArrayAccess
 
     /**
      * Insert a batch of rows with Timestamps feature into the associated database table using the attribute values of this record.
-     *
+     * 
      * @param array $data The rows to be batch inserted
-     * @param boolean $runValidation Whether to perform validation (calling validate()) before manipulate the record.
+     * @param boolean $runValidation Whether to perform validation (calling validate()) before manipulate the record. 
      * @return int Number of rows inserted or FALSE on failure
      * @example
      *  $result = $this->Model->batchInsert([
@@ -660,7 +660,7 @@ class Model extends \CI_Model implements \ArrayAccess
 
             // Validation
             if ($runValidation && false===$attributes=$this->validate($attributes, true))
-                return false;
+                return false; 
 
             $this->_attrEventBeforeInsert($attributes);
         }
@@ -680,9 +680,9 @@ class Model extends \CI_Model implements \ArrayAccess
 
     /**
      * Replace a row with Timestamps feature into the associated database table using the attribute values of this record.
-     *
+     * 
      * @param array $attributes
-     * @param boolean $runValidation Whether to perform validation (calling validate()) before manipulate the record.
+     * @param boolean $runValidation Whether to perform validation (calling validate()) before manipulate the record. 
      * @return bool Result
      * @example
      *  $result = $this->Model->replace([
@@ -695,8 +695,8 @@ class Model extends \CI_Model implements \ArrayAccess
     {
         // Validation
         if ($runValidation && false===$attributes=$this->validate($attributes, true))
-            return false;
-
+            return false; 
+        
         $this->_attrEventBeforeInsert($attributes);
 
         return $this->_db->replace($this->table, $attributes);
@@ -704,13 +704,13 @@ class Model extends \CI_Model implements \ArrayAccess
 
     /**
      * Save the changes with Timestamps feature to the selected record(s) into the associated database table.
-     *
+     * 
      * @param array $attributes
-     * @param mixed $condition Refer to _findByCondition() for the explanation
-     * @param boolean $runValidation Whether to perform validation (calling validate()) before manipulate the record.
+     * @param mixed $condition Refer to _findByCondition() for the explanation 
+     * @param boolean $runValidation Whether to perform validation (calling validate()) before manipulate the record. 
      * @return bool Result
      *
-     * @example
+     * @example    
      *  $this->Model->update(['status'=>'off'], 123)
      * @example
      *  // Query builder ORM usage
@@ -721,7 +721,7 @@ class Model extends \CI_Model implements \ArrayAccess
     {
         // Validation
         if ($runValidation && false===$attributes=$this->validate($attributes, true))
-            return false;
+            return false; 
 
         // Model Condition
         $query = $this->_findByCondition($condition);
@@ -741,9 +741,9 @@ class Model extends \CI_Model implements \ArrayAccess
      * @param array $dataSet [[[Attributes], [Condition]], ]
      * @param boolean $withAll withAll() switch helper
      * @param integer $maxLenth MySQL max_allowed_packet
-     * @param boolean $runValidation Whether to perform validation (calling validate()) before manipulate the record.
+     * @param boolean $runValidation Whether to perform validation (calling validate()) before manipulate the record. 
      * @return integer Count of successful query pack(s)
-     * @example
+     * @example 
      *  $result = $this->Model->batchUpdate([
      *      [['title'=>'A1', 'modified'=>'1'], ['id'=>1]],
      *      [['title'=>'A2', 'modified'=>'1'], ['id'=>2]],
@@ -753,7 +753,7 @@ class Model extends \CI_Model implements \ArrayAccess
     {
         $count = 0;
         $sqlBatch = '';
-
+        
         foreach ($dataSet as $key => &$each) {
 
             // Data format
@@ -761,17 +761,17 @@ class Model extends \CI_Model implements \ArrayAccess
 
             // Check attributes
             if (!is_array($attributes) || !$attributes)
-                continue;
+                continue; 
 
             // Validation
             if ($runValidation && false===$attributes=$this->validate($attributes, true))
-                continue;
+                continue; 
 
             // WithAll helper
             if ($withAll===true) {
                 $this->withAll();
             }
-
+                
             // Model Condition
             $query = $this->_findByCondition($condition);
 
@@ -782,15 +782,15 @@ class Model extends \CI_Model implements \ArrayAccess
             $this->_dbr->reset_query();
 
             // Last batch check: First single query & Max length
-            // The first single query needs to be sent ahead to prevent the limitation that PDO transaction could not
-            // use multiple SQL line in one query, but allows if the multi-line query is behind a single query.
+            // The first single query needs to be sent ahead to prevent the limitation that PDO transaction could not 
+            // use multiple SQL line in one query, but allows if the multi-line query is behind a single query. 
             if (($count==0 && $sqlBatch) || strlen($sqlBatch)>=$maxLength) {
                 // Each batch of query
                 $result = $this->_db->query($sqlBatch);
                 $sqlBatch = "";
                 $count = ($result) ? $count + 1 : $count;
             }
-
+            
             // Keep Combining query
             $sqlBatch .= "{$sql};\n";
         }
@@ -803,20 +803,20 @@ class Model extends \CI_Model implements \ArrayAccess
 
     /**
      * Delete the selected record(s) with Timestamps feature into the associated database table.
-     *
-     * @param mixed $condition Refer to _findByCondition() for the explanation
+     * 
+     * @param mixed $condition Refer to _findByCondition() for the explanation 
      * @param boolean $forceDelete Force to hard delete
      * @param array $attributes Extended attributes for Soft Delete Mode
      * @return bool Result
      *
-     * @example
+     * @example    
      *  $this->Model->delete(123);
      * @example
      *  // Query builder ORM usage
      *  $this->Model->find()->where('id', 123);
      *  $this->Model->delete();
-     * @example
-     *  // Force delete for SOFT_DELETED mode
+     * @example  
+     *  // Force delete for SOFT_DELETED mode 
      *  $this->Model->delete(123, true);
      */
     public function delete($condition=NULL, $forceDelete=false, $attributes=[])
@@ -827,17 +827,17 @@ class Model extends \CI_Model implements \ArrayAccess
             $this->reset();
             $condition = $this->_selfCondition;
         }
-
+        
         // Model Condition by $forceDelete switch
         $query = ($forceDelete)
             ? $this->withTrashed()->_findByCondition($condition)
             : $this->_findByCondition($condition);
 
         /* Soft Delete Mode */
-        if (static::SOFT_DELETED
-            && isset($this->softDeletedTrueValue)
+        if (static::SOFT_DELETED 
+            && isset($this->softDeletedTrueValue) 
             && !$forceDelete) {
-
+            
             // Mark the records as deleted
             $attributes[static::SOFT_DELETED] = $this->softDeletedTrueValue;
 
@@ -854,17 +854,17 @@ class Model extends \CI_Model implements \ArrayAccess
             $sql = $this->_dbr->get_compiled_delete();
             $this->_dbr->reset_query();
         }
-
+        
         return $this->_db->query($sql);
     }
 
     /**
      * Force Delete the selected record(s) with Timestamps feature into the associated database table.
-     *
-     * @param mixed $condition Refer to _findByCondition() for the explanation
+     * 
+     * @param mixed $condition Refer to _findByCondition() for the explanation 
      * @return mixed CI delete result of DB Query Builder
      *
-     * @example
+     * @example    
      *  $this->Model->forceDelete(123)
      * @example
      *  // Query builder ORM usage
@@ -888,11 +888,11 @@ class Model extends \CI_Model implements \ArrayAccess
 
     /**
      * Restore SOFT_DELETED field value to the selected record(s) into the associated database table.
-     *
-     * @param mixed $condition Refer to _findByCondition() for the explanation
+     * 
+     * @param mixed $condition Refer to _findByCondition() for the explanation 
      * @return bool Result
      *
-     * @example
+     * @example    
      *  $this->Model->restore(123)
      * @example
      *  // Query builder ORM usage
@@ -905,9 +905,9 @@ class Model extends \CI_Model implements \ArrayAccess
         $query = $this->withTrashed()->_findByCondition($condition);
 
         /* Soft Delete Mode */
-        if (static::SOFT_DELETED
+        if (static::SOFT_DELETED 
             && isset($this->softDeletedFalseValue)) {
-
+            
             // Mark the records as deleted
             $attributes[static::SOFT_DELETED] = $this->softDeletedFalseValue;
 
@@ -932,10 +932,10 @@ class Model extends \CI_Model implements \ArrayAccess
 
     /**
      * Lock the selected rows in the table for updating.
-     *
+     * 
      * sharedLock locks only for write, lockForUpdate also prevents them from being selected
      *
-     * @example
+     * @example 
      *  $this->Model->find()->where('id', 123)
      *  $result = $this->Model->lockForUpdate()->row_array();
      * @example
@@ -944,8 +944,8 @@ class Model extends \CI_Model implements \ArrayAccess
      *  $this->Model->getDB()->trans_start();
      *  $this->Model->find()->where('id', 123)
      *  $result = $this->Model->lockForUpdate()->row_array();
-     *  $this->Model->getDB()->trans_complete();
-     *
+     *  $this->Model->getDB()->trans_complete();  
+     * 
      * @return object CI_DB_result
      */
     public function lockForUpdate()
@@ -959,11 +959,11 @@ class Model extends \CI_Model implements \ArrayAccess
 
     /**
      * Share lock the selected rows in the table.
-     *
-     * @example
+     * 
+     * @example 
      *  $this->Model->find()->where('id', 123)
      *  $result = $this->Model->sharedLock()->row_array();'
-     *
+     * 
      * @return object CI_DB_result
      */
     public function sharedLock()
@@ -979,7 +979,7 @@ class Model extends \CI_Model implements \ArrayAccess
      * Without SOFT_DELETED query conditions for next find()
      *
      * @return object Self
-     * @example
+     * @example 
      *  $this->Model->withTrashed()->find();
      */
     public function withTrashed()
@@ -993,7 +993,7 @@ class Model extends \CI_Model implements \ArrayAccess
      * Without Global Scopes query conditions for next find()
      *
      * @return object Self
-     * @example
+     * @example 
      *  $this->Model->withoutGlobalScopes()->find();
      */
     public function withoutGlobalScopes()
@@ -1008,7 +1008,7 @@ class Model extends \CI_Model implements \ArrayAccess
      * That is, with all set of Models for next find()
      *
      * @return object Self
-     * @example
+     * @example 
      *  $this->Model->withAll()->find();
      */
     public function withAll()
@@ -1032,7 +1032,7 @@ class Model extends \CI_Model implements \ArrayAccess
         $activeRecord = new static();
         // ORM handling
         $activeRecord->_readProperties = $readProperties;
-        // Primary key condition to ensure single query result
+        // Primary key condition to ensure single query result 
         $activeRecord->_selfCondition = $selfCondition;
 
         return $activeRecord;
@@ -1041,14 +1041,14 @@ class Model extends \CI_Model implements \ArrayAccess
     /**
      * Active Record (ORM) save for insert or update
      *
-     * @param boolean $runValidation Whether to perform validation (calling validate()) before manipulate the record.
+     * @param boolean $runValidation Whether to perform validation (calling validate()) before manipulate the record. 
      * @return bool Result of CI insert
      */
     public function save($runValidation=true)
     {
         // if (empty($this->_writeProperties))
         //     return false;
-
+        
         // ORM status distinguishing
         if (!$this->_selfCondition) {
 
@@ -1075,12 +1075,12 @@ class Model extends \CI_Model implements \ArrayAccess
             if (!$this->beforeSave(false)) {
                 return false;
             }
-
+            
             $result = ($this->_writeProperties) ? $this->update($this->_writeProperties, $this->_selfCondition, $runValidation) : true;
             // Check the primary key is changed
             if ($result) {
 
-                // Primary key condition to ensure single query result
+                // Primary key condition to ensure single query result 
                 if (isset($this->_writeProperties[$this->primaryKey])) {
                     $this->_selfCondition = $this->_writeProperties[$this->primaryKey];
                 }
@@ -1091,7 +1091,7 @@ class Model extends \CI_Model implements \ArrayAccess
 
         // Reset properties
         $this->_writeProperties = [];
-
+        
         return $result;
     }
 
@@ -1129,7 +1129,7 @@ class Model extends \CI_Model implements \ArrayAccess
      * Declares a has-many relation.
      *
      * @param string $modelName The model class name of the related record
-     * @param string $foreignKey
+     * @param string $foreignKey 
      * @param string $localKey
      * @return object CI_DB_query_builder
      */
@@ -1142,7 +1142,7 @@ class Model extends \CI_Model implements \ArrayAccess
      * Declares a has-many relation.
      *
      * @param string $modelName The model class name of the related record
-     * @param string $foreignKey
+     * @param string $foreignKey 
      * @param string $localKey
      * @return object CI_DB_query_builder
      */
@@ -1156,7 +1156,7 @@ class Model extends \CI_Model implements \ArrayAccess
      *
      * @param string $modelName The model class name of the related record
      * @param string $relationship
-     * @param string $foreignKey
+     * @param string $foreignKey 
      * @param string $localKey
      * @return object CI_DB_query_builder
      */
@@ -1164,11 +1164,11 @@ class Model extends \CI_Model implements \ArrayAccess
     {
         /**
          * PSR-4 support check
-         *
+         * 
          * @see https://github.com/yidas/codeigniter-psr4-autoload
          */
         if (strpos($modelName, "\\") !== false ) {
-
+            
             $model = new $modelName;
 
         } else {
@@ -1178,7 +1178,7 @@ class Model extends \CI_Model implements \ArrayAccess
         }
 
         $libClass = __CLASS__;
-
+        
         // Check if is using same library
         if (!is_subclass_of($model, $libClass)) {
             throw new Exception("Model `{$modelName}` does not extend {$libClass}", 500);
@@ -1186,7 +1186,7 @@ class Model extends \CI_Model implements \ArrayAccess
 
         // Keys
         $foreignKey = ($foreignKey) ? $foreignKey : $this->primaryKey;
-        $localKey = ($localKey) ? $localKey : $this->primaryKey;
+        $localKey = ($localKey) ? $localKey : $this->primaryKey; 
 
         $query = $model->find()
             ->where($foreignKey, $this->$localKey);
@@ -1217,7 +1217,7 @@ class Model extends \CI_Model implements \ArrayAccess
      * @param string $key  Array key for index key
      * @param bool   $obj2Array Object converts to array if is object
      * @return array Result with indexBy Key
-     * @example
+     * @example 
      *  $records = $this->Model->findAll();
      *  $this->Model->indexBy($records, 'sn');
      */
@@ -1228,13 +1228,13 @@ class Model extends \CI_Model implements \ArrayAccess
 
         $tmp = [];
         foreach ($array as $row) {
-            // Array & Object types support
+            // Array & Object types support 
             if (is_object($row) && isset($row->$key)) {
-
+                
                 $tmp[$row->$key] = ($obj2Array) ? (array)$row : $row;
-            }
+            } 
             elseif (is_array($row) && isset($row[$key])) {
-
+                
                 $tmp[$row[$key]] = $row;
             }
         }
@@ -1243,29 +1243,29 @@ class Model extends \CI_Model implements \ArrayAccess
 
     /**
      * Encodes special characters into HTML entities.
-     *
+     * 
      * The [[$this->config->item('charset')]] will be used for encoding.
-     *
+     * 
      * @param string $content the content to be encoded
      * @param bool $doubleEncode whether to encode HTML entities in `$content`. If false,
      * HTML entities in `$content` will not be further encoded.
      * @return string the encoded content
-     *
+     * 
      * @see http://www.php.net/manual/en/function.htmlspecialchars.php
      * @see https://www.yiiframework.com/doc/api/2.0/yii-helpers-basehtml#encode()-detail
      */
     public static function htmlEncode($content, $doubleEncode = true)
     {
         $ci = & get_instance();
-
+        
         return htmlspecialchars($content, ENT_QUOTES | ENT_SUBSTITUTE, $ci->config->item('charset') ? $ci->config->item('charset') : 'UTF-8', $doubleEncode);
     }
 
     /**
      * Decodes special HTML entities back to the corresponding characters.
-     *
+     * 
      * This is the opposite of [[encode()]].
-     *
+     * 
      * @param string $content the content to be decoded
      * @return string the decoded content
      * @see htmlEncode()
@@ -1301,7 +1301,7 @@ class Model extends \CI_Model implements \ArrayAccess
 
         // Trigger UPDATED_AT
         if ($this->createdWithUpdated) {
-
+            
             $this->_formatDate(static::UPDATED_AT, $attributes);
         }
 
@@ -1339,13 +1339,13 @@ class Model extends \CI_Model implements \ArrayAccess
      *
      * This method is internally called by findOne(), findAll(), update(), delete(), etc.
      * The query will be reset to start a new scope if the condition is used.
-     *
-     * @param mixed Primary key value or a set of column values. If is null, it would be used for
-     *  previous find() method, which means it would not rebuild find() so it would check and
+     * 
+     * @param mixed Primary key value or a set of column values. If is null, it would be used for  
+     *  previous find() method, which means it would not rebuild find() so it would check and 
      *  protect the SQL statement.
      * @return object CI_DB_query_builder
      * @internal
-     * @example
+     * @example 
      *  // find a single customer whose primary key value is 10
      *  $this->_findByCondition(10);
      *
@@ -1371,7 +1371,7 @@ class Model extends \CI_Model implements \ArrayAccess
 
             // Check if is numeric array
             if (array_keys($condition)===range(0, count($condition)-1)) {
-
+                
                 /* Numeric Array */
                 $query->where_in($this->_field($this->primaryKey), $condition);
 
@@ -1379,11 +1379,11 @@ class Model extends \CI_Model implements \ArrayAccess
 
                 /* Associated Array */
                 foreach ($condition as $field => $value) {
-
+                    
                     (is_array($value)) ? $query->where_in($field, $value) : $query->where($field, $value);
                 }
             }
-        }
+        } 
         elseif (is_numeric($condition) || is_string($condition)) {
             /* Single Primary Key */
             $query->where($this->_field($this->primaryKey), $condition);
@@ -1418,13 +1418,13 @@ class Model extends \CI_Model implements \ArrayAccess
                 case 'datetime':
                     $dateFormat = date("Y-m-d H:i:s");
                     break;
-
+                
                 case 'unixtime':
                 default:
                     $dateFormat = time();
                     break;
             }
-
+            
             $attributes[$field] = $dateFormat;
         }
 
@@ -1432,7 +1432,7 @@ class Model extends \CI_Model implements \ArrayAccess
     }
 
     /**
-     * The scope which not been soft deleted
+     * The scope which not been soft deleted 
      *
      * @param bool $skip Skip
      * @return bool Result
@@ -1442,18 +1442,18 @@ class Model extends \CI_Model implements \ArrayAccess
         if ($this->_withoutSoftDeletedScope) {
             // Reset SOFT_DELETED switch
             $this->_withoutSoftDeletedScope = false;
-        }
+        } 
         elseif (static::SOFT_DELETED && isset($this->softDeletedFalseValue)) {
             // Add condition
-            $this->_dbr->where($this->_field(static::SOFT_DELETED),
+            $this->_dbr->where($this->_field(static::SOFT_DELETED), 
             $this->softDeletedFalseValue);
         }
-
+        
         return true;
     }
 
     /**
-     * The scope which not been soft deleted
+     * The scope which not been soft deleted 
      *
      * @param bool $skip Skip
      * @return bool Result
@@ -1485,7 +1485,7 @@ class Model extends \CI_Model implements \ArrayAccess
 
     /**
      * Get & load $this->db in CI application
-     *
+     * 
      * @return object CI $this->db
      */
     private function _getDefaultDB()
@@ -1494,7 +1494,7 @@ class Model extends \CI_Model implements \ArrayAccess
         if ($this->_db) {
             return $this->_db;
         }
-
+        
         if (!isset($this->db)) {
             get_instance()->load->database();
         }
@@ -1522,16 +1522,16 @@ class Model extends \CI_Model implements \ArrayAccess
     {
         // ORM property check
         if (array_key_exists($name, $this->_writeProperties) ) {
-
-            return $this->_writeProperties[$name];
+            
+            return $this->_writeProperties[$name]; 
         }
         else if (array_key_exists($name, $this->_readProperties)) {
-
-            return $this->_readProperties[$name];
+            
+            return $this->_readProperties[$name]; 
         }
         // ORM relationship check
         else if (method_exists($this, $method = $name)) {
-
+            
             $query = call_user_func_array([$this, $method], []);
 
             // Extract query builder injection property
@@ -1544,11 +1544,11 @@ class Model extends \CI_Model implements \ArrayAccess
 
             /**
              * PSR-4 support check
-             *
+             * 
              * @see https://github.com/yidas/codeigniter-psr4-autoload
              */
             if (strpos($modelName, "\\") !== false ) {
-
+                
                 $model = new $modelName;
 
             } else {
@@ -1588,30 +1588,30 @@ class Model extends \CI_Model implements \ArrayAccess
             // Write cache to read properties of this ORM
             foreach (self::$_ormCaches[get_class($this)] as $key => $column) {
 
-                $this->_readProperties[$column['Field']] = isset($this->_readProperties[$column['Field']])
-                    ? $this->_readProperties[$column['Field']]
+                $this->_readProperties[$column['Field']] = isset($this->_readProperties[$column['Field']]) 
+                    ? $this->_readProperties[$column['Field']] 
                     : null;
             }
 
             // Match property again
             if (array_key_exists($name, $this->_readProperties)) {
-
-                return $this->_readProperties[$name];
+        
+                return $this->_readProperties[$name]; 
             }
 
             // CI parent::__get() check
             if (property_exists(get_instance(), $name)) {
-
+                
                 return parent::__get($name);
             }
 
             // Exception
-            throw new \Exception("Property `{$name}` does not exist", 500);
+            throw new \Exception("Property `{$name}` does not exist", 500);  
         }
 
         return null;
     }
-
+    
     /**
      * ArrayAccess offsetSet
      *
@@ -1620,7 +1620,7 @@ class Model extends \CI_Model implements \ArrayAccess
      * @return void
      */
     public function offsetSet($offset, $value) {
-
+        
         $this->_writeProperties[$offset] = $value;
     }
 
@@ -1655,11 +1655,11 @@ class Model extends \CI_Model implements \ArrayAccess
     public function offsetGet($offset) {
 
         if (isset($this->_writeProperties[$offset])) {
-
+            
             return $this->_writeProperties[$offset];
         }
         elseif (isset($this->_readProperties[$offset]) ) {
-
+            
             return $this->_readProperties[$offset];
         }
         else {

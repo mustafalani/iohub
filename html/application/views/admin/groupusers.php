@@ -78,7 +78,7 @@
 																		<tr>
 																			<td><input type="checkbox" name="actions"></td>
 																			
-																			<td><img width="20px" height="20px" src="<?php echo site_url();?>assets/site/main/group_pics/<?php echo isset($img[0]['name'])?$img[0]['name']:"";?>"/><a id="<?php echo $group['id']?>" href="<?php echo site_url();?>updateuser/<?php echo $group['id']?>"><?php echo $group['fname'].' '.$group['lname']?></a></td>
+																			<td><img width="20px" height="20px" src="<?php echo site_url();?>public/site/main/group_pics/<?php echo isset($img[0]['name'])?$img[0]['name']:"";?>"/><a id="<?php echo $group['id']?>" href="<?php echo site_url();?>updateuser/<?php echo $group['id']?>"><?php echo $group['fname'].' '.$group['lname']?></a></td>
 																			
 																			<td><?php echo isset($group['email_id'])?$group['email_id']:"";?></td>
 																			<td><?php if(!empty($group['role_id'])){
@@ -197,7 +197,7 @@
 																		<tr>
 																			<td><input type="checkbox" name=""></td>
 																			<td><?php echo $counterU;?></td>
-																			<td><img width="20px" height="20px" src="<?php echo site_url();?>assets/site/main/group_pics/<?php echo $img1[0]['name'];?>"/><a id="<?php echo $usr['fname'].' '.$usr['lname'];?>" href="<?php echo site_url();?>/admin/updateuser/<?php echo $usr['id']?>"> <?php echo $usr['fname'].' '.$usr['lname'];?></td>
+																			<td><img width="20px" height="20px" src="<?php echo site_url();?>public/site/main/group_pics/<?php echo $img1[0]['name'];?>"/><a id="<?php echo $usr['fname'].' '.$usr['lname'];?>" href="<?php echo site_url();?>/admin/updateuser/<?php echo $usr['id']?>"> <?php echo $usr['fname'].' '.$usr['lname'];?></td>
 																				<td><?php echo $groupname[0]['group_name'];?></td>
 																				
 																				<td>

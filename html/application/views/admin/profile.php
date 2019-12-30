@@ -64,9 +64,9 @@
 			<div class="dateof-birth col-xs-12 col-sm-12 col-md-12 pdleft pdright">
 				<div class="col-xs-2 col-sm-2 col-md-2 pdleft pdright">
 					<?php if(isset($userProfileData[0]['user_profile']) && !empty($userProfileData[0]['user_profile'])){
-						echo '<img width="150" height="170" id="imgdiv" src="'.site_url().'assets/site/main/group_pics/'.$userProfileData[0]['user_profile'].'">';
+						echo '<img width="150" height="170" id="imgdiv" src="'.site_url().'public/site/main/group_pics/'.$userProfileData[0]['user_profile'].'">';
 					}else{
-						echo '<img width="150" height="170" id="imgdiv" src="'.site_url().'assets/site/main/images/'._DEFAULT_USER_IMAGE_.'">';
+						echo '<img width="150" height="170" id="imgdiv" src="'.site_url().'public/site/main/images/'._DEFAULT_USER_IMAGE_.'">';
 					}?>
 				</div>
 

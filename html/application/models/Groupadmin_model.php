@@ -48,6 +48,7 @@ class Groupadmin_model extends CI_Model {
 			{
 				$sql ="Select * from (SELECT * FROM ks_encoder WHERE  uid =".$userid." or encoder_group=".$gid.") as t1 where status=1 ORDER BY t1.id DESC";
 			}
+				
 		}
 		else
 		{
@@ -59,6 +60,7 @@ class Groupadmin_model extends CI_Model {
 			{
 				$sql ="Select * from (SELECT * FROM ks_encoder WHERE  uid =".$userid.") as t1 where status=1 ORDER BY t1.id DESC";
 			}
+			
 		}		
 		$code = $this->db->error(); 
 		if($code['code'] > 0)
@@ -68,8 +70,8 @@ class Groupadmin_model extends CI_Model {
 		return $this->db->query($sql)->result_array();
 	}
 	function getAllOnlineEncodersbyUserIdAndGroupId($userid=0,$gid=0)
-    {
-		if(sizeof($gid)>0)
+    {    	
+    	if(sizeof($gid)>0)
 		{
 			$sql ="Select * from (SELECT * FROM ks_encoder WHERE  uid =".$userid." or encoder_group=".$gid.") as t1 where status=1 ORDER BY t1.id DESC";	
 		}

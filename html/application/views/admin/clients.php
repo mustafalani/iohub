@@ -150,13 +150,13 @@
 																				if(sizeof($img)>0)
 																				{
 																				?>
-																				<img class="img-circle" src="<?php echo site_url();?>assets/site/main/group_pics/<?php echo $img[0]['name'];?>"/>
+																				<img class="img-circle" src="<?php echo site_url();?>public/site/main/group_pics/<?php echo $img[0]['name'];?>"/>
 																				<?php
 																				}
 																				else
 																				{
 																					?>
-																				<img class="img-circle" src="<?php echo site_url();?>assets/site/main/images/dummy3.png"/>
+																				<img class="img-circle" src="<?php echo site_url();?>public/site/main/images/dummy3.png"/>
 																				<?php
 																				}
 																				?>
@@ -260,13 +260,13 @@
 																				if(sizeof($img1)>0)
 																				{
 																				?>
-																				<img class="img-circle" src="<?php echo site_url();?>assets/site/main/group_pics/<?php echo $img1[0]['name'];?>"/>
+																				<img class="img-circle" src="<?php echo site_url();?>public/site/main/group_pics/<?php echo $img1[0]['name'];?>"/>
 																				<?php
 																				}
 																				else
 																				{
 																					?>
-																					<img class="img-circle" src="<?php echo site_url();?>assets/site/main/group_pics/1522075611_user.png" style="background:#ffff;"/>
+																					<img class="img-circle" src="<?php echo site_url();?>public/site/main/group_pics/1522075611_user.png" style="background:#ffff;"/>
 																					<?php
 																				}
 																				?>

@@ -188,13 +188,13 @@
 												if(sizeof($img)<=0)
 												{
 												?>
-												<img class="groupimg img-circle" id="imgdiv" src="<?php echo site_url();?>assets/site/main/images/user.png">
+												<img class="groupimg img-circle" id="imgdiv" src="<?php echo site_url();?>public/site/main/images/user.png">
 												<?php
 												}
 												else
 												{
 												?>
-												<img  id="imgdiv" src="<?php echo site_url();?>assets/site/main/group_pics/<?php if(!empty($img[0])){echo $img[0]['name'];}?>" class="groupimg img-circle">
+												<img  id="imgdiv" src="<?php echo site_url();?>public/site/main/group_pics/<?php if(!empty($img[0])){echo $img[0]['name'];}?>" class="groupimg img-circle">
 												<?php
 												}
 											?>
