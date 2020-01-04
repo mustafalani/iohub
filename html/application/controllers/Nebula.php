@@ -883,6 +883,7 @@
 		$endingids = explode('_',$cleanData['engine_id']);
 		$rundown['engine_id'] = $endingids[1];
 		$rundown_id = "";
+		
 		$rundown_id = str_replace(' ','_',$cleanData['title']).'_'.$this->random_string(4);
 		$encoder = $this->common_model->getAllEncoders($cleanData['engine_id'],0);
 		if(sizeof($encoder)>0)

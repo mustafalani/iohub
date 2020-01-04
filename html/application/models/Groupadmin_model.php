@@ -6,6 +6,20 @@ class Groupadmin_model extends CI_Model {
         parent::__construct();   
         $this->load->database();   
     }
+	function getAllRundownsbyGroupId($gids)
+	{
+		$this->db->select('*');
+		$this->db->from('ks_rundowns');
+		$this->db->order_by('id','desc');
+		$code = $this->db->error();
+		if ($id>0) {
+			$this->db->where('id',$id);
+		}
+		if ($code['code'] > 0) {
+			show_error('Message');
+		}
+		return $this->db->get()->result_array();
+	}
     function getConfigurationsDetails($userid=0,$groupid=0)
 	{	
 		$this->db->select("*");
