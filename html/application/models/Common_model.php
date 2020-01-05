@@ -528,7 +528,7 @@ class Common_model extends CI_Model {
        $this->db->from('ks_nebula');
        if($gid > 0)
        {
-	   	$this->db->where('encoder_group',$gid);  	
+		   $this->db->where_in('encoder_group',$gid);  	
 	   }
        $code = $this->db->error(); if($code['code'] > 0)
 	   {	      	
@@ -6924,6 +6924,20 @@ where iccr_status_mapping.status IN(13,14,-14) and tt.university_is_accept=1 and
 		  show_error('Message');
 	   }
        return $this->db->get()->result_array();
+	}
+	function getAllRundownsByIds($ids)
+	{
+		$this->db->select('*');
+		$this->db->from('ks_rundowns');
+		$this->db->order_by('id','desc');
+		$code = $this->db->error();
+		if ($id>0) {
+			$this->db->where_in('engine_id',$ids);
+		}
+		if ($code['code'] > 0) {
+			show_error('Message');
+		}
+		return $this->db->get()->result_array();
 	}
 	function deleteRundown($rundownid)
 	{	          

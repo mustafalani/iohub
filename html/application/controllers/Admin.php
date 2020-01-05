@@ -627,8 +627,34 @@ error_reporting(E_ALL);
 			$this->load->view('admin/footer');
 		}
 		public function rundowns(){
-			$data['rundowns'] = $this->common_model->getAllRundowns(0);
-
+			
+			$userdata = $this->session->userdata('user_data');			
+			if ($userdata['user_type'] == 1) {
+				$data['rundowns'] = $this->common_model->getAllRundowns(0);	
+			}
+			elseif($userdata['user_type'] == 2 || $userdata['user_type'] == 3){
+				$group_id = $userdata['group_id'];	
+				if($group_id != NULL && $group_id >0)
+				{
+					$nebulas = $this->common_model->getNebula($group_id);
+					$nebulaids = array();
+					if (sizeof($nebulas)>0) {
+						foreach ($nebulas as $nebula) {
+							array_push($nebulaids,$nebula['id']);
+						}
+					}
+					
+					if (sizeof($nebulaids)>0) {
+						$data['rundowns'] = $this->common_model->getAllRundownsByIds($nebulaids);
+					}
+ 					else {
+						$data['rundowns'] = array();
+					}
+				}
+ 				else {
+	 				$data['rundowns'] = array();
+				}							
+			}
 			$this->load->view('admin/header');
 			$this->load->view('admin/rundown',$data);
 			$this->load->view('admin/footer');
