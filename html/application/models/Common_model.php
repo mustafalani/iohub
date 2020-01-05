@@ -6931,12 +6931,13 @@ where iccr_status_mapping.status IN(13,14,-14) and tt.university_is_accept=1 and
 		$this->db->from('ks_rundowns');
 		$this->db->order_by('id','desc');
 		$code = $this->db->error();
-		if ($id>0) {
+		if (sizeof($ids)>0) {
 			$this->db->where_in('engine_id',$ids);
 		}
 		if ($code['code'] > 0) {
 			show_error('Message');
 		}
+		//echo $this->db->last_query();
 		return $this->db->get()->result_array();
 	}
 	function deleteRundown($rundownid)
