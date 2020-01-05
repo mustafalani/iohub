@@ -227,7 +227,7 @@ function convertToDHMS($seconds){
 																									   <tbody>
 																											 <tr>
 																													<td>1</td>
-																													<td><a href="https://northwaves.net/iohub/editasset/44">test-nometa</a></td>
+																													<td><a href="https://iohub.tv/iohub/editasset/44">test-nometa</a></td>
 																													<td><span class="folder" style="background-color:#2872b3">Movie</span></td>
 																													<td>00:00:00:00</td>
 																													<td style="padding-bottom: 0;padding-top: 0;vertical-align: middle;"><img style="width:85%;vertical-align:middle;" src="https://kurrenttv.nbla.cloud/thumb/0000/30/orig.jpg"></td>
