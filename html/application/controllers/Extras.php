@@ -166,7 +166,7 @@ class Extras extends CI_Controller {
 				case "phyinput":					
 				break;
 				case "virinput":
-				switch ($Inputs[2]) {
+				switch ($Inputs[1]) {
 					case 3:
 					$inputName = $iotStream[0]['channel_ndi_source'];
 					break;
