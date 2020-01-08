@@ -156,7 +156,7 @@
 																	case "virinput":
 																		$virInput = $this->common_model->channelInput($channelInputid[1]);
 																		$encoderInput = $this->common_model->getEncoderInputbyId($channelInputid[1]);
-																		$id = $stream['encoderid'];
+																		$id = $stream['encoder_id'];
 																		$encoder = $this->common_model->getAllEncoders($id,0);
 																		echo '<label class="label label-input lblinputtext">'.$encoder[0]['encoder_name'].'</label>';
 																		switch ($channelInputid[1]) {
