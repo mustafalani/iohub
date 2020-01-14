@@ -94,6 +94,25 @@
    				  echo '<script type="text/javascript">encoderModelOutputs.push("DeckLink Duo ('.$i.')");</script>';
    				}
    				break;
+          case "3":
+   				$len = 0;
+   				$len = 1 * $count;
+   				for($k=1; $k<=$len; $k++)
+   				{
+   					if($k>1)
+   					{
+   						echo '<script type="text/javascript">encoderModelInputs.push("DeckLink 4K Extreme 12G ('.$k.')");</script>';
+   																																	echo '<script type="text/javascript">encoderModelOutputs.push("DeckLink 4K Extreme 12G ('.$k.')");</script>';
+
+   					}
+   					else
+   					{
+   						echo '<script type="text/javascript">encoderModelInputs.push("DeckLink SDI Micro");</script>';
+   																																	echo '<script type="text/javascript">encoderModelOutputs.push("DeckLink 4K Extreme 12G");</script>';
+
+   					}
+
+   				}
    				case "6":
    				$len = 0;
    				$len = 4 * $count;
@@ -964,6 +983,59 @@
                                                 					}
                                                 				}
                                                 				break;
+                                                        case "3":
+                                                        $len = 0;
+                                                        $len = 1 * $count;
+                                                        for($k=1; $k<=$len; $k++)
+                                                        {
+                                                          if($k>1)
+                                                          {
+                                                            if($inps['inp_source'] == "DeckLink 4K Extreme 12G (".$k.")")
+                                                            {
+
+                                                              echo "<option selected='selected' value='DeckLink 4K Extreme 12G (".$k.")'>DeckLink 4K Extreme 12G (".$k.")</option>";
+                                                              array_push($selectedArray,"DeckLink 4K Extreme 12G (".$k.")");
+
+                                                            }
+                                                            else
+                                                            {
+                                                              if(sizeof($selectedArray)>0)
+                                                              {
+                                                                if(in_array("DeckLink 4K Extreme 12G (".$k.")",$selectedArray))
+                                                                {
+                                                                  echo "<option value='DeckLink 4K Extreme 12G (".$k.")'>DeckLink 4K Extreme 12G (".$k.")</option>";
+                                                                }
+                                                              }
+                                                              else
+                                                              {
+                                                                echo "<option value='DeckLink 4K Extreme 12G (".$k.")'>DeckLink 4K Extreme 12G (".$k.")</option>";
+                                                              }
+                                                            }
+                                                          }
+                                                          else
+                                                          {
+                                                            if($inps['inp_source'] == "DeckLink 4K Extreme 12G")
+                                                            {
+                                                              echo "<option selected='selected' value='DeckLink 4K Extreme 12G'>DeckLink 4K Extreme 12G</option>";
+                                                              array_push($selectedArray,"DeckLink 4K Extreme 12G");
+                                                            }
+                                                            else
+                                                            {
+                                                              if(sizeof($selectedArray)>0)
+                                                              {
+                                                                if(in_array("DeckLink 4K Extreme 12G",$selectedArray))
+                                                                {
+                                                                  echo "<option disabled='disabled' value='DeckLink 4K Extreme 12G'>DeckLink 4K Extreme 12G</option>";
+                                                                }
+                                                              }
+                                                              else
+                                                              {
+                                                                echo "<option value='DeckLink 4K Extreme 12G'>DeckLink 4K Extreme 12G</option>";
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                        break;
                                                 				case "6":
                                                 				$len = 0;
                                                 				$len = 4 * $count;
@@ -1269,6 +1341,59 @@
                                                 																						}
                                                 																					}
                                                 																					break;
+                                                                                          case "3":
+                                                                                          $len = 0;
+                                                                                          $len = 1 * $count;
+                                                                                          for($k=1; $k<=$len; $k++)
+                                                                                          {
+                                                                                            if($k>1)
+                                                                                            {
+                                                                                              if($out['out_destination'] == "DeckLink 4K Extreme 12G (".$k.")")
+                                                                                              {
+
+                                                                                                echo "<option selected='selected' value='DeckLink 4K Extreme 12G (".$k.")'>DeckLink 4K Extreme 12G (".$k.")</option>";
+                                                                                                array_push($selectedoutputArray,"DeckLink 4K Extreme 12G (".$k.")");
+
+                                                                                              }
+                                                                                              else
+                                                                                              {
+                                                                                                if(sizeof($selectedoutputArray)>0)
+                                                                                                {
+                                                                                                  if(in_array("DeckLink 4K Extreme 12G (".$k.")",$selectedoutputArray))
+                                                                                                  {
+                                                                                                    echo "<option value='DeckLink 4K Extreme 12G (".$k.")'>DeckLink 4K Extreme 12G (".$k.")</option>";
+                                                                                                  }
+                                                                                                }
+                                                                                                else
+                                                                                                {
+                                                                                                  echo "<option value='DeckLink 4K Extreme 12G (".$k.")'>DeckLink 4K Extreme 12G (".$k.")</option>";
+                                                                                                }
+                                                                                              }
+                                                                                            }
+                                                                                            else
+                                                                                            {
+                                                                                              if($out['out_destination'] == "DeckLink 4K Extreme 12G")
+                                                                                              {
+                                                                                                echo "<option selected='selected' value='DeckLink 4K Extreme 12G'>DeckLink 4K Extreme 12G</option>";
+                                                                                                array_push($selectedoutputArray,"DeckLink 4K Extreme 12G");
+                                                                                              }
+                                                                                              else
+                                                                                              {
+                                                                                                if(sizeof($selectedoutputArray)>0)
+                                                                                                {
+                                                                                                  if(in_array("DeckLink 4K Extreme 12G",$selectedoutputArray))
+                                                                                                  {
+                                                                                                    echo "<option disabled='disabled' value='DeckLink 4K Extreme 12G'>DeckLink 4K Extreme 12G</option>";
+                                                                                                  }
+                                                                                                }
+                                                                                                else
+                                                                                                {
+                                                                                                  echo "<option value='DeckLink 4K Extreme 12G'>DeckLink 4K Extreme 12G</option>";
+                                                                                                }
+                                                                                              }
+                                                                                            }
+                                                                                          }
+                                                                                          break;
                                                 																					case "6":
                                                 																					$len = 0;
                                                 																					$len = 4 * $count;
