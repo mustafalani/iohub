@@ -83,7 +83,7 @@ var contains = function(needle) {
 $('.assettabs li a').on('click',function(){
 	$('.grid').removeClass('active');
 	$('.list').addClass('active');
-	
+
 	var tabe = "";
 	var tabhref = "";
 	$('.assettabs li').each(function(){
@@ -91,12 +91,12 @@ $('.assettabs li a').on('click',function(){
 			tabe = $(this).find('a').html();
 			tabhref = $(this).find('a').attr('href');
 		}
-	});			
+	});
 	$(tabhref + '_list').attr('style','display:flex');
 	$(tabhref + '_grid').removeAttr('style');
 	$(tabhref + '_list').removeClass('dnone');
 	$(tabhref + '_grid').addClass('dnone');
-	$(tabhref + '_list').parent('.card-body').attr('style','padding:0 !important');	
+	$(tabhref + '_list').parent('.card-body').attr('style','padding:0 !important');
 });
 $(document).on('click','.list',function(){
 	var tabe = "";
@@ -106,7 +106,7 @@ $(document).on('click','.list',function(){
 			tabe = $(this).find('a').html();
 			tabhref = $(this).find('a').attr('href');
 		}
-	});	
+	});
 	$(this).addClass('active');
 	$('.grid').removeClass('active');
 	$(tabhref + '_grid').parent('.card-body').addClass('dnone');
@@ -115,7 +115,7 @@ $(document).on('click','.list',function(){
 	$(tabhref + '_list').removeClass('dnone');
 	$(tabhref + '_grid').addClass('dnone');
 	$(tabhref + '_list').parent('.card-body').attr('style','padding:0 !important');
-	
+
 });
 $(document).on('click','.grid',function(){
 	var tabe = "";
@@ -125,7 +125,7 @@ $(document).on('click','.grid',function(){
 			tabe = $(this).find('a').html();
 			tabhref = $(this).find('a').attr('href');
 		}
-	});	
+	});
 	$(this).addClass('active');
 	$('.list').removeClass('active');
 	$(tabhref + '_grid').parent('.card-body').removeClass('dnone');
@@ -135,17 +135,17 @@ $(document).on('click','.grid',function(){
 	$(tabhref + '_list').addClass('dnone');
 	$(tabhref + '_list').parent('.card-body').removeAttr('style');
 	var nid = $(this).attr('accesskey');
-	
+
 	$.ajax({
         url: baseURL + "nebula/getAssets",
         data:{'assetType':tabhref,'nid':nid},
         type:'post',
         dataType:'json',
-        success:function(jsonResponse){   
-         
+        success:function(jsonResponse){
+
 	        var HTMLL = "";
 	        var OBJ = JSON.parse(jsonResponse.data);
-	     
+
 	        if(OBJ.count >0)
 	        {
 	        	for(var i =0; i<OBJ.data.length; i++)
@@ -161,7 +161,7 @@ $(document).on('click','.grid',function(){
 					HTMLL += "<video class='rh5v-DefaultPlayer_video' poster='"+jsonResponse.KURRENTTV_BASE_URL + "/thumb/0000/" + OBJ.data[i]['id']  + "/orig.jpg'>";
 					HTMLL += "<source src='"+jsonResponse.KURRENTTV_BASE_URL + "/proxy/0000/"+ OBJ.data[i]['id'] +".mp4' type='video/webm'/>";
 					HTMLL += "<source src='"+jsonResponse.KURRENTTV_BASE_URL + "/proxy/0000/"+ OBJ.data[i]['id'] +".mp4' type='video/mp4'/>";
-					HTMLL += "<source src='"+jsonResponse.KURRENTTV_BASE_URL + "/proxy/0000/"+ OBJ.data[i]['id'] +".mp4' type='video/ogg'/>";					
+					HTMLL += "<source src='"+jsonResponse.KURRENTTV_BASE_URL + "/proxy/0000/"+ OBJ.data[i]['id'] +".mp4' type='video/ogg'/>";
 					HTMLL += "</video>";
 					//HTMLL += "<a data-toggle='modal' accesskey='" + jsonResponse.KURRENTTV_BASE_URL + "' data-target='#myModal' href='javascript:void(0);' class='playbtn'><i class='fa fa-play' aria-hidden='true'></i></a>";
 					HTMLL += "</div>";
@@ -181,10 +181,10 @@ $(document).on('click','.grid',function(){
 							HTMLL +="<i class='fa fa-circle-thin icons text-secondary' style='font-size: 24px;'></i>";
 								break;
 						}
-					}	
+					}
 				 else {
 						 HTMLL +="<i class='fa fa-circle-thin icons'></i>";
-					}														
+					}
 					HTMLL += "<span>  </span>";
 					HTMLL += "<button class='badge badge-block btn-outline-secondary' disabled=''>" + secondsToHms(OBJ.data[i]['duration']) + "</button><span>  </span>";
 					HTMLL += "<button class='badge badge-block btn-outline-secondary' disabled=''>" + bytesToSize(OBJ.data[i]['file/size'])+ "</button><span>  </span>";
@@ -200,35 +200,35 @@ $(document).on('click','.grid',function(){
 			}
 			else{
 				HTMLL += "<div class='norecord col-12'>No Record Found</div>";
-			}  
-			$(tabhref + '_grid').html(HTMLL);  			
+			}
+			$(tabhref + '_grid').html(HTMLL);
 		},
         error:function(){
-        	toastr['error']("Error occured while performing actions!");        		
+        	toastr['error']("Error occured while performing actions!");
 		}
 	});
 });
-function subTitleFormat(cell){  
-  	if(cell === "" || cell == 'undefined' || cell == null) 
+function subTitleFormat(cell){
+  	if(cell === "" || cell == 'undefined' || cell == null)
   	return "-";
   	else return cell;
-  		
+
   }
  function titleFormat(cell, row){
   	if(cell === "" || cell == 'undefined' || cell == null)
   	return "-";
-    else 
+    else
     return "<Link to={`/asset/${row.id}`}>{cell}</Link>";
   }
  function assetStatusFlag(cell){
-  	if(cell === 1) 
+  	if(cell === 1)
   	return "<i className='fa fa-circle text-success' />";
-  	else 
+  	else
   	return "<i className='fa fa-circle text-disabled' />";
-  		
+
   }
 
-function secondsToHms(d){  	
+function secondsToHms(d){
   	if(d !== "" && d !== undefined)
   	{
 	   const fps = 25;
@@ -237,14 +237,14 @@ function secondsToHms(d){
 	         m = pad2( d % 3600 / 60 ),
 	         s = pad2( d % 60 ),
 	         f = pad2( d % 1 * fps ); // +1 here for one based frame
-	   return `${h}:${m}:${s}:${f}`;	
+	   return `${h}:${m}:${s}:${f}`;
 	}
-	else 
+	else
 		return '00:00:00.00';
-  	
+
 	}
 function formatTime(cell){
-  	var date = new Date(cell*1000);  
+  	var date = new Date(cell*1000);
   	var d = date.getDay();
   	var m = date.getMonth();
   	var y = date.getFullYear();
@@ -262,12 +262,12 @@ function formatTime(cell){
 	else
 	{
 		return "";
-	}  	
+	}
   }
  function fpsFormat(cell){
   	if(cell != "" && cell != null &&  typeof cell !== undefined)
   	{
-		var fps = cell.split("/");	
+		var fps = cell.split("/");
 		return fps[0];
 	}
 	else
@@ -1009,6 +1009,22 @@ var refreshEncodersInputOutputs = function(){
 						encoderModelOutputs.push("DeckLink Duo ("+ inp +")");
 					}
 					break;
+          case 3:
+          var len = parseInt(encoderModelsCount[i]) * 1;
+          for(var inp=1; inp<=len; inp++)
+          {
+            if(inp == 1)
+            {
+              encoderModelInputs.push("DeckLink 4K Extreme 12");
+              encoderModelOutputs.push("DeckLink 4K Extreme 12");
+            }
+            else
+            {
+              encoderModelInputs.push("DeckLink 4K Extreme 12 ("+ inp +")");
+              encoderModelOutputs.push("DeckLink 4K Extreme 12 ("+ inp +")");
+            }
+          }
+          break;
 					case 6:
 					var len = parseInt(encoderModelsCount[i]) * 4;
 
