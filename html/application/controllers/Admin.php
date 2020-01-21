@@ -59,38 +59,38 @@ error_reporting(E_ALL);
 				redirect(site_url() . 'home');
 			}
 		}
-		public function upload_asset_files(){
-
+		public function upload_asset_files(){			
+			
 			$returnarray = array('status'=>FALSE,'data'=>'');
 			$cleanData = $this->security->xss_clean($this->input->post(NULL, TRUE));
-			$nebulaId = $this->uri->segment(3);
-			$nebula = $this->common_model->getNebulabyId($nebulaId);
-			$URL_SERVER = "https://".$nebula[0]['encoder_ip'];
-			$URL = $URL_SERVER."/login";
-			$ch1 = curl_init();
-			curl_setopt($ch1,CURLOPT_URL, $URL);
-			curl_setopt($ch1, CURLOPT_POST, 1);
-			curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
+			$nebulaId = $this->uri->segment(3);	
+			$nebula = $this->common_model->getNebulabyId($nebulaId);	
+			$URL_SERVER = "https://".$nebula[0]['encoder_ip'];			
+			$URL = $URL_SERVER."/login";			
+			$ch1 = curl_init();	
+			curl_setopt($ch1,CURLOPT_URL, $URL);	
+			curl_setopt($ch1, CURLOPT_POST, 1);	
+			curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);	
 			curl_setopt($ch1,CURLOPT_POSTFIELDS,"login=".$nebula[0]['encoder_uname']."&password=".$nebula[0]['encoder_pass']."&api=1");
-			curl_setopt($ch1, CURLOPT_HTTPHEADER, array('Content-Type'=>'application/json'));
-
-			$result = curl_exec($ch1);
-			$jsonData = rtrim($result, "\0");
-			$resultarray = json_decode($jsonData,TRUE);
-			curl_close($ch1);
-
+			curl_setopt($ch1, CURLOPT_HTTPHEADER, array('Content-Type'=>'application/json'));			
+			
+			$result = curl_exec($ch1);				
+			$jsonData = rtrim($result, "\0");		
+			$resultarray = json_decode($jsonData,TRUE);				
+			curl_close($ch1);			
+		
 			$curl = curl_init();
 			$fields = array("id_asset" =>43,'session_id'=>$resultarray['session_id'],'file'=>'@'.$_FILES['file']['tmp_name']);
-
+			
 			curl_setopt_array($curl, array(
 			  CURLOPT_URL => $URL_SERVER."/upload",
 			  CURLOPT_RETURNTRANSFER => true,
 			  CURLOPT_ENCODING => "",
-			  CURLOPT_MAXREDIRS => 10,
-			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			  CURLOPT_MAXREDIRS => 10,			 
+			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,			  
 			  CURLOPT_CUSTOMREQUEST => "POST",
 			  CURLOPT_POSTFIELDS =>$fields,
-			  CURLOPT_HTTPHEADER => array(
+			  CURLOPT_HTTPHEADER => array(			  	
 			    'Content-Type: multipart/form-data',
 			    'Content-Length:'. strlen($fields),
 			    'Authorization: Bearer '.base64_encode($resultarray['data']['login'].':demo'),
@@ -99,8 +99,8 @@ error_reporting(E_ALL);
 			));
 
 			$response = curl_exec($curl);
-			$err = curl_error($curl);
-			curl_close($curl);
+			$err = curl_error($curl);				
+			curl_close($curl);			
 			if($err){
 			  echo json_encode($returnarray);
 			}
@@ -110,42 +110,42 @@ error_reporting(E_ALL);
 			    echo json_encode($returnarray);
 			}
 		}
-
+		
 		public function saveAssets(){
-
+			
 			$returnarray = array('status'=>FALSE,'data'=>'');
 			$cleanData = $this->security->xss_clean($this->input->post(NULL, TRUE));
-			$nebulaId = $cleanData['accesskey'];
-			$nebula = $this->common_model->getNebulabyId($nebulaId);
-			$URL_SERVER = "https://".$nebula[0]['encoder_ip'];
-			$URL = $URL_SERVER."/login";
-			$ch1 = curl_init();
-			curl_setopt($ch1,CURLOPT_URL, $URL);
-			curl_setopt($ch1, CURLOPT_POST, 1);
-			curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
+			$nebulaId = $cleanData['accesskey'];	
+			$nebula = $this->common_model->getNebulabyId($nebulaId);	
+			$URL_SERVER = "https://".$nebula[0]['encoder_ip'];		
+			$URL = $URL_SERVER."/login";			
+			$ch1 = curl_init();	
+			curl_setopt($ch1,CURLOPT_URL, $URL);	
+			curl_setopt($ch1, CURLOPT_POST, 1);	
+			curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);	
 			curl_setopt($ch1,CURLOPT_POSTFIELDS, "login=".$nebula[0]['encoder_uname']."&password=".$nebula[0]['encoder_pass']."&api=1");
-			curl_setopt($ch1, CURLOPT_HTTPHEADER, array('Content-Type'=>'application/json'));
-
-			$result = curl_exec($ch1);
-			$jsonData = rtrim($result, "\0");
-			$resultarray = json_decode($jsonData,TRUE);
+			curl_setopt($ch1, CURLOPT_HTTPHEADER, array('Content-Type'=>'application/json'));			
+			
+			$result = curl_exec($ch1);				
+			$jsonData = rtrim($result, "\0");		
+			$resultarray = json_decode($jsonData,TRUE);				
 			curl_close($ch1);
-
+		
 			$curl = curl_init();
 			$flds = array();
 			foreach($cleanData as $key=>$d)
 			{
 				if($key != "accesskey"){
-					$flds[$key] = $d;
+					$flds[$key] = $d;	
 				}
 			}
-			$fields = json_encode(array("object_type" =>'asset','objects'=>array(0),'data'=>$flds,'session_id'=>$resultarray['session_id']));
-
+			$fields = json_encode(array("object_type" =>'asset','objects'=>array(0),'data'=>$flds,'session_id'=>$resultarray['session_id']));		
+			
 			curl_setopt_array($curl, array(
 			  CURLOPT_URL => $URL_SERVER."/api/set",
 			  CURLOPT_RETURNTRANSFER => true,
 			  CURLOPT_ENCODING => "",
-			  CURLOPT_MAXREDIRS => 10,
+			  CURLOPT_MAXREDIRS => 10,			 
 			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			  CURLOPT_CUSTOMREQUEST => "POST",
 			  CURLOPT_POSTFIELDS =>$fields,
@@ -159,8 +159,8 @@ error_reporting(E_ALL);
 			));
 
 			$response = curl_exec($curl);
-			$err = curl_error($curl);
-			curl_close($curl);
+			$err = curl_error($curl);				
+			curl_close($curl);			
 			if($err){
 			  echo json_encode($returnarray);
 			}
@@ -172,34 +172,34 @@ error_reporting(E_ALL);
 			}
 		}
 		public function createassets(){
-
+			
 			$data = array();
 			$nebulaId = $this->uri->segment(3);
-			$nebula = $this->common_model->getNebulabyId($nebulaId);
-
+			$nebula = $this->common_model->getNebulabyId($nebulaId);	
+			
 			$userdata = $this->session->userdata('user_data');
-			$data['userdata'] = $this->session->userdata('user_data');
-			$URL_SERVER = "https://".$nebula[0]['encoder_ip'];
+			$data['userdata'] = $this->session->userdata('user_data');			
+			$URL_SERVER = "https://".$nebula[0]['encoder_ip'];			
 			$data = array();
-			$URL = $URL_SERVER."/login";
-			$ch1 = curl_init();
-			curl_setopt($ch1,CURLOPT_URL, $URL);
-			curl_setopt($ch1, CURLOPT_POST, 1);
-			curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
+			$URL = $URL_SERVER."/login";				
+			$ch1 = curl_init();	
+			curl_setopt($ch1,CURLOPT_URL, $URL);	
+			curl_setopt($ch1, CURLOPT_POST, 1);	
+			curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);	
 			curl_setopt($ch1,CURLOPT_POSTFIELDS, "login=".$nebula[0]['encoder_uname']."&password=".$nebula[0]['encoder_pass']."&api=1");
-			curl_setopt($ch1, CURLOPT_HTTPHEADER, array('Content-Type'=>'application/json'));
-			$result = curl_exec($ch1);
-			$jsonData = rtrim($result, "\0");
-			$resultarray = json_decode($jsonData,TRUE);
+			curl_setopt($ch1, CURLOPT_HTTPHEADER, array('Content-Type'=>'application/json'));	
+			$result = curl_exec($ch1);				
+			$jsonData = rtrim($result, "\0");		
+			$resultarray = json_decode($jsonData,TRUE);				
 			curl_close($ch1);
-
+			
 			$settins = curl_init();
 			$fields = json_encode(array('session_id'=>$resultarray['session_id']));
 			curl_setopt_array($settins, array(
 			  CURLOPT_URL => $URL_SERVER."/api/settings",
 			  CURLOPT_RETURNTRANSFER => true,
 			  CURLOPT_ENCODING => "",
-			  CURLOPT_MAXREDIRS => 10,
+			  CURLOPT_MAXREDIRS => 10,			 
 			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			  CURLOPT_CUSTOMREQUEST => "POST",
 			  CURLOPT_POSTFIELDS =>$fields,
@@ -222,8 +222,8 @@ error_reporting(E_ALL);
 		}
 		public function updateNebula()
 		{
-			try{
-
+			try{			
+				
 				$this->form_validation->set_rules('encoder_name', 'Encoder Name', 'required');
 				$this->form_validation->set_rules('encoder_ip', 'Encoder IP Address', 'required');
 				$this->form_validation->set_rules('encoder_port', 'Encoder Port', 'required');
@@ -274,7 +274,7 @@ error_reporting(E_ALL);
 						redirect('configuration');
 					}
 				}
-
+				
 			}
 			catch(Exception $e)
 			{
@@ -321,7 +321,7 @@ error_reporting(E_ALL);
 	                	'encoder_pass'=>$cleanData['encoder_pass'],
 						'parh_setting'=>$cleanData['parh_setting'],
 	                	'encoder_group'=>$groupid,
-
+						
 	                	'created'=>time()
 					);
 					$id = $this->common_model->insertNebula($encoderData);
@@ -368,7 +368,7 @@ error_reporting(E_ALL);
 			$this->load->view('admin/footer');
 		}
 		public function createnebula(){
-
+			
 			$userdata = $this->session->userdata('user_data');
 			$data['userdata'] = $this->session->userdata('user_data');
 			if($userdata['user_type'] == 1)
@@ -383,34 +383,34 @@ error_reporting(E_ALL);
 			$this->load->view('admin/createnebula',$data);
 			$this->load->view('admin/footer');
 		}
-
+		
 		public function asset(){
-
+			
 			$nebulaId = $this->uri->segment(2);
-			$nebula = $this->common_model->getNebulabyId($nebulaId);
-			$URL_SERVER = 	"https://".$nebula[0]['encoder_ip'];
-
+			$nebula = $this->common_model->getNebulabyId($nebulaId);	
+			$URL_SERVER = 	"https://".$nebula[0]['encoder_ip'];		
+			
 			$data = array();
-			$URL = $URL_SERVER."/login";
-			$ch1 = curl_init();
-			curl_setopt($ch1,CURLOPT_URL, $URL);
-			curl_setopt($ch1, CURLOPT_POST, 1);
-			curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
+			$URL = $URL_SERVER."/login";			
+			$ch1 = curl_init();	
+			curl_setopt($ch1,CURLOPT_URL, $URL);	
+			curl_setopt($ch1, CURLOPT_POST, 1);	
+			curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);	
 			curl_setopt($ch1,CURLOPT_POSTFIELDS, "login=".$nebula[0]['encoder_uname']."&password=".$nebula[0]['encoder_pass']."&api=1");
-			curl_setopt($ch1, CURLOPT_HTTPHEADER, array('Content-Type'=>'application/json'));
-
-			$result = curl_exec($ch1);
-			$jsonData = rtrim($result, "\0");
-			$resultarray = json_decode($jsonData,TRUE);
+			curl_setopt($ch1, CURLOPT_HTTPHEADER, array('Content-Type'=>'application/json'));			
+			
+			$result = curl_exec($ch1);						
+			$jsonData = rtrim($result, "\0");		
+			$resultarray = json_decode($jsonData,TRUE);						
 			curl_close($ch1);
-
+		
 			$settins = curl_init();
 			$fields = json_encode(array('session_id'=>$resultarray['session_id']));
 			curl_setopt_array($settins, array(
 			  CURLOPT_URL => $URL_SERVER."/api/settings",
 			  CURLOPT_RETURNTRANSFER => true,
 			  CURLOPT_ENCODING => "",
-			  CURLOPT_MAXREDIRS => 10,
+			  CURLOPT_MAXREDIRS => 10,			 
 			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			  CURLOPT_CUSTOMREQUEST => "POST",
 			  CURLOPT_POSTFIELDS =>$fields,
@@ -427,14 +427,14 @@ error_reporting(E_ALL);
 			$data['settings'] = $set;
 			$err = curl_error($settins);
 			curl_close($settins);
-
+		
 			$main = curl_init();
 			$fields = json_encode(array("object_type" =>'asset','id_view'=>1,'session_id'=>$resultarray['session_id']));
 			curl_setopt_array($main, array(
 			  CURLOPT_URL => $URL_SERVER."/api/get",
 			  CURLOPT_RETURNTRANSFER => true,
 			  CURLOPT_ENCODING => "",
-			  CURLOPT_MAXREDIRS => 10,
+			  CURLOPT_MAXREDIRS => 10,			 
 			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			  CURLOPT_CUSTOMREQUEST => "POST",
 			  CURLOPT_POSTFIELDS =>$fields,
@@ -451,15 +451,15 @@ error_reporting(E_ALL);
 			$data['main'] = $mainAssets;
 			$err = curl_error($main);
 			curl_close($main);
-
-
+			
+			
 			$fill = curl_init();
 			$fields = json_encode(array("object_type" =>'asset','id_view'=>2,'session_id'=>$resultarray['session_id']));
 			curl_setopt_array($fill, array(
 			  CURLOPT_URL => $URL_SERVER."/api/get",
 			  CURLOPT_RETURNTRANSFER => true,
 			  CURLOPT_ENCODING => "",
-			  CURLOPT_MAXREDIRS => 10,
+			  CURLOPT_MAXREDIRS => 10,			 
 			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			  CURLOPT_CUSTOMREQUEST => "POST",
 			  CURLOPT_POSTFIELDS =>$fields,
@@ -476,14 +476,14 @@ error_reporting(E_ALL);
 			$data['fill'] = $fillAssets;
 			$err = curl_error($fill);
 			curl_close($fill);
-
+			
 			$music = curl_init();
 			$fields = json_encode(array("object_type" =>'asset','id_view'=>3,'session_id'=>$resultarray['session_id']));
 			curl_setopt_array($music, array(
 			  CURLOPT_URL => $URL_SERVER."/api/get",
 			  CURLOPT_RETURNTRANSFER => true,
 			  CURLOPT_ENCODING => "",
-			  CURLOPT_MAXREDIRS => 10,
+			  CURLOPT_MAXREDIRS => 10,			 
 			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			  CURLOPT_CUSTOMREQUEST => "POST",
 			  CURLOPT_POSTFIELDS =>$fields,
@@ -500,14 +500,14 @@ error_reporting(E_ALL);
 			$data['music'] = $musicAssets;
 			$err = curl_error($music);
 			curl_close($music);
-
+			
 			$stories = curl_init();
 			$fields = json_encode(array("object_type" =>'asset','id_view'=>4,'session_id'=>$resultarray['session_id']));
 			curl_setopt_array($stories, array(
 			  CURLOPT_URL => $URL_SERVER."/api/get",
 			  CURLOPT_RETURNTRANSFER => true,
 			  CURLOPT_ENCODING => "",
-			  CURLOPT_MAXREDIRS => 10,
+			  CURLOPT_MAXREDIRS => 10,			 
 			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			  CURLOPT_CUSTOMREQUEST => "POST",
 			  CURLOPT_POSTFIELDS =>$fields,
@@ -524,14 +524,14 @@ error_reporting(E_ALL);
 			$data['story'] = $storyAssets;
 			$err = curl_error($stories);
 			curl_close($stories);
-
+			
 			$commercial = curl_init();
 			$fields = json_encode(array("object_type" =>'asset','id_view'=>5,'session_id'=>$resultarray['session_id']));
 			curl_setopt_array($commercial, array(
 			  CURLOPT_URL => $URL_SERVER."/api/get",
 			  CURLOPT_RETURNTRANSFER => true,
 			  CURLOPT_ENCODING => "",
-			  CURLOPT_MAXREDIRS => 10,
+			  CURLOPT_MAXREDIRS => 10,			 
 			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			  CURLOPT_CUSTOMREQUEST => "POST",
 			  CURLOPT_POSTFIELDS =>$fields,
@@ -547,16 +547,16 @@ error_reporting(E_ALL);
 			$commercialAssets = json_decode($commercialresponse,TRUE);
 			$data['commercial'] = $commercialAssets;
 			$err = curl_error($commercial);
-			curl_close($commercial);
-
-
+			curl_close($commercial);	
+			
+			
 			$incoming = curl_init();
 			$fields = json_encode(array("object_type" =>'asset','id_view'=>52,'session_id'=>$resultarray['session_id']));
 			curl_setopt_array($incoming, array(
 			  CURLOPT_URL => $URL_SERVER."/api/get",
 			  CURLOPT_RETURNTRANSFER => true,
 			  CURLOPT_ENCODING => "",
-			  CURLOPT_MAXREDIRS => 10,
+			  CURLOPT_MAXREDIRS => 10,			 
 			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			  CURLOPT_CUSTOMREQUEST => "POST",
 			  CURLOPT_POSTFIELDS =>$fields,
@@ -572,15 +572,15 @@ error_reporting(E_ALL);
 			$incomingAssets = json_decode($incomingresponse,TRUE);
 			$data['incoming'] = $incomingAssets;
 			$err = curl_error($incoming);
-			curl_close($incoming);
-
+			curl_close($incoming);	
+			
 			$archive = curl_init();
 			$fields = json_encode(array("object_type" =>'asset','id_view'=>51,'session_id'=>$resultarray['session_id']));
 			curl_setopt_array($archive, array(
 			  CURLOPT_URL => $URL_SERVER."/api/get",
 			  CURLOPT_RETURNTRANSFER => true,
 			  CURLOPT_ENCODING => "",
-			  CURLOPT_MAXREDIRS => 10,
+			  CURLOPT_MAXREDIRS => 10,			 
 			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			  CURLOPT_CUSTOMREQUEST => "POST",
 			  CURLOPT_POSTFIELDS =>$fields,
@@ -597,14 +597,14 @@ error_reporting(E_ALL);
 			$data['archive'] = $archiveAssets;
 			$err = curl_error($archive);
 			curl_close($archive);
-
+			
 			$trash = curl_init();
 			$fields = json_encode(array("object_type" =>'asset','id_view'=>50,'session_id'=>$resultarray['session_id']));
 			curl_setopt_array($trash, array(
 			  CURLOPT_URL => $URL_SERVER."/api/get",
 			  CURLOPT_RETURNTRANSFER => true,
 			  CURLOPT_ENCODING => "",
-			  CURLOPT_MAXREDIRS => 10,
+			  CURLOPT_MAXREDIRS => 10,			 
 			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			  CURLOPT_CUSTOMREQUEST => "POST",
 			  CURLOPT_POSTFIELDS =>$fields,
@@ -620,8 +620,8 @@ error_reporting(E_ALL);
 			$trashAssets = json_decode($trashresponse,TRUE);
 			$data['trash'] = $trashAssets;
 			$err = curl_error($trash);
-			curl_close($trash);
-
+			curl_close($trash);	
+			
 			$this->load->view('admin/header');
 			$this->load->view('admin/assets',$data);
 			$this->load->view('admin/footer');
@@ -635,16 +635,15 @@ error_reporting(E_ALL);
 			elseif($userdata['user_type'] == 2 || $userdata['user_type'] == 3){
 				$group_id = $userdata['group_id'];	
 				if($group_id != NULL && $group_id >0)
-				{
-					$nebulas = $this->common_model->getNebula($group_id);
+				{					
+					$nebulas = $this->common_model->getNebula($group_id);					
 					$nebulaids = array();
 					if (sizeof($nebulas)>0) {
 						foreach ($nebulas as $nebula) {
 							array_push($nebulaids,$nebula['id']);
 						}
-					}
-					
-					if (sizeof($nebulaids)>0) {
+					}					
+					if (sizeof($nebulaids)>0) {						
 						$data['rundowns'] = $this->common_model->getAllRundownsByIds($nebulaids);
 					}
  					else {
@@ -735,7 +734,7 @@ error_reporting(E_ALL);
 		public function workflowlist(){
 			$data = array();
 			$userdata = $this->session->userdata('user_data');
-
+			
 			$this->load->view('admin/header');
 			$this->load->view('admin/workflowlist',$data);
 			$this->load->view('admin/footer');
@@ -929,7 +928,7 @@ error_reporting(E_ALL);
 			$this->load->view('admin/header');
 			$this->load->view('admin/schedule',$data);
 			$this->load->view('admin/footer');
-		}
+		}	
 		/* Bank Lock */
 		public function lockUnlockBank()
 		{
@@ -2760,7 +2759,7 @@ error_reporting(E_ALL);
 				$fields = array(
 					"grant_type"=>"authorization_code",
 					"code"=>$_GET['code'],
-					"redirect_uri"=>"https://iohub.tv/periscope",
+					"redirect_uri"=>"https://dev.iohub.tv/periscope",
 					"client_id"=>"Tr5fxCa7x62pZrhe50b3Oy_iGoSrn02KcclRRH20rHteUdD8L2",
 					"client_secret"=>"8PyUSMT1LuliGFBVAUZFZaUXO5Mzw8-mZGxslimam6M1V2u187"
 				);
@@ -2793,7 +2792,7 @@ error_reporting(E_ALL);
 			try {
 			$fbToken = $this->session->userdata('fb_token');
 			$fbdd = $this->session->userdata('fbUser');
-			define('APP_URL', 'https://iohub.tv/admin/fb');
+			define('APP_URL', 'https://dev.iohub.tv/admin/fb');
 			$facebookArray = array('app_id' => '201130880631964', 'app_secret' => '49e984459f5d67695b85b443dc879d82',  'default_graph_version' => 'v2.6');
 
 			$fb = new Facebook\Facebook($facebookArray);
@@ -2865,7 +2864,7 @@ error_reporting(E_ALL);
 
 			$URLlink = $_GET['URL'];
 			//echo $URLlink;
-			$URL = "http://iohub.tv:19999".$URLlink;
+			$URL = "http://northwaves.net:19999".$URLlink;
 
 			//echo $URL;
 			$curl = curl_init($URL);
@@ -4432,6 +4431,8 @@ error_reporting(E_ALL);
 
 			}
 			$data['channelsLock'] = $channelsLocks;
+			$data['channelTabs'] = $this->common_model->getChannelGroups($userdata['userid']);
+			$data['channelGroupMapping'] = $this->common_model->getChannelGroupMapping($userdata['userid']);
 
 			$this->load->view('admin/header');
 			$this->load->view('admin/channels',$data);
@@ -4474,6 +4475,7 @@ error_reporting(E_ALL);
 					$data['encoders'] = $this->Groupadmin_model->getAllOnlineEncodersbyUserIdAndGroupId($userdata['userid'],$userdata['group_id']);
 					$data['profiles'] = $this->Groupadmin_model->getEncoderProfilesByUseridAndGroupId($userdata['userid'],$userdata['group_id']);
 				}
+				$data['channelgroups'] = $this->common_model->getChannelGroups($userdata['userid']);
 				$this->load->view('admin/header');
 				$this->load->view('admin/createchannels',$data);
 				$this->load->view('admin/footer');
@@ -4516,7 +4518,10 @@ error_reporting(E_ALL);
 					$data['channels'] = $this->common_model->getChannelbyId($id);
 			}
 
-
+			$data['channelgroups'] = $this->common_model->getChannelGroups($userdata['userid']);
+			$data['ugroup'] = $userdata['group_id'];
+			//echo $userdata['group_id'].'__'.$userdata['userid'];
+			$data['channelMapping'] = $this->common_model->getChannelGroupMapping($userdata['userid']);
 			$this->load->view('admin/header');
 			$this->load->view('admin/updatechannel',$data);
 			$this->load->view('admin/footer');
@@ -4708,6 +4713,14 @@ error_reporting(E_ALL);
 				$id = $this->common_model->insertChannels($chennelData);
 				if($id > 0)
 				{
+					if ($cleanData['channelGroup'] > 0) {
+						$grpupData = array(
+							'channelId'=>$id,
+							'groupid'=>$cleanData['channelGroup'],
+							'uid'=>$userdata['userid']
+						);
+						$this->common_model->insertChannelGroupMapping($grpupData);
+					}
 						if($cleanData['enablechannelSchedule'] != "")
 						{
 
@@ -5019,8 +5032,23 @@ error_reporting(E_ALL);
 	                	'recording_presets'=>$cleanData['recording_encoding_profile'],
 	                	'is_record_channel'=>$record_channel
 					);
-
+					
 					$id = $this->common_model->updateChannels($chennelData,$cid);
+					if ($cleanData['channelGroup'] > 0) {
+						$grpupData = array(
+						'channelId'=>$cid,
+						'groupid'=>$cleanData['channelGroup'],
+						'uid'=>$userdata['userid']
+						);
+						$isExistingTab = $this->common_model->getChannelIdsbyMappingChannelId($userdata['userid'],$cid);
+						if (sizeof($isExistingTab)>0) {
+							$this->common_model->updateChannelGroupMapping($grpupData,$isExistingTab[0]['id']);
+						}
+						else {
+							$this->common_model->insertChannelGroupMapping($grpupData);
+						}
+						
+					}
 					if($id >= 0)
 					{
 						$this->session->set_flashdata('message_type', 'success');
@@ -6001,11 +6029,11 @@ error_reporting(E_ALL);
 			//$OAUTH2_CLIENT_ID = '96664961069-u28cbpg3rn590g43l9jbl8fu3ma1uk41.apps.googleusercontent.com';
 
 			//$OAUTH2_CLIENT_SECRET = 'sjjaq7BxcjKLrQ1Pv4ISpPuj';
-
+			
 			$OAUTH2_CLIENT_ID = '96664961069-6vfdv1nhpsi1e8f5t07iub8pfih07d9a.apps.googleusercontent.com';
 
 			$OAUTH2_CLIENT_SECRET = 'OOAaZYighw0dVtg0_BnuYG_W';
-
+			
 			$client = new Google_Client();
 			$client->setClientId($OAUTH2_CLIENT_ID);
 			$client->setClientSecret($OAUTH2_CLIENT_SECRET);
@@ -6221,12 +6249,12 @@ error_reporting(E_ALL);
 								$stopname = "Target_Stop_".$processname.".sh";
 								$ssh->exec("touch /home/ksm/scheduler/".$startname);
 								$ssh->exec("chmod +x /home/ksm/scheduler/".$startname);
-								$ssh->exec('echo "curl -H  \'Content-Type: application/json\'  --data \'{\"process\":\"'.$processname.'\"}\'  https://iohub.tv/api/startTarget >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$startname);
+								$ssh->exec('echo "curl -H  \'Content-Type: application/json\'  --data \'{\"process\":\"'.$processname.'\"}\'  https://dev.iohub.tv/api/startTarget >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$startname);
 								$ssh->exec('echo "echo \"\n----------------------------------------------\n\" >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$startname);
 
 								$ssh->exec("touch /home/ksm/scheduler/".$stopname);
 								$ssh->exec("chmod +x /home/ksm/scheduler/".$stopname);
-								$ssh->exec('echo "curl -H  \'Content-Type: application/json\'  --data \'{\"process\":\"'.$processname.'\"}\'  https://iohub.tv/api/StopTarget >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$stopname);
+								$ssh->exec('echo "curl -H  \'Content-Type: application/json\'  --data \'{\"process\":\"'.$processname.'\"}\'  https://dev.iohub.tv/api/StopTarget >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$stopname);
 								$ssh->exec('echo "echo \"\n----------------------------------------------\n\" >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$stopname);
 								$ssh->exec('(crontab -l; echo "'.$starttime["m"].' '.$starttime["h"].' '.$starttime["day"].' '.$starttime["month"].' * /home/ksm/scheduler/'.$startname.'") | crontab -');
 								$ssh->exec('(crontab -l; echo "'.$stoptime["m"].' '.$stoptime["h"].' '.$stoptime["day"].' '.$stoptime["month"].' * /home/ksm/scheduler/'.$stopname.'") | crontab -');
@@ -6290,7 +6318,7 @@ error_reporting(E_ALL);
 		{
 			$this->session->set_userdata('socialLogin', "twitch");
 
-			header("Location: https://api.twitch.tv/kraken/oauth2/authorize?client_id=kz30uug3w8b73asx3qe2q1yt98al5r&redirect_uri=https://iohub.tv/twitchcasting&response_type=code&scope=channel_read+channel_editor");
+			header("Location: https://api.twitch.tv/kraken/oauth2/authorize?client_id=kz30uug3w8b73asx3qe2q1yt98al5r&redirect_uri=https://dev.iohub.tv/twitchcasting&response_type=code&scope=channel_read+channel_editor");
 
 
 		}
@@ -6304,7 +6332,7 @@ error_reporting(E_ALL);
 					"client_secret"=>"fpsw6urwwko7lkrwtdu5jyulm0zrpi",
 					"code"=>$_GET['code'],
 					"grant_type"=>"authorization_code",
-					"redirect_uri"=>"https://iohub.tv/twitchcasting",
+					"redirect_uri"=>"https://dev.iohub.tv/twitchcasting",
 					"scope"=>"channel_editor"
 				);
 				$ch = curl_init();
@@ -6347,7 +6375,7 @@ error_reporting(E_ALL);
 		public function twitter()
 		{
 			$this->session->set_userdata('socialLogin', "twitter");
-			header("Location: https://www.pscp.tv/oauth?client_id=Tr5fxCa7x62pZrhe50b3Oy_iGoSrn02KcclRRH20rHteUdD8L2&redirect_uri=https://iohub.tv/periscope");
+			header("Location: https://www.pscp.tv/oauth?client_id=Tr5fxCa7x62pZrhe50b3Oy_iGoSrn02KcclRRH20rHteUdD8L2&redirect_uri=https://dev.iohub.tv/periscope");
 		}
 		public function wowzacdn()
 		{
@@ -6389,7 +6417,7 @@ error_reporting(E_ALL);
 		public function facebookLogout()
 		{
 			$fbToken = $this->session->userdata('fb_token');
-			$url = 'https://www.facebook.com/logout.php?next=https://iohub.tv/admin/createtarget&access_token='.$fbToken;
+			$url = 'https://www.facebook.com/logout.php?next=https://dev.iohub.tv/admin/createtarget&access_token='.$fbToken;
 			$this->session->unset_userdata('fb_token');
 			$this->session->unset_userdata('rtmpData');
 			$this->session->unset_userdata('fbUser');
@@ -6406,7 +6434,7 @@ error_reporting(E_ALL);
 				$this->session->set_userdata('act',$act.'_'.$id);
 			}
 
-			define('APP_URL', 'https://iohub.tv/admin/fb');
+			define('APP_URL', 'https://dev.iohub.tv/admin/fb');
 			$facebookArray = array('app_id' => '201130880631964', 'app_secret' => '49e984459f5d67695b85b443dc879d82',  'default_graph_version' => 'v2.6');
 
 
@@ -6422,7 +6450,7 @@ error_reporting(E_ALL);
 					$accessToken = $fbToken;
 				} else {
 			  		//$accessToken = $helper->getAccessToken();
-			  		$accessToken = $helper->getAccessToken('https://iohub.tv/admin/fb');
+			  		$accessToken = $helper->getAccessToken('https://dev.iohub.tv/admin/fb');
 				}
 			} catch(Facebook\Exceptions\FacebookSDKException $e) {
 			 	$this->session->set_flashdata('message_type', 'error');
@@ -6994,10 +7022,10 @@ error_reporting(E_ALL);
 			$wowza = $this->common_model->getWovzData($application[0]['live_source']);
 
 			$url = 'http://'.$wowza[0]['ip_address'].':'.$wowza[0]['rest_api_port'].'/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/'.$application[0]['application_name'].'/pushpublish/mapentries';
-
+		
 			//echo $url;
 			$xmlData = file_get_contents($url);
-
+			
 			$xml = simplexml_load_string($xmlData);
 			//echo $xml;
 			$MapEntries = json_encode($xml);
@@ -8319,7 +8347,7 @@ error_reporting(E_ALL);
 							if(array_key_exists('fbuserid',$cleanData) && array_key_exists('fbusername',$cleanData) && array_key_exists('timelines',$cleanData))
 							{
 								$createLiveVideo = array();
-								define('APP_URL', 'https://iohub.tv/admin/fb');
+								define('APP_URL', 'https://dev.iohub.tv/admin/fb');
 								$fbToken = $this->session->userdata('fb_token');
 								$fbcode = $this->session->userdata('fb_code');
 								if($cleanData['timelines'] == "page")
@@ -8960,12 +8988,12 @@ $xmlll ='<PushPublishStream serverName="_defaultServer_">
 
 								$ssh->exec("touch /home/ksm/scheduler/".$startname);
 								$ssh->exec("chmod +x /home/ksm/scheduler/".$startname);
-								$ssh->exec('echo "curl -H  \'Content-Type: application/json\'  --data \'{\"process\":\"'.$processname.'\"}\'  https://iohub.tv/api/startTarget >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$startname);
+								$ssh->exec('echo "curl -H  \'Content-Type: application/json\'  --data \'{\"process\":\"'.$processname.'\"}\'  https://dev.iohub.tv/api/startTarget >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$startname);
 								$ssh->exec('echo "echo \"\n----------------------------------------------\n\" >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$startname);
 
 								$ssh->exec("touch /home/ksm/scheduler/".$stopname);
 								$ssh->exec("chmod +x /home/ksm/scheduler/".$stopname);
-								$ssh->exec('echo "curl -H  \'Content-Type: application/json\'  --data \'{\"process\":\"'.$processname.'\"}\'  https://iohub.tv/api/StopTarget >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$stopname);
+								$ssh->exec('echo "curl -H  \'Content-Type: application/json\'  --data \'{\"process\":\"'.$processname.'\"}\'  https://dev.iohub.tv/api/StopTarget >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$stopname);
 								$ssh->exec('echo "echo \"\n----------------------------------------------\n\" >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$stopname);
 
 								$ssh->exec('(crontab -l; echo "'.$starttime["m"].' '.$starttime["h"].' '.$starttime["day"].' '.$starttime["month"].' * /home/ksm/scheduler/'.$startname.'") | crontab -');

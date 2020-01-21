@@ -8684,7 +8684,7 @@ $(document).ready(function(){
    		$('.alert').fadeOut('slow');
 	}, 5000);
 	/* Create Chanell Page Things Start */
-	if(Action != "updatechannel")
+	if(Action != "updatechannel" && Action != "editiotstream")
 	{
 		$('.hls,.audioch,.ndi,.ips,.rtmp,.mpeg-rtp,.mpeg-udp,.mpeg-srt,.ch-applications,.ndi-name,.out-rtmp-url,.out-rtmp-key,.ch-uname,.ch-pass,.out-mpeg-rpt,.out-mpeg-udp,.out-mpeg-srt').hide();
 		$('.ch-profile').hide();
@@ -8965,7 +8965,7 @@ $(document).ready(function(){
 
 
 										$('#channel_ndi_source').html(NDISources);
-										//$('#channel_ndi_source').selectpicker('refresh');
+										$('#channel_ndi_source').selectpicker('refresh');
 										$("#find_NDISources").find('img').remove();
 										$("#find_NDISources").html("<i class='fa fa-refresh'></i>");
 										$("a.remote > span.text").html(function(i,val){
