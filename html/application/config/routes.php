@@ -116,3 +116,5 @@ $route['editrundown/:num'] = 'nebula/editrundown/:num';
 $route['temp'] = 'nebula/temp';
 $route['iotstream'] = 'extras/iotstream';
 $route['createIoTStream'] = 'extras/createIoTStream';
+$route['editiotstream/:num'] = 'extras/editiotstream/:num';
+
