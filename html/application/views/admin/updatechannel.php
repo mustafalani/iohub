@@ -875,6 +875,42 @@
                                     </select>
                                 </div>
                             </div>
+							<div class="form-group col-lg-11">
+								<div class="row">
+									<label> Channel Groups</label>
+									<?php
+										$array = array();
+										if (sizeof($channelMapping)>0) {
+											foreach ($channelMapping as $map) {
+												if (!array_key_exists($map['groupid'],$array)) {
+													$array[$map['groupid']] = array();
+												}
+												array_push($array[$map['groupid']],$map['channelId']);
+											}
+										}
+													
+									?>
+									<select class="form-control selectpicker" name="channelGroup" id="channelGroup">
+										<option value="0">- Select Group -</option>
+										<?php
+										
+															
+							if (sizeof($channelgroups)>0) {
+										foreach ($channelgroups as $grp) {
+											if (in_array($channels[0]['id'],$array[$grp['id']])) {
+												echo '<option selected="selected" value="'.$grp['id'].'">'.$grp['groupname'].'</option>';
+											}
+ 											else {
+												echo '<option value="'.$grp['id'].'">'.$grp['groupname'].'</option>';
+											}
+										 
+									
+								}
+							}
+							?>
+									</select>
+								</div>
+							</div>
                         </div>
 						<div class="col-lg-6 p-t-15">
 							<br/>

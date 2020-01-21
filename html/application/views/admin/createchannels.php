@@ -465,6 +465,21 @@ div.dropdown-menu li.picker-switch > a:hover, .dropdown-menu li.picker-switch > 
                                     </select>
                                 </div>
                             </div>
+								<div class="form-group col-lg-11">
+									<div class="row">
+										<label> Channel Groups</label>
+										<select class="form-control selectpicker" name="channelGroup" id="channelGroup">
+											<option value="0">- Select Group -</option>
+											<?php
+											if (sizeof($channelgroups)>0) {
+															foreach ($channelgroups as $grp) {
+																echo '<option value="'.$grp['id'].'">'.$grp['groupname'].'</option>';
+											}
+											}
+											?>
+										</select>
+									</div>
+								</div>
 						 </div>
                     </div>
                                 </div>

@@ -1337,7 +1337,7 @@ $(document).on('click','.chnlGrp_delete',function() {
 		clickFunctionList: [
 			function() {
 				$.ajax({
-					url: baseURL + 'nebula/deletechannelgroup',
+					url: baseURL + 'diverse/deletechannelgroup',
 					data:{'groupname':grpname,'action':'deletegroup'},
 					type:'post',
 					dataType:'json',
@@ -1360,7 +1360,7 @@ $(document).on('click','.chnlGrp_delete',function() {
 			},
 			function() {
 				$.ajax({
-					url: baseURL + 'nebula/deletechannelgroup',
+					url: baseURL + 'diverse/deletechannelgroup',
 					data:{'groupname':grpname ,'action':'deletegroupandchannel'},
 					type:'post',
 					dataType:'json',
