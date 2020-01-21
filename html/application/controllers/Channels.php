@@ -86,6 +86,53 @@ class Channels extends REST_Controller {
 		}
 		echo json_encode($response);
 	}
+	public function streamupdate_uptime_post()
+	{
+		$cleanData = json_decode(file_get_contents('php://input'),TRUE);
+		//echo($cleanData);
+		if (!empty($cleanData['channelId'])) {
+			$data = array(
+			'uptime'=>$cleanData['uptime']
+			);
+			$channel = $this->common_model->getStreambyProcessName($cleanData['channelId']);
+			if (sizeof($channel)>0) {
+				$isUpdated = $this->common_model->updateStreamByChannelId($data,$cleanData['channelId']);
+				if ($isUpdated > 0) {
+					echo "Stream Time Updated Successfully!";
+				} else {
+					echo "Stream Time Not Updated!";
+				}
+			} else {
+				echo "wrong channel ID-".$cleanData['channelId'];
+			}
+
+		} else {
+			echo "Channel Id Null";
+		}
+	}
+	public function updatestream_post()
+	{
+		$cleanData = json_decode(file_get_contents('php://input'),TRUE);
+		if (!empty($cleanData['channelId'])) {
+			$data = array(
+			'channel_status'=>$cleanData['status']
+			);
+			$channel = $this->common_model->getStreambyProcessName($cleanData['channelId']);
+			if (sizeof($channel)>0) {
+				$isUpdated = $this->common_model->updateStreamByChannelId($data,$cleanData['channelId']);
+				if ($isUpdated > 0) {
+					echo "Status Updated Successfully for ".$cleanData['channelId'];
+				} else {
+					echo "Status has already been updated for ".$cleanData['channelId'];
+				}
+			} else {
+				echo "wrong channel ID-".$cleanData['channelId'];
+			}
+
+		} else {
+			echo "Channel Id Null";
+		}
+	}
     public function update_uptime_post()
     {
 		$cleanData = json_decode(file_get_contents('php://input'),TRUE);
