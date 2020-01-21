@@ -11,6 +11,87 @@ class Common_model extends CI_Model {
         $this->status = $this->config->item('status');
         $this->roles = $this->config->item('roles');
     }
+    function getChannelGroupMappingByGroupId($gid)
+	{
+		$this->db->select('ks_channel_group_mapping.*');
+		$this->db->from('ks_channel_group_mapping');
+		$this->db->where('groupid',$gid);
+		$code = $this->db->error();
+		if ($code['code'] > 0) {
+			show_error('Message');
+		}
+		return $this->db->get()->result_array();
+	}	
+	function deleteIoTStream($id){
+	   $this->db->where('id', $id);	
+       $this->db->delete('ks_iotstreams');
+       $code = $this->db->error(); if($code['code'] > 0)
+	   {	      	
+		  show_error('Message');
+	   }
+       return $this->db->affected_rows();
+	}
+    function deleteChannelGroupMapping($gid){
+       $this->db->where('groupid', $gid);	
+       $this->db->delete('ks_channel_group_mapping');
+       $code = $this->db->error(); if($code['code'] > 0)
+	   {	      	
+		  show_error('Message');
+	   }
+       return $this->db->affected_rows();
+    }
+    function deleteChannelGroup($gid){
+       $this->db->where('id', $gid);	
+       $this->db->delete('ks_channel_groups');
+       $code = $this->db->error(); if($code['code'] > 0)
+	   {	      	
+		  show_error('Message');
+	   }
+       return $this->db->affected_rows();
+    }
+    function getChannelIdsbyMappingChannelId($uid,$channelid){
+		$this->db->select('ks_channel_group_mapping.channelId,ks_channel_group_mapping.id');
+		$this->db->from('ks_channel_group_mapping');
+		$this->db->where(array('uid'=>$uid,'channelId'=>$channelid));
+		$code = $this->db->error();
+		if ($code['code'] > 0) {
+			show_error('Message');
+		}
+		return $this->db->get()->result_array();
+    }
+	function getChannelIdsbyMappingGroupId($gid, $uid)
+	{
+		$this->db->select('ks_channel_group_mapping.channelId');
+		$this->db->from('ks_channel_group_mapping');
+		$this->db->where(array('uid'=>$uid,'groupid'=>$gid));
+		$code = $this->db->error();
+		if ($code['code'] > 0) {
+			show_error('Message');
+		}
+		return $this->db->get()->result_array();
+	}
+	function getChannelGroupMapping($uid)
+	{
+		$this->db->select('ks_channel_group_mapping.*');
+		$this->db->from('ks_channel_group_mapping');
+		$this->db->where('uid',$uid);
+		$code = $this->db->error();
+		if ($code['code'] > 0) {
+			show_error('Message');
+		}
+		return $this->db->get()->result_array();
+	}
+	function getChannelGroups($uid){
+		
+		$this->db->select('ks_channel_groups.*');
+		$this->db->from('ks_channel_groups');
+		$this->db->where('uid',$uid);
+		$code = $this->db->error();
+		if ($code['code'] > 0) {
+			show_error('Message');
+		}
+		return $this->db->get()->result_array();
+	}
     function getWrokflowbyId($wid)
     {
 	   $this->db->select('ks_workflow.*');
@@ -356,6 +437,17 @@ class Common_model extends CI_Model {
 	   }
        return $this->db->get()->result_array();
 	}
+	function getStreambyProcessName($processname)
+	{
+		$this->db->select('ks_iotstreams.*');
+		$this->db->from('ks_iotstreams');
+		$this->db->where('process_name',$processname);
+		$code = $this->db->error();
+		if ($code['code'] > 0) {
+			show_error('Message');
+		}
+		return $this->db->get()->result_array();
+	}
 	function getAllChannelsByUserids($id)
     {
 	   $this->db->select('ks_channels.*');
@@ -474,6 +566,7 @@ class Common_model extends CI_Model {
 	   }
        return $this->db->get()->result_array();
 	}
+	
 	function getAllIoTStreams($id)
 	{
 		$this->db->select('ks_iotstreams.*');
@@ -752,6 +845,16 @@ class Common_model extends CI_Model {
 	   }
         return $this->db->affected_rows(); 
 	}
+	public function updateIoTStreamById($data, $id)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('ks_iotstreams', $data);
+		$code = $this->db->error();
+		if ($code['code'] > 0) {
+			show_error('Message');
+		}
+		return $this->db->affected_rows();
+	}
 	public function updateIoTStreamByStreamId($data, $id)
 	{
 		$this->db->where('process_name', $id);
@@ -771,6 +874,16 @@ class Common_model extends CI_Model {
 		  show_error('Message');
 	   }
         return $this->db->affected_rows(); 
+	}
+	public function updateStreamByChannelId($data, $id)
+	{
+		$this->db->where('process_name', $id);
+		$this->db->update('ks_iotstreams', $data);
+		$code = $this->db->error();
+		if ($code['code'] > 0) {
+			show_error('Message');
+		}
+		return $this->db->affected_rows();
 	}
 	function updateTemplate($data,$id)
 	{
@@ -6969,6 +7082,28 @@ where iccr_status_mapping.status IN(13,14,-14) and tt.university_is_accept=1 and
 		  show_error('Message');
 	   }
        return $this->db->affected_rows();
+	}
+	function insertChannelGroups($channelgrop)
+	{
+		$q = $this->db->insert_string('ks_channel_groups',$channelgrop);
+		$this->db->query($q);
+		return $this->db->insert_id();
+	}
+	function insertChannelGroupMapping($channelgrop)
+	{
+		$q = $this->db->insert_string('ks_channel_group_mapping',$channelgrop);
+		$this->db->query($q);
+		return $this->db->insert_id();
+	}
+	public function updateChannelGroupMapping($data, $id)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('ks_channel_group_mapping', $data);
+		$code = $this->db->error();
+		if ($code['code'] > 0) {
+			show_error('Message');
+		}
+		return $this->db->affected_rows();
 	}
 } 
 ?>
