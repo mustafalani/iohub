@@ -54,6 +54,41 @@
 			redirect(site_url() . 'home');
 		}
 	}
+	public function deletechannelgroup(){
+		$response = array('status'=>FALSE);
+		$cleanData = $this->security->xss_clean($this->input->post(NULL, TRUE));
+		$action = $cleanData['action'];
+		$groupId = $cleanData['groupname'];		
+		if($action == "deletegroupandchannel"){
+			$channelGroups = $this->common_model->getChannelGroupMappingByGroupId($groupId);
+			if(sizeof($channelGroups)>0){
+				foreach($channelGroups as $chanelgroup){
+					$channelId = $chanelgroup['channelId'];
+					$this->common_model->deleteChannel($channelId);
+				}
+			}
+		}
+		$this->common_model->deleteChannelGroupMapping($groupId);
+		$this->common_model->deleteChannelGroup($groupId);
+		$response['status'] = TRUE;
+		echo json_encode($response);
+	}	
+	public function savechannelgroup(){
+		$nebulas = array();$response = array('status'=>FALSE);
+		$userdata = $this->session->userdata('user_data');		
+		$cleanData = $this->security->xss_clean($this->input->post(NULL, TRUE));
+		$data = array(
+			'groupname'=>$cleanData['groupname'],
+			'uid'=>$userdata['userid'],
+			'status'=>1,
+			'created_at'=>time()	
+		);
+		$id = $this->common_model->insertChannelGroups($data);
+		if ($id>0) {
+			$response['status'] = TRUE;
+			echo json_encode($response);
+		}
+	}
 	public function jobs()
 	{
 		$nebulas = array();
@@ -72,6 +107,7 @@
 		$returnResponse['failed_jobs']['data'] = array();
 		if (sizeof($nebulas)>0) {			
 			foreach ($nebulas as $nebula) {
+				//echo base64_encode($nebula['encoder_uname'].':'.$nebula['encoder_pass']);
 				//$returnResponse['active_jobs']['encoder_name'] = $nebula['encoder_name'];
 				//$returnResponse['finished_jobs']['encoder_name'] = $nebula['encoder_name'];
 				//$returnResponse['failed_jobs']['encoder_name'] = $nebula['encoder_name'];
@@ -84,7 +120,7 @@
 				curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
 				curl_setopt($ch1,CURLOPT_POSTFIELDS, "login=".$nebula['encoder_uname']."&password=".$nebula['encoder_pass']."&api=1");
 				curl_setopt($ch1, CURLOPT_HTTPHEADER, array('Content-Type'=>'application/json'));
-
+				
 				$result = curl_exec($ch1);
 				$jsonData = rtrim($result, "\0");
 				$resultarray = json_decode($jsonData,TRUE);				
@@ -111,8 +147,7 @@
 				$allactiveJobs = curl_exec($activejobs);			
 				$activejobs_data = json_decode($allactiveJobs,TRUE);	
 				$err = curl_error($activejobs);
-				curl_close($activejobs);
-				
+				curl_close($activejobs);				
 				$finishedjobs = curl_init();
 				$fields = json_encode(array("object_type" =>'jobs','view'=>'finished','session_id'=>$resultarray['session_id']));
 				curl_setopt_array($finishedjobs, array(
@@ -898,7 +933,7 @@
 		$rundown['engine_type'] = $endingids[0];
 		$rundown['status'] = 0;
 		$rundown['created_at'] = time();
-		$rundown['updated_at'] = time();		
+		$rundown['updated_at'] = time();
 		$id = $this->common_model->insertRundown($rundown);
 		if($id > 0)
 		{

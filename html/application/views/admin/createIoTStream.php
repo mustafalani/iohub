@@ -12,7 +12,7 @@
         <li class="breadcrumb-item">
           <a href="#">Home</a>
         </li>
-        <li class="breadcrumb-item active"><a href="<?php echo site_url();?>extras">Extras</a></li>
+        <li class="breadcrumb-item active"><a href="<?php echo site_url();?>extra">Extras</a></li>
         <li class="breadcrumb-item active">Create IoT Stream</li>
       </ol>
       <div class="container-fluid">
@@ -50,7 +50,7 @@
 									<div class="col-lg-4">
 										<div class="form-group">
 											<label>Name <span class="mndtry">*</span></label>
-												<input type="text" pattern="[a-zA-Z ]+" title="[a-zA-Z ]+"  class="form-control" placeholder="First Name" name="stream_name" id="stream_name" required="true"/>
+												<input type="text"  class="form-control" placeholder="First Name" name="stream_name" id="stream_name" required="true"/>
 										</div>
 										<div class="form-group">
 											<label>Encoders <span class="mndtry">*</span></label>

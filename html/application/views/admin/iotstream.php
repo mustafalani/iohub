@@ -67,16 +67,13 @@
 														<div class="box-header">
 															<!-- Single button -->
 															<div class="btn-group">
-
-																<select class="form-control actionsel" id="actionChannels">
+																<select class="form-control actionsel" id="actionIotStreams">
 																	<option value="0">Action</option>
-																	<option value ="Archive">Archive</option>
 																	<option value="Delete">Delete</option>
 																</select>
-
 															</div>
 															<!-- Standard button -->
-															<button type="button" class="btn btn-primary submit" onclick="submitChannels();">Submit</button>
+															<button type="button" class="btn btn-primary submit" onclick="submitIoTStream();">Submit</button>
 															<a href="<?php echo site_url(); ?>createIoTStream" class="add-btn btn btn-primary float-right">
 																<span>
 																	<i class="fa fa-plus"></i> IoT Stream</span>
@@ -84,7 +81,7 @@
 														</div>
 														<br/>
 														<div class="table-responsive no-padding">
-															<table  class="table table-hover check-input cstmtable channeltable channelTable">
+															<table  class="table table-hover check-input cstmtable channeltable iotStreamTable">
 																<tr>
 																	<th width="60px">
 																		<div class="boxes">
@@ -109,13 +106,13 @@
 																<tr id="row_<?php echo $stream['id']; ?>">
 																<td>
 																	<div class="boxes">
-																		<input type="checkbox" id="channel_<?php echo $stream['id']; ?>" class="channelActions">
+																		<input type="checkbox" id="channel_<?php echo $stream['id']; ?>" class="IoTStreamActions">
 																		<label for="channel_<?php echo $stream['id']; ?>"></label>
 																	</div>
 																</td>
 																<td><?php echo $counter; ?></td>
 																<td>
-																	<a class="channels_status" onclick="openEditPage('<?php echo site_url(); ?>updatechannel/<?php echo $stream['id']; ?>',this);" href="javascript:void(0);"><?php echo $stream['channel_name']; ?></a></td>
+																	<a  href="<?php echo site_url(); ?>editiotstream/<?php echo $stream['id']; ?>"><?php echo $stream['channel_name']; ?></a></td>
 																	<td>
 																	<?php
 																		$id = $stream['encoder_id'];
@@ -236,7 +233,7 @@
 																	?>
 																	</td>
 																	<td>
-																		<a data-container="body" data-toggle="tooltip" title="Delete" data-placement="bottom" data-html="true" id="ss_<?php echo $stream['id']; ?>"  class="iotstreamsstartstopDelete" href="javascript:void(0);">
+																		<a data-container="body" data-toggle="tooltip" title="Delete" data-placement="bottom" data-html="true" id="ss_<?php echo $stream['id']; ?>"  class="iotstreamsstartstopDelete" accesskey="<?php echo $stream['id']; ?>" href="javascript:void(0);">
 																			<i class="fa fa-trash"></i></a>
 																			</td>
 																</tr>

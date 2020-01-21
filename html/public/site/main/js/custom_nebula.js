@@ -819,7 +819,7 @@ $(document).on('click','.btnSaveRundownList',function(){
 	var stime = stimes.substring(0, stimes.length - 1);
 	$.ajax({
         url: baseURL + "nebula/saveRundownList",
-        data:{'rundownid':pathArray[2],'clipids':cids,'loops':lps,'paths':pthss,'stime':stime},
+        data:{'rundownid':pathArray[3],'clipids':cids,'loops':lps,'paths':pthss,'stime':stime},
         type:'post',
         dataType:'json',
         success:function(jsonResponse){
@@ -1265,3 +1265,198 @@ $(document).on('click','.iotstreamsstartstop',function() {
 		});
 	});
 });
+$(document).on('click','.createChannelGroup',function() {
+	$('#create_channel_group').modal('show');	
+});
+$(document).on('click','.saveChannelGroupName',function() {
+	var grpname = $('#ch_grpup_name').val();
+	$.ajax({
+		url: baseURL + 'nebula/savechannelgroup',
+		data:{'groupname':grpname},
+		type:'post',
+		dataType:'json',
+		success:function(jsonResponse) {
+			if (jsonResponse.status == true) {
+				$('<li class="nav-item" role="presentation"><a class="nav-link active" href="javascript:void(0);" aria-controls="channels" role="tab" data-toggle="tab">'+ grpname +'</a></li>').insertBefore('.channeltabs li:last');
+				$('#create_channel_group').modal('hide');
+				$('#ch_grpup_name').val("");
+			}
+			if (jsonResponse.status == false) {
+				toastr['error']("Error occured while creating group!");
+			}
+		},
+		error:function() {
+			toastr['error']("Error occured while performing actions!");
+
+		}
+	});
+});
+
+$(document).on('click','.iotstreamsstartstopDelete',function(){
+	var iostreamid = $(this).attr('accesskey');
+	swal({
+		title: "Are you sure?",
+		text: "You want to delete this!",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonClass: "btn-danger",
+		confirmButtonText: "Yes delete it!",
+		closeOnConfirm: true
+	},
+	function() {		
+		$.ajax({
+			url: baseURL + 'extras/deleteiotstream',
+			data:{'iotstreamid':iostreamid},
+			type:'post',
+			dataType:'json',
+			success:function(jsonResponse) {
+				if (jsonResponse.status == true) {
+					toastr['success']("Delete Successfully!");
+					setTimeout(function(){
+					    location.reload();
+					},3000);
+				}
+				if (jsonResponse.status == false) {
+					toastr['error']("Error occured while performing action!");					
+				}			
+			},
+			error:function() {
+				toastr['error']("Error occured while performing actions!");
+				
+			}
+		});
+	});
+});
+$(document).on('click','.chnlGrp_delete',function() {
+	var grpname = $(this).attr('accesskey');
+	 swalExtend({
+		swalFunction: deleteExtend,
+		hasCancelButton: true,
+		buttonNum: 2,		
+		buttonNames: ["Yes","Yes - delete Group & Channels"],
+		clickFunctionList: [
+			function() {
+				$.ajax({
+					url: baseURL + 'nebula/deletechannelgroup',
+					data:{'groupname':grpname,'action':'deletegroup'},
+					type:'post',
+					dataType:'json',
+					success:function(jsonResponse) {
+						if (jsonResponse.status == true) {
+							toastr['success']("Group Deleted Successfully!");
+							setTimeout(function(){
+							    location.reload();
+							},2000);
+						}
+						if (jsonResponse.status == false) {
+							toastr['error']("Error occured while creating group!");
+						}
+					},
+					error:function() {
+						toastr['error']("Error occured while performing actions!");
+
+					}
+				});
+			},
+			function() {
+				$.ajax({
+					url: baseURL + 'nebula/deletechannelgroup',
+					data:{'groupname':grpname ,'action':'deletegroupandchannel'},
+					type:'post',
+					dataType:'json',
+					success:function(jsonResponse) {
+						if (jsonResponse.status == true) {
+							toastr['success']("Group Deleted Successfully!");
+							setTimeout(function(){
+							    location.reload();
+							},2000);
+						}
+						if (jsonResponse.status == false) {
+							toastr['error']("Error occured while creating group!");
+						}
+					},
+					error:function() {
+						toastr['error']("Error occured while performing actions!");
+
+					}
+				});
+			}
+		]
+	});
+});
+function deleteExtend(){
+	 swal({
+		title: "Are you sure?",
+		text: "You want to delete it!",
+		type: "warning",
+		showCancelButton: true,
+		showConfirmButton: false
+	});
+}
+function submitIoTStream()
+{
+	var Ids = [];
+	if($("#actionIotStreams option:selected").val() == "" || $('.iotStreamTable tbody tr').find('input[type=checkbox]:checked').length <= 0)
+    {
+    	toastr['info']('At least select one action/record');
+    	return false;
+    }
+
+	$("input:checkbox[class=IoTStreamActions]:checked").each(function () {
+		var ids = $(this).attr("id");
+		var id = ids.split('_');
+		Ids.push(id[1]);
+		var action = $("#actionIotStreams").val();
+
+		if(action != "" && action != "0" && action == "Delete" || action == "Archive")
+		{
+			var objj = $(this);
+			swal({
+				title: "Are you sure?",
+				text: "You want to " + action + " this!",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonClass: "btn-danger",
+				confirmButtonText: "Yes, " + action + " it!",
+				closeOnConfirm: true
+			},
+			function(){
+				$.ajax({
+			        url: baseURL + 'extras/IoTStreamActions',
+			        data:{'id':Ids,'action':action},
+			        type:'post',
+			        dataType:'json',
+			        success:function(jsonResponse){
+
+			        	$('.iotStreamTable tr td').find("input[type='checkbox']").prop('checked',false);
+			        	$('.iotStreamTable tr th').find("input[type='checkbox']").prop('checked',false);
+			        	switch(action)
+			        	{							
+							case "Delete":
+							toastr['success'](action +  " Successfully!");
+							for(i=0; i<Ids.length; i++)
+				        	{
+								$('.iotStreamTable #row_'+Ids[i]).remove();
+							}
+							case "Archive":
+							toastr['success'](action +  " Successfully!");
+							for(i=0; i<Ids.length; i++)
+				        	{
+								$('.iotStreamTable #row_'+Ids[i]).remove();
+							}
+							break;
+						}
+					},
+			        error:function(){
+			        	toastr['error']("Error Occured While performing actions");
+					}
+				});
+			});
+		}
+		else
+		{
+			toastr['info']('At least select one action');
+			return;
+		}
+	});
+}
