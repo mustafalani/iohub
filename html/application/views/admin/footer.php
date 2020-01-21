@@ -1,7 +1,7 @@
    </div>
   <footer class="app-footer">
       <div>
-        <a href="http://iohub.live">iohub v2.1 <span class="badge badge-success">LIVE</span></a>
+        <a href="http://iohub.live">iohub v2.0 <span class="badge badge-warning">BETA</span></a>
         <span>&copy; - Copyright <a href="https://kurrent.tv">Kurrent TV </a>All rights reserved.</span>
       </div>
       <div class="ml-auto">
@@ -51,6 +51,7 @@
     <script src="<?php echo site_url();?>public/site/main/js/datatables.min.js"></script>
     <script src="<?php echo site_url();?>public/site/main/js/admin.min.js"></script>
     <script src="<?php echo site_url();?>public/site/main/js/sweetalert.js"></script>
+ <script src="<?php echo site_url(); ?>public/site/main/js/swalExtend.js"> </script>
        <script src="<?php echo site_url();?>public/site/main/js/toastr.min.js"></script>
        <!-- fullCalendar -->
 	<script src="<?php echo site_url();?>public/site/main/js/moment.js"></script>
