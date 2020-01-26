@@ -33,9 +33,9 @@ class Extras extends CI_Controller {
 		$cleanData = $this->security->xss_clean($this->input->post(NULL, TRUE));
 		$chid = $cleanData['id'];
 		$action = $cleanData['action'];
-		switch($action){			
-			case "Archive":			
-			break;			
+		switch($action){
+			case "Archive":
+			break;
 			case "Delete":
 			if(sizeof($chid)>0)
 			{
@@ -59,7 +59,7 @@ class Extras extends CI_Controller {
 		echo json_encode($response);
     }
     public function editiotstream(){
-   		$iostreamid = $this->uri->segment(3);    	
+   		$iostreamid = $this->uri->segment(3);
     	$data['audiochannels'] = $this->common_model->getAudioChannels();
 		$data['encoders'] = $this->common_model->getAllEncodersbyStatus(0,0);
 		$data['streams'] = $this->common_model->getAllIoTStreams($iostreamid);
@@ -77,7 +77,7 @@ class Extras extends CI_Controller {
     	}
     	echo json_encode($response);
     }
-    public function iotstream(){		
+    public function iotstream(){
 		$data['streams'] = $this->common_model->getAllIoTStreams(0);
 		$this->load->view('admin/header');
 		$this->load->view('admin/iotstream',$data);
@@ -95,7 +95,7 @@ class Extras extends CI_Controller {
 			$cid = $this->uri->segment(3);
 			$cleanData = $this->security->xss_clean($this->input->post(NULL, TRUE));
 			$userdata = $this->session->userdata('user_data');
-			$apps =0;$encid =0;		
+			$apps =0;$encid =0;
 			$eids = explode("_",$cleanData['channelInput']);
 			$ndisoucewe ="";$isRemote=0;
 			if($eids[0]== "phyinput")
@@ -126,8 +126,8 @@ class Extras extends CI_Controller {
 			{
 				$EncrIDs = explode('_',$cleanData['channelEncoders']);
 				$EncrID = $EncrIDs[1];
-			}				
-			$cinputs = explode('_',$cleanData['channelInput']);			
+			}
+			$cinputs = explode('_',$cleanData['channelInput']);
 			$processname ="";
 			$encoder = $this->common_model->getAllEncoders($EncrID,0);
 			if(sizeof($encoder)>0)
@@ -140,7 +140,7 @@ class Extras extends CI_Controller {
 			{
 				$processname = $cleanData['processname'];
 			}
-			
+
 			$is_IPAddress = 0;
 			if(array_key_exists('isIPAddress',$cleanData))
 			{
@@ -151,8 +151,8 @@ class Extras extends CI_Controller {
 			{
 				$ip_addresses_comma = $cleanData['ip_addresses_comma'];
 			}
-			
-			$chennelData = array(                				
+
+			$chennelData = array(
 				'channel_name'=>$cleanData['stream_name'],
 				'encoder_id'=>$EncrID,
 				'channelInput'=>$cleanData['channelInput'],
@@ -161,14 +161,14 @@ class Extras extends CI_Controller {
 				'input_rtmp_url'=>$cleanData['input_rtmp_url'],
 				'input_mpeg_rtp'=>$cleanData['input_mpeg_rtp'],
 				'input_mpeg_udp'=>$cleanData['input_mpeg_udp'],
-				'input_mpeg_srt'=>$cleanData['input_mpeg_srt'],	
+				'input_mpeg_srt'=>$cleanData['input_mpeg_srt'],
 				'process_name'=>$processname,
-				'input_hls_url'=>$cleanData['input_hls_url'],			
+				'input_hls_url'=>$cleanData['input_hls_url'],
 				'isIPAddresses'=>$is_IPAddress,
 				'ipAddress'=>$ip_addresses_comma,
 				'isRemote'=>$isRemote
 			);
-			
+
 			$id = $this->common_model->updateIoTStreamById($chennelData,$cid);
 			if($id >= 0)
 			{
@@ -182,7 +182,7 @@ class Extras extends CI_Controller {
 				$this->session->set_flashdata('error', 'Error occur while updating IoT Stream!');
 				redirect('iotstream');
 			}
-			
+
 		}
 		catch(Exception $e)
 		{
@@ -192,17 +192,17 @@ class Extras extends CI_Controller {
 		}
 	}
 	public function saveIoTStream(){
-		try 
+		try
 		{
 			$post     = $this->input->post();
 			$actual_link =  $_SERVER['HTTP_REFERER'];
 			$cleanData = $this->security->xss_clean($this->input->post(NULL, TRUE));
 
 			$userdata = $this->session->userdata('user_data');
-			$encid =0;			
+			$encid =0;
 			$is_scheduled = 0;
 			$processname = 'CH'.$this->random_string(10);
-			$eids = explode("_",$cleanData['channelInput']);			
+			$eids = explode("_",$cleanData['channelInput']);
 			$ndisoucewe ="";
 			$isRemote = 0;
 			if ($eids[0]== "phyinput") {
@@ -219,7 +219,7 @@ class Extras extends CI_Controller {
 			} else {
 				$encid = 0;
 			}
-			
+
 			$is_IPAddress = 0;
 			if (array_key_exists('isIPAddress',$cleanData)) {
 				$is_IPAddress = 1;
@@ -232,20 +232,20 @@ class Extras extends CI_Controller {
 			if (array_key_exists('record_channel',$cleanData)) {
 				$record_channel = 1;
 			}
-			
+
 			$EncrID = 0;
 			if ($cleanData['channelEncoders'] != "") {
 				$EncrIDs = explode('_',$cleanData['channelEncoders']);
 				$EncrID = $EncrIDs[1];
 			}
-			$cinputs = explode('_',$cleanData['channelInput']);				
+			$cinputs = explode('_',$cleanData['channelInput']);
 			$encoder = $this->common_model->getAllEncoders($encid,0);
 			if (sizeof($encoder)>0) {
 				$processname = $processname.'_'.$encoder[0]['encoder_id'];
 			}
-			
+
 			$chennelData = array(
-				'uid'=>$userdata['userid'],				
+				'uid'=>$userdata['userid'],
 				'channel_name'=>$cleanData['stream_name'],
 				'encoder_id'=>$EncrID,
 				'channelInput'=>$cleanData['channelInput'],
@@ -254,18 +254,18 @@ class Extras extends CI_Controller {
 				'input_rtmp_url'=>$cleanData['input_rtmp_url'],
 				'input_mpeg_rtp'=>$cleanData['input_mpeg_rtp'],
 				'input_mpeg_udp'=>$cleanData['input_mpeg_udp'],
-				'input_mpeg_srt'=>$cleanData['input_mpeg_srt'],			
+				'input_mpeg_srt'=>$cleanData['input_mpeg_srt'],
 				'status'=>1,
 				'created'=>time(),
 				'process_name'=>$processname,
-				'input_hls_url'=>$cleanData['input_hls_url'],			
+				'input_hls_url'=>$cleanData['input_hls_url'],
 				'isIPAddresses'=>$is_IPAddress,
 				'ipAddress'=>$ip_addresses_comma,
-				'isRemote'=>$isRemote						
+				'isRemote'=>$isRemote
 			);
 
 			$id = $this->common_model->insertIoTStreams($chennelData);
-			if ($id > 0) {			
+			if ($id > 0) {
 				$this->session->set_flashdata('message_type', 'success');
 				$this->session->set_flashdata('success', 'Stream is sucessfully saved!');
 				redirect('iotstream');
@@ -309,13 +309,13 @@ class Extras extends CI_Controller {
 			$response['status']= FALSE;
 			$response['response']= $ssh->getLog();
 			echo json_encode($response);
-		} else {	
+		} else {
 			$inputType = "";$inputName = "";
 			$streamlID = $iotStream[0]['process_name'];
 			$stream_name = $iotStream[0]['channel_name'];
-			$Inputs = explode('_',$iotStream[0]['channelInput']);		
+			$Inputs = explode('_',$iotStream[0]['channelInput']);
 			switch ($Inputs[0]) {
-				case "phyinput":					
+				case "phyinput":
 				break;
 				case "virinput":
 				switch ($Inputs[1]) {
@@ -336,14 +336,14 @@ class Extras extends CI_Controller {
 					break;
 					case 8:
 					$inputName = $iotStream[0]['input_hls_url'];
-					break;	
-				}					
+					break;
+				}
 				break;
 			}
-			$response = $ssh->exec('while sleep 2; do omxplayer --adev hdmi '.$inputName.' -threads 16  >>iohub/logs/'.$streamlID.' 2>&1; done');	
+			$response = $ssh->exec('while sleep 2; do omxplayer --adev hdmi '.$inputName.' -threads 16  >>iohub/logs/channels/'.$streamlID.' 2>&1; done');
 			$loopId = $ssh->exec('$(ps -ef | grep "'.$streamlID.'" | grep -v "grep" | grep "omxplayer" | awk \'{print $2}\');');
 			if (empty($loopId)) {
-				$status = "Error";				
+				$status = "Error";
 				echo json_encode(array('status'=>FALSE, "message"=> 'Error occur while starting stream!' ,'change'=>'stop','error'=>$response));
 			}
 			elseif(!empty($loopId) && preg_match('~[0-9]+~', $loopId))
@@ -358,7 +358,7 @@ class Extras extends CI_Controller {
 				'uptime'=>$time1
 				);
 				$this->common_model->updateIoTStreamByStreamId($data,$streamlID);
-				echo json_encode(array('status'=>TRUE,"response"=>$response, "message"=> 'Stream Start Successfully.','change'=>'start','time'=>$time1));	
+				echo json_encode(array('status'=>TRUE,"response"=>$response, "message"=> 'Stream Start Successfully.','change'=>'start','time'=>$time1));
 			}
 		}
 	}
@@ -371,7 +371,7 @@ class Extras extends CI_Controller {
 		$channelId = $cleanData['iotstreamid'];
 
 		$idArray = explode('_',$channelId);
-		$channel = $this->common_model->getIoTStreambyId($idArray[1]);		
+		$channel = $this->common_model->getIoTStreambyId($idArray[1]);
 		if($channel[0]['encoder_id'] == "")
 		{
 			$encoderId = $channel[0]['encoderid'];
@@ -397,7 +397,7 @@ class Extras extends CI_Controller {
 			$channel_name ="";$status = "";
 			$channel_name = $channel[0]['channel_name'];
 			$channelID = $channel[0]['process_name'];
-			$loopid = $ssh->exec('$(ps -ef | grep "'.$channelID.'" | grep -v "grep" | grep "omxplayer" | grep -h "while" | awk \'{print $2}\');');
+			$loopid = $ssh->exec('$(ps -ef | grep -v "grep" | grep "omxplayer" | grep -h "while" | awk \'{print $2}\');');
 			if(empty($loopid))
 			{
 				echo json_encode(array('status'=>TRUE, "message"=> 'IoTStreamID Not Exists!','change'=>'stop'));
@@ -407,8 +407,8 @@ class Extras extends CI_Controller {
 				$LOOPIDINRESPONSE = (int) filter_var($loopid, FILTER_SANITIZE_NUMBER_INT);
         $CID = "'.$LOOPIDINRESPONSE.'";
 				$actualCID = (int) filter_var($CID, FILTER_SANITIZE_NUMBER_INT);
-				
-				$resp= $ssh->exec('pkill -9 -P '.trim($actualCID).' && kill -9 '.trim($actualCID).' && dd if=/dev/zero of=/dev/fb0');
+
+				$resp= $ssh->exec('kill -9 -'.trim($actualCID).' && kill -9 '.trim($actualCID).' && dd if=/dev/zero of=/dev/fb0');
 				//echo $resp;
 				$status = "Success";
 				$command = $channel_name.'=> Stop => IoTStream Stopped Successfully!';
