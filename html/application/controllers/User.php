@@ -24,47 +24,47 @@ class User extends CI_Controller {
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $this->load->library('session');	
+        $this->load->library('session');
         $this->load->library('encrypt');
-        $this->load->helper('date');      
+        $this->load->helper('date');
         $this->load->model('user_model');
         $this->load->model('common_model');
         $this->load->model('LogsModel');
-    } 
+    }
 	public function login()
 	{
 		try
 		{
 			$this->form_validation->set_rules('username', 'Email', 'required|valid_email');
-	        $this->form_validation->set_rules('pass', 'Password', 'required');	       
+	        $this->form_validation->set_rules('pass', 'Password', 'required');
 	        $actual_link =  $_SERVER['HTTP_REFERER'];
-	        if ($this->form_validation->run() == FALSE) { 	
+	        if ($this->form_validation->run() == FALSE) {
 				$this->session->set_flashdata('message_type', 'error');
 				$this->session->set_flashdata('error', 'Wrong Username/Password!');
-				redirect($actual_link);				            
+				redirect($actual_link);
 	        } else {
 	            $post     = $this->input->post();
-	            $clean    = $this->security->xss_clean($post);	
-				$userPass= $this->common_model->checkPass($clean['username']);				
+	            $clean    = $this->security->xss_clean($post);
+				$userPass= $this->common_model->checkPass($clean['username']);
 				if(sha1($clean['pass']) !=$userPass->password){
 						$this->session->set_flashdata('error', 'Wrong Username/Password!');
 						redirect('user/login');
 					}
-					$userInfo = $this->user_model->checkLogin($clean);	 					
-		            if (is_object($userInfo) && property_exists($userInfo,"password")) {	
-		            	
+					$userInfo = $this->user_model->checkLogin($clean);
+		            if (is_object($userInfo) && property_exists($userInfo,"password")) {
+
 		            	$password = $this->input->post('pass');
 						session_regenerate_id();
-						$this->user_model->updateLogin($userInfo->id);			   			
+						$this->user_model->updateLogin($userInfo->id);
 			   			$roles = $this->config->item('roles_id');
-			   			$role = $roles[$userInfo->role_id];	
+			   			$role = $roles[$userInfo->role_id];
 		            	switch($role)
 		            	{
 							case "Admin":
 							$groupInfo = $this->common_model->getAdminGroupInfo();
 							$groupImage = $this->common_model->getGroupImage($groupInfo[0]['id']);
 							$userImage = $this->user_model->getUserImage($userInfo->id);
-							
+
 							$datas = array(
 							 'userid'=> $userInfo->id,
 							 'fname'=> $userInfo->fname,
@@ -93,26 +93,26 @@ class User extends CI_Controller {
 							 'group_sitename'=>$groupInfo[0]['group_sitename']
 							);
 							$this->LogsModel->insert(["created"=>time(),"name"=>$datas['fname'],"log_type"=>'user',"message"=>"User Logged In Successfully!","uid"=>$datas['userid'],"status"=>"Success"],FALSE);
-							
-							$this->session->set_userdata('user_data',$datas);   
-							$this->session->set_userdata('lock_data',array());        
-							redirect(site_url() . 'dashboard');
+
+							$this->session->set_userdata('user_data',$datas);
+							$this->session->set_userdata('lock_data',array());
+							redirect(site_url() . 'configuration');
 							break;
-							
+
 							case "GroupAdmin":
 							$groupId = $userInfo->group_id;
 							$groupInfo = $this->common_model->getGroupInfobyId($groupId);
-							
+
 							if(sizeof($groupInfo)>0)
 							{
-								$groupImage = $this->common_model->getGroupImage($groupInfo[0]['id']);	
+								$groupImage = $this->common_model->getGroupImage($groupInfo[0]['id']);
 							}
 							else
 							{
 								$groupImage = "";
-							}							
+							}
 							$userImage = $this->user_model->getUserImage($userInfo->id);
-							
+
 							$datas = array(
 							 'userid'=> $userInfo->id,
 							 'fname'=> $userInfo->fname,
@@ -122,10 +122,10 @@ class User extends CI_Controller {
 							 'timezone'=>$userInfo->timezone,
 							 'timeformat'=>$userInfo->timeformat,
 							 'language'=>$userInfo->language,
-							 'userImage'=>$userImage['image']							 
+							 'userImage'=>$userImage['image']
 							);
 							if(sizeof($groupInfo) > 0){
-								
+
 								$datas['group_id'] = 	$groupInfo[0]['id'];
 								$datas['group_name'] = 	$groupInfo[0]['group_name'];
 								$datas['group_address'] = 	$groupInfo[0]['group_address'];
@@ -138,7 +138,7 @@ class User extends CI_Controller {
 								$datas['group_image'] = 	$groupInfo[0]['group_name'];
 								$datas['group_theme'] = 	$groupInfo[0]['group_theme'];
 								$datas['group_menu_hide'] = 	$groupInfo[0]['group_menu_hide'];
-								
+
 								$datas['group_logo'] = 	$groupInfo[0]['group_logo'];
 								$datas['group_favicon'] = 	$groupInfo[0]['group_favicon'];
 								$datas['group_notification'] = 	$groupInfo[0]['group_notification'];
@@ -156,20 +156,20 @@ class User extends CI_Controller {
 								$datas['group_image'] = "";
 								$datas['group_theme'] =0;
 								$datas['group_menu_hide'] = 0;
-								
+
 								$datas['group_logo'] = 0;
 								$datas['group_favicon'] = 0;
 								$datas['group_notification'] = 	0;
 								$datas['group_sitename'] = 0;
 							}
-										 
+
 							$this->session->set_userdata('user_data',$datas);
-							redirect(site_url() . 'dashboard');
+							redirect(site_url() . 'configuration');
 							break;
 							case "User":
 							$groupId = $userInfo->group_id;
 							$groupInfo = $this->common_model->getGroupInfobyId($groupId);
-							
+
 							$group_image = '';
 							if(isset($groupInfo[0]['id']) && !empty($groupInfo[0]['id'])){
 								$groupImage = $this->common_model->getGroupImage($groupInfo[0]['id']);
@@ -185,10 +185,10 @@ class User extends CI_Controller {
 							 'timezone'=>$userInfo->timezone,
 							 'timeformat'=>$userInfo->timeformat,
 							 'language'=>$userInfo->language,
-							 'userImage'=>$userImage['image']							 			 
+							 'userImage'=>$userImage['image']
 							);
 								if(sizeof($groupInfo) > 0){
-								
+
 								$datas['group_id'] = 	$groupInfo[0]['id'];
 								$datas['group_name'] = 	$groupInfo[0]['group_name'];
 								$datas['group_address'] = 	$groupInfo[0]['group_address'];
@@ -201,7 +201,7 @@ class User extends CI_Controller {
 								$datas['group_image'] = 	$groupInfo[0]['group_name'];
 								$datas['group_theme'] = 	$groupInfo[0]['group_theme'];
 								$datas['group_menu_hide'] = 	$groupInfo[0]['group_menu_hide'];
-								
+
 								$datas['group_logo'] = 	$groupInfo[0]['group_logo'];
 								$datas['group_favicon'] = 	$groupInfo[0]['group_favicon'];
 								$datas['group_notification'] = 	$groupInfo[0]['group_notification'];
@@ -219,25 +219,25 @@ class User extends CI_Controller {
 								$datas['group_image'] = "";
 								$datas['group_theme'] =0;
 								$datas['group_menu_hide'] = 0;
-								
+
 								$datas['group_logo'] = 0;
 								$datas['group_favicon'] = 0;
 								$datas['group_notification'] = 	0;
 								$datas['group_sitename'] = 0;
 							}
 							$this->session->set_userdata('user_data',$datas);
-							redirect(site_url() . 'dashboard');
+							redirect(site_url() . 'configuration');
 							break;
-						} 
-						
+						}
+
 		            }
 		            else
 		            {
 		            	$this->LogsModel->insert(["created"=>time(),"name"=>$clean['username'],"log_type"=>'user',"message"=>"Wrong Username/Password!","uid"=>0,"status"=>"Error"],FALSE);
-		            	
+
 		            	$this->session->set_flashdata('message_type', 'error');
 						$this->session->set_flashdata('error', 'Wrong Username/Password!');
-						redirect($actual_link);	
+						redirect($actual_link);
 					}
 	        }
 		}
@@ -246,26 +246,26 @@ class User extends CI_Controller {
 			$this->LogsModel->insert(["created"=>time(),"name"=>$clean['username'],"log_type"=>'user',"message"=>"Wrong Username/Password!","uid"=>0,"status"=>"Error"],FALSE);
 			$this->session->set_flashdata('message_type', 'error');
 			$this->session->set_flashdata('error', 'Wrong Username/Password');
-			redirect($actual_link);				
+			redirect($actual_link);
 		}
-	}	
+	}
 	public function logout()
-    {        
+    {
         $userInfo = $this->session->userdata('user_data');
         $this->LogsModel->insert(["created"=>time(),"name"=>$userInfo['fname'],"log_type"=>'user',"message"=>"User Logged Out Successfully!","uid"=>$userInfo['userid'],"status"=>"Success"],FALSE);
-        
+
 		$roles = $this->config->item('roles_id');
 		$role = $roles[$userInfo['user_type']];
 		$this->session->unset_userdata('user_data');
 		$this->session->sess_destroy();
-		redirect('home');    	       
+		redirect('home');
     }
 	function isValidCaptch($captchText)
 	{
 		$sessionData = $this->session->userdata('captcha_code');
 		$sessionText = $sessionData['code'];
 		return ($captchText == $sessionText) ? TRUE : FALSE;
-	}	
+	}
 	public function base64url_encode($data)
     {
         return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
@@ -273,5 +273,5 @@ class User extends CI_Controller {
     public function base64url_decode($data)
     {
         return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
-    }	
+    }
 }

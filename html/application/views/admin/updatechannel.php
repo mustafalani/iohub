@@ -854,7 +854,20 @@
 											<?php
 										}
                                         ?>
-
+																				<?php
+                                        if($channels[0]['recording_presets'] == -3)
+                                        {
+											?>
+											 <option selected="true" value="-3">Use Script</option>
+											<?php
+										}
+										else
+										{
+											?>
+											  <option value="-3">Use Script</option>
+											<?php
+										}
+                                        ?>
                                         <?php
 											if(sizeof($profiles)>0)
 											{
@@ -875,6 +888,11 @@
                                     </select>
                                 </div>
                             </div>
+														<div class="form-group col-lg-11">
+	                             <div class="row">
+                                    	<input type="text" placeholder="Recording Script" class="form-control" name="recording_preset_script" id="recording_script" value="<?php echo $channels[0]['recording_preset_script']; ?>"/>
+                                    </div>
+                            </div>
 							<div class="form-group col-lg-11">
 								<div class="row">
 									<label> Channel Groups</label>
@@ -888,13 +906,13 @@
 												array_push($array[$map['groupid']],$map['channelId']);
 											}
 										}
-													
+
 									?>
 									<select class="form-control selectpicker" name="channelGroup" id="channelGroup">
 										<option value="0">- Select Group -</option>
 										<?php
-										
-															
+
+
 							if (sizeof($channelgroups)>0) {
 										foreach ($channelgroups as $grp) {
 											if (in_array($channels[0]['id'],$array[$grp['id']])) {
@@ -903,8 +921,8 @@
  											else {
 												echo '<option value="'.$grp['id'].'">'.$grp['groupname'].'</option>';
 											}
-										 
-									
+
+
 								}
 							}
 							?>

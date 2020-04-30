@@ -167,8 +167,10 @@
 																		   		case "active":
 																		   		$wowza = $this->common_model->getWovzData($application[0]['live_source']);
 										                                       $pathinfo = 'rtmp://'.$wowza[0]['ip_address'].':'.$wowza[0]['rtmp_port'].'/'.$application[0]['application_name'].'/'.$value['Name'];
+                                                           $startrecurl = 'http://'.$wowza[0]['ip_address'].':8086/livestreamrecord?app='.$application[0]['application_name'].'&streamname='.$value['Name'].'&action=startRecording&outputPath='.$wowza[0]['vod_directory'];
+                                                           $stoprecurl = 'http://'.$wowza[0]['ip_address'].':8086/livestreamrecord?app='.$application[0]['application_name'].'&streamname='.$value['Name'].'&action=stopRecording';
 																		   		?>
-																		   		<td><i class="fa fa-circle fa-2x" style="color:red;"></i><a class="plapp" href="javascript:void(0);" aria-label="<?php echo $pathinfo;?>"><i class="fa fa-play fa-2x" style="padding-left:12px;"></i></a></td>
+																		   		<td><a class="recordstream" data-toggle="tooltip" title="Record Stream" data-placement="bottom" href="javascript:void(0);" startrecurl="<?php echo $startrecurl;?>" stoprecurl="<?php echo $stoprecurl;?>"><i class="fa fa-circle fa-2x" style="color:red;"></i><a class="plapp" data-toggle="tooltip" title="Preview" data-placement="bottom" href="javascript:void(0);" aria-label="<?php echo $pathinfo;?>"><i class="fa fa-play fa-2x" style="padding-left:12px;"></i></a></td>
 																               <td>
 																                  <div class=" pull-right">
 																                     <button type="button" class="btn btn-box-tool appstat" id="<?php echo $application[0]['id'];?>_<?php echo $value['Name'];?>">
@@ -181,9 +183,10 @@
 																		   		case "Recording": case "Waiting":
 																		   		$wowza = $this->common_model->getWovzData($application[0]['live_source']);
 										                                       $pathinfo = 'rtmp://'.$wowza[0]['ip_address'].':'.$wowza[0]['rtmp_port'].'/'.$application[0]['application_name'].'/'.$value['Name'];
+                                                           $startrecurl = 'http://'.$wowza[0]['ip_address'].':8086/livestreamrecord?app='.$application[0]['application_name'].'&streamname='.$value['Name'].'&action=startRecording&outputPath='.$wowza[0]['vod_directory'];
+                                                           $stoprecurl = 'http://'.$wowza[0]['ip_address'].':8086/livestreamrecord?app='.$application[0]['application_name'].'&streamname='.$value['Name'].'&action=stopRecording';
 																		   		?>
-																		   		 <td style="/* text-align: center; */"><i class="fa fa-stop fa-2x icon-standalone-link" style="color: #3c8dbc;"></i>
-																		   		 <a class="plapp" href="javascript:void(0);" aria-label="<?php echo $pathinfo;?>"><i class="fa fa-play fa-2x" style="padding-left: 12px;"></i></a></td>
+																		   		 <td><a class="recordstream" data-toggle="tooltip" title="Stop Recoding" data-placement="bottom" href="javascript:void(0);" startrecurl="<?php echo $startrecurl;?>" stoprecurl="<?php echo $stoprecurl;?>"><i class="fa fa-stop fa-2x" style="color:red;"></i><a class="plapp" data-toggle="tooltip" title="Preview" data-placement="bottom" href="javascript:void(0);" aria-label="<?php echo $pathinfo;?>"><i class="fa fa-play fa-2x" style="padding-left: 12px;"></i></a></td>
 										               <td>
 										                  <div class="box-tools pull-right">
 										                     <button type="button" class="btn appstat" id="<?php echo $application[0]['id'];?>_<?php echo $value['Name'];?>">
@@ -296,10 +299,11 @@
 
 										                                       $wowza = $this->common_model->getWovzData($application[0]['live_source']);
 										                                       $pathinfo = 'rtmp://'.$wowza[0]['ip_address'].':'.$wowza[0]['rtmp_port'].'/'.$application[0]['application_name'].'/'.$value['Name'];
+                                                           $startrecurl = 'http://'.$wowza[0]['ip_address'].':8086/livestreamrecord?app='.$application[0]['application_name'].'&streamname='.$value['Name'].'&action=startRecording&outputPath='.$wowza[0]['vod_directory'];
+                                                           $stoprecurl = 'http://'.$wowza[0]['ip_address'].':8086/livestreamrecord?app='.$application[0]['application_name'].'&streamname='.$value['Name'].'&action=stopRecording';
 										                                       ?>
 
-																		   		<td><i class="fa fa-circle fa-2x" style="color: red;"></i>
-																		   		<a class="plapp" href="javascript:void(0);" aria-label="<?php echo $pathinfo;?>"><i class="fa fa-play fa-2x" style="padding-left: 12px;"></i></a></td>
+																		   		<td><a class="recordstream" data-toggle="tooltip" title="Record Stream" data-placement="bottom" href="javascript:void(0);" startrecurl="<?php echo $startrecurl;?>" stoprecurl="<?php echo $stoprecurl;?>"><i class="fa fa-circle fa-2x" style="color:red;"></i><a class="plapp" data-toggle="tooltip" title="Preview" data-placement="bottom" href="javascript:void(0);" aria-label="<?php echo $pathinfo;?>"><i class="fa fa-play fa-2x" style="padding-left: 12px;"></i></a></td>
 																               <td>
 																                  <div class="box-tools pull-right">
 																                     <button type="button" class="btn btn-box-tool appstat" id="<?php echo $application[0]['id'];?>_<?php echo $value['Name'];?>">
@@ -312,10 +316,11 @@
 																		   		case "Recording": case "Waiting":
 																		   		$wowza = $this->common_model->getWovzData($application[0]['live_source']);
 										                                       $pathinfo = 'rtmp://'.$wowza[0]['ip_address'].':'.$wowza[0]['rtmp_port'].'/'.$application[0]['application_name'].'/'.$value['Name'];
+                                                           $startrecurl = 'http://'.$wowza[0]['ip_address'].':8086/livestreamrecord?app='.$application[0]['application_name'].'&streamname='.$value['Name'].'&action=startRecording&outputPath='.$wowza[0]['vod_directory'];
+                                                           $stoprecurl = 'http://'.$wowza[0]['ip_address'].':8086/livestreamrecord?app='.$application[0]['application_name'].'&streamname='.$value['Name'].'&action=stopRecording';
 																		   		?>
 																		   		 <td>
-																		   		 <i class="fa fa-stop fa-2x icon-standalone-link" style="color: #3c8dbc;"></i>
-																		   		 <a class="plapp" href="javascript:void(0);" aria-label="<?php echo $pathinfo;?>"><i class="fa fa-play fa-2x" style="padding-left: 12px;"></i></a>
+																		   		 <td><a class="recordstream" data-toggle="tooltip" title="Stop Recording" data-placement="bottom" href="javascript:void(0);" startrecurl="<?php echo $startrecurl;?>" stoprecurl="<?php echo $stoprecurl;?>"><i class="fa fa-stop fa-2x" style="color:red;"></i><a class="plapp" data-toggle="tooltip" title="Preview" data-placement="bottom" href="javascript:void(0);" aria-label="<?php echo $pathinfo;?>"><i class="fa fa-play fa-2x" style="padding-left: 12px;"></i></a>
 																		   		 </td>
 																               <td>
 																                  <div class="box-tools pull-right">
