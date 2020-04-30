@@ -1,7 +1,19 @@
 <?php $this->load->view('admin/navigation.php');?>
 <?php $this->load->view('admin/leftsidebar.php');?>
 <?php $this->load->view('admin/rightsidebar.php');?>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+	$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+		localStorage.setItem('activeTab', $(e.target).attr('href'));
+	});
+	var activeTab = localStorage.getItem('activeTab');
+	if(activeTab){
+		$('#channelsTab a[href="' + activeTab + '"]').tab('show');
+	}
+});
+</script>
 <script type="text/javascript">
 	var channelLocks = [];
 </script>
@@ -86,7 +98,7 @@ if(sizeof($channelsLock)>0)
                             <div class="content-box config-contentonly">
                                 <div class="config-container">
                                     <!-- === Nav tabs === -->
-                                        <ul class="nav nav-tabs channeltabs" role="tablist">
+                                        <ul class="nav nav-tabs channeltabs" role="tablist" id="channelsTab">
                                             <li class="nav-item" role="presentation" class="active">
                                             	<a class="nav-link active" href="#Channels" aria-controls="channels" role="tab" data-toggle="tab">Channels</a></li>
                                           <?php
@@ -98,7 +110,7 @@ if(sizeof($channelsLock)>0)
 											  	<?php
 											  }
 										  }
-                                          ?>  	
+                                          ?>
                                           <li  class="nav-item" role="presentation" >
 											<a class="nav-link createChannelGroup" href="javascript:void(0);" aria-controls="channels" role="tab" data-toggle="tab">+</a></li>
                                         </ul>
@@ -157,11 +169,11 @@ if(sizeof($channelsLock)>0)
                             $counter=1;
                            if(sizeof($channels)>0)
                            {
-							
-																
+
+
 						   	foreach($channels as $channel)
 						   	{
-						   		
+
 								?>
 								<tr id="row_<?php echo $channel['id'];?>">
                                 <td>
@@ -353,6 +365,19 @@ if(sizeof($channelsLock)>0)
 											}
 
 											break;
+											case 9:
+											if($channel['is_record_channel'] == 1 && $channel['record_file'] != "")
+											{
+												echo '<label class="label label-output lbloutputtext">Rec</label> <label class="label label-output lblrecordtext">File</label> ';
+												echo '<span data-container="body" data-toggle="tooltip" title="Click To Copy" data-placement="bottom" data-html="true" style="display: none;" class="copytoclipboardtext">'.$channel['output_mpeg_srt'].'</span>   <span data-container="body" data-toggle="tooltip" title="Click To Copy" data-placement="bottom" data-html="true" class="copyrecordfile">./recordings/'.$channel['record_file'].'</span>';
+											}
+											else
+											{
+												echo '<label class="label label-output lbloutputtext">Rec</label> ';
+												echo '<span data-container="body" data-toggle="tooltip" title="Click To Copy" data-placement="bottom" data-html="true" style="display: none;" class="copytoclipboardtext">'.$channel['output_mpeg_srt'].'</span> ';
+											}
+
+											break;
 										}
 
 								 	break;} ?></td>
@@ -450,9 +475,9 @@ if(sizeof($channelsLock)>0)
 
 										</div>
 										<?php
-										if (sizeof($channelTabs)>0) {										
+										if (sizeof($channelTabs)>0) {
 											foreach ($channelTabs as $tab) {
-											
+
 										?>
 										<div role="tabpanel" class="tab-pane" id="channelgid_<?php echo $tab['id'] ?>">
 											<div class="card-body">
@@ -474,13 +499,13 @@ if(sizeof($channelsLock)>0)
 															</div>
 															<!-- Standard button -->
 															<button type="button" class="btn btn-primary submit" onclick="submitChannels();">Submit</button>
-															
+
 															<a href="<?php echo site_url(); ?>createchannel" class="add-btn btn btn-primary float-right">
 																<span>
 																	<i class="fa fa-plus"></i> Channel</span>
 															</a>
-															
-															
+
+
 																								<a href="javascript:void(0);" class="add-btn btn btn-danger float-right mr-2 chnlGrp_delete" accesskey="<?php echo $tab['id'] ?>"><span><i class="fa fa-trash"></i> Delete</span></a>
 														</div>
 														<br/>
@@ -508,7 +533,7 @@ if(sizeof($channelsLock)>0)
 																</tr>
 																<?php
 																$channelIds = $this->common_model->getChannelIdsbyMappingGroupId($tab['id'],$tab['uid']);
-																if (sizeof($channelIds)>0) 
+																if (sizeof($channelIds)>0)
 																{
 																	$counter=1;
 																	foreach ($channelIds as $chid) {
@@ -755,12 +780,12 @@ if(sizeof($channelsLock)>0)
 																<?php
 																$counter++;
 																}
-															}																		
-														}	
+															}
+														}
 																}
 																else{
 																	?>
-																	<tr> 
+																	<tr>
 																	<td colspan="12">No Record Found</td>
 																	</tr>
 																	<?php
@@ -777,7 +802,7 @@ if(sizeof($channelsLock)>0)
 										<?php
 									}
 								}
-										?> 
+										?>
                                     </div>
                                 </div>
 
@@ -800,7 +825,7 @@ if(sizeof($channelsLock)>0)
 					<div class="form-group col-lg-12">
 						<h3 class="tit">Enter Group Name</h3></div>
 						<div class="form-group col-lg-12">
-							<div class="row">								
+							<div class="row">
 								<input class="form-control" type="text" id="ch_grpup_name" name="ch_grpup_name"/>
 							</div>
 						</div>

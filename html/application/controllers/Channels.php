@@ -86,53 +86,6 @@ class Channels extends REST_Controller {
 		}
 		echo json_encode($response);
 	}
-	public function streamupdate_uptime_post()
-	{
-		$cleanData = json_decode(file_get_contents('php://input'),TRUE);
-		//echo($cleanData);
-		if (!empty($cleanData['channelId'])) {
-			$data = array(
-			'uptime'=>$cleanData['uptime']
-			);
-			$channel = $this->common_model->getStreambyProcessName($cleanData['channelId']);
-			if (sizeof($channel)>0) {
-				$isUpdated = $this->common_model->updateStreamByChannelId($data,$cleanData['channelId']);
-				if ($isUpdated > 0) {
-					echo "Stream Time Updated Successfully!";
-				} else {
-					echo "Stream Time Not Updated!";
-				}
-			} else {
-				echo "wrong channel ID-".$cleanData['channelId'];
-			}
-
-		} else {
-			echo "Channel Id Null";
-		}
-	}
-	public function updatestream_post()
-	{
-		$cleanData = json_decode(file_get_contents('php://input'),TRUE);
-		if (!empty($cleanData['channelId'])) {
-			$data = array(
-			'channel_status'=>$cleanData['status']
-			);
-			$channel = $this->common_model->getStreambyProcessName($cleanData['channelId']);
-			if (sizeof($channel)>0) {
-				$isUpdated = $this->common_model->updateStreamByChannelId($data,$cleanData['channelId']);
-				if ($isUpdated > 0) {
-					echo "Status Updated Successfully for ".$cleanData['channelId'];
-				} else {
-					echo "Status has already been updated for ".$cleanData['channelId'];
-				}
-			} else {
-				echo "wrong channel ID-".$cleanData['channelId'];
-			}
-
-		} else {
-			echo "Channel Id Null";
-		}
-	}
     public function update_uptime_post()
     {
 		$cleanData = json_decode(file_get_contents('php://input'),TRUE);
@@ -396,6 +349,37 @@ class Channels extends REST_Controller {
 					$outputName = $channel[0]["output_mpeg_srt"]."?mode=listener";
 					$outputOptions = $this->encodingProfile($encodingProfile);
 				break;
+        case "SDITOFILE":
+          $encodingProfile = $this->common_model->getEncodingTemplateById($channel[0]['encoding_profile']);
+          $Inputs = explode('_',$channel[0]['channelInput']);
+          $inputType = $_config['input_type'];
+          if(strpos($Inputs[1],"HDMI") !== FALSE)
+          {
+            $inputName = "DeckLink Mini Recorder 4K";
+          }
+          else
+          {
+            $inputName = $Inputs[1];
+          }
+          $audioSource = $this->common_model->getInpOutByEncIdAndName($encoder[0]['id'],$inputName);
+          $inputOptions = $_config['format_code'];
+          if(strpos($Inputs[1],"HDMI") !== FALSE)
+          {
+            $inputOptions .= " -video_input hdmi";
+          }
+          else
+          {
+            $inputOptions .= " -video_input sdi";
+          }
+          $inputOptions .= ($audioSource[0]['inp_aud_source'] != "") ? " -audio_input ".$audioSource[0]['inp_aud_source']:"";
+          if($channel[0]['audio_channel'] != "" && $channel[0]['audio_channel'] > 0)
+          {
+            $inputOptions .= " -channels '".$channel[0]['audio_channel']."'";
+          }
+          $outputType = "";
+          $outputName = "";
+          $outputOptions = "";
+        break;
 				case "NDITOSDI":
 					$outformat ="";
 					$output = explode('_',$channel[0]['channelOutpue']);
@@ -497,6 +481,19 @@ class Channels extends REST_Controller {
 					$outputName = $channel[0]["output_mpeg_srt"]."?mode=listener";
 					$outputOptions = $this->encodingProfile($encodingProfile);
 				break;
+        case "NDITOFILE":
+          $encodingProfile = $this->common_model->getEncodingTemplateById($channel[0]['encoding_profile']);
+          $inputType = $_config['input_type'];
+          if($channel[0]['isRemote'] == 1 && $channel[0]['isIPAddresses'] == 1)
+          {
+            $inputType = $inputType." -extra_ips ".$channel[0]['ipAddress'];
+          }
+          $inputName = $channel[0]['channel_ndi_source'];
+          $inputOptions = "";
+          $outputType = "";
+          $outputName = "";
+          $outputOptions = "";
+        break;
 				case "RTMPTOSDI":
 					$output = explode('_',$channel[0]['channelOutpue']);
 					$outputfull = $this->common_model->getOutByEncIdAndName($encoder[0]['id'],$output[1]);
@@ -838,6 +835,10 @@ class Channels extends REST_Controller {
 
 							$outputOptions_recording = $this->encodingProfile($encoderprofile);
 						}
+            elseif($channel[0]['recording_presets'] == -3)
+						{
+							$outputOptions_recording = $channel[0]['recording_preset_script'];
+						}
 						elseif($channel[0]['recording_presets'] > 0)
 						{
 							$encodingProfile = $this->common_model->getEncodingTemplateById($channel[0]['recording_presets']);
@@ -845,9 +846,9 @@ class Channels extends REST_Controller {
 						}
 						$dateTime = date('Y-m-d-h-i-s');
 
-						$LogCommand = $channel_name.'=> Start => while sleep 2; do ffmpeg '.$inputOptions.' '.$inputType.' -i \''.$inputName.'\' '.$outputOptions.' '.$outputType.' '.$outputName.' -threads 16 '.$logPath.' -f mpegts '.$outputOptions_recording.' iohub/media/recordings/'.$channel[0]['record_file'].$channelID.'`date +%s`.ts >>iohub/logs/recordings/'.$channelID.' 2>&1; done';
+						$LogCommand = $channel_name.'=> Start => while sleep 2; do ffmpeg '.$inputOptions.' '.$inputType.' -i \''.$inputName.'\' '.$outputOptions.' '.$outputType.' '.$outputName.' -threads 16 '.$logPath.' '.$outputOptions_recording.' iohub/media/recordings/'.$channel[0]['record_file'].' >>iohub/logs/recordings/'.$channelID.' 2>&1; done';
 
-					$resp = $ssh->exec('while sleep 2; do ffmpeg '.$inputOptions.' '.$inputType.' -i \''.$inputName.'\' '.$outputOptions.' '.$outputType.' '.$outputName.' -threads 16 '.$logPath.' -f mpegts  '.$outputOptions_recording.' iohub/media/recordings/'.$channel[0]['record_file'].$channelID.'`date +%s`.ts >>iohub/logs/recordings/'.$channelID.' 2>&1; done');
+					$resp = $ssh->exec('while sleep 2; do ffmpeg '.$inputOptions.' '.$inputType.' -i \''.$inputName.'\' '.$outputOptions.' '.$outputType.' '.$outputName.' -threads 16 '.$logPath.' '.$outputOptions_recording.' iohub/media/recordings/'.$channel[0]['record_file'].' >>iohub/logs/recordings/'.$channelID.' 2>&1; done');
 					}
 					else
 					{
@@ -871,20 +872,38 @@ class Channels extends REST_Controller {
 
 							$outputOptions_recording = $this->encodingProfile($encoderprofile);
 						}
+            elseif($channel[0]['recording_presets'] == -3)
+						{
+							$outputOptions_recording = $channel[0]['recording_preset_script'];
+						}
 						elseif($channel[0]['recording_presets'] > 0)
 						{
 							$encodingProfile = $this->common_model->getEncodingTemplateById($channel[0]['recording_presets']);
 							$outputOptions_recording = $this->encodingProfile($encodingProfile);
 						}
 						$dateTime = date('Y-m-d-h-i-s');
-						$LogCommand = $channel_name.'=> Start => while sleep 2; do ffmpeg '.$inputOptions.' '.$inputType.' -i \''.$inputName.'\' '.$outputOptions.' '.$outputType.' \''.$outputName.'\' -threads 16 '.$logPath.' -f mpegts  '.$outputOptions_recording.' iohub/media/recordings/'.$channel[0]['record_file'].$channelID.'`date +%s`.ts >>iohub/logs/recordings/'.$channelID.' 2>&1;  done';
-					$resp = $ssh->exec('while sleep 2; do ffmpeg '.$inputOptions.' '.$inputType.' -i \''.$inputName.'\' '.$outputOptions.' '.$outputType.' \''.$outputName.'\' -threads 16 '.$logPath.' -f mpegts  '.$outputOptions_recording.' iohub/media/recordings/'.$channel[0]['record_file'].$channelID.'`date +%s`.ts >>iohub/logs/recordings/'.$channelID.' 2>&1; done');
+						if($outputName == ""){
+								$LogCommand = $channel_name.'=> Start => while sleep 2; do ffmpeg '.$inputOptions.' '.$inputType.' -i \''.$inputName.'\' '.$outputOptions.' '.$outputType.' -threads 16 '.$logPath.' '.$outputOptions_recording.' iohub/media/recordings/'.$channel[0]['record_file'].' >>iohub/logs/recordings/'.$channelID.' 2>&1;  done';
+					$resp = $ssh->exec('while sleep 2; do ffmpeg '.$inputOptions.' '.$inputType.' -i \''.$inputName.'\' '.$outputOptions.' '.$outputType.' -threads 16 '.$logPath.' '.$outputOptions_recording.' iohub/media/recordings/'.$channel[0]['record_file'].' >>iohub/logs/recordings/'.$channelID.' 2>&1; done');
+						}
+						else{
+								$LogCommand = $channel_name.'=> Start => while sleep 2; do ffmpeg '.$inputOptions.' '.$inputType.' -i \''.$inputName.'\' '.$outputOptions.' '.$outputType.' \''.$outputName.'\' -threads 16 '.$logPath.'  '.$outputOptions_recording.' iohub/media/recordings/'.$channel[0]['record_file'].' >>iohub/logs/recordings/'.$channelID.' 2>&1;  done';
+					$resp = $ssh->exec('while sleep 2; do ffmpeg '.$inputOptions.' '.$inputType.' -i \''.$inputName.'\' '.$outputOptions.' '.$outputType.' \''.$outputName.'\' -threads 16 '.$logPath.' '.$outputOptions_recording.' iohub/media/recordings/'.$channel[0]['record_file'].' >>iohub/logs/recordings/'.$channelID.' 2>&1; done');
+						}
+
 
 					}
 					else
 					{
-						$LogCommand = $channel_name.'=> Start => while sleep 2; do ffmpeg '.$inputOptions.' '.$inputType.' -i \''.$inputName.'\' '.$outputOptions.' '.$outputType.' \''.$outputName.'\' -threads 16 '.$logPath.'; done';
+					  if($outputName == ""){
+					  	$LogCommand = $channel_name.'=> Start => while sleep 2; do ffmpeg '.$inputOptions.' '.$inputType.' -i \''.$inputName.'\' '.$outputOptions.' '.$outputType.'  -threads 16 '.$logPath.'; done';
+					$resp = $ssh->exec('while sleep 2; do ffmpeg '.$inputOptions.' '.$inputType.' -i \''.$inputName.'\' '.$outputOptions.' '.$outputType.' -threads 16 '.$logPath.'; done');
+					  }
+					  else{
+					  	$LogCommand = $channel_name.'=> Start => while sleep 2; do ffmpeg '.$inputOptions.' '.$inputType.' -i \''.$inputName.'\' '.$outputOptions.' '.$outputType.' \''.$outputName.'\' -threads 16 '.$logPath.'; done';
 					$resp = $ssh->exec('while sleep 2; do ffmpeg '.$inputOptions.' '.$inputType.' -i \''.$inputName.'\' '.$outputOptions.' '.$outputType.' \''.$outputName.'\' -threads 16 '.$logPath.'; done');
+					  }
+
 					}
 
 				}
