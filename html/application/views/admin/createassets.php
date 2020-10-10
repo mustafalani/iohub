@@ -10,13 +10,13 @@
 		display:block !important;
 	}
 .dropzone {
-    background: #343B41; 
+    background: #343B41;
 }
 </style>
 <script type="text/javascript">
-	var _folderSettings = {};	
+	var _folderSettings = {};
 </script>
-<?php 
+<?php
 $settingss = json_encode($settings);
 echo '<script type="text/javascript">';
 echo "_folderSettings=".$settingss;
@@ -29,7 +29,7 @@ echo '</script>';
           <li class="breadcrumb-item">
             <a href="#">Home</a>
           </li>
-          <li class="breadcrumb-item active"><a href="assets">Assets</a></li>
+          <li class="breadcrumb-item active"><a href="<?php echo site_url();?>assets/<?php echo $this->uri->segment(2); ?>"><?php $nebula_id = $this->uri->segment(2);?><?php $nebula = $this->common_model->getNebulabyId($nebula_id);?><?php echo $nebula[0]['encoder_name'];?></a></li>
 					<li class="breadcrumb-item active">New Asset</li>
         </ol>
         <div class="container-fluid">
@@ -83,7 +83,7 @@ echo '</script>';
 													<select id="id_folder" name="id_folder" class="form-control selectpicker">
 													<option value="">Select</option>
 													<?php
-													
+
 													if(sizeof($settings['data']['folders'])>0)
 													{
 														foreach($settings['data']['folders'] as $fid=>$folder)
@@ -105,11 +105,11 @@ echo '</script>';
 											<div class="col-lg-6 col-md-12">
 												<form id="frm_assetsmain" action="<?php echo site_url();?>admin/upload_asset_files/<?php echo $this->uri->segment(3);?>"  method="post" enctype="multipart/form-data">
 												<input type="hidden" id="assetid" name="assetid"/>
-												</form>		
+												</form>
 											</div>
 										</div>
 
-								</div>							
+								</div>
 						</div>
                 	</div>
               </div>
