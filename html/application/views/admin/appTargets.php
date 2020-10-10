@@ -9,7 +9,7 @@
           <li class="breadcrumb-item">
             <a href="/applications">Apps</a>
           </li>
-          <li class="breadcrumb-item active">Apps</li>
+          <li class="breadcrumb-item active"><?php $appid = $this->uri->segment(3); $app = $this->common_model->getApplicationbyId($appid);?><?php echo $app[0]['application_name'];?></li>
         </ol>
         <div class="container-fluid">
 	        <div class="animated fadeIn">

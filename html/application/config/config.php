@@ -561,7 +561,7 @@ $config['SDITOMPEGSRT']['output_type'] = "-f mpegts";
 $config['NDITOSDI']['input_type'] = "-f libndi_newtek";
 $config['NDITOSDI']['output_options'] = "";
 $config['NDITOSDI']['format_code'] = "";
-$config['NDITOSDI']['output_type'] = "-f decklink";
+$config['NDITOSDI']['output_type'] = "-vf mpdecimate,setpts=N/FRAME_RATE/TB -f decklink";
 
 $config['NDITONDI']['input_type'] = "-f libndi_newtek";
 $config['NDITONDI']['output_options'] = "";

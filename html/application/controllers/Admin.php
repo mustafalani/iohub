@@ -666,6 +666,20 @@ error_reporting(E_ALL);
 			$this->load->view('admin/help');
 			$this->load->view('admin/footer');
 		}
+		public function privacy()
+		{
+			$this->breadcrumbs->push('Privacy', '/privacy');
+			$this->load->view('admin/header');
+			$this->load->view('admin/privacy');
+			$this->load->view('admin/footer');
+		}
+		public function terms()
+		{
+			$this->breadcrumbs->push('Terms', '/terms');
+			$this->load->view('admin/header');
+			$this->load->view('admin/terms');
+			$this->load->view('admin/footer');
+		}
 		public function streamviewer()
 		{
 			$this->breadcrumbs->push('Stream Viewer', '/streamviewer');
@@ -883,7 +897,7 @@ error_reporting(E_ALL);
 		/* Cront End */
 		public function schedule()
 		{
-			
+
 
 			$userdata =$this->session->userdata('user_data');
 			$channelsLocks = array();
@@ -1088,7 +1102,7 @@ error_reporting(E_ALL);
 							}
 							if($encodingProfile[0]['adv_video_keyframe_intrval'] != "")
 							{
-								$adv_video_keyframe_intrval = '-force_key_frames '.$encodingProfile[0]['adv_video_keyframe_intrval'];
+								$adv_video_keyframe_intrval = '-force_key_frames \'expr:gte(t,n_forced*'.$encodingProfile[0]['adv_video_keyframe_intrval'].')\'';
 							}
 							if($encodingProfile[0]['adv_video_profile'] != "" && $encodingProfile[0]['adv_video_profile'] != 0)
 							{
@@ -1169,7 +1183,7 @@ error_reporting(E_ALL);
 							}
 							if($encodingProfile[0]['adv_video_keyframe_intrval'] != "")
 							{
-								$adv_video_keyframe_intrval = '-force_key_frames '.$encodingProfile[0]['adv_video_keyframe_intrval'];
+								$adv_video_keyframe_intrval = '-force_key_frames \'expr:gte(t,n_forced*'.$encodingProfile[0]['adv_video_keyframe_intrval'].')\'';
 							}
 							if($encodingProfile[0]['adv_video_profile'] != "" && $encodingProfile[0]['adv_video_profile'] != 0)
 							{
@@ -3078,6 +3092,7 @@ error_reporting(E_ALL);
 			curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
 			curl_setopt($curl, CURLOPT_HEADER, true);    // we want headers
 			curl_setopt($curl, CURLOPT_NOBODY, true);    // we don't need body
+			curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
 			curl_setopt($curl, CURLOPT_RETURNTRANSFER,1);
 			curl_setopt($curl, CURLOPT_TIMEOUT_MS, 300); //timeout in seconds
 			curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
@@ -4402,6 +4417,8 @@ error_reporting(E_ALL);
 			{
 				$data['channels'] = $this->common_model->getAllChannels(0);
 				$channelAdmin = $this->common_model->getAllChannels(0);
+				$data['channelTabs'] = $this->common_model->getAllChannelGroups(0);
+				$data['channelGroupMapping'] = $this->common_model->getChannelGroupMapping($userdata['userid']);
 				if(sizeof($channelAdmin)>0)
 				{
 					foreach($channelAdmin as $ch)
@@ -4424,6 +4441,8 @@ error_reporting(E_ALL);
 				}
 				$data['channels'] = $this->common_model->getAllChannelsByUserids($USERidS);
 				$channelUser = $this->common_model->getAllChannelsByUserids($userdata['userid']);
+				$data['channelTabs'] = $this->common_model->getChannelGroups($USERidS);
+				$data['channelGroupMapping'] = $this->common_model->getChannelGroupMapping($userdata['userid']);
 				if(sizeof($channelUser)>0)
 				{
 					foreach($channelUser as $chu)
@@ -4434,8 +4453,6 @@ error_reporting(E_ALL);
 
 			}
 			$data['channelsLock'] = $channelsLocks;
-			$data['channelTabs'] = $this->common_model->getChannelGroups($userdata['userid']);
-			$data['channelGroupMapping'] = $this->common_model->getChannelGroupMapping($userdata['userid']);
 			$this->load->view('admin/header');
 			$this->load->view('admin/channels',$data);
 			$this->load->view('admin/footer');
@@ -4477,7 +4494,24 @@ error_reporting(E_ALL);
 					$data['encoders'] = $this->Groupadmin_model->getAllOnlineEncodersbyUserIdAndGroupId($userdata['userid'],$userdata['group_id']);
 					$data['profiles'] = $this->Groupadmin_model->getEncoderProfilesByUseridAndGroupId($userdata['userid'],$userdata['group_id']);
 				}
-				$data['channelgroups'] = $this->common_model->getChannelGroups($userdata['userid']);
+
+				if($userdata['user_type'] == 1)
+				{
+				  $data['channelgroups'] = $this->common_model->getAllChannelGroups(0);
+				}
+				elseif($userdata['user_type'] == 2 || $userdata['user_type'] == 3)
+				{
+				  $idsss = array($userdata['group_id']);
+				  $useids = $this->common_model->getUsersByGroupIds($idsss);
+				  $USERidS = array();
+				  if(sizeof($useids)>0)
+				  {
+				    foreach($useids as $u)
+				    {
+				      array_push($USERidS,$u['id']);
+				    }
+				  }
+				$data['channelgroups'] = $this->common_model->getChannelGroups($USERidS);}
 				$this->load->view('admin/header');
 				$this->load->view('admin/createchannels',$data);
 				$this->load->view('admin/footer');
@@ -4519,10 +4553,28 @@ error_reporting(E_ALL);
 					$data['profiles'] = $this->Groupadmin_model->getEncoderProfilesByUseridAndGroupId($userdata['userid'],$userdata['group_id']);
 					$data['channels'] = $this->common_model->getChannelbyId($id);
 			}
-			$data['channelgroups'] = $this->common_model->getChannelGroups($userdata['userid']);
+
+			if($userdata['user_type'] == 1)
+			{
+				$data['channelgroups'] = $this->common_model->getAllChannelGroups(0);
+			}
+			elseif($userdata['user_type'] == 2 || $userdata['user_type'] == 3)
+			{
+				$idsss = array($userdata['group_id']);
+				$useids = $this->common_model->getUsersByGroupIds($idsss);
+				$USERidS = array();
+				if(sizeof($useids)>0)
+				{
+					foreach($useids as $u)
+					{
+						array_push($USERidS,$u['id']);
+					}
+				}
+			$data['channelgroups'] = $this->common_model->getChannelGroups($USERidS);}
 			$data['ugroup'] = $userdata['group_id'];
 			//echo $userdata['group_id'].'__'.$userdata['userid'];
-			$data['channelMapping'] = $this->common_model->getChannelGroupMapping($userdata['userid']);
+			$GChannelId = $this->uri->segment(2);
+			$data['channelMapping'] = $this->common_model->getChannelGroupMappingByChannelId($GChannelId);
 
 			$this->load->view('admin/header');
 			$this->load->view('admin/updatechannel',$data);
@@ -5591,7 +5643,7 @@ error_reporting(E_ALL);
 							}
 							if($encodingProfile[0]['adv_video_keyframe_intrval'] != "")
 							{
-								$adv_video_keyframe_intrval = '-force_key_frames '.$encodingProfile[0]['adv_video_keyframe_intrval'];
+								$adv_video_keyframe_intrval = '-force_key_frames \'expr:gte(t,n_forced*'.$encodingProfile[0]['adv_video_keyframe_intrval'].')\'';
 							}
 							if($encodingProfile[0]['adv_video_profile'] != "" && $encodingProfile[0]['adv_video_profile'] != 0)
 							{
@@ -5647,7 +5699,7 @@ error_reporting(E_ALL);
 							}
 							if($encodingProfile[0]['adv_video_keyframe_intrval'] != "")
 							{
-								$adv_video_keyframe_intrval = '-force_key_frames '.$encodingProfile[0]['adv_video_keyframe_intrval'];
+								$adv_video_keyframe_intrval = '-force_key_frames \'expr:gte(t,n_forced*'.$encodingProfile[0]['adv_video_keyframe_intrval'].')\'';
 							}
 							if($encodingProfile[0]['adv_video_profile'] != "" && $encodingProfile[0]['adv_video_profile'] != 0)
 							{
@@ -6150,6 +6202,8 @@ error_reporting(E_ALL);
 
 					$cdn = new Google_Service_YouTube_CdnSettings();
 					$cdn->setFormat("1080p");
+					$cdn->setframeRate("30fps");
+					$cdn->setresolution("1080p");
 
 					$cdn->setIngestionType('rtmp');
 					$statsss = new Google_Service_YouTube_LiveStreamStatus();
@@ -8988,6 +9042,7 @@ $xmlll ='<PushPublishStream serverName="_defaultServer_">
 								"host"=>$RtmpAr[0],
 								"streamName"=>$cleanData['rtmp_stream_key'],
 								"port"=>$RtmpAr[1],
+								"sendSSL"=>"true",
 								"userName"=>$uname,
 								"password"=>$pass,
 								"application"=>$RTMPURL[3],

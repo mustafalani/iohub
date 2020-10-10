@@ -895,7 +895,7 @@ class Api extends REST_Controller {
 							}
 							if($encodingProfile[0]['adv_video_keyframe_intrval'] != "")
 							{
-								$adv_video_keyframe_intrval = '-force_key_frames '.$encodingProfile[0]['adv_video_keyframe_intrval'];
+								$adv_video_keyframe_intrval = '-force_key_frames \'expr:gte(t,n_forced*'.$encodingProfile[0]['adv_video_keyframe_intrval'].')\'';
 							}
 							if($encodingProfile[0]['adv_video_profile'] != "" && $encodingProfile[0]['adv_video_profile'] != 0)
 							{
@@ -951,7 +951,7 @@ class Api extends REST_Controller {
 							}
 							if($encodingProfile[0]['adv_video_keyframe_intrval'] != "")
 							{
-								$adv_video_keyframe_intrval = '-force_key_frames '.$encodingProfile[0]['adv_video_keyframe_intrval'];
+								$adv_video_keyframe_intrval = '-force_key_frames \'expr:gte(t,n_forced*'.$encodingProfile[0]['adv_video_keyframe_intrval'].')\'';
 							}
 							if($encodingProfile[0]['adv_video_profile'] != "" && $encodingProfile[0]['adv_video_profile'] != 0)
 							{
@@ -1252,7 +1252,7 @@ class Api extends REST_Controller {
 							}
 							if($encodingProfile[0]['adv_video_keyframe_intrval'] != "")
 							{
-								$adv_video_keyframe_intrval = '-force_key_frames '.$encodingProfile[0]['adv_video_keyframe_intrval'];
+								$adv_video_keyframe_intrval = '-force_key_frames \'expr:gte(t,n_forced*'.$encodingProfile[0]['adv_video_keyframe_intrval'].')\'';
 							}
 							if($encodingProfile[0]['adv_video_profile'] != "" && $encodingProfile[0]['adv_video_profile'] != 0)
 							{
@@ -1308,7 +1308,7 @@ class Api extends REST_Controller {
 							}
 							if($encodingProfile[0]['adv_video_keyframe_intrval'] != "")
 							{
-								$adv_video_keyframe_intrval = '-force_key_frames '.$encodingProfile[0]['adv_video_keyframe_intrval'];
+								$adv_video_keyframe_intrval = '-force_key_frames \'expr:gte(t,n_forced*'.$encodingProfile[0]['adv_video_keyframe_intrval'].')\'';
 							}
 							if($encodingProfile[0]['adv_video_profile'] != "" && $encodingProfile[0]['adv_video_profile'] != 0)
 							{
@@ -2456,7 +2456,7 @@ class Api extends REST_Controller {
 			}
 			if($encodingProfile[0]['adv_video_keyframe_intrval'] != "")
 			{
-				$adv_video_keyframe_intrval = '-force_key_frames '.$encodingProfile[0]['adv_video_keyframe_intrval'];
+				$adv_video_keyframe_intrval = '-force_key_frames \'expr:gte(t,n_forced*'.$encodingProfile[0]['adv_video_keyframe_intrval'].')\'';
 			}
 			if($encodingProfile[0]['adv_video_profile'] != "" && $encodingProfile[0]['adv_video_profile'] != 0)
 			{

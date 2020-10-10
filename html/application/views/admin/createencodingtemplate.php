@@ -75,7 +75,7 @@
       <div class="container-fluid">
       	<div class="animated fadeIn">
            <div class="card">
-           
+
             <form id="wowza-form" class="action-table" method="post" action="<?php echo site_url();?>admin/saveEncoderTemplate" enctype="multipart/form-data">
              <div class="card-header">Add Encoding Preset</div>
 				<div class="card-body">
@@ -105,7 +105,7 @@
          <div class="col-lg-12 col-12-12">
             <div class="content-box config-contentonly">
                <div class="config-container">
-               	
+
                	 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
                   <!-- === Nav tabs === -->
                   <div class="col-lg-12 conf " id="">
@@ -148,10 +148,11 @@
                                                 <span class="text-blue">Resolution</span>
                                                 <select class="form-control selectpicker" name="video_resolution" id="video_resolution">
                                                    <option value="0">-- Select --</option>
-                                                   <option value="qvga">320x240</option>
-                                                   <option value="vga">640x480</option>
+                                                   <option value="qvga">QVGA (320x240)</option>
+                                                   <option value="vga">VGA (640x480)</option>
                                                    <option value="ntsc">NTSC (720x480)</option>
                                                    <option value="pal">PAL (720x576)</option>
+                                                   <option value="640x360">360P (640x360)</option>
                                                    <option value="hd480">480P (852x480)</option>
                                                    <option value="hd720">720P (1280x720)</option>
                                                    <option value="hd1080">1080P (1920x1080)</option>
@@ -342,7 +343,7 @@
                      </div>
                      </div>
                      </div>
-					
+
                   </div>
                </div>
             </div>
@@ -352,9 +353,9 @@
 	        <button class="btn btn-sm btn-primary" type="submit">Save</button>
 	          <button class="btn btn-sm btn-danger" type="reset">Reset</button>
 	          </div>
-	          
+
 	          </form>
-	          
+
 			</div>
 		</div>
 	</div>

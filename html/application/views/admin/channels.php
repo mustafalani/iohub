@@ -698,6 +698,19 @@ if(sizeof($channelsLock)>0)
 																				}
 
 																				break;
+																			case 9:
+																				if($channel['is_record_channel'] == 1 && $channel['record_file'] != "")
+																				{
+																					echo '<label class="label label-output lbloutputtext">Rec</label> <label class="label label-output lblrecordtext">File</label> ';
+																					echo '<span data-container="body" data-toggle="tooltip" title="Click To Copy" data-placement="bottom" data-html="true" style="display: none;" class="copytoclipboardtext">'.$channel['output_mpeg_srt'].'</span>   <span data-container="body" data-toggle="tooltip" title="Click To Copy" data-placement="bottom" data-html="true" class="copyrecordfile">./recordings/'.$channel['record_file'].'</span>';
+																				}
+																				else
+																				{
+																					echo '<label class="label label-output lbloutputtext">Rec</label> ';
+																					echo '<span data-container="body" data-toggle="tooltip" title="Click To Copy" data-placement="bottom" data-html="true" style="display: none;" class="copytoclipboardtext">'.$channel['output_mpeg_srt'].'</span> ';
+																				}
+
+																				break;
 																		}
 
 																		break;
