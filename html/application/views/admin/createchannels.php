@@ -453,6 +453,7 @@ div.dropdown-menu li.picker-switch > a:hover, .dropdown-menu li.picker-switch > 
                                         <option value="0">- Select Preset -</option>
                                         <option value="-1">Use The Channel Encoding Preset</option>
                                         <option value="-2">Use The Default Encoder Recording Preset</option>
+                                        <option value="-3">Use Script</option>
                                         <?php
 											if(sizeof($profiles)>0)
 											{
@@ -464,6 +465,11 @@ div.dropdown-menu li.picker-switch > a:hover, .dropdown-menu li.picker-switch > 
 										?>
                                     </select>
                                 </div>
+                            </div>
+                            <div class="form-group col-lg-11">
+	                             <div class="row">
+                                    	<input type="text" placeholder="Recording Script" class="form-control" name="recording_preset_script" id="recording_preset_script"/>
+                                    </div>
                             </div>
 								<div class="form-group col-lg-11">
 									<div class="row">

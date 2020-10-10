@@ -80,9 +80,9 @@ $route['updatechannel/:num/(.*)'] = "admin/updatechannel/:num/(.*)";
 $route['allgroupuser/:num'] = "admin/allgroupuser/:num";
 $route['internalServerError'] = "admin/internalServerError";
 $route['notFound'] = "admin/notFound";
-$route['privacy'] = "home/privacy";
+$route['privacy'] = "admin/privacy";
+$route['terms'] = "admin/terms";
 $route['report/dblog'] = "admin/logs";
-$route['terms'] = "home/terms";
 $route['404_override'] = 'admin/notFound';
 $route['archive'] = 'admin/archive';
 $route['500_override'] = 'admin/internalServerError';
@@ -117,4 +117,3 @@ $route['temp'] = 'nebula/temp';
 $route['iotstream'] = 'extras/iotstream';
 $route['createIoTStream'] = 'extras/createIoTStream';
 $route['editiotstream/:num'] = 'extras/editiotstream/:num';
-

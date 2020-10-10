@@ -1,6 +1,19 @@
 <?php $this->load->view('admin/navigation.php');?>
 <?php $this->load->view('admin/leftsidebar.php');?>
 <?php $this->load->view('admin/rightsidebar.php');?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+	$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+		localStorage.setItem('activeTab', $(e.target).attr('href'));
+	});
+	var activeTab = localStorage.getItem('activeTab');
+	if(activeTab){
+		$('#appstarger a[href="' + activeTab + '"]').tab('show');
+	}
+});
+</script>
 <script type="text/javascript">
 	var applicationLocks = [];
 	var appTargets = [];

@@ -227,10 +227,10 @@ iframe.twitter-tweet p {
 									}
 									?>
 
-								<br/><br/>
+								<br/>
 									<div class="col-lg-12">
 									 <div class="btns-dv">
-                                    <div class="fb-notification alert-success alert-dismissable fade in">
+                                    <div class="fb-notification alert-success alert-dismissable fade in" style="opacity: 1;">
                                         <a href="#" class="close" data-dismiss="fb-notification" onclick="javascript:$(this).parent().parent().parent().fadeOut('slow');" aria-label="close">&times;</a>
                                         <?php
                                         	if($target[0]['shareon'] == "page")

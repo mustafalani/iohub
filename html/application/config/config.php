@@ -367,12 +367,12 @@ $config['encryption_key'] = 'EDCV^FR5tgb7u8%';
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
-//$config['sess_driver'] = 'database';
-$config['sess_driver'] = 'files';
+$config['sess_driver'] = 'database';
+//$config['sess_driver'] = 'files';
 
 $config['sess_cookie_name'] = 'ks_sessions';
 $config['sess_expiration'] = 72000;
-$config['sess_save_path'] = FCPATH.'application/ci_sessions/';
+//$config['sess_save_path'] = FCPATH.'application/ci_sessions/';
 $config['sess_match_ip'] = FALSE;
 $config['sess_use_database'] = TRUE;
 $config['sess_table_name'] = 'ks_sessions';
@@ -380,6 +380,8 @@ $config['sess_match_useragent'] = TRUE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
 
+ini_set( 'session.gc_probability',  1 );
+ini_set( 'session.gc_divisor',      100 );
 /*
 |--------------------------------------------------------------------------
 | Cookie Related Variables
@@ -559,12 +561,18 @@ $config['SDITOMPEGSRT']['output_type'] = "-f mpegts";
 $config['NDITOSDI']['input_type'] = "-f libndi_newtek";
 $config['NDITOSDI']['output_options'] = "";
 $config['NDITOSDI']['format_code'] = "";
-$config['NDITOSDI']['output_type'] = "-f decklink";
+$config['NDITOSDI']['output_type'] = "-vf mpdecimate,setpts=N/FRAME_RATE/TB -f decklink";
 
 $config['NDITONDI']['input_type'] = "-f libndi_newtek";
 $config['NDITONDI']['output_options'] = "";
 $config['NDITONDI']['format_code'] = "";
 $config['NDITONDI']['output_type'] = "-f libndi_newtek";
+
+$config['NDITOFILE']['input_type'] = "-f libndi_newtek";
+$config['NDITOFILE']['output_options'] = "";
+$config['NDITOFILE']['format_code'] = "";
+$config['NDITOFILE']['output_type'] = "-f libndi_newtek";
+
 
 $config['NDITORTMP']['input_type'] = "-f libndi_newtek";
 $config['NDITORTMP']['output_options'] = "";

@@ -3,9 +3,18 @@
 <?php $this->load->view('admin/navigation.php');?>
 <?php $this->load->view('admin/leftsidebar.php');?>
 <?php $this->load->view('admin/rightsidebar.php');?>
-<section class="content-wrapper">
-   <!-- ========= Main Content Start ========= -->
-   <div class="content">
+<main class="main">
+	   <!-- Breadcrumb-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="/applications">Apps</a>
+          </li>
+          <li class="breadcrumb-item active"><?php $appid = $this->uri->segment(3); $app = $this->common_model->getApplicationbyId($appid);?><?php echo $app[0]['application_name'];?></li>
+        </ol>
+        <div class="container-fluid">
+	        <div class="animated fadeIn">
+	        	<div class="card">
+	        		<div class="card-body">
     <?php if($this->session->flashdata('success')){ ?>
 	<div class="alert alert-success">
 	<a href="#" class="close" data-dismiss="alert">&times;</a>
@@ -27,43 +36,40 @@
 	<strong>Info!</strong> <?php echo $this->session->flashdata('info'); ?>
 	</div>
 <?php } ?>
-      <div class="content-container">
          <div class="row">
             <div class="col-lg-12 col-12-12">
-               <div class="content-box config-contentonly">
-                  <div class="config-container">
-                     <div class="tab-btn-container">
-                        <ul class="nav nav-tabs" role="tablist" id="appstarger">
-                           <li class="active"><a id="target" data-toggle="tab" href="#apps_tar">Targets</a></li>
-                        </ul>
-                     </div>
+              <div class="tab-btn-container">
+                 <ul class="nav nav-tabs" role="tablist" id="appstarger">
+                    <li class="nav-item">
+                      <a class="nav-link active show" id="target" data-toggle="tab" href="#apps_tar">Targets</a>
+                    </li>
+                 </ul>
+              </div>
                      <div class="tab-content">
 
                         <div id="apps_tar" class="tab-pane active">
-                           <div class="action-table">
+                           <div class="card-body">
                               <div class="row">
-                                 <div class="col-xs-12">
+                                 <div class="col-12" style="padding: 0;">
                                     <div class="box-header">
                                        <div class="btn-group">
-                                          <div class="custom-select">
 												<select class="form-control actionsel" id="actiontargetval1">
 													<option value ="">Action</option>
 													<option value ="Start">Start</option>
 													<option value ="Stop">Stop</option>
 													<option value ="Delete">Delete</option>
 												</select>
-											</div>
                                        </div>
-                                       <button type="button" class="btn btn-default submit" onclick="submitAllTargets('admin/targetActions');">Submit</button>
-                                       <a href="<?php echo site_url();?>admin/createtarget" class="add-btn">
+                                       <button type="button" class="btn btn-primary submit" onclick="submitAllTargets('admin/targetActions');">Submit</button>
+                                       <a href="<?php echo site_url();?>admin/createtarget" class="add-btn btn btn-primary float-right">
                                        <span><i class="fa fa-plus"></i>
 
                                         Target</span>
                                        </a>
                                     </div>
-                                    <div class="box">
-                                       <div class="box-body table-responsive no-padding">
-                                          <table class="table table-hover check-input targetTable">
+                                    <br>
+                                       <div class="table-responsive no-padding">
+                                          <table class="cstmtable table table-hover check-input targetTable">
                                              <tbody>
                                                 <tr>
                                                    <th><div class="boxes">
@@ -182,16 +188,15 @@
                                              </tbody>
                                           </table>
                                        </div>
-                                    </div>
                                  </div>
                               </div>
                            </div>
                         </div>
                      </div>
-                  </div>
-               </div>
             </div>
          </div>
       </div>
+      </div>
    </div>
-</section>
+   </div>
+</main>

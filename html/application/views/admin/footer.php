@@ -1,7 +1,7 @@
    </div>
   <footer class="app-footer">
       <div>
-        <a href="http://iohub.live">iohub v2.0 <span class="badge badge-warning">BETA</span></a>
+        <a href="http://iohub.live">iohub v2.1 <span class="badge badge-success">LIVE</span></a>
         <span>&copy; - Copyright <a href="https://kurrent.tv">Kurrent TV </a>All rights reserved.</span>
       </div>
       <div class="ml-auto">
@@ -380,6 +380,7 @@ function playStreams(id)
 		swal("Warning","Enter RTMP URL First!", 'warning');
 	}
 }
+
 function playAppSRC(src)
 {
 	if(src != "")
@@ -487,6 +488,84 @@ $(document).on('click','.plapp',function(){
 
 
 });
+$(document).on('click','.recordstream',function(){
+  if($(this).find('i').hasClass("fa-circle"))
+	{
+		$(this).find('i').removeClass('fa-circle');
+		$(this).find('i').addClass('fa-stop');
+		var startrecurl = $(this).attr("startrecurl");
+    swal({
+      title: "Are you sure?",
+      text: "You want to start recording!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonClass: "btn-danger",
+      confirmButtonText: "Yes, record it!",
+      closeOnConfirm: true
+    },
+    function(){
+			$.ajax({
+		        url: baseURL + "admin/startRecording",
+		        data:{'url':startrecurl},
+		        type:'post',
+		        dataType:'json',
+		        success:function(jsonResponse){
+		            if(jsonResponse.status == true)
+		            {
+						toastr['success']('Recoding Started Successfully!');
+					}
+		            if(jsonResponse.status == false)
+		            {
+		            	toastr['error'](jsonResponse.response);
+					}
+				},
+		        error:function(){
+		        	toastr['error']('Error occured while performing action');
+				}
+			});
+		}
+    );
+	}
+	else if($(this).find('i').hasClass("fa-stop"))
+	{
+		$(this).find('i').removeClass('fa-stop');
+		$(this).find('i').addClass('fa-circle');
+    var stoprecurl = $(this).attr("stoprecurl");
+    swal({
+      title: "Are you sure?",
+      text: "You want to stop the recording!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonClass: "btn-danger",
+      confirmButtonText: "Yes, stop it!",
+      closeOnConfirm: true
+      },
+      function(){
+  			$.ajax({
+  		        url: baseURL + "admin/stopRecording",
+  		        data:{'url':stoprecurl},
+  		        type:'post',
+  		        dataType:'json',
+  		        success:function(jsonResponse){
+  		            if(jsonResponse.status == true)
+  		            {
+  						toastr['success']('Recoding Stopped Successfully!');
+  					}
+  		            if(jsonResponse.status == false)
+  		            {
+  		            	toastr['error'](jsonResponse.response);
+  					}
+  				},
+  		        error:function(){
+  		        	toastr['error']('Error occured while performing action');
+  				}
+  			});
+  		}
+    );
+
+	}
+});
+
 function validateUrl(url) {
     if (url == "") {
         $("#url-form").removeClass("has-success");

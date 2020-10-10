@@ -161,7 +161,7 @@
                 <div class="row">
                   <div class="col-sm-5">
                     <h4 class="card-title mb-0">Traffic</h4>
-                    <div class="small text-muted">November 2017</div>
+                    <div class="small text-muted"><?php echo date("F Y");?></div>
                   </div>
                   <!-- /.col-->
                   <div class="col-sm-7 d-none d-md-block">

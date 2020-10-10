@@ -1,6 +1,19 @@
 <?php $this->load->view('admin/navigation.php');?>
 <?php $this->load->view('admin/leftsidebar.php');?>
 <?php $this->load->view('admin/rightsidebar.php');?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+	$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+		localStorage.setItem('activeTab', $(e.target).attr('href'));
+	});
+	var activeTab = localStorage.getItem('activeTab');
+	if(activeTab){
+		$('#appstarger a[href="' + activeTab + '"]').tab('show');
+	}
+});
+</script>
 <style type="text/css">
 	table tr td.tdimg{
 		text-align: left;
@@ -148,9 +161,9 @@ function codec($codec){
 	   <!-- Breadcrumb-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="#">Home</a>
+            <a href=<?php echo site_url();?>>Home</a>
           </li>
-          <li class="breadcrumb-item active">Assets</li>
+          <li class="breadcrumb-item active"><?php $nebula_id = $this->uri->segment(2);?><?php $nebula = $this->common_model->getNebulabyId($nebula_id);?><?php echo $nebula[0]['encoder_name'];?></li>
         </ol>
         <div class="container-fluid">
         <div class="animated fadeIn">

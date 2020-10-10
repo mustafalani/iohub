@@ -456,6 +456,7 @@ class Api extends REST_Controller {
 	}
     public function saveTargetSchedule_post()
     {
+    	$userdata = $this->session->userdata('user_data');
 		$response = array('status'=>FALSE,'response'=>array(),'message'=>"");
 		$cleanData = $this->security->xss_clean($this->input->post(NULL, TRUE));
 		$id = $cleanData['id'];
@@ -481,7 +482,8 @@ class Api extends REST_Controller {
 				'start_job'=>$startfile,
 				'stop_job'=>$stopfile,
 				'start_filename'=>$startname,
-				'stop_filename'=>$stopname
+				'stop_filename'=>$stopname,
+				'uid'=>$userdata['userid']
 			);
 			$sts = $this->Common_model->insertSchedule($dataS);
 			if($sts)
@@ -608,6 +610,7 @@ class Api extends REST_Controller {
 	}
     public function saveChannelSchedule_post()
     {
+    	$userdata = $this->session->userdata('user_data');
 		$response = array('status'=>FALSE,'response'=>array(),'message'=>"");
 		$cleanData = $this->security->xss_clean($this->input->post(NULL, TRUE));
 		$id = $cleanData['id'];
@@ -666,6 +669,9 @@ class Api extends REST_Controller {
 					case "7":
 					$type = $type."MPEG-SRT";
 					break;
+          case "9":
+          $type = $type."FILE";
+          break;
 				}
 			}
 
@@ -687,7 +693,8 @@ class Api extends REST_Controller {
 				'start_job'=>$startfile,
 				'stop_job'=>$stopfile,
 				'start_filename'=>$startname,
-				'stop_filename'=>$stopname
+				'stop_filename'=>$stopname,
+				'uid'=>$userdata['userid']
 			);
 			$sts = $this->Common_model->insertSchedule($dataS);
 			if($sts)
@@ -739,12 +746,12 @@ class Api extends REST_Controller {
 		$timeArray = explode(":",$dateTimeArray[1]);
 		return array("day"=>$dateArray[0],"month"=>$dateArray[1],"year"=>$dateArray[2],"h"=>$timeArray[0],"m"=>$timeArray[1],"s"=>$timeArray[2]);
 	}
-	
+
 	function getDateTime($date)
 	{
-		$dateTimeArray = explode(" ",$date);		
+		$dateTimeArray = explode(" ",$date);
 		$dateArray = explode("/",$dateTimeArray[0]);
-		$timeArray = explode(":",$dateTimeArray[1]);		
+		$timeArray = explode(":",$dateTimeArray[1]);
 		return array("day"=>$dateArray[0],"month"=>$dateArray[1],"year"=>$dateArray[2],"h"=>$timeArray[0],"m"=>$timeArray[1],"s"=>$timeArray[2]);
 	}
     public function startChannel_post()
@@ -844,6 +851,12 @@ class Api extends REST_Controller {
 						#$options = '-vf "tinterlace=2,format=pix_fmts=uyvy422,fps=50"'; commentd By Mustafa 16Aug
 						$output_name = $channel[0]["ndi_name"];
 						break;
+            case FILE:
+						$output_type = "";
+						//$options = '-vf "scale=interl=1,fps=50,format=pix_fmts=uyvy422"';
+						#$options = '-vf "tinterlace=2,format=pix_fmts=uyvy422,fps=50"'; commentd By Mustafa 16Aug
+						$output_name = "";
+						break;
 						case RTMP:
 						$application = $this->Common_model->getAppbyId($channel[0]['channel_apps']);
 						$encodingProfile = $this->Common_model->getEncodingTemplateById($channel[0]['encoding_profile']);
@@ -882,7 +895,7 @@ class Api extends REST_Controller {
 							}
 							if($encodingProfile[0]['adv_video_keyframe_intrval'] != "")
 							{
-								$adv_video_keyframe_intrval = '-force_key_frames '.$encodingProfile[0]['adv_video_keyframe_intrval'];
+								$adv_video_keyframe_intrval = '-force_key_frames \'expr:gte(t,n_forced*'.$encodingProfile[0]['adv_video_keyframe_intrval'].')\'';
 							}
 							if($encodingProfile[0]['adv_video_profile'] != "" && $encodingProfile[0]['adv_video_profile'] != 0)
 							{
@@ -938,7 +951,7 @@ class Api extends REST_Controller {
 							}
 							if($encodingProfile[0]['adv_video_keyframe_intrval'] != "")
 							{
-								$adv_video_keyframe_intrval = '-force_key_frames '.$encodingProfile[0]['adv_video_keyframe_intrval'];
+								$adv_video_keyframe_intrval = '-force_key_frames \'expr:gte(t,n_forced*'.$encodingProfile[0]['adv_video_keyframe_intrval'].')\'';
 							}
 							if($encodingProfile[0]['adv_video_profile'] != "" && $encodingProfile[0]['adv_video_profile'] != 0)
 							{
@@ -1239,7 +1252,7 @@ class Api extends REST_Controller {
 							}
 							if($encodingProfile[0]['adv_video_keyframe_intrval'] != "")
 							{
-								$adv_video_keyframe_intrval = '-force_key_frames '.$encodingProfile[0]['adv_video_keyframe_intrval'];
+								$adv_video_keyframe_intrval = '-force_key_frames \'expr:gte(t,n_forced*'.$encodingProfile[0]['adv_video_keyframe_intrval'].')\'';
 							}
 							if($encodingProfile[0]['adv_video_profile'] != "" && $encodingProfile[0]['adv_video_profile'] != 0)
 							{
@@ -1295,7 +1308,7 @@ class Api extends REST_Controller {
 							}
 							if($encodingProfile[0]['adv_video_keyframe_intrval'] != "")
 							{
-								$adv_video_keyframe_intrval = '-force_key_frames '.$encodingProfile[0]['adv_video_keyframe_intrval'];
+								$adv_video_keyframe_intrval = '-force_key_frames \'expr:gte(t,n_forced*'.$encodingProfile[0]['adv_video_keyframe_intrval'].')\'';
 							}
 							if($encodingProfile[0]['adv_video_profile'] != "" && $encodingProfile[0]['adv_video_profile'] != 0)
 							{
@@ -2443,7 +2456,7 @@ class Api extends REST_Controller {
 			}
 			if($encodingProfile[0]['adv_video_keyframe_intrval'] != "")
 			{
-				$adv_video_keyframe_intrval = '-force_key_frames '.$encodingProfile[0]['adv_video_keyframe_intrval'];
+				$adv_video_keyframe_intrval = '-force_key_frames \'expr:gte(t,n_forced*'.$encodingProfile[0]['adv_video_keyframe_intrval'].')\'';
 			}
 			if($encodingProfile[0]['adv_video_profile'] != "" && $encodingProfile[0]['adv_video_profile'] != 0)
 			{

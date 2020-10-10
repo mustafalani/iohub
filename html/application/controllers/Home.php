@@ -1,7 +1,7 @@
 <?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
 	class Home extends CI_Controller {
-		
+
 		/**
 			* Index Page for this controller.
 			*
@@ -24,13 +24,13 @@
 			$this->load->helper('form');
 			$this->load->helper('security');
 			$this->load->library('form_validation');
-			$this->load->library('session');	
+			$this->load->library('session');
 			$this->load->library('encrypt');
-			$this->load->helper('date');   
-			$this->load->model('user_model'); 
-			$this->load->model('common_model');  
+			$this->load->helper('date');
+			$this->load->model('user_model');
+			$this->load->model('common_model');
 			$this->load->helper('captcha');
-		} 
+		}
 		public function not_found()
 		{
 			$this->load->view('site/header');
@@ -39,26 +39,26 @@
 		}
 		public function createasset()
 		{
-			$URL = "https://kurrenttv.nbla.cloud/login";			
-			$ch1 = curl_init();	
-			curl_setopt($ch1,CURLOPT_URL, $URL);	
-			curl_setopt($ch1, CURLOPT_POST, 1);	
-			curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);	
+			$URL = "https://kurrenttv.nbla.cloud/login";
+			$ch1 = curl_init();
+			curl_setopt($ch1,CURLOPT_URL, $URL);
+			curl_setopt($ch1, CURLOPT_POST, 1);
+			curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($ch1,CURLOPT_POSTFIELDS, "login=demo&password=demo&api=1");
-			curl_setopt($ch1, CURLOPT_HTTPHEADER, array('Content-Type'=>'application/json'));			
-			
-			$result = curl_exec($ch1);				
-			$jsonData = rtrim($result, "\0");		
-			$resultarray = json_decode($jsonData,TRUE);				
+			curl_setopt($ch1, CURLOPT_HTTPHEADER, array('Content-Type'=>'application/json'));
+
+			$result = curl_exec($ch1);
+			$jsonData = rtrim($result, "\0");
+			$resultarray = json_decode($jsonData,TRUE);
 			curl_close($ch1);
-		
+
 			$curl = curl_init();
 			$fields = json_encode(array("object_type" =>'asset','objects'=>array(0),'data'=>array('title'=>'test','subtitle'=>'testing','description'=>'testing desc','id_folder'=>1),'session_id'=>$resultarray['session_id']));
 			curl_setopt_array($curl, array(
 			  CURLOPT_URL => "https://kurrenttv.nbla.cloud/api/set",
 			  CURLOPT_RETURNTRANSFER => true,
 			  CURLOPT_ENCODING => "",
-			  CURLOPT_MAXREDIRS => 10,			 
+			  CURLOPT_MAXREDIRS => 10,
 			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			  CURLOPT_CUSTOMREQUEST => "POST",
 			  CURLOPT_POSTFIELDS =>$fields,
@@ -76,7 +76,7 @@
 			echo $response;
 			print_r($response);
 			curl_close($curl);
-			
+
 			if ($err) {
 			  echo "cURL Error #:" . $err;
 			} else {
@@ -85,26 +85,26 @@
 		}
 		public function testcurl()
 		{
-			$URL = "https://kurrenttv.nbla.cloud/login";			
-			$ch1 = curl_init();	
-			curl_setopt($ch1,CURLOPT_URL, $URL);	
-			curl_setopt($ch1, CURLOPT_POST, 1);	
-			curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);	
+			$URL = "https://kurrenttv.nbla.cloud/login";
+			$ch1 = curl_init();
+			curl_setopt($ch1,CURLOPT_URL, $URL);
+			curl_setopt($ch1, CURLOPT_POST, 1);
+			curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($ch1,CURLOPT_POSTFIELDS, "login=demo&password=demo&api=1");
-			curl_setopt($ch1, CURLOPT_HTTPHEADER, array('Content-Type'=>'application/json'));			
-			
-			$result = curl_exec($ch1);				
-			$jsonData = rtrim($result, "\0");		
-			$resultarray = json_decode($jsonData,TRUE);				
+			curl_setopt($ch1, CURLOPT_HTTPHEADER, array('Content-Type'=>'application/json'));
+
+			$result = curl_exec($ch1);
+			$jsonData = rtrim($result, "\0");
+			$resultarray = json_decode($jsonData,TRUE);
 			curl_close($ch1);
-		
+
 			$curl = curl_init();
 			$fields = json_encode(array("object_type" =>'asset','id_view'=>1,'session_id'=>$resultarray['session_id']));
 			curl_setopt_array($curl, array(
 			  CURLOPT_URL => "https://kurrenttv.nbla.cloud/api/get",
 			  CURLOPT_RETURNTRANSFER => true,
 			  CURLOPT_ENCODING => "",
-			  CURLOPT_MAXREDIRS => 10,			 
+			  CURLOPT_MAXREDIRS => 10,
 			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			  CURLOPT_CUSTOMREQUEST => "POST",
 			  CURLOPT_POSTFIELDS =>$fields,
@@ -121,7 +121,7 @@
 			$err = curl_error($curl);
 
 			curl_close($curl);
-			
+
 			if ($err) {
 			  echo "cURL Error #:" . $err;
 			} else {
@@ -135,19 +135,19 @@
 			{
 			    $roles = $this->config->item('roles_id');
 				$role = $roles[$userdata['user_type']];
-				redirect(site_url() . 'dashboard');
+				redirect(site_url() . 'configuration');
 			}
 			$this->load->view('site/header');
 			$this->load->view('site/login');
 			$this->load->view('site/footer');
-			
+
 		}
 		public function test($body)
 		{
 			$data = $_POST;
-			
+
 			print_r($body);
-			
+
 		}
 		public function privacy()
 		{
@@ -176,7 +176,7 @@
 			return implode('', $temp_array);
 		}
 		 public function refresh(){
-		 	$actual_link =  $_SERVER['HTTP_REFERER'];	
+		 	$actual_link =  $_SERVER['HTTP_REFERER'];
 	        $config = array(
 	            'img_path'      => FCPATH.'public/site/main/captcha/',
 	            'img_url'       => base_url().'public/site/main/captcha/',
@@ -192,7 +192,7 @@
 	         echo $captcha['image'];
 	    }
 		public function forgotPassword()
-		{			
+		{
 			$config = array(
 			    'img_path'      => FCPATH.'public/site/main/captcha/',
 			    'img_url'       => base_url().'public/site/main/captcha/',
@@ -210,33 +210,33 @@
 				);
 			$captcha = create_captcha($config);
 			 $this->session->unset_userdata('captchaCode');
-	        $this->session->set_userdata('captchaCode', $captcha['word']);	        
+	        $this->session->set_userdata('captchaCode', $captcha['word']);
 	        $data['captchaImg'] = $captcha['image'];
 			$this->load->view('site/header');
 			$this->load->view('site/forgotpassword',$data);
 			$this->load->view('site/footer');
 		}
-		public function forgot_password() 
+		public function forgot_password()
 		{
-			
+
 			$this->form_validation->set_rules('email', 'Email', 'required|valid_email|min_length[5]|max_length[125]');
-			if ($this->form_validation->run() == FALSE) 
+			if ($this->form_validation->run() == FALSE)
 			{
 				$this->session->set_flashdata('message_type', 'error');
-				$this->session->set_flashdata('error', 'Wrong Email Id');	
-			} 
-			else 
-			{	
+				$this->session->set_flashdata('error', 'Wrong Email Id');
+			}
+			else
+			{
 				$post = $this->input->post(NULL, TRUE);
 				$cleanPost = $this->security->xss_clean($post);
-				
+
 					$email = $this->input->post('email');
 					$this->db->where('email_id', $email);
 					$this->db->from('iccr_users');
 					$num_res = $this->db->count_all_results();
-					
-					
-					if ($num_res == 1) 
+
+
+					if ($num_res == 1)
 					{
 						// Make a small string (code) to assign to the user // to indicate they've requested a change of // password
 						$code = mt_rand('5000', '200000');
@@ -245,86 +245,86 @@
 						'token' => $code,
 						'pass_updated_count'=>0
 						);
-						
+
 						$this->db->where('email_id', $email);
-						if ($this->db->update('iccr_users', $data)) 
+						if ($this->db->update('iccr_users', $data))
 						{
-							
-							
+
+
 							// Update okay, send email
 							$url     = site_url() . 'home/completePassword/' .$code;
-							
+
 							$link    = '<a href="' . $url . '">Please click the link to reset the password! »</a>';
-							$message = '';                
+							$message = '';
 							$message .= 'Please click the link below to reset your password. <br>';
-							
+
 							$message .= $link;
 							$data = array(
-							'content' => $message					   
+							'content' => $message
 							);
 							$config = Array(
-							 'mailtype' => 'html'				        
+							 'mailtype' => 'html'
 							);
-							$content = $this->load->view('change_password',$data, true); 
-							//$from_email = "diritc.iccr@gov.in"; 
-							$from_email = "yashpal.sharma@velocis.co.in"; 
-							$to_email = $email; 			   
+							$content = $this->load->view('change_password',$data, true);
+							//$from_email = "diritc.iccr@gov.in";
+							$from_email = "yashpal.sharma@velocis.co.in";
+							$to_email = $email;
 							/* Load email library */
-							$this->load->library('email',$config);			   
-							$this->email->from($from_email, 'Indian Council for Cultural Relations (ICCR)'); 
+							$this->load->library('email',$config);
+							$this->email->from($from_email, 'Indian Council for Cultural Relations (ICCR)');
 							$this->email->to($to_email);
-							$this->email->subject('Indian Council for Cultural Relations (ICCR)'); 
-							$this->email->message($content);			   
-							if($this->email->send()) 
+							$this->email->subject('Indian Council for Cultural Relations (ICCR)');
+							$this->email->message($content);
+							if($this->email->send())
 							{
 								$this->session->set_flashdata('message_type', 'success');
 								$this->session->set_flashdata('success', 'Kindly Check Your Email to Reset Password!');
 								redirect(site_url().'home/forgotPassword');
-								
+
 							}
-							else 
+							else
 							{
-								
+
 								$this->session->set_flashdata('message_type', 'error');
 								$this->session->set_flashdata('error', 'Email Not Send');
 								redirect(site_url().'home/forgotPassword');
 							}
-							
-							
-							
-						} 
-						else 
-						{ 
+
+
+
+						}
+						else
+						{
 							$this->session->set_flashdata('message_type', 'error');
 							$this->session->set_flashdata('error', 'Wrong Email Id');
 							redirect(site_url().'home/forgotPassword');
 						}
-					} 
+					}
 					else
-					{ 
+					{
 						$this->session->set_flashdata('message_type', 'error');
 						$this->session->set_flashdata('error', 'Wrong Email Id');
 						redirect(site_url().'home/forgotPassword');
 					}
-				
-				
+
+
 			}
 		}
-		public function completePassword() 
+		public function completePassword()
 		{
-		
+
 			$data['salt'] = uniqid(rand(59999, 199999));
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('code', 'Code', 'required|min_length[4]|max_length[50]');
 			$this->form_validation->set_rules('email', 'Email', 'required|valid_email|min_length[5]|max_length[125]');
 			$this->form_validation->set_rules('password', 'Password', 'required|min_length[8]|max_length[125]');
 			$this->form_validation->set_rules('password2', 'Confirmation Password', 'required|min_length[8]|max_length[45]|matches[password]');
-			
+
 			// Get Code from URL or POST and clean up
 			 $var = $this->uri->segment(3);
 			if(!empty($var))
 			{
-				$passUpdatedCount = $this->common_model->checkPasswordUpdatedCount($var);	
+				$passUpdatedCount = $this->common_model->checkPasswordUpdatedCount($var);
 			//echo "<pre>";print_r($passUpdatedCount);die;
 				if($passUpdatedCount[0]['pass_updated_count'] == 1)
 				{
@@ -334,41 +334,41 @@
 					return false;
 				}
 			}
-			
-			if($this->input->post()) 
+
+			if($this->input->post())
 			{
 				$data['code'] = xss_clean($this->input->post('code'));
-			} 
-			else 
+			}
+			else
 			{
 				$data['code'] = xss_clean($this->uri->segment(3));
 			}
-			
-			if($this->form_validation->run() == FALSE) 
+
+			if($this->form_validation->run() == FALSE)
 			{
-		
+
 				$data['captcha'] = $this->getCaptchaForPassword();
 				$this->load->view('site/header');
 				$this->load->view('site/new_password',$data);
 				$this->load->view('site/footer');
-			} 
-			else 
+			}
+			else
 			{
 				// Does code from input match the code against the // email
 				// $this->load->model('Signin_model');
 				$post = $this->input->post(NULL, TRUE);
-				$cleanPost = $this->security->xss_clean($post);				
+				$cleanPost = $this->security->xss_clean($post);
 				if($this->isValidCaptch($cleanPost['userCaptcha']))
 				{
 					$email = xss_clean($this->input->post('email'));
-					if (!$this->common_model->does_code_match($data['code'], $email)) 
+					if (!$this->common_model->does_code_match($data['code'], $email))
 					{
 						// Code doesn't match
 						$this->session->set_flashdata('message_type', 'error');
 						$this->session->set_flashdata('error', 'Your Email is not Valid Please Try Again.');
 						redirect(site_url().'home/completePassword');
-					} 
-					else 
+					}
+					else
 					{
 						$password = $this->input->post('password');
 						$hash = $password;
@@ -377,8 +377,8 @@
 						'password' => $hash,
 						'pass_updated_count'=>1
 						);
-						
-						if ($this->common_model->update_user($data, $email)) 
+
+						if ($this->common_model->update_user($data, $email))
 						{
 							$this->session->set_flashdata('message_type', 'success');
 							$this->session->set_flashdata('success', 'Password Update Successfully!');
@@ -388,7 +388,7 @@
 						{
 							$this->session->set_flashdata('message_type', 'error');
 							$this->session->set_flashdata('error', 'Password is not Update Successfully');
-							redirect(site_url().'home');							 
+							redirect(site_url().'home');
 						}
 					}
 				}
@@ -417,25 +417,25 @@
 			'shadow_color' => '#fff',
 			'shadow_offset_x' => -1,
 			'shadow_offset_y' => 1
-			));	
+			));
 			$this->session->set_userdata('captcha_code',$data['captcha']);
-			
-			return $data; 
+
+			return $data;
 		}
 		function isValidCaptch($captchText)
 		{
 			$sessionData = $this->session->userdata('captcha_code');
 			$sessionText = $sessionData['code'];
-			
+
 			return ($captchText == $sessionText) ? TRUE : FALSE;
 		}
-	
+
 		public function register()
-		{	
+		{
 			$this->load->view('site/header');
 			$this->load->view('site/register');
 			$this->load->view('site/footer');
-		}	
+		}
 		public function createGroup()
 		{
 			try{
@@ -446,26 +446,26 @@
 		        $this->form_validation->set_rules('lname', 'Last Name', 'required');
 		        $this->form_validation->set_rules('timezone', 'Time Zone', 'required');
 		        $this->form_validation->set_rules('timeformat', 'Time Format', 'required');
-		        $this->form_validation->set_rules('password', 'Password', 'required');	       
+		        $this->form_validation->set_rules('password', 'Password', 'required');
 		        $this->form_validation->set_rules('passwordagain', 'Confirm Password', 'required');
 		        $post     = $this->input->post();
 		        $actual_link =  $_SERVER['HTTP_REFERER'];
-		        $clean   = $this->security->xss_clean($this->input->post(NULL, TRUE));	
+		        $clean   = $this->security->xss_clean($this->input->post(NULL, TRUE));
 		        if ($this->form_validation->run() == FALSE) {
 	        	    $this->session->set_flashdata('message_type', 'error');
 					$this->session->set_flashdata('error', validation_errors());
-					redirect($actual_link);		           
-		        } 
-		        else 
-		        {		        	
-	    		    if($this->user_model->isDuplicate($this->input->post('email_id'))) 
+					redirect($actual_link);
+		        }
+		        else
+		        {
+	    		    if($this->user_model->isDuplicate($this->input->post('email_id')))
 	    		    {
 	    		     	$this->session->set_flashdata('message_type', 'error');
 						$this->session->set_flashdata('error', 'Email Id Already Exist!');
-						redirect($actual_link);	    	
+						redirect($actual_link);
 		            }
 		            else
-		            {			
+		            {
 		            	$cleanData = $this->security->xss_clean($this->input->post(NULL, TRUE));
 		                $userData = array(
 		                	'username'=>$cleanData['username'],
@@ -479,52 +479,52 @@
 		                	'role_id'=>2,
 		                	'created'=>time()
 		                );
-		                $id      = $this->user_model->insertUser($userData);	
+		                $id      = $this->user_model->insertUser($userData);
 		                $token   = $this->user_model->insertToken($id);
 		                $qstring = $this->base64url_encode($token);
 		                $url     = site_url() . 'home/complete/token/'.$qstring;
 		                $link    = '<a href="' . $url . '">Confirm my email and create my account! »</a>';
-		                $message = '';                
+		                $message = '';
 		                $message .= '<strong>Please confirm your email address.</strong><br><br>';
 		                $message .= 'You are almost there! Please click the link below to create your KSM account. <br>';
-		                                
+
 		                $message .= $link;
 	                	$data = array(
-						    'content' => $message					   
+						    'content' => $message
 						);
 	                	$config = Array(
-					        'mailtype' => 'html'				        
+					        'mailtype' => 'html'
 					     );
-					     $content = $this->load->view('mail_signup',$data, true); 
-					     $from_email = "accounts@ksm.com"; 
-						 $to_email = $this->input->post('email_id'); 			   
+					     $content = $this->load->view('mail_signup',$data, true);
+					     $from_email = "accounts@ksm.com";
+						 $to_email = $this->input->post('email_id');
 						 /* Load email library */
-						 $this->load->library('email',$config);			   
-						 $this->email->from($from_email, 'Kurrent Stream Manager'); 
+						 $this->load->library('email',$config);
+						 $this->email->from($from_email, 'Kurrent Stream Manager');
 						 $this->email->to($to_email);
-						 $this->email->subject('Kurrent Stream Manager Account Activation'); 
-						 $this->email->message($content); 			   
-						 if($this->email->send()) 
-						 {						 	
+						 $this->email->subject('Kurrent Stream Manager Account Activation');
+						 $this->email->message($content);
+						 if($this->email->send())
+						 {
 						 	$this->session->set_flashdata('message_type', 'success');
 							$this->session->set_flashdata('success', 'Registration Sucessfully! Please check your email inbox/spam to activate the account!');
-							redirect($actual_link);	 
-						 }					
-						 else 
+							redirect($actual_link);
+						 }
+						 else
 						 {
 						 	$this->session->set_flashdata('message_type', 'error');
 							$this->session->set_flashdata('error', 'Registration Sucessfully! But due to technical problem mail not sent!');
-							redirect($actual_link);	
-						 }		
-		            }    	
-		            
+							redirect($actual_link);
+						 }
+		            }
+
 	        	}
 			}
 			catch(Exception $e)
 			{
 		 		$this->session->set_flashdata('message_type', 'error');
 				$this->session->set_flashdata('error', 'Internal Server Error. Please Try After Some Time');
-				redirect($actual_link);				 
+				redirect($actual_link);
 			}
 		}
 		public function complete()
@@ -535,7 +535,7 @@
 				$user_info  = $this->user_model->isTokenValid($cleanToken);
 				if (!is_object($user_info)) {
 					echo '<script>window.location.href="'.site_url().'home?text=Token is invalid or expired!.&type=Error Message&at=danger&redirect='.site_url().'home";</script>';
-					return;  
+					return;
 				}
 				$data = array(
 	            'firstName' => $user_info->username,
@@ -564,36 +564,36 @@
 						'userid'=> $userInfo->id,
 						'fname'=> $userInfo->username,
 						'email'=> $userInfo->email_id,
-						'user_type'=> $userInfo->user_type								
+						'user_type'=> $userInfo->user_type
 						);
-						$this->session->set_userdata('user_data',$datas);   
-						echo '<script>window.location.href="'.site_url().'home?text=Login Successfully!.&type=Thank You!&at=success&redirect='.site_url().'Applicant/dashboard";</script>';       
-						
+						$this->session->set_userdata('user_data',$datas);
+						echo '<script>window.location.href="'.site_url().'home?text=Login Successfully!.&type=Thank You!&at=success&redirect='.site_url().'Applicant/dashboard";</script>';
+
 					}
 					else
 					{
-						if (!$userInfo) {            	
+						if (!$userInfo) {
 							$this->session->set_flashdata('flash_message', 'There was a problem updating your record');
-							echo '<script>window.location.href="'.site_url().'home?text=There was a problem updating your record!.&type=Error Message!&at=danger&redirect='.site_url().'home";</script>';  
+							echo '<script>window.location.href="'.site_url().'home?text=There was a problem updating your record!.&type=Error Message!&at=danger&redirect='.site_url().'home";</script>';
 						}
 					}
 				}
 			}
 			catch(Exception $e)
 			{
-				echo '<script>window.location.href="'.site_url().'home?text=Internal Server Error. Try After Some Time!&type=Error Message!&at=danger&redirect='.site_url().'home";</script>';			
+				echo '<script>window.location.href="'.site_url().'home?text=Internal Server Error. Try After Some Time!&type=Error Message!&at=danger&redirect='.site_url().'home";</script>';
 			}
-		} 
-			
+		}
+
 		public function createCaptcha($config = array())
 		{
 			if( !function_exists('gd_info') ) {
 				throw new Exception('Required GD library is missing');
 			}
-			
+
 			$bg_path = dirname(__FILE__) . 'public/site/main/images/captcha_bg/backgrounds/';
 			$font_path = dirname(__FILE__) . 'public/site/main/fonts/captcha_fonts/';
-			
+
 			// Default values
 			$captcha_config = array(
 	        'code' => '',
@@ -623,12 +623,12 @@
 	        'shadow_offset_x' => -1,
 	        'shadow_offset_y' => 1
 			);
-			
+
 			// Overwrite defaults with custom config values
 			if( is_array($config) ) {
 				foreach( $config as $key => $value ) $captcha_config[$key] = $value;
 			}
-			
+
 			// Restrict certain values
 			if( $captcha_config['min_length'] < 1 ) $captcha_config['min_length'] = 1;
 			if( $captcha_config['angle_min'] < 0 ) $captcha_config['angle_min'] = 0;
@@ -636,7 +636,7 @@
 			if( $captcha_config['angle_max'] < $captcha_config['angle_min'] ) $captcha_config['angle_max'] = $captcha_config['angle_min'];
 			if( $captcha_config['min_font_size'] < 10 ) $captcha_config['min_font_size'] = 10;
 			if( $captcha_config['max_font_size'] < $captcha_config['min_font_size'] ) $captcha_config['max_font_size'] = $captcha_config['min_font_size'];
-			
+
 			// Generate CAPTCHA code if not set by user
 			if( empty($captcha_config['code']) ) {
 				$captcha_config['code'] = '';
@@ -646,47 +646,47 @@
 				}
 			}
 			$image_src = site_url().'home/getCaptcha?_CAPTCHA&amp;t=' . urlencode(microtime());
-			
+
 			$cnfg = array('config'=>serialize($captcha_config));
-			$this->session->set_userdata('captcha',$cnfg);	
+			$this->session->set_userdata('captcha',$cnfg);
 			return array(
 	        'code' => $captcha_config['code'],
 	        'image_src' => $image_src
 			);
 		}
 		public function getCaptcha()
-		{	
-			
-			$captcha_cnf = array();		
-			$cnf = $this->session->userdata('captcha');			
-			$captcha_config = unserialize($cnf['config']);			
-			
+		{
+
+			$captcha_cnf = array();
+			$cnf = $this->session->userdata('captcha');
+			$captcha_config = unserialize($cnf['config']);
+
 			if( !$captcha_config ) exit();
-			
-			//$this->session->unset_userdata('captcha');	    
-			
+
+			//$this->session->unset_userdata('captcha');
+
 			// Pick random background, get info, and start captcha
 			$background = $captcha_config['backgrounds'][mt_rand(0, count($captcha_config['backgrounds']) -1)];
 			list($bg_width, $bg_height, $bg_type, $bg_attr) = getimagesize($background);
-			
+
 			$captcha = imagecreatefrompng($background);
-			
+
 			$color = $this->hex2rgb($captcha_config['color']);
 			$color = imagecolorallocate($captcha, $color['r'], $color['g'], $color['b']);
-			
+
 			// Determine text angle
 			$angle = mt_rand( $captcha_config['angle_min'], $captcha_config['angle_max'] ) * (mt_rand(0, 1) == 1 ? -1 : 1);
-			
+
 			// Select font randomly
 			$font = $captcha_config['fonts'][mt_rand(0, count($captcha_config['fonts']) - 1)];
-			
+
 			// Verify font file exists
 			if( !file_exists($font) ) throw new Exception('Font file not found: ' . $font);
-			
+
 			//Set the font size.
 			$font_size = mt_rand($captcha_config['min_font_size'], $captcha_config['max_font_size']);
 			$text_box_size = imagettfbbox($font_size, $angle, $font, $captcha_config['code']);
-			
+
 			// Determine text position
 			$box_width = abs($text_box_size[6] - $text_box_size[2]);
 			$box_height = abs($text_box_size[5] - $text_box_size[1]);
@@ -701,17 +701,17 @@
 				$text_pos_y_max = $temp_text_pos_y;
 			}
 			$text_pos_y = mt_rand($text_pos_y_min, $text_pos_y_max);
-			
+
 			// Draw shadow
 			if( $captcha_config['shadow'] ){
 				$shadow_color = $this->hex2rgb($captcha_config['shadow_color']);
 				$shadow_color = imagecolorallocate($captcha, $shadow_color['r'], $shadow_color['g'], $shadow_color['b']);
 				imagettftext($captcha, $font_size, $angle, $text_pos_x + $captcha_config['shadow_offset_x'], $text_pos_y + $captcha_config['shadow_offset_y'], $shadow_color, $font, $captcha_config['code']);
 			}
-			
+
 			// Draw text
 			imagettftext($captcha, $font_size, $angle, $text_pos_x, $text_pos_y, $color, $font, $captcha_config['code']);
-			
+
 			// Output image
 			header("Content-type: image/png");
 			imagepng($captcha);
@@ -741,6 +741,6 @@
 		{
 			return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
 		}
-		
-	
+
+
 	}

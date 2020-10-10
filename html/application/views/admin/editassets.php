@@ -10,7 +10,7 @@
 		display:block !important;
 	}
 .dropzone {
-    background: #343B41; 
+    background: #343B41;
 }
 .icnasset i{
 	cursor: pointer;
@@ -61,25 +61,25 @@ function convertToDHMS($seconds){
 	return $string;
 }
 function convertoTimeFormat($time){
-	
-	$t = (int)($time)*(1000);	
-	
+
+	$t = (int)($time)*(1000);
+
 	return date('Y-m-d H:i:s',$t);
 }
 
 
 
-function convertToReadableSize($size){	
+function convertToReadableSize($size){
 
 	if($size != "NAN" && $size != "")
 	{
 		$base = log($size) / log(1024);
 	  $suffix = array("", "KB", "MB", "GB", "TB");
 	  $f_base = floor($base);
-	  return round(pow(1024, $base - floor($base)), 1).' ' . $suffix[$f_base];		
+	  return round(pow(1024, $base - floor($base)), 1).' ' . $suffix[$f_base];
 	}
 	else{
-		return "0 KB";	
+		return "0 KB";
 	}
 }
 //print_r($data['data']);
@@ -89,9 +89,9 @@ function convertToReadableSize($size){
         <!-- Breadcrumb-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="#">Home</a>
+            <a href=<?php echo site_url();?>>Home</a>
           </li>
-          <li class="breadcrumb-item active"><a href="<?php echo site_url();?>assets">Assets</a></li>
+          <li class="breadcrumb-item active"><a href="<?php echo site_url();?>assets/<?php echo $this->uri->segment(3); ?>"><?php $nebula_id = $this->uri->segment(3);?><?php $nebula = $this->common_model->getNebulabyId($nebula_id);?><?php echo $nebula[0]['encoder_name'];?></a></li>
 					<li class="breadcrumb-item active">Edit Asset</li>
         </ol>
         <div class="container-fluid">
@@ -143,14 +143,14 @@ function convertToReadableSize($size){
                 <div class="tab-content">
                   			<div role="tabpanel" class="tab-pane active" id="main">
 										<div class="row">
-											<div class="col-lg-12 col-md-12 fields">		
-												<input type="hidden" name="assetid" id="assetid" value="<?php echo $data['data'][0]['id'];?>"/>							
+											<div class="col-lg-12 col-md-12 fields">
+												<input type="hidden" name="assetid" id="assetid" value="<?php echo $data['data'][0]['id'];?>"/>
 												<div class='form-group'>
 													<label>Folder</label>
 													<select id="id_folder" name="id_folder" class="form-control selectpicker">
 													<option value="">Select</option>
 													<?php
-													
+
 													if(sizeof($settings['data']['folders'])>0)
 													{
 														foreach($settings['data']['folders'] as $fid=>$folder)
@@ -164,16 +164,16 @@ function convertToReadableSize($size){
 															else{
 															?>
 																<option style="color:#<?php echo base_convert($settings['data']['folders'][$fid]['color'], 10, 16);?>" value="<?php echo $fid;?>"><?php echo $folder['title']; ?></option>
-															<?php	
+															<?php
 															}
-															
+
 														}
 													}
 													?>
 												</select>
 												</div>
 												<?php
-												
+
 												if(is_array($settings) && sizeof($settings)>0)
 												{
 													foreach($settings['data']['folders'][$data['data'][0]['id_folder']]['meta_set'] as $field)
@@ -216,7 +216,7 @@ function convertToReadableSize($size){
 																				}
 																			}
 																			?>
-																			
+
 																			<?php
 																		}
 																		?>
@@ -224,13 +224,13 @@ function convertToReadableSize($size){
 																</div>
 																<?php
 															}
-															else if(array_key_exists('mode',$f)){	
+															else if(array_key_exists('mode',$f)){
 																?>
 															<div class="form-group">
 																<label><?php echo $f['aliases']['en'][0];?> </label>
 																<input type="text" class="form-control" name="<?php echo $field[0]; ?>" id="<?php echo $field[0]; ?>" value="<?php echo $data['data'][0][$field[0]];?>"/>
 															</div>
-															<?php	
+															<?php
 															}
 															else{
 																?>
@@ -238,7 +238,7 @@ function convertToReadableSize($size){
 																		<label><?php echo $f['aliases']['en'][0];?> </label>
 																		<input type="text" class="form-control" name="<?php echo $field[0]; ?>" id="<?php echo $field[0]; ?>" value="<?php echo $data['data'][0][$field[0]];?>"/>
 																	</div>
-															<?php	
+															<?php
 															}
 														}
 														else if($f['fulltext'] >= 1)
@@ -248,17 +248,17 @@ function convertToReadableSize($size){
 																<label><?php echo $f['aliases']['en'][0];?> </label>
 																<input type="text" class="form-control" name="<?php echo $field[0]; ?>" id="<?php echo $field[0]; ?>" value="<?php echo $data['data'][0][$field[0]];?>"/>
 															</div>
-															<?php	
+															<?php
 														}
 													}
 												}
-												?>												
+												?>
 											</div>
-											
+
 										</div>
 
 								</div>
-							<div role="tabpanel" class="tab-pane" id="extended">	
+							<div role="tabpanel" class="tab-pane" id="extended">
 								<div class="bg-secondary card">
 								   <div class="card-body">
 								      <pre><strong>Path : </strong><?php if(array_key_exists('path',$data['data'][0])){
@@ -268,9 +268,9 @@ function convertToReadableSize($size){
 												echo "N/A";
 											}
 								      	?></pre>
-								      <pre><strong>Status : </strong><?php								     
+								      <pre><strong>Status : </strong><?php
 								       if(array_key_exists('status',$data['data'][0])){
-								      	
+
 								      		if($data['data'][0]['status'] == 1){
 												?><i class="fa fa-circle text-success"></i> ONLINE <?php
 											}else{?><i class="fa fa-circle text-secondary"></i> OFFLINE<?php
@@ -432,16 +432,16 @@ function convertToReadableSize($size){
 							</div>
 						</div>
                 	</div>
-                	
-                	
+
+
                 	<div class="col-md-6 mb-4">
                 		<div class="col-lg-12 col-md-12" style="vertical-align: top !important;">
 												 <video style="height: auto;" class="rh5v-DefaultPlayer_video" poster="<?php echo $URL; ?>/thumb/0000/<?php echo $data['data'][0]['id']; ?>/orig.jpg" controls="controls">
 	                                                <source src="<?php echo $URL; ?>/proxy/0000/<?php echo $data['data'][0]['id']; ?>.mp4" type="video/webm">
 	                                            </video>
 	                                            <div style="text-align:left;font-size:20px;" class="icnasset">
-	                                            	QC: 
-	                                              <?php 
+	                                            	QC:
+	                                              <?php
 	                                              if(array_key_exists('qc/state',$data['data'][0]))
 	                                              {
 												  	switch($data['data'][0]['qc/state'])
@@ -471,7 +471,7 @@ function convertToReadableSize($size){
 							                          <i class="icon-close icons"></i>
 							                          <span>  </span>
 							                          <i class="fa fa-circle-thin icons text-secondary" style="font-size: 24px;"></i>
-							                          
+
 														<?php
 														break;
 													}
@@ -485,8 +485,8 @@ function convertToReadableSize($size){
 							                          <i class="fa fa-circle-thin icons" style="font-size: 24px;"></i>
 														<?php
 												  }
-	                                              ?>	
-						                          
+	                                              ?>
+
 						                          <span>  </span>
 						                         <!-- <button class="badge badge-block btn-outline-secondary" disabled>
 						                          	<?php echo convertToDHMS($data['data'][0]['duration']); ?>
@@ -497,7 +497,7 @@ function convertToReadableSize($size){
               </div>
 		</div>
 		<div class="card-footer">
-				<button class="btn btn-sm btn-primary btnEditAssets" accesskey="<?php echo $this->uri->segment(3);?>" type="button">Update</button>				
+				<button class="btn btn-sm btn-primary btnEditAssets" accesskey="<?php echo $this->uri->segment(3);?>" type="button">Update</button>
 				</div>
 				</div>
 			</div>

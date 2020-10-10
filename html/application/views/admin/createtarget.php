@@ -273,7 +273,7 @@ z-index: 9999;
 					<?php
 						}
 						?>
-             
+
              <div class="card-header">Add New Target</div>
 				<div class="card-body">
 				<?php if($this->session->flashdata('success')){ ?>
@@ -302,7 +302,7 @@ z-index: 9999;
 			<div class="col-lg-12 col-12-12">
 	            <div class="content-box config-contentonly">
 	            <div class="config-container">
-	           
+
 
       <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
 
@@ -342,6 +342,10 @@ z-index: 9999;
                                     <a class="btn btn-twitter btn-sm btndis">
                                         <i class="fa fa-twitter"></i>
                                             Twitter Periscope
+                                    </a>
+                                    <a class="btn btn-sm btndis" style="color: #23282c; background-color: #19b7ea; border-color: #19b7ea;">
+                                        <i class="fa fa-vimeo"></i>
+                                            Vimeo Live
                                     </a>
                                     </div>
                                 </div>
@@ -408,6 +412,10 @@ z-index: 9999;
                                         <i class="fa fa-twitter"></i>
                                             Twitter Periscope
                                     </a>
+                                    <a class="btn btn-sm btndis" style="color: #23282c; background-color: #19b7ea; border-color: #19b7ea;">
+                                        <i class="fa fa-vimeo"></i>
+                                            Vimeo Live
+                                    </a>
                                     </div>
                                 </div>
                             </div>
@@ -473,6 +481,10 @@ z-index: 9999;
                                     <a class="btn btn-twitter btn-sm btndis">
                                         <i class="fa fa-twitter"></i>
                                             Twitter Periscope
+                                    </a>
+                                    <a class="btn btn-sm btndis" style="color: #23282c; background-color: #19b7ea; border-color: #19b7ea;">
+                                        <i class="fa fa-vimeo"></i>
+                                            Vimeo Live
                                     </a>
                                     </div>
                                 </div>
@@ -541,6 +553,10 @@ z-index: 9999;
                                         <i class="fa fa-twitter"></i>
                                             Twitter Periscope
                                     </a>
+                                    <a class="btn btn-sm btndis" style="color: #23282c; background-color: #19b7ea; border-color: #19b7ea;">
+                                        <i class="fa fa-vimeo"></i>
+                                            Vimeo Live
+                                    </a>
                                     </div>
                                 </div>
                             </div>
@@ -607,6 +623,10 @@ z-index: 9999;
                                     <a class="btn btn-twitter btn-sm btndis">
                                         <i class="fa fa-twitter"></i>
                                             Twitter Periscope
+                                    </a>
+                                    <a class="btn btn-sm btndis" style="color: #23282c; background-color: #19b7ea; border-color: #19b7ea;">
+                                        <i class="fa fa-vimeo"></i>
+                                            Vimeo Live
                                     </a>
                                     </div>
                                 </div>
@@ -675,6 +695,10 @@ z-index: 9999;
                                         <i class="fa fa-twitter"></i>
                                             Twitter Periscope
                                     </a>
+                                    <a class="btn btn-sm btndis" style="color: #23282c; background-color: #19b7ea; border-color: #19b7ea;">
+                                        <i class="fa fa-vimeo"></i>
+                                            Vimeo Live
+                                    </a>
                                     </div>
                                 </div>
                             </div>
@@ -742,6 +766,10 @@ z-index: 9999;
                                         <i class="fa fa-twitter"></i>
                                             Twitter Periscope
                                     </a>
+                                    <a class="btn btn-sm btndis" style="color: #23282c; background-color: #19b7ea; border-color: #19b7ea;">
+                                        <i class="fa fa-vimeo"></i>
+                                            Vimeo Live
+                                    </a>
                                     </div>
                                 </div>
                             </div>
@@ -808,6 +836,10 @@ z-index: 9999;
                                     <a class="btn btn-twitter btn-sm btndis" >
                                         <i class="fa fa-twitter"></i>
                                             Twitter Periscope
+                                    </a>
+                                    <a class="btn btn-sm btndis" style="color: #23282c; background-color: #19b7ea; border-color: #19b7ea;">
+                                        <i class="fa fa-vimeo"></i>
+                                            Vimeo Live
                                     </a>
                                     </div>
                                 </div>
@@ -878,6 +910,10 @@ z-index: 9999;
                                         <i class="fa fa-twitter"></i>
                                             Twitter Periscope
                                     </a>
+                                    <a class="btn btn-sm btndis" style="color: #23282c; background-color: #19b7ea; border-color: #19b7ea;">
+                                        <i class="fa fa-vimeo"></i>
+                                            Vimeo Live
+                                    </a>
                                     </div>
                                 </div>
                             </div>
@@ -944,6 +980,10 @@ z-index: 9999;
                                     <a class="btn btn-twitter btn-sm btndis" >
                                         <i class="fa fa-twitter"></i>
                                             Twitter Periscope
+                                    </a>
+                                    <a class="btn btn-sm btndis" style="color: #23282c; background-color: #19b7ea; border-color: #19b7ea;">
+                                        <i class="fa fa-vimeo"></i>
+                                            Vimeo Live
                                     </a>
                                     </div>
                                 </div>
@@ -1012,6 +1052,10 @@ z-index: 9999;
                                         <i class="fa fa-twitter"></i>
                                             Twitter Periscope
                                     </a>
+                                    <a class="btn btn-sm btndis" style="color: #23282c; background-color: #19b7ea; border-color: #19b7ea;">
+                                        <i class="fa fa-vimeo"></i>
+                                            Vimeo Live
+                                    </a>
                                     </div>
                                 </div>
                             </div>
@@ -1078,6 +1122,10 @@ z-index: 9999;
                                     <a class="btn btn-twitter btn-sm btndis" >
                                         <i class="fa fa-twitter"></i>
                                             Twitter Periscope
+                                    </a>
+                                    <a class="btn btn-sm btndis" style="color: #23282c; background-color: #19b7ea; border-color: #19b7ea;">
+                                        <i class="fa fa-vimeo"></i>
+                                            Vimeo Live
                                     </a>
                                     </div>
                                 </div>
@@ -1147,6 +1195,10 @@ z-index: 9999;
                                     <a class="btn btn-twitter btn-sm" href="<?php echo site_url();?>admin/twitter">
                                         <i class="fa fa-twitter"></i>
                                             Twitter Periscope
+                                    </a>
+                                    <a class="btn btn-sm" style="color: #23282c; background-color: #19b7ea; border-color: #19b7ea;">
+                                        <i class="fa fa-vimeo"></i>
+                                            Vimeo Live
                                     </a>
                                     </div>
                                 </div>
@@ -1532,7 +1584,7 @@ z-index: 9999;
 								<div class="row">
 									<div class="boxes">
                                         <input type="checkbox" id="continuelive" name="continuelive">
-                                        <label for="continuelive">Send a continuous live stream</label>
+                                        <label for="continuelive" style="padding-left: 20px;line-height:15px;">Send a continuous live stream</label>
                                     </div>
 									<!--<label class="checkbox-inline">
 									<input type="checkbox" id="continuelive" name="continuelive">
