@@ -1163,7 +1163,7 @@ error_reporting(E_ALL);
 						{
 							$enablezerolatency = '-tune zerolatency';
 						}
-						$output_name =  "srt://".$channel[0]["srt_ip"].':'.$channel[0]['srt_port']."?mode=listener";
+						$output_name =  "srt://".$channel[0]["srt_ip"].':'.$channel[0]['srt_port'];
 
 						if(sizeof($encodingProfile)>0)
 						{
@@ -5679,7 +5679,7 @@ error_reporting(E_ALL);
 						{
 							$enablezerolatency = '-tune zerolatency';
 						}
-						$output_name = $channel[0]["output_mpeg_srt"]."?mode=listener";
+						$output_name = $channel[0]["output_mpeg_srt"];
 
 						if(sizeof($encodingProfile)>0)
 						{

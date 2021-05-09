@@ -346,7 +346,7 @@ class Channels extends REST_Controller {
 						$inputOptions .= " -channels '".$channel[0]['audio_channel']."'";
 					}
 					$outputType = $_config['output_type'];
-					$outputName = $channel[0]["output_mpeg_srt"]."?mode=listener";
+					$outputName = $channel[0]["output_mpeg_srt"];
 					$outputOptions = $this->encodingProfile($encodingProfile);
 				break;
         case "SDITOFILE":
@@ -478,7 +478,7 @@ class Channels extends REST_Controller {
 					$inputName = $channel[0]['channel_ndi_source'];
 					$inputOptions = "";
 					$outputType = $_config['output_type'];
-					$outputName = $channel[0]["output_mpeg_srt"]."?mode=listener";
+					$outputName = $channel[0]["output_mpeg_srt"];
 					$outputOptions = $this->encodingProfile($encodingProfile);
 				break;
         case "NDITOFILE":
@@ -565,7 +565,7 @@ class Channels extends REST_Controller {
 					$inputOptions = "";
 
 					$outputType = $_config['output_type'];
-					$outputName = $channel[0]["output_mpeg_srt"]."?mode=listener";
+					$outputName = $channel[0]["output_mpeg_srt"];
 					$outputOptions = $this->encodingProfile($encodingProfile);
 				break;
 				case "MPEGRTPTOSDI":
@@ -809,7 +809,7 @@ class Channels extends REST_Controller {
 					$inputOptions = "";
 
 					$outputType = $_config['output_type'];
-					$outputName = $channel[0]["output_mpeg_srt"]."?mode=listener";
+					$outputName = $channel[0]["output_mpeg_srt"];
 					$outputOptions = $this->encodingProfile($encodingProfile);
 				break;
 			}

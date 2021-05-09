@@ -931,7 +931,7 @@ class Api extends REST_Controller {
 						{
 							$enablezerolatency = '-tune zerolatency';
 						}
-						$output_name = $channel[0]["output_mpeg_srt"]."?mode=listener";
+						$output_name = $channel[0]["output_mpeg_srt"];
 
 						if(sizeof($encodingProfile)>0)
 						{
@@ -1288,7 +1288,7 @@ class Api extends REST_Controller {
 						{
 							$enablezerolatency = '-tune zerolatency';
 						}
-						$output_name = $channel[0]["output_mpeg_srt"]."?mode=listener";
+						$output_name = $channel[0]["output_mpeg_srt"];
 
 						if(sizeof($encodingProfile)>0)
 						{
@@ -1822,7 +1822,7 @@ class Api extends REST_Controller {
 						$inputOptions .= " -channels '".$channel[0]['audio_channel']."'";
 					}
 					$outputType = $_config['output_type'];
-					$outputName = $channel[0]["output_mpeg_srt"]."?mode=listener";
+					$outputName = $channel[0]["output_mpeg_srt"];
 					$outputOptions = $this->encodingProfile($encodingProfile);
 				break;
 				case "NDITOSDI":
@@ -1923,7 +1923,7 @@ class Api extends REST_Controller {
 					$inputName = $channel[0]['channel_ndi_source'];
 					$inputOptions = "";
 					$outputType = $_config['output_type'];
-					$outputName = $channel[0]["output_mpeg_srt"]."?mode=listener";
+					$outputName = $channel[0]["output_mpeg_srt"];
 					$outputOptions = $this->encodingProfile($encodingProfile);
 				break;
 				case "RTMPTOSDI":
@@ -1997,7 +1997,7 @@ class Api extends REST_Controller {
 					$inputOptions = "";
 
 					$outputType = $_config['output_type'];
-					$outputName = $channel[0]["output_mpeg_srt"]."?mode=listener";
+					$outputName = $channel[0]["output_mpeg_srt"];
 					$outputOptions = $this->encodingProfile($encodingProfile);
 				break;
 				case "MPEGRTPTOSDI":
@@ -2241,7 +2241,7 @@ class Api extends REST_Controller {
 					$inputOptions = "";
 
 					$outputType = $_config['output_type'];
-					$outputName = $channel[0]["output_mpeg_srt"]."?mode=listener";
+					$outputName = $channel[0]["output_mpeg_srt"];
 					$outputOptions = $this->encodingProfile($encodingProfile);
 				break;
 			}
