@@ -1069,7 +1069,10 @@ error_reporting(E_ALL);
 						$encodingProfile = $this->common_model->getEncodingTemplateById($channel[0]['encoding_profile']);
 						$eprofile = "";
 						$output_type = "flv";
-						$gop ="";$deinterlace ="";
+						$gop ="";
+						$deinterlace ="";
+						$x264params="";
+						$x264opts="";
 						if(sizeof($encodingProfile) > 0 && $encodingProfile[0]['adv_video_gop'] != "" && $encodingProfile[0]['adv_video_gop'] != NULL)
 						{
 							$gop = '-g '.$encodingProfile[0]["adv_video_gop"];
@@ -1082,6 +1085,16 @@ error_reporting(E_ALL);
 						{
 							$enablezerolatency = '-tune zerolatency';
 						}
+						//x264_params && x264opts
+						if(sizeof($encodingProfile) > 0 && $encodingProfile[0]['x264_params'] != NULL)
+						{
+							$x264params = '-x264-params '.$encodingProfile[0]["x264_params"];
+						}
+						if(sizeof($encodingProfile) > 0 && $encodingProfile[0]['x264opts'] != NULL)
+						{
+							$x264opts = '-x264opts '.$encodingProfile[0]["x264opts"];
+						}
+						//eof x264_params && x264opts
 						$output_name = $channel[0]["output_rtmp_url"]."/".$channel[0]["output_rtmp_key"];
 
 						if(sizeof($encodingProfile)>0)
@@ -1150,7 +1163,11 @@ error_reporting(E_ALL);
 						$encodingProfile = $this->common_model->getEncodingTemplateById($channel[0]['encoding_profile']);
 						$eprofile = "";
 						$output_type = "mpegts";
-						$gop ="";$deinterlace ="";$enablezerolatency="";
+						$gop ="";
+						$deinterlace ="";
+						$x264params="";
+						$x264opts="";
+						$enablezerolatency="";
 						if(sizeof($encodingProfile) > 0 && $encodingProfile[0]['adv_video_gop'] != "" && $encodingProfile[0]['adv_video_gop'] != NULL)
 						{
 							$gop = '-g '.$encodingProfile[0]["adv_video_gop"];
@@ -1163,7 +1180,20 @@ error_reporting(E_ALL);
 						{
 							$enablezerolatency = '-tune zerolatency';
 						}
+
+						//x264_params && x264opts
+						if(sizeof($encodingProfile) > 0 && $encodingProfile[0]['x264_params'] != NULL)
+						{
+							$x264params = '-x264-params '.$encodingProfile[0]["x264_params"];
+						}
+						if(sizeof($encodingProfile) > 0 && $encodingProfile[0]['x264opts'] != NULL)
+						{
+							$x264opts = '-x264opts '.$encodingProfile[0]["x264opts"];
+						}
+						//eof x264_params && x264opts
+            
 						$output_name =  "srt://".$channel[0]["srt_ip"].':'.$channel[0]['srt_port'];
+
 
 						if(sizeof($encodingProfile)>0)
 						{
@@ -4875,12 +4905,12 @@ error_reporting(E_ALL);
 								$ssh->exec("touch /home/ksm/scheduler/".$startname);
 								$ssh->exec("chmod +x /home/ksm/scheduler/".$startname);
 
-								$ssh->exec('echo "curl -H  \'Content-Type: application/json\'  --data \'{\"process\":\"'.$processname.'\"}\'  '.$this->config->item('startChannelPath').' >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$startname);
+								$ssh->exec('echo "curl -k -H  \'Content-Type: application/json\'  --data \'{\"process\":\"'.$processname.'\"}\'  '.$this->config->item('startChannelPath').' >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$startname);
 								$ssh->exec('echo "echo \"\n----------------------------------------------\n\" >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$startname);
 
 								$ssh->exec("touch /home/ksm/scheduler/".$stopname);
 								$ssh->exec("chmod +x /home/ksm/scheduler/".$stopname);
-								$ssh->exec('echo "curl -H  \'Content-Type: application/json\'  --data \'{\"process\":\"'.$processname.'\"}\'  '.$this->config->item('stopChannelPath').' >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$stopname);
+								$ssh->exec('echo "curl -k -H  \'Content-Type: application/json\'  --data \'{\"process\":\"'.$processname.'\"}\'  '.$this->config->item('stopChannelPath').' >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$stopname);
 								$ssh->exec('echo "echo \"\n----------------------------------------------\n\" >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$stopname);
 								$starttime = $this->getDateTime($cleanData['channel_starttime']);
 								$stoptime = $this->getDateTime($cleanData['channel_endtime']);
@@ -5073,6 +5103,7 @@ error_reporting(E_ALL);
 	                	'encoder_id'=>$encid,
 	                	'channel_type'=>$type,
 	                	'audio_channel'=>$cleanData['sdi_audio_channel'],
+										'sdi_out_audio_channels'=>$cleanData['sdi_out_audio_channels'],
 	                	'channelInput'=>$cleanData['channelInput'],
 	                	'channel_ndi_source'=>$ndisoucewe,
 	                	'input_rtmp_url'=>$cleanData['input_rtmp_url'],
@@ -5610,7 +5641,10 @@ error_reporting(E_ALL);
 						$encodingProfile = $this->common_model->getEncodingTemplateById($channel[0]['encoding_profile']);
 						$eprofile = "";
 						$output_type = "flv";
-						$gop ="";$deinterlace ="";
+						$gop ="";
+						$deinterlace ="";
+						$x264params="";
+						$x264opts="";
 						if(sizeof($encodingProfile) > 0 && $encodingProfile[0]['adv_video_gop'] != "" && $encodingProfile[0]['adv_video_gop'] != NULL)
 						{
 							$gop = '-g '.$encodingProfile[0]["adv_video_gop"];
@@ -5623,6 +5657,16 @@ error_reporting(E_ALL);
 						{
 							$enablezerolatency = '-tune zerolatency';
 						}
+						//x264_params && x264opts
+						if(sizeof($encodingProfile) > 0 && $encodingProfile[0]['x264_params'] != NULL)
+						{
+							$x264params = '-x264-params '.$encodingProfile[0]["x264_params"];
+						}
+						if(sizeof($encodingProfile) > 0 && $encodingProfile[0]['x264opts'] != NULL)
+						{
+							$x264opts = '-x264opts '.$encodingProfile[0]["x264opts"];
+						}
+						//eof x264_params && x264opts
 						$output_name = $channel[0]["output_rtmp_url"]."/".$channel[0]["output_rtmp_key"];
 
 						if(sizeof($encodingProfile)>0)
@@ -5666,7 +5710,11 @@ error_reporting(E_ALL);
 						$encodingProfile = $this->common_model->getEncodingTemplateById($channel[0]['encoding_profile']);
 						$eprofile = "";
 						$output_type = "mpegts";
-						$gop ="";$deinterlace ="";$enablezerolatency="";
+						$gop ="";
+						$deinterlace ="";
+						$enablezerolatency="";
+						$x264params="";
+						$x264opts="";
 						if(sizeof($encodingProfile) > 0 && $encodingProfile[0]['adv_video_gop'] != "" && $encodingProfile[0]['adv_video_gop'] != NULL)
 						{
 							$gop = '-g '.$encodingProfile[0]["adv_video_gop"];
@@ -5679,6 +5727,18 @@ error_reporting(E_ALL);
 						{
 							$enablezerolatency = '-tune zerolatency';
 						}
+
+						//x264_params && x264opts
+						if(sizeof($encodingProfile) > 0 && $encodingProfile[0]['x264_params'] != NULL)
+						{
+							$x264params = '-x264-params '.$encodingProfile[0]["x264_params"];
+						}
+						if(sizeof($encodingProfile) > 0 && $encodingProfile[0]['x264opts'] != NULL)
+						{
+							$x264opts = '-x264opts '.$encodingProfile[0]["x264opts"];
+						}
+						//eof x264_params && x264opts
+
 						$output_name = $channel[0]["output_mpeg_srt"];
 
 						if(sizeof($encodingProfile)>0)
@@ -6321,12 +6381,12 @@ error_reporting(E_ALL);
 								$stopname = "Target_Stop_".$processname.".sh";
 								$ssh->exec("touch /home/ksm/scheduler/".$startname);
 								$ssh->exec("chmod +x /home/ksm/scheduler/".$startname);
-								$ssh->exec('echo "curl -H  \'Content-Type: application/json\'  --data \'{\"process\":\"'.$processname.'\"}\'  https://iohub.tv/api/startTarget >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$startname);
+								$ssh->exec('echo "curl -k -H  \'Content-Type: application/json\'  --data \'{\"process\":\"'.$processname.'\"}\'  https://iohub.tv/api/startTarget >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$startname);
 								$ssh->exec('echo "echo \"\n----------------------------------------------\n\" >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$startname);
 
 								$ssh->exec("touch /home/ksm/scheduler/".$stopname);
 								$ssh->exec("chmod +x /home/ksm/scheduler/".$stopname);
-								$ssh->exec('echo "curl -H  \'Content-Type: application/json\'  --data \'{\"process\":\"'.$processname.'\"}\'  https://iohub.tv/api/StopTarget >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$stopname);
+								$ssh->exec('echo "curl -k -H  \'Content-Type: application/json\'  --data \'{\"process\":\"'.$processname.'\"}\'  https://iohub.tv/api/StopTarget >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$stopname);
 								$ssh->exec('echo "echo \"\n----------------------------------------------\n\" >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$stopname);
 								$ssh->exec('(crontab -l; echo "'.$starttime["m"].' '.$starttime["h"].' '.$starttime["day"].' '.$starttime["month"].' * /home/ksm/scheduler/'.$startname.'") | crontab -');
 								$ssh->exec('(crontab -l; echo "'.$stoptime["m"].' '.$stoptime["h"].' '.$stoptime["day"].' '.$stoptime["month"].' * /home/ksm/scheduler/'.$stopname.'") | crontab -');
@@ -9105,12 +9165,12 @@ $xmlll ='<PushPublishStream serverName="_defaultServer_">
 
 								$ssh->exec("touch /home/ksm/scheduler/".$startname);
 								$ssh->exec("chmod +x /home/ksm/scheduler/".$startname);
-								$ssh->exec('echo "curl -H  \'Content-Type: application/json\'  --data \'{\"process\":\"'.$processname.'\"}\'  https://iohub.tv/api/startTarget >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$startname);
+								$ssh->exec('echo "curl -k -H  \'Content-Type: application/json\'  --data \'{\"process\":\"'.$processname.'\"}\'  https://iohub.tv/api/startTarget >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$startname);
 								$ssh->exec('echo "echo \"\n----------------------------------------------\n\" >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$startname);
 
 								$ssh->exec("touch /home/ksm/scheduler/".$stopname);
 								$ssh->exec("chmod +x /home/ksm/scheduler/".$stopname);
-								$ssh->exec('echo "curl -H  \'Content-Type: application/json\'  --data \'{\"process\":\"'.$processname.'\"}\'  https://iohub.tv/api/StopTarget >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$stopname);
+								$ssh->exec('echo "curl -k -H  \'Content-Type: application/json\'  --data \'{\"process\":\"'.$processname.'\"}\'  https://iohub.tv/api/StopTarget >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$stopname);
 								$ssh->exec('echo "echo \"\n----------------------------------------------\n\" >> /home/ksm/scheduler/scheduler.log" >>  /home/ksm/scheduler/'.$stopname);
 
 								$ssh->exec('(crontab -l; echo "'.$starttime["m"].' '.$starttime["h"].' '.$starttime["day"].' '.$starttime["month"].' * /home/ksm/scheduler/'.$startname.'") | crontab -');

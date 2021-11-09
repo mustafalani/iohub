@@ -498,6 +498,51 @@
                                         ?>
                                     </select>
                                 </div>
+		                       	<?php
+		                       	if ($cOutput[0] == "phyoutput") {
+		                       	?>
+		                       	<div class="row sdioutaudioch" style="display:block;">
+		                                	<br/>
+		                                	<label>SDI Out Audio Channels</label>
+		                                	 <select class="form-control selectpicker" name="sdi_out_audio_channels" id="sdi_out_audio_channels">
+		                                        <option value="0">- Select Channel -</option>
+		                        <?php
+		                        if (sizeof($audiochannels) > 0) {
+										foreach ($audiochannels as $audio) {
+														if ($channels[0]['sdi_out_audio_channels'] == $audio['value']) {
+
+																		echo '<option selected="selected" value="' . $audio['value'] . '">' . $audio['name'] . '</option>';
+														}
+														else {
+																		echo '<option value="' . $audio['value'] . '">' . $audio['name'] . '</option>';
+														}
+
+										}
+									}
+								?>
+								</select>
+									</div>
+									<?php
+								}
+								else {
+									?>
+									<div class="row sdioutaudioch" style="display:none;">
+		                                	<br/>
+		                                	<label>SDI Out Audio Channels</label>
+		                                	 <select class="form-control selectpicker" name="sdi_out_audio_channels" id="sdi_out_audio_channels">
+		                                        <option value="0">- Select Channel -</option>
+		                                        <?php
+		                                        if (sizeof($audiochannels) > 0) {
+		                                        	foreach ($audiochannels as $audio) {
+														echo '<option value="' . $audio['value'] . '">' . $audio['name'] . '</option>';
+													}
+												}
+												?>
+		                                    </select>
+		                                </div>
+										<?php
+									}
+									?>
                                 <?php
                                 if($cOutput[0] == "viroutput" && $cOutput[1] == 3)
                                 {
