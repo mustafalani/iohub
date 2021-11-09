@@ -180,7 +180,12 @@ class Channels extends REST_Controller {
 		else
 		{
 			/* Variables Define */
-			$inputType = "";$inputName = "";$inputOptions = "";$outputType ="";$outputName="";$outputOptions="";
+			$inputType ="";
+      $inputName ="";
+      $inputOptions ="";
+      $outputType ="";
+      $outputName="";
+      $outputOptions="";
 			$channelID = $channel[0]['process_name'];
 			$channel_name = $channel[0]['channel_name'];
 
@@ -346,7 +351,7 @@ class Channels extends REST_Controller {
 						$inputOptions .= " -channels '".$channel[0]['audio_channel']."'";
 					}
 					$outputType = $_config['output_type'];
-					$outputName = $channel[0]["output_mpeg_srt"]."?mode=listener";
+					$outputName = $channel[0]["output_mpeg_srt"];
 					$outputOptions = $this->encodingProfile($encodingProfile);
 				break;
         case "SDITOFILE":
@@ -376,9 +381,9 @@ class Channels extends REST_Controller {
           {
             $inputOptions .= " -channels '".$channel[0]['audio_channel']."'";
           }
-          $outputType = "";
-          $outputName = "";
-          $outputOptions = "";
+          $outputType ="";
+          $outputName ="";
+          $outputOptions ="";
         break;
 				case "NDITOSDI":
 					$outformat ="";
@@ -397,12 +402,12 @@ class Channels extends REST_Controller {
 					}
 					$inputName = $channel[0]['channel_ndi_source'];
 
-					$outputOptions = "";
+					$outputOptions ="";
 
 
 					if(strpos($output[1],'PC Out') !== false)
 					{
-						$outputType = "";
+						$outputType ="";
 						$outputName = " alsa default -pix_fmt bgra -f fbdev /dev/fb0";
             $inputOptions = "-fflags nobuffer";
 					}
@@ -416,6 +421,7 @@ class Channels extends REST_Controller {
 					{
 						$outputOptions = $outformat[0]['value'];
 					}
+          $outputOptions .= " -ac '".$channel[0]['sdi_out_audio_channels']."'";
 				break;
 				case "NDITONDI":
 					$inputType = $_config['input_type'];
@@ -424,7 +430,7 @@ class Channels extends REST_Controller {
 						$inputType = $inputType." -extra_ips ".$channel[0]['ipAddress'];
 					}
 					$inputName = $channel[0]['channel_ndi_source'];
-					$inputOptions = "";
+					$inputOptions ="";
 					$outputType = $_config['output_type'];
 					$outputName = $channel[0]["ndi_name"];
 					$outputOptions = "-pix_fmt uyvy422";
@@ -437,7 +443,7 @@ class Channels extends REST_Controller {
 						$inputType = $inputType." -extra_ips ".$channel[0]['ipAddress'];
 					}
 					$inputName = $channel[0]['channel_ndi_source'];
-					$inputOptions = "";
+					$inputOptions ="";
 					$outputType = $_config['output_type'];
 					$outputName = $channel[0]["output_rtmp_url"]."/".$channel[0]["output_rtmp_key"];
 					$outputOptions = $this->encodingProfile($encodingProfile);
@@ -450,7 +456,7 @@ class Channels extends REST_Controller {
 						$inputType = $inputType." -extra_ips ".$channel[0]['ipAddress'];
 					}
 					$inputName = $channel[0]['channel_ndi_source'];
-					$inputOptions = "";
+					$inputOptions ="";
 					$outputType = $_config['output_type'];
 					$outputName = $channel[0]["output_mpeg_rtp"];
 					$outputOptions = $this->encodingProfile($encodingProfile);
@@ -463,7 +469,7 @@ class Channels extends REST_Controller {
 						$inputType = $inputType." -extra_ips ".$channel[0]['ipAddress'];
 					}
 					$inputName = $channel[0]['channel_ndi_source'];
-					$inputOptions = "";
+					$inputOptions ="";
 					$outputType = $_config['output_type'];
 					$outputName = $channel[0]["output_mpeg_udp"];
 					$outputOptions = $this->encodingProfile($encodingProfile);
@@ -476,9 +482,9 @@ class Channels extends REST_Controller {
 						$inputType = $inputType." -extra_ips ".$channel[0]['ipAddress'];
 					}
 					$inputName = $channel[0]['channel_ndi_source'];
-					$inputOptions = "";
+					$inputOptions ="";
 					$outputType = $_config['output_type'];
-					$outputName = $channel[0]["output_mpeg_srt"]."?mode=listener";
+					$outputName = $channel[0]["output_mpeg_srt"];
 					$outputOptions = $this->encodingProfile($encodingProfile);
 				break;
         case "NDITOFILE":
@@ -489,10 +495,10 @@ class Channels extends REST_Controller {
             $inputType = $inputType." -extra_ips ".$channel[0]['ipAddress'];
           }
           $inputName = $channel[0]['channel_ndi_source'];
-          $inputOptions = "";
-          $outputType = "";
-          $outputName = "";
-          $outputOptions = "";
+          $inputOptions ="";
+          $outputType ="";
+          $outputName ="";
+          $outputOptions ="";
         break;
 				case "RTMPTOSDI":
 					$output = explode('_',$channel[0]['channelOutpue']);
@@ -503,11 +509,11 @@ class Channels extends REST_Controller {
 					}
 					$inputType = $_config['input_type'];
 					$inputName = $channel[0]['input_rtmp_url'];
-					$inputOptions = "";
+					$inputOptions ="";
 
 					if(strpos($output[1],'PC Out') !== false)
 					{
-						$outputType = "";
+						$outputType ="";
 						$outputName = " alsa default -pix_fmt bgra -f fbdev /dev/fb0";
             $inputOptions = "-fflags nobuffer";
 					}
@@ -520,11 +526,12 @@ class Channels extends REST_Controller {
 					{
 						$outputOptions = $outformat[0]['value'];
 					}
+          $outputOptions .= " -ac '".$channel[0]['sdi_out_audio_channels']."'";
 				break;
 				case "RTMPTONDI":
 					$inputType = $_config['input_type'];
 					$inputName = $channel[0]['input_rtmp_url'];
-					$inputOptions = "";
+					$inputOptions ="";
 					$outputType = $_config['output_type'];
 					$outputName = $channel[0]["ndi_name"];
 					$outputOptions = "-pix_fmt uyvy422";
@@ -533,7 +540,7 @@ class Channels extends REST_Controller {
 					$encodingProfile = $this->common_model->getEncodingTemplateById($channel[0]['encoding_profile']);
 					$inputType = $_config['input_type'];
 					$inputName = $channel[0]['input_rtmp_url'];
-					$inputOptions = "";
+					$inputOptions ="";
 					$outputType = $_config['output_type'];
 					$outputName = $channel[0]["output_rtmp_url"]."/".$channel[0]["output_rtmp_key"];
 					$outputOptions = $this->encodingProfile($encodingProfile);
@@ -542,7 +549,7 @@ class Channels extends REST_Controller {
 					$encodingProfile = $this->common_model->getEncodingTemplateById($channel[0]['encoding_profile']);
 					$inputType = $_config['input_type'];
 					$inputName = $channel[0]['input_rtmp_url'];
-					$inputOptions = "";
+					$inputOptions ="";
 
 					$outputType = $_config['output_type'];
 					$outputName = $channel[0]["output_mpeg_rtp"];
@@ -552,7 +559,7 @@ class Channels extends REST_Controller {
 					$encodingProfile = $this->common_model->getEncodingTemplateById($channel[0]['encoding_profile']);
 					$inputType = $_config['input_type'];
 					$inputName = $channel[0]['input_rtmp_url'];
-					$inputOptions = "";
+					$inputOptions ="";
 
 					$outputType = $_config['output_type'];
 					$outputName = $channel[0]["output_mpeg_udp"];
@@ -562,10 +569,10 @@ class Channels extends REST_Controller {
 					$encodingProfile = $this->common_model->getEncodingTemplateById($channel[0]['encoding_profile']);
 					$inputType = $_config['input_type'];
 					$inputName = $channel[0]['input_rtmp_url'];
-					$inputOptions = "";
+					$inputOptions ="";
 
 					$outputType = $_config['output_type'];
-					$outputName = $channel[0]["output_mpeg_srt"]."?mode=listener";
+					$outputName = $channel[0]["output_mpeg_srt"];
 					$outputOptions = $this->encodingProfile($encodingProfile);
 				break;
 				case "MPEGRTPTOSDI":
@@ -577,10 +584,10 @@ class Channels extends REST_Controller {
 					}
 					$inputType = $_config['input_type'];
 					$inputName = $channel[0]['input_mpeg_rtp'];
-					$inputOptions = "";
+					$inputOptions ="";
 					if(strpos($output[1],'PC Out') !== false)
 					{
-						$outputType = "";
+						$outputType ="";
 						$outputName = " alsa default -pix_fmt bgra -f fbdev /dev/fb0";
             $inputOptions = "-fflags nobuffer";
 					}
@@ -594,11 +601,12 @@ class Channels extends REST_Controller {
 					{
 						$outputOptions = $outformat[0]['value'];
 					}
+          $outputOptions .= " -ac '".$channel[0]['sdi_out_audio_channels']."'";
 				break;
 				case "MPEGRTPTONDI":
 					$inputType = $_config['input_type'];
 					$inputName = $channel[0]['input_mpeg_rtp'];
-					$inputOptions = "";
+					$inputOptions ="";
 
 					$outputType = $_config['output_type'];
 					$outputName = $channel[0]["ndi_name"];
@@ -608,7 +616,7 @@ class Channels extends REST_Controller {
 					$encodingProfile = $this->common_model->getEncodingTemplateById($channel[0]['encoding_profile']);
 					$inputType = $_config['input_type'];
 					$inputName = $channel[0]['input_mpeg_rtp'];
-					$inputOptions = "";
+					$inputOptions ="";
 
 					$outputType = $_config['output_type'];
 					$outputName = $channel[0]["output_rtmp_url"]."/".$channel[0]["output_rtmp_key"];
@@ -618,7 +626,7 @@ class Channels extends REST_Controller {
 					$encodingProfile = $this->common_model->getEncodingTemplateById($channel[0]['encoding_profile']);
 					$inputType = $_config['input_type'];
 					$inputName = $channel[0]['input_mpeg_rtp'];
-					$inputOptions = "";
+					$inputOptions ="";
 
 					$outputType = $_config['output_type'];
 					$outputName = $channel[0]["output_mpeg_rtp"];
@@ -633,11 +641,11 @@ class Channels extends REST_Controller {
 					}
 					$inputType = $_config['input_type'];
 					$inputName = $channel[0]['input_mpeg_udp'];
-					$inputOptions = "";
+					$inputOptions ="";
 
 					if(strpos($output[1],'PC Out') !== false)
 					{
-						$outputType = "";
+						$outputType ="";
 						$outputName = " alsa default -pix_fmt bgra -f fbdev /dev/fb0";
             $inputOptions = "-fflags nobuffer";
 					}
@@ -651,11 +659,12 @@ class Channels extends REST_Controller {
 					{
 						$outputOptions = $outformat[0]['value'];
 					}
+          $outputOptions .= " -ac '".$channel[0]['sdi_out_audio_channels']."'";
 				break;
 				case "MPEGUDPTONDI":
 					$inputType = $_config['input_type'];
 					$inputName = $channel[0]['input_mpeg_udp'];
-					$inputOptions = "";
+					$inputOptions ="";
 
 					$outputType = $_config['output_type'];
 					$outputName = $channel[0]["ndi_name"];
@@ -665,7 +674,7 @@ class Channels extends REST_Controller {
 					$encodingProfile = $this->common_model->getEncodingTemplateById($channel[0]['encoding_profile']);
 					$inputType = $_config['input_type'];
 					$inputName = $channel[0]['input_mpeg_udp'];
-					$inputOptions = "";
+					$inputOptions ="";
 
 					$outputType = $_config['output_type'];
 					$outputName = $channel[0]["output_rtmp_url"]."/".$channel[0]["output_rtmp_key"];
@@ -675,7 +684,7 @@ class Channels extends REST_Controller {
 					$encodingProfile = $this->common_model->getEncodingTemplateById($channel[0]['encoding_profile']);
 					$inputType = $_config['input_type'];
 					$inputName = $channel[0]['input_mpeg_udp'];
-					$inputOptions = "";
+					$inputOptions ="";
 
 					$outputType = $_config['output_type'];
 					$outputName = $channel[0]["output_mpeg_rtp"];
@@ -693,7 +702,7 @@ class Channels extends REST_Controller {
 
 					if(strpos($output[1],'PC Out') !== false)
 					{
-						$outputType = "";
+						$outputType ="";
 						$outputName = " alsa default -pix_fmt bgra -s hd1080 -f fbdev /dev/fb0";
             $inputOptions = "-fflags nobuffer";
 					}
@@ -707,11 +716,12 @@ class Channels extends REST_Controller {
 					{
 						$outputOptions = $outformat[0]['value'];
 					}
+          $outputOptions .= " -ac '".$channel[0]['sdi_out_audio_channels']."'";
 				break;
 				case "MPEGSRTTONDI":
 					$inputType = $_config['input_type'];
 					$inputName = $channel[0]['input_mpeg_srt'];
-					$inputOptions = "";
+					$inputOptions ="";
 
 					$outputType = $_config['output_type'];
 					$outputName = $channel[0]["ndi_name"];
@@ -721,7 +731,7 @@ class Channels extends REST_Controller {
 					$encodingProfile = $this->common_model->getEncodingTemplateById($channel[0]['encoding_profile']);
 					$inputType = $_config['input_type'];
 					$inputName = $channel[0]['input_mpeg_srt'];
-					$inputOptions = "";
+					$inputOptions ="";
 
 					$outputType = $_config['output_type'];
 					$outputName = $channel[0]["output_rtmp_url"]."/".$channel[0]["output_rtmp_key"];
@@ -731,7 +741,7 @@ class Channels extends REST_Controller {
 					$encodingProfile = $this->common_model->getEncodingTemplateById($channel[0]['encoding_profile']);
 					$inputType = $_config['input_type'];
 					$inputName = $channel[0]['input_mpeg_srt'];
-					$inputOptions = "";
+					$inputOptions ="";
 
 					$outputType = $_config['output_type'];
 					$outputName = $channel[0]["output_mpeg_srt"];
@@ -747,10 +757,10 @@ class Channels extends REST_Controller {
 
 					$inputType = $_config['input_type'];
 					$inputName = $channel[0]['input_hls_url'];
-					$inputOptions = "";
+					$inputOptions ="";
 					if(strpos($output[1],'PC Out') !== false)
 					{
-						$outputType = "";
+						$outputType ="";
 						$outputName = " alsa default -pix_fmt bgra -f fbdev /dev/fb0";
             $inputOptions = "-fflags nobuffer";
 					}
@@ -764,11 +774,12 @@ class Channels extends REST_Controller {
 					{
 						$outputOptions = $outformat[0]['value'];
 					}
+          $outputOptions .= " -ac '".$channel[0]['sdi_out_audio_channels']."'";
 				break;
 				case "HTTPLIVETONDI":
 					$inputType = $_config['input_type'];
 					$inputName = $channel[0]['input_hls_url'];
-					$inputOptions = "";
+					$inputOptions ="";
 					$outputType = $_config['output_type'];
 					$outputName = $channel[0]["ndi_name"];
 					$outputOptions = "-pix_fmt uyvy422";
@@ -777,7 +788,7 @@ class Channels extends REST_Controller {
 					$encodingProfile = $this->common_model->getEncodingTemplateById($channel[0]['encoding_profile']);
 					$inputType = $_config['input_type'];
 					$inputName = $channel[0]['input_hls_url'];
-					$inputOptions = "";
+					$inputOptions ="";
 					$outputType = $_config['output_type'];
 					$outputName = $channel[0]["output_rtmp_url"]."/".$channel[0]["output_rtmp_key"];
 					$outputOptions = $this->encodingProfile($encodingProfile);
@@ -786,7 +797,7 @@ class Channels extends REST_Controller {
 					$encodingProfile = $this->common_model->getEncodingTemplateById($channel[0]['encoding_profile']);
 					$inputType = $_config['input_type'];
 					$inputName = $channel[0]['input_hls_url'];
-					$inputOptions = "";
+					$inputOptions ="";
 
 					$outputType = $_config['output_type'];
 					$outputName = $channel[0]["output_mpeg_rtp"];
@@ -796,7 +807,7 @@ class Channels extends REST_Controller {
 					$encodingProfile = $this->common_model->getEncodingTemplateById($channel[0]['encoding_profile']);
 					$inputType = $_config['input_type'];
 					$inputName = $channel[0]['input_hls_url'];
-					$inputOptions = "";
+					$inputOptions ="";
 
 					$outputType = $_config['output_type'];
 					$outputName = $channel[0]["output_mpeg_udp"];
@@ -806,10 +817,10 @@ class Channels extends REST_Controller {
 					$encodingProfile = $this->common_model->getEncodingTemplateById($channel[0]['encoding_profile']);
 					$inputType = $_config['input_type'];
 					$inputName = $channel[0]['input_hls_url'];
-					$inputOptions = "";
+					$inputOptions ="";
 
 					$outputType = $_config['output_type'];
-					$outputName = $channel[0]["output_mpeg_srt"]."?mode=listener";
+					$outputName = $channel[0]["output_mpeg_srt"];
 					$outputOptions = $this->encodingProfile($encodingProfile);
 				break;
 			}
@@ -820,7 +831,7 @@ class Channels extends REST_Controller {
 			{
 				if(strpos($outputName,"alsa") != FALSE)
 				{
-					$outputOptions_recording = "";
+					$outputOptions_recording ="";
 					if($channel[0]['is_record_channel'] == 1)
 					{
 						if($channel[0]['recording_presets'] == -1)
@@ -968,7 +979,8 @@ class Channels extends REST_Controller {
 		}
 		else
 		{
-			$channel_name ="";$status = "";
+			$channel_name ="";
+      $status ="";
 			$channel_name = $channel[0]['channel_name'];
 			$channelID = $channel[0]['process_name'];
 			$loopid = $ssh->exec('$(ps -ef | grep "'.$channelID.'" | grep -v "grep" | grep "ffmpeg" | grep -h "while" | awk \'{print $2}\');');
@@ -1026,7 +1038,8 @@ class Channels extends REST_Controller {
 		}
 		else
 		{
-			$channel_name ="";$status = "";
+			$channel_name ="";
+      $status ="";
 			$channel_name = $channel[0]['channel_name'];
 			$channelID =$channel[0]['process_name'];
 			$loopId = $ssh->exec('$(ps -ef | grep "'.$channelID.'" | grep -v "grep" | grep "ffmpeg" | awk \'{print $2}\');');
@@ -1048,9 +1061,13 @@ class Channels extends REST_Controller {
 	/* Fetch Output Options from Encoding Profile */
 	public function encodingProfile($encodingProfile)
 	{
-		$eprofile = "";
+		$eprofile ="";
 		$outputOptions ="";
-		$gop ="";$deinterlace ="";
+		$gop ="";
+    $deinterlace ="";
+    $x264params="";
+    $x264opts="";
+    $enablezerolatency="";
 
 		if(sizeof($encodingProfile)>0)
 		{
@@ -1058,6 +1075,16 @@ class Channels extends REST_Controller {
 			{
 				$gop = '-g '.$encodingProfile[0]["adv_video_gop"];
 			}
+      //x264_params && x264opts
+      if($encodingProfile[0]['x264_params'] != NULL)
+      {
+        $x264params = '-x264-params '.$encodingProfile[0]["x264_params"];
+      }
+      if($encodingProfile[0]['x264opts'] != NULL)
+      {
+        $x264opts = '-x264opts '.$encodingProfile[0]["x264opts"];
+      }
+      //eof x264_params && x264opts
 			if($encodingProfile[0]['enabledeinterlance'] == 1)
 			{
 				$deinterlace = '-deinterlace';
@@ -1066,8 +1093,27 @@ class Channels extends REST_Controller {
 			{
 				$enablezerolatency = '-tune zerolatency';
 			}
-			$enablezerolatency="";
-			$minBitRate = "";$maxBitRate ="";$bufSize="";$adv_video_keyframe_intrval="";$adv_video_profile="";$video_framerate ="";
+      $video_bitrate ="";
+      $muxrate ="";
+			$minBitRate ="";
+      $maxBitRate ="";
+      $bufSize="";
+      $adv_video_keyframe_intrval="";
+      $adv_video_profile="";
+      $video_framerate ="";
+      $extra_flags ="";
+      $enableAdvanceAudio ="";
+      $audio_gain ="";
+      $delay ="";
+      $enableAdvAudGainDealy ="";
+      if($encodingProfile[0]['video_bitrate'] != "")
+			{
+				$video_bitrate = '-b:v '.$encodingProfile[0]['video_bitrate'].'k';
+			}
+      if($encodingProfile[0]['video_muxrate'] != "")
+			{
+				$muxrate = '-muxrate '.$encodingProfile[0]['video_muxrate'].'k';
+			}
 			if($encodingProfile[0]['video_min_bitrate'] != "")
 			{
 				$minBitRate = '-minrate '.$encodingProfile[0]['video_min_bitrate'].'k';
@@ -1092,7 +1138,10 @@ class Channels extends REST_Controller {
 			{
 				$video_framerate = '-vf fps='.$encodingProfile[0]['video_framerate'];
 			}
-			$enableAdvanceAudio ="";$audio_gain ="";$delay =""; $enableAdvAudGainDealy = "";
+      if($encodingProfile[0]['extra_flags'] != "")
+			{
+				$extra_flags = $encodingProfile[0]['extra_flags'];
+			}
 			if($encodingProfile[0]['enableAdvanceAudio'] != "" && $encodingProfile[0]['enableAdvanceAudio'] > 0)
 			{
 				$enableAdvanceAudio  = ' -filter:a';
@@ -1149,8 +1198,8 @@ class Channels extends REST_Controller {
 			}
 
 
-
-			$outputOptions =  '-c:v '.$encodingProfile[0]['video_codec'].' -s '.$encodingProfile[0]['video_resolution'].' -b:v '.$encodingProfile[0]['video_bitrate'].'k '.$minBitRate.' '.$maxBitRate.' '.$bufSize.' '.$adv_video_keyframe_intrval.' '.$gop.' '.$adv_video_profile.' -pix_fmt yuv420p -preset '.$encodingProfile[0]['adv_video_preset'].' '.$deinterlace.' '.$enablezerolatency.' '.$video_framerate.' -c:a '.$encodingProfile[0]['audio_codec'].' -b:a '.$encodingProfile[0]['audio_bitrate'].'k -ar '.$encodingProfile[0]['audio_sample_rate'].' -ac '.$encodingProfile[0]['audio_channel'].$enableAdvAudGainDealy;
+      //THIS IS THE COMMAND
+			$outputOptions =  '-c:v '.$encodingProfile[0]['video_codec'].' '.$x264params.' '.$x264opts.' -s '.$encodingProfile[0]['video_resolution'].' '.$video_bitrate.' '.$minBitRate.' '.$maxBitRate.' '.$muxrate.' '.$bufSize.' '.$adv_video_keyframe_intrval.' '.$gop.' '.$adv_video_profile.' -pix_fmt yuv420p -preset '.$encodingProfile[0]['adv_video_preset'].' '.$deinterlace.' '.$enablezerolatency.' '.$video_framerate.' -c:a '.$encodingProfile[0]['audio_codec'].' -b:a '.$encodingProfile[0]['audio_bitrate'].'k -ar '.$encodingProfile[0]['audio_sample_rate'].' -ac '.$encodingProfile[0]['audio_channel'].$enableAdvAudGainDealy.' '.$extra_flags;
 		}
 		return $outputOptions;
 	}

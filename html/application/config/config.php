@@ -665,7 +665,7 @@ $config['MPEGUDPTOMPEGUDP']['format_code'] = "";
 $config['MPEGUDPTOMPEGUDP']['output_type'] = "-f mpegts";
 
 $config['MPEGSRTTOSDI']['input_type'] = "-f mpegts";
-$config['MPEGSRTTOSDI']['output_options'] = "";
+$config['MPEGSRTTOSDI']['output_options'] = "-ac 16";
 $config['MPEGSRTTOSDI']['format_code'] = "";
 $config['MPEGSRTTOSDI']['output_type'] = "-f decklink";
 
